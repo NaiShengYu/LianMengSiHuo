@@ -48,11 +48,11 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden =YES;
- 
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    self.navigationController.navigationBar.hidden =NO;
+//    self.navigationController.navigationBar.hidden =NO;
 
 }
 

@@ -17,8 +17,9 @@
     if (self) {
         WS(blockSelf);
         self.backgroundColor =RGBA(167, 38, 30, 1);
-        _backBut =[[UIButton alloc]initWithFrame:CGRectMake(0, MaxY-49, 44, 44)];
+        _backBut =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 44, MaxY)];
         [self addSubview:_backBut];
+        [_backBut setImageEdgeInsets:UIEdgeInsetsMake(15, 0, 0, 0)];
         [_backBut setImage:[UIImage imageNamed:@"06"] forState:UIControlStateNormal];
         
         _rightBut =[[UIButton alloc]initWithFrame:CGRectMake(screenWigth-52, MaxY-44, 44, 44)];
