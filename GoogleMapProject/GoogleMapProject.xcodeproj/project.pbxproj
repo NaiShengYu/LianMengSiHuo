@@ -32,6 +32,11 @@
 		267BBF6C20DAAEE60005AE5A /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 267BBF6B20DAAEE60005AE5A /* LeftViewController.m */; };
 		267BBF6F20DAB2060005AE5A /* LeftViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 267BBF6E20DAB2060005AE5A /* LeftViewHeader.m */; };
 		267BBF7520DAB9090005AE5A /* CollectionShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 267BBF7420DAB9090005AE5A /* CollectionShopViewController.m */; };
+		C97712E120DB4F2D007AE5F0 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712E020DB4F2D007AE5F0 /* CommentViewController.m */; };
+		C97712E420DB5012007AE5F0 /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712E320DB5012007AE5F0 /* ForgetPasswordViewController.m */; };
+		C97712E720DB5046007AE5F0 /* BindingPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712E620DB5046007AE5F0 /* BindingPhoneViewController.m */; };
+		C97712EA20DB5062007AE5F0 /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712E920DB5062007AE5F0 /* AboutUsViewController.m */; };
+		C97712ED20DB5085007AE5F0 /* VersionInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712EC20DB5085007AE5F0 /* VersionInformationViewController.m */; };
 		F4FF636EA87F22A1DB12DE83 /* libPods-GoogleMapProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF73FC6E901B989D43D34C9 /* libPods-GoogleMapProject.a */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +92,16 @@
 		2BF73FC6E901B989D43D34C9 /* libPods-GoogleMapProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GoogleMapProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		764BAFDF28E3445530AD6A69 /* Pods-GoogleMapProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleMapProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GoogleMapProject/Pods-GoogleMapProject.debug.xcconfig"; sourceTree = "<group>"; };
 		962BF1968C3B249CC9293335 /* Pods-GoogleMapProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleMapProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoogleMapProject/Pods-GoogleMapProject.release.xcconfig"; sourceTree = "<group>"; };
+		C97712DF20DB4F2D007AE5F0 /* CommentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
+		C97712E020DB4F2D007AE5F0 /* CommentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
+		C97712E220DB5012007AE5F0 /* ForgetPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordViewController.h; sourceTree = "<group>"; };
+		C97712E320DB5012007AE5F0 /* ForgetPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordViewController.m; sourceTree = "<group>"; };
+		C97712E520DB5046007AE5F0 /* BindingPhoneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BindingPhoneViewController.h; sourceTree = "<group>"; };
+		C97712E620DB5046007AE5F0 /* BindingPhoneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BindingPhoneViewController.m; sourceTree = "<group>"; };
+		C97712E820DB5062007AE5F0 /* AboutUsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutUsViewController.h; sourceTree = "<group>"; };
+		C97712E920DB5062007AE5F0 /* AboutUsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
+		C97712EB20DB5085007AE5F0 /* VersionInformationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VersionInformationViewController.h; sourceTree = "<group>"; };
+		C97712EC20DB5085007AE5F0 /* VersionInformationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VersionInformationViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +169,16 @@
 				267BBF6B20DAAEE60005AE5A /* LeftViewController.m */,
 				267BBF7320DAB9090005AE5A /* CollectionShopViewController.h */,
 				267BBF7420DAB9090005AE5A /* CollectionShopViewController.m */,
+				C97712DF20DB4F2D007AE5F0 /* CommentViewController.h */,
+				C97712E020DB4F2D007AE5F0 /* CommentViewController.m */,
+				C97712E220DB5012007AE5F0 /* ForgetPasswordViewController.h */,
+				C97712E320DB5012007AE5F0 /* ForgetPasswordViewController.m */,
+				C97712E520DB5046007AE5F0 /* BindingPhoneViewController.h */,
+				C97712E620DB5046007AE5F0 /* BindingPhoneViewController.m */,
+				C97712E820DB5062007AE5F0 /* AboutUsViewController.h */,
+				C97712E920DB5062007AE5F0 /* AboutUsViewController.m */,
+				C97712EB20DB5085007AE5F0 /* VersionInformationViewController.h */,
+				C97712EC20DB5085007AE5F0 /* VersionInformationViewController.m */,
 			);
 			path = GoogleMapProject;
 			sourceTree = "<group>";
@@ -313,7 +338,10 @@
 			files = (
 				267BBF6020DA99460005AE5A /* HomePageSectionOneCell.m in Sources */,
 				267BBF6C20DAAEE60005AE5A /* LeftViewController.m in Sources */,
+				C97712ED20DB5085007AE5F0 /* VersionInformationViewController.m in Sources */,
+				C97712E420DB5012007AE5F0 /* ForgetPasswordViewController.m in Sources */,
 				267BBF6920DAA1F50005AE5A /* HomePageSectionTowheader.m in Sources */,
+				C97712E120DB4F2D007AE5F0 /* CommentViewController.m in Sources */,
 				260C46D220CD6736008952B4 /* TopView.m in Sources */,
 				267BBF7520DAB9090005AE5A /* CollectionShopViewController.m in Sources */,
 				26196CC120C55C6E0097D72D /* GoogleMapProject.xcdatamodeld in Sources */,
@@ -323,6 +351,7 @@
 				26196CC920C55C6F0097D72D /* main.m in Sources */,
 				267BBF5A20DA89A10005AE5A /* HomePageNavView.m in Sources */,
 				267BBF5720DA840A0005AE5A /* HomePageViewController.m in Sources */,
+				C97712EA20DB5062007AE5F0 /* AboutUsViewController.m in Sources */,
 				267BBF4320D913760005AE5A /* LoginViewController.m in Sources */,
 				267BBF4920D92B450005AE5A /* FogotViewController.m in Sources */,
 				267BBF4C20D93D4D0005AE5A /* PubulicObj.m in Sources */,
@@ -330,6 +359,7 @@
 				267BBF6320DA9FC20005AE5A /* HomePageSecitonThreeCell.m in Sources */,
 				267BBF6F20DAB2060005AE5A /* LeftViewHeader.m in Sources */,
 				267BBF5D20DA912E0005AE5A /* HomePageSectionZeroCell.m in Sources */,
+				C97712E720DB5046007AE5F0 /* BindingPhoneViewController.m in Sources */,
 				267BBF6620DAA1D30005AE5A /* HomePageSectionOneheader.m in Sources */,
 				267BBF4620D92B330005AE5A /* RegistViewController.m in Sources */,
 				26196CB820C55C6E0097D72D /* AppDelegate.m in Sources */,
@@ -482,7 +512,7 @@
 					"$(PROJECT_DIR)/Subspecs/Base/Frameworks",
 					"$(PROJECT_DIR)",
 				);
-				GCC_PREFIX_HEADER = /Users/nashengyu/Downloads/GoogleMapProject/GoogleMapProject/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/GoogleMapProject/PrefixHeader.pch";
 				INFOPLIST_FILE = GoogleMapProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -508,7 +538,7 @@
 					"$(PROJECT_DIR)/Subspecs/Base/Frameworks",
 					"$(PROJECT_DIR)",
 				);
-				GCC_PREFIX_HEADER = /Users/nashengyu/Downloads/GoogleMapProject/GoogleMapProject/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/GoogleMapProject/PrefixHeader.pch";
 				INFOPLIST_FILE = GoogleMapProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

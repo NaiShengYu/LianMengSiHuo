@@ -9,6 +9,11 @@
 #import "LeftViewController.h"
 #import "LeftViewHeader.h"
 #import "CollectionShopViewController.h"
+#import "CommentViewController.h"
+#import "ForgetPasswordViewController.h"
+#import "BindingPhoneViewController.h"
+#import "AboutUsViewController.h"
+#import "VersionInformationViewController.h"
 @interface LeftViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *myTable;
 @property (nonatomic,strong)NSMutableArray *titlesArray;
@@ -84,7 +89,21 @@
         case 0:
             [self.homePageVC.navigationController pushViewController:[CollectionShopViewController new] animated:NO];
             break;
-            
+        case 1:
+            [self.homePageVC.navigationController pushViewController:[CommentViewController new] animated:NO];
+            break;
+        case 2:
+            [self.homePageVC.navigationController pushViewController:[ForgetPasswordViewController new] animated:NO];
+            break;
+        case 3:
+            [self.homePageVC.navigationController pushViewController:[BindingPhoneViewController new] animated:NO];
+            break;
+        case 4:
+            [self.homePageVC.navigationController pushViewController:[AboutUsViewController new] animated:NO];
+            break;
+        case 5:
+            [self.homePageVC.navigationController pushViewController:[VersionInformationViewController new] animated:NO];
+            break;
         default:
             break;
     }
