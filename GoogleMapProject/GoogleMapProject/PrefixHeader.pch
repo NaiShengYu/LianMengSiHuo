@@ -1,0 +1,54 @@
+//
+//  PrefixHeader.pch
+//  GoogleMapProject
+//
+//  Created by 俞乃胜 on 2018/6/10.
+//  Copyright © 2018年 俞乃胜. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+#import <Masonry.h>
+#import <SVProgressHUD.h>
+#import <MMDrawerController.h>
+#import <MMDrawerBarButtonItem.h>
+#import "PubulicObj.h"
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+//字体大小
+#define FontSize(a) [UIFont systemFontOfSize:a];
+
+//颜色
+#define RGBA(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+//判断字符串是否为空
+#define strIsEmpty(str) ([str isKindOfClass:[NSNull class]] || str == nil || [str length]<1 ? YES : NO )
+//防止Block中的self循环引用的宏定义
+#define WS(blockSelf) __weak __typeof(&*self)blockSelf = self;
+//代替字符串，在请求数据的时候用instailString代替换行符@“\n”
+#define instailString @"     "
+//自定义NSLog
+#ifdef DEBUG
+#define DLog(...) NSLog(__VA_ARGS__)
+#else
+#define DLog(...)
+#endif
+//屏幕宽度
+#define screenWigth [[UIScreen mainScreen] bounds].size.width
+//屏幕高度
+#define screenHeight [[UIScreen mainScreen] bounds].size.height
+#define ActivityZuiXiTableViewCellHeight 145
+
+#define HEXCOLOR(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000)>>16))/255.0 green:((float)((rgbValue & 0xFF00)>>8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+#define huiSe RGBA(179, 179, 179, 1)
+#define imgHeght(H) H *screenWigth /320.0//图片按比例放大
+//APP主色
+#define zhuse RGBA(164,38, 30, 1)
+#define navRigntImgWight 25 //导航栏右按钮图片大小
+//默认地址
+#define addressDefault @"address_default"
+
+#define userInfoModel @"userInfoModel"
+
+#define  MaxY ([UIApplication sharedApplication].statusBarFrame.size.height +44)
+
+#endif /* PrefixHeader_pch */
