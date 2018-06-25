@@ -45,6 +45,7 @@
 		C977130320E0B768007AE5F0 /* PersonDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C977130220E0B768007AE5F0 /* PersonDataCell.m */; };
 		C977130620E0DF69007AE5F0 /* ChangePersonNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C977130520E0DF69007AE5F0 /* ChangePersonNameViewController.m */; };
 		C977130920E0E93F007AE5F0 /* ChangeSexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C977130820E0E93F007AE5F0 /* ChangeSexViewController.m */; };
+		C977130C20E0EFAC007AE5F0 /* ChangeTelphoneNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C977130B20E0EFAC007AE5F0 /* ChangeTelphoneNumViewController.m */; };
 		F4FF636EA87F22A1DB12DE83 /* libPods-GoogleMapProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF73FC6E901B989D43D34C9 /* libPods-GoogleMapProject.a */; };
 /* End PBXBuildFile section */
 
@@ -126,6 +127,8 @@
 		C977130520E0DF69007AE5F0 /* ChangePersonNameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangePersonNameViewController.m; sourceTree = "<group>"; };
 		C977130720E0E93F007AE5F0 /* ChangeSexViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeSexViewController.h; sourceTree = "<group>"; };
 		C977130820E0E93F007AE5F0 /* ChangeSexViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeSexViewController.m; sourceTree = "<group>"; };
+		C977130A20E0EFAC007AE5F0 /* ChangeTelphoneNumViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeTelphoneNumViewController.h; sourceTree = "<group>"; };
+		C977130B20E0EFAC007AE5F0 /* ChangeTelphoneNumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeTelphoneNumViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,6 +285,8 @@
 				C977130520E0DF69007AE5F0 /* ChangePersonNameViewController.m */,
 				C977130720E0E93F007AE5F0 /* ChangeSexViewController.h */,
 				C977130820E0E93F007AE5F0 /* ChangeSexViewController.m */,
+				C977130A20E0EFAC007AE5F0 /* ChangeTelphoneNumViewController.h */,
+				C977130B20E0EFAC007AE5F0 /* ChangeTelphoneNumViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -440,6 +445,7 @@
 				267BBF6620DAA1D30005AE5A /* HomePageSectionOneheader.m in Sources */,
 				267BBF4620D92B330005AE5A /* RegistViewController.m in Sources */,
 				267BBF7B20DBEA8E0005AE5A /* CollectionShopUneditCell.m in Sources */,
+				C977130C20E0EFAC007AE5F0 /* ChangeTelphoneNumViewController.m in Sources */,
 				26196CB820C55C6E0097D72D /* AppDelegate.m in Sources */,
 				267BBF7E20DBF4930005AE5A /* CollectionShopEditCell.m in Sources */,
 				C977130920E0E93F007AE5F0 /* ChangeSexViewController.m in Sources */,

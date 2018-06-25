@@ -33,7 +33,7 @@
             make.top.offset =10;
             make.bottom.offset =-10;
             make.right.offset =-5;
-            make.width.offset =70;
+            
         }];
         _otherLab.textColor =HEXCOLOR(0x4cabfc);
         _otherLab.text =@"修改";

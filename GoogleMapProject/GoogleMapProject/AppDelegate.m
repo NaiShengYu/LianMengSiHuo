@@ -51,7 +51,7 @@
     [SVProgressHUD setCornerRadius:5];
     [SVProgressHUD setDefaultMaskType:(SVProgressHUDMaskTypeClear)];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(HUDDismiss) name:SVProgressHUDDidReceiveTouchEventNotification object:nil];
-    [SVProgressHUD setOffsetFromCenter:UIOffsetMake(0, 0)];
+    [SVProgressHUD setOffsetFromCenter:UIOffsetMake(0, 50)];
     [GMSServices provideAPIKey:@"AIzaSyBUuB_ESkwf_2qx5SpiE5IWuMbg1wpiMYM"];
     return YES;
 }

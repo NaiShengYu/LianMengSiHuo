@@ -12,10 +12,12 @@
 
 #import "ChangePersonNameViewController.h"
 #import "ChangeSexViewController.h"
+#import "ChangeTelphoneNumViewController.h"
 @interface PersonDataController ()
 @property (nonatomic,strong)NSMutableArray *titlesArray;
 @property (nonatomic,copy)NSString *name;
 @property (nonatomic,copy)NSString *sex;
+@property (nonatomic,copy)NSString *telNum;
 
 
 @end
@@ -27,6 +29,7 @@
     self.view.backgroundColor =[UIColor lightGrayColor];
     self.name =@"俞乃胜";
     self.sex =@"男";
+    self.telNum = @"";
     _titlesArray =[[NSMutableArray alloc]initWithObjects:@[@"1",@"昵称",@"性别"],@[@"手机号",@"密码"] ,nil];
     self.title =@"个人信息";
     self.view.backgroundColor =[UIColor whiteColor];
@@ -98,8 +101,17 @@
             if (indexPath.row ==2) {
                 cell.otherLab.text =self.sex;
             }
-            
+        }
+        
+        if (indexPath.section ==1 ) {
+            if (indexPath.row ==0) {
+                cell.otherLab.text =self.telNum;
             }
+            if (indexPath.row ==1) {
+//                cell.otherLab.text =self.sex;
+            }
+        }
+        
         
         if (indexPath.row ==1) {
             cell.otherLab.textColor =HEXCOLOR(0x4cabfc);
@@ -140,8 +152,16 @@
             
         }
     }
-    if (indexPath.section ==0) {
+    if (indexPath.section ==1) {
         if (indexPath.row ==0) {
+            ChangeTelphoneNumViewController *numVC =[[ChangeTelphoneNumViewController alloc]init];
+            numVC.telNum =self.telNum;
+            numVC.changetelNumBlock = ^(NSString *telNum) {
+                self.telNum = telNum;
+                [tableView reloadData];
+
+            };
+            [self.navigationController pushViewController:numVC animated:YES];
             
         }
         if (indexPath.row ==1) {
