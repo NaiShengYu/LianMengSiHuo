@@ -10,10 +10,11 @@
 #import "LeftViewHeader.h"
 #import "CollectionShopViewController.h"
 #import "CommentViewController.h"
-#import "ForgetPasswordViewController.h"
+#import "FogotViewController.h"
 #import "BindingPhoneViewController.h"
 #import "AboutUsViewController.h"
 #import "VersionInformationViewController.h"
+#import "PersonDataController.h"
 @interface LeftViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *myTable;
 @property (nonatomic,strong)NSMutableArray *titlesArray;
@@ -68,6 +69,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
     LeftViewHeader *header =[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"LeftViewHeader"];
+    [header.imgBut addTarget:self action:@selector(changeUserData) forControlEvents:UIControlEventTouchUpInside];
     return header;
     
 }
@@ -93,7 +95,7 @@
             [self.homePageVC.navigationController pushViewController:[CommentViewController new] animated:NO];
             break;
         case 2:
-            [self.homePageVC.navigationController pushViewController:[ForgetPasswordViewController new] animated:NO];
+            [self.homePageVC.navigationController pushViewController:[FogotViewController new] animated:NO];
             break;
         case 3:
             [self.homePageVC.navigationController pushViewController:[BindingPhoneViewController new] animated:NO];
@@ -127,5 +129,15 @@
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
 }
-
+- (void)changeUserData{
+    
+    PersonDataController *dataVC =[[PersonDataController alloc]initWithStyle:UITableViewStyleGrouped];
+    [self.homePageVC.navigationController pushViewController:dataVC animated:NO];
+    [self.drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {
+    }];
+    
+    
+    
+    
+}
 @end

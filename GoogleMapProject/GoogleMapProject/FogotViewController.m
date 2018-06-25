@@ -77,6 +77,8 @@
         make.centerY.equalTo(phoneLab.mas_centerY).offset =0;
         make.height.offset =40;
         make.width.offset =40;
+        make.left.equalTo(phoneLab.mas_right).offset =0;
+
     }];
     [but setTitle:@"+86" forState:UIControlStateNormal];
     [but setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -174,14 +176,15 @@
     WS(blockSelf);
     [SVProgressHUD setMinimumDismissTimeInterval:1];
     if (_phoneTF.text.length ==0 ||_phoneTF.text ==nil) {
-        [SVProgressHUD showErrorWithStatus:@"请输入电话号码"];
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"请填写正确手机号!"];
         return;
     }
     if (![[PubulicObj valiMobile:_phoneTF.text] isEqualToString:@"是"]) {
-        [SVProgressHUD showErrorWithStatus:@"请正确手机号"];
+        [SVProgressHUD showErrorWithStatus:@"请填写正确手机号!"];
         return;
     }
-    
+    [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"验证码已发送至手机!"];
+ 
     _timerBut.enabled =NO;
     _timer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(changeTime) userInfo:nil repeats:YES];
     [_timer fire];

@@ -43,11 +43,24 @@
     _window.rootViewController =self.drawerController;
     
     
-    
+    [SVProgressHUD setDefaultStyle:(SVProgressHUDStyleCustom)];
+    [SVProgressHUD setBackgroundColor:HEXCOLOR(0x303132)];
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
+    [SVProgressHUD setFont:FontSize(19)];
+    [SVProgressHUD setMinimumSize:CGSizeMake(260, 44)];
+    [SVProgressHUD setCornerRadius:5];
+    [SVProgressHUD setDefaultMaskType:(SVProgressHUDMaskTypeClear)];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(HUDDismiss) name:SVProgressHUDDidReceiveTouchEventNotification object:nil];
+    [SVProgressHUD setOffsetFromCenter:UIOffsetMake(0, 0)];
     [GMSServices provideAPIKey:@"AIzaSyBUuB_ESkwf_2qx5SpiE5IWuMbg1wpiMYM"];
     return YES;
 }
 
+- (void)HUDDismiss{
+    
+    [SVProgressHUD popActivity];
+    
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

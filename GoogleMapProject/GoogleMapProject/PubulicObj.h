@@ -46,4 +46,6 @@
 
 + (void)getMediaInfoFromAsset: (PHAsset *)asset completion: (void(^)(NSString *name, id pathData))completion;
 
+
++ (void)ShowSVWithoutImage;
 @end

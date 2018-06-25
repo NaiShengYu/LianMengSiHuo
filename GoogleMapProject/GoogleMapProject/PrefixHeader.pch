@@ -16,7 +16,7 @@
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 //字体大小
-#define FontSize(a) [UIFont systemFontOfSize:a];
+#define FontSize(a) [UIFont systemFontOfSize:a]
 
 //颜色
 #define RGBA(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
@@ -51,4 +51,5 @@
 
 #define  MaxY ([UIApplication sharedApplication].statusBarFrame.size.height +44)
 
+#define TabbarHeight [[UITabBarController alloc]init].tabBar.frame.size.height
 #endif /* PrefixHeader_pch */

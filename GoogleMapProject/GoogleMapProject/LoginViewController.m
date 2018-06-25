@@ -27,6 +27,7 @@
     [super viewDidLoad];
     self.view.backgroundColor =zhuse;
 
+    
 
     [self creatView];
     [self CreatThirdPartyLanded];

@@ -37,10 +37,14 @@
 		267BBF7E20DBF4930005AE5A /* CollectionShopEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 267BBF7D20DBF4930005AE5A /* CollectionShopEditCell.m */; };
 		267BBF8120DBFC9E0005AE5A /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 267BBF8020DBFC9E0005AE5A /* CommentCell.m */; };
 		C97712E120DB4F2D007AE5F0 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712E020DB4F2D007AE5F0 /* CommentViewController.m */; };
-		C97712E420DB5012007AE5F0 /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712E320DB5012007AE5F0 /* ForgetPasswordViewController.m */; };
 		C97712E720DB5046007AE5F0 /* BindingPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712E620DB5046007AE5F0 /* BindingPhoneViewController.m */; };
 		C97712EA20DB5062007AE5F0 /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712E920DB5062007AE5F0 /* AboutUsViewController.m */; };
 		C97712ED20DB5085007AE5F0 /* VersionInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712EC20DB5085007AE5F0 /* VersionInformationViewController.m */; };
+		C97712FD20E09B4A007AE5F0 /* PersonDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712FC20E09B4A007AE5F0 /* PersonDataController.m */; };
+		C977130020E09F73007AE5F0 /* PersonImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712FF20E09F73007AE5F0 /* PersonImageCell.m */; };
+		C977130320E0B768007AE5F0 /* PersonDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C977130220E0B768007AE5F0 /* PersonDataCell.m */; };
+		C977130620E0DF69007AE5F0 /* ChangePersonNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C977130520E0DF69007AE5F0 /* ChangePersonNameViewController.m */; };
+		C977130920E0E93F007AE5F0 /* ChangeSexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C977130820E0E93F007AE5F0 /* ChangeSexViewController.m */; };
 		F4FF636EA87F22A1DB12DE83 /* libPods-GoogleMapProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF73FC6E901B989D43D34C9 /* libPods-GoogleMapProject.a */; };
 /* End PBXBuildFile section */
 
@@ -106,14 +110,22 @@
 		962BF1968C3B249CC9293335 /* Pods-GoogleMapProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleMapProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoogleMapProject/Pods-GoogleMapProject.release.xcconfig"; sourceTree = "<group>"; };
 		C97712DF20DB4F2D007AE5F0 /* CommentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
 		C97712E020DB4F2D007AE5F0 /* CommentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
-		C97712E220DB5012007AE5F0 /* ForgetPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordViewController.h; sourceTree = "<group>"; };
-		C97712E320DB5012007AE5F0 /* ForgetPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordViewController.m; sourceTree = "<group>"; };
 		C97712E520DB5046007AE5F0 /* BindingPhoneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BindingPhoneViewController.h; sourceTree = "<group>"; };
 		C97712E620DB5046007AE5F0 /* BindingPhoneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BindingPhoneViewController.m; sourceTree = "<group>"; };
 		C97712E820DB5062007AE5F0 /* AboutUsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutUsViewController.h; sourceTree = "<group>"; };
 		C97712E920DB5062007AE5F0 /* AboutUsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
 		C97712EB20DB5085007AE5F0 /* VersionInformationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VersionInformationViewController.h; sourceTree = "<group>"; };
 		C97712EC20DB5085007AE5F0 /* VersionInformationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VersionInformationViewController.m; sourceTree = "<group>"; };
+		C97712FB20E09B4A007AE5F0 /* PersonDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonDataController.h; sourceTree = "<group>"; };
+		C97712FC20E09B4A007AE5F0 /* PersonDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonDataController.m; sourceTree = "<group>"; };
+		C97712FE20E09F73007AE5F0 /* PersonImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonImageCell.h; sourceTree = "<group>"; };
+		C97712FF20E09F73007AE5F0 /* PersonImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonImageCell.m; sourceTree = "<group>"; };
+		C977130120E0B768007AE5F0 /* PersonDataCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonDataCell.h; sourceTree = "<group>"; };
+		C977130220E0B768007AE5F0 /* PersonDataCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonDataCell.m; sourceTree = "<group>"; };
+		C977130420E0DF69007AE5F0 /* ChangePersonNameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangePersonNameViewController.h; sourceTree = "<group>"; };
+		C977130520E0DF69007AE5F0 /* ChangePersonNameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangePersonNameViewController.m; sourceTree = "<group>"; };
+		C977130720E0E93F007AE5F0 /* ChangeSexViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeSexViewController.h; sourceTree = "<group>"; };
+		C977130820E0E93F007AE5F0 /* ChangeSexViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeSexViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +161,7 @@
 		26196CB520C55C6E0097D72D /* GoogleMapProject */ = {
 			isa = PBXGroup;
 			children = (
+				C97712F720E09AF8007AE5F0 /* PersonData */,
 				267BBF5120DA7CF50005AE5A /* View */,
 				26196CB620C55C6E0097D72D /* AppDelegate.h */,
 				26196CB720C55C6E0097D72D /* AppDelegate.m */,
@@ -183,8 +196,6 @@
 				267BBF7420DAB9090005AE5A /* CollectionShopViewController.m */,
 				C97712DF20DB4F2D007AE5F0 /* CommentViewController.h */,
 				C97712E020DB4F2D007AE5F0 /* CommentViewController.m */,
-				C97712E220DB5012007AE5F0 /* ForgetPasswordViewController.h */,
-				C97712E320DB5012007AE5F0 /* ForgetPasswordViewController.m */,
 				C97712E520DB5046007AE5F0 /* BindingPhoneViewController.h */,
 				C97712E620DB5046007AE5F0 /* BindingPhoneViewController.m */,
 				C97712E820DB5062007AE5F0 /* AboutUsViewController.h */,
@@ -232,6 +243,47 @@
 				2BF73FC6E901B989D43D34C9 /* libPods-GoogleMapProject.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C97712F720E09AF8007AE5F0 /* PersonData */ = {
+			isa = PBXGroup;
+			children = (
+				C97712FA20E09B23007AE5F0 /* Controller */,
+				C97712F920E09B17007AE5F0 /* View */,
+				C97712F820E09B03007AE5F0 /* Model */,
+			);
+			path = PersonData;
+			sourceTree = "<group>";
+		};
+		C97712F820E09B03007AE5F0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C97712F920E09B17007AE5F0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C97712FE20E09F73007AE5F0 /* PersonImageCell.h */,
+				C97712FF20E09F73007AE5F0 /* PersonImageCell.m */,
+				C977130120E0B768007AE5F0 /* PersonDataCell.h */,
+				C977130220E0B768007AE5F0 /* PersonDataCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C97712FA20E09B23007AE5F0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C97712FB20E09B4A007AE5F0 /* PersonDataController.h */,
+				C97712FC20E09B4A007AE5F0 /* PersonDataController.m */,
+				C977130420E0DF69007AE5F0 /* ChangePersonNameViewController.h */,
+				C977130520E0DF69007AE5F0 /* ChangePersonNameViewController.m */,
+				C977130720E0E93F007AE5F0 /* ChangeSexViewController.h */,
+				C977130820E0E93F007AE5F0 /* ChangeSexViewController.m */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		D9AA7F0C19CCA884D174764A /* Pods */ = {
@@ -359,12 +411,13 @@
 				267BBF6020DA99460005AE5A /* HomePageSectionOneCell.m in Sources */,
 				267BBF6C20DAAEE60005AE5A /* LeftViewController.m in Sources */,
 				C97712ED20DB5085007AE5F0 /* VersionInformationViewController.m in Sources */,
-				C97712E420DB5012007AE5F0 /* ForgetPasswordViewController.m in Sources */,
 				267BBF6920DAA1F50005AE5A /* HomePageSectionTowheader.m in Sources */,
 				C97712E120DB4F2D007AE5F0 /* CommentViewController.m in Sources */,
 				260C46D220CD6736008952B4 /* TopView.m in Sources */,
+				C977130020E09F73007AE5F0 /* PersonImageCell.m in Sources */,
 				267BBF7520DAB9090005AE5A /* CollectionShopViewController.m in Sources */,
 				26196CC120C55C6E0097D72D /* GoogleMapProject.xcdatamodeld in Sources */,
+				C977130320E0B768007AE5F0 /* PersonDataCell.m in Sources */,
 				267BBF4F20D941D20005AE5A /* FogotSecondViewController.m in Sources */,
 				267BBF5420DA7D4F0005AE5A /* ThirdPartyLandedView.m in Sources */,
 				26196CBB20C55C6E0097D72D /* ViewController.m in Sources */,
@@ -373,6 +426,8 @@
 				267BBF5A20DA89A10005AE5A /* HomePageNavView.m in Sources */,
 				267BBF5720DA840A0005AE5A /* HomePageViewController.m in Sources */,
 				C97712EA20DB5062007AE5F0 /* AboutUsViewController.m in Sources */,
+				C977130620E0DF69007AE5F0 /* ChangePersonNameViewController.m in Sources */,
+				C97712FD20E09B4A007AE5F0 /* PersonDataController.m in Sources */,
 				267BBF8120DBFC9E0005AE5A /* CommentCell.m in Sources */,
 				267BBF4320D913760005AE5A /* LoginViewController.m in Sources */,
 				267BBF4920D92B450005AE5A /* FogotViewController.m in Sources */,
@@ -387,6 +442,7 @@
 				267BBF7B20DBEA8E0005AE5A /* CollectionShopUneditCell.m in Sources */,
 				26196CB820C55C6E0097D72D /* AppDelegate.m in Sources */,
 				267BBF7E20DBF4930005AE5A /* CollectionShopEditCell.m in Sources */,
+				C977130920E0E93F007AE5F0 /* ChangeSexViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
