@@ -13,12 +13,14 @@
 #import "ChangePersonNameViewController.h"
 #import "ChangeSexViewController.h"
 #import "ChangeTelphoneNumViewController.h"
-@interface PersonDataController ()
+#import "ChangePasswordViewController.h"
+
+@interface PersonDataController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic,strong)NSMutableArray *titlesArray;
 @property (nonatomic,copy)NSString *name;
 @property (nonatomic,copy)NSString *sex;
 @property (nonatomic,copy)NSString *telNum;
-
+@property (nonatomic,strong)UIImage *headerImg;
 
 @end
 
@@ -66,7 +68,7 @@
     return 50;
     
 }
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 0.1;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -127,7 +129,27 @@
     
     if (indexPath.section ==0) {
         if (indexPath.row ==0) {
+            WS(blockSelf)
+            UIImagePickerController* picker = [[UIImagePickerController alloc]init];
+            picker.delegate = self;
+            picker.allowsEditing =YES;
             
+            UIAlertController *alert =[UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+            [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            }]];
+            [alert addAction:[UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                [blockSelf presentViewController:picker animated:YES completion:nil];
+                
+            }]];
+            [alert addAction:[UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                [blockSelf presentViewController:picker animated:YES completion:nil];
+            }]];
+            
+            [self presentViewController:alert animated:YES completion:nil];
+                    
+                
         }
         if (indexPath.row ==1) {
            ChangePersonNameViewController *nameVC =[[ChangePersonNameViewController alloc]init];
@@ -165,10 +187,25 @@
             
         }
         if (indexPath.row ==1) {
-            
+            [self.navigationController pushViewController:[ChangePasswordViewController new] animated:YES];
         }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+}
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    
+    //获取图片裁剪的图
+    UIImage* edit = [info objectForKey:UIImagePickerControllerEditedImage];
+    //数据请求
+    PersonImageCell *cell =(PersonImageCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    cell.imageV.image =edit;
+    self.headerImg =edit;
+    
+    
+    //完成
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
     
 }
 

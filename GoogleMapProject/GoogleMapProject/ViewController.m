@@ -32,12 +32,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.markersArray =[[NSMutableArray alloc]init];
-    GMSCameraPosition *position = [GMSCameraPosition cameraWithLatitude:-33.86 longitude:151.20 zoom:9];
+    GMSCameraPosition *position = [GMSCameraPosition cameraWithLatitude:-33.86 longitude:151.20 zoom:14];
     _mapV =[GMSMapView mapWithFrame:self.view.bounds camera:position];
     _mapV.myLocationEnabled = YES;
     _mapV.delegate =self;
     _mapV.settings.compassButton = YES;//显示指南针
-
+    _mapV.contentScaleFactor = 100;
+    
     [self.view addSubview:_mapV];
 
     if (self.locationManager == nil) {
@@ -51,9 +52,8 @@
 
     
      self.bottomV=[[BottomView alloc]initWithFrame:CGRectMake(10, self.view.bounds.size.height, self.view.bounds.size.width-20, 153)];
-    self.bottomV.backgroundColor =[UIColor whiteColor];
-    self.bottomV.layer.cornerRadius =5;
-    self.bottomV.layer.masksToBounds =YES;
+ 
+    self.bottomV.vc =self;
     [self.view addSubview:self.bottomV];
     
     UITapGestureRecognizer *tap =[[UITapGestureRecognizer alloc]init];
@@ -92,7 +92,7 @@
 - (void)currentCenter{
 
     if (position2D.latitude !=0 && position2D.longitude !=0) {
-        GMSCameraPosition *position1 = [GMSCameraPosition cameraWithTarget:position2D zoom:10];
+        GMSCameraPosition *position1 = [GMSCameraPosition cameraWithTarget:position2D zoom:14];
         [self.mapV animateToCameraPosition:position1];
 
     }
@@ -104,7 +104,7 @@ static int a =0 ;
     CLLocation *curLocation = [locations lastObject];
     // 通过location  或得到当前位置的经纬度
     CLLocationCoordinate2D curCoordinate2D = curLocation.coordinate;
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:curCoordinate2D.latitude longitude:curCoordinate2D.longitude zoom:8];
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:curCoordinate2D.latitude longitude:curCoordinate2D.longitude zoom:14];
      position2D = CLLocationCoordinate2DMake(curLocation.coordinate.latitude, curLocation.coordinate.longitude);//可以吧这个存起来
     
     BIGposition2D = CLLocationCoordinate2DMake(curLocation.coordinate.latitude, curLocation.coordinate.longitude);//可以吧这个存起来
@@ -122,8 +122,8 @@ static int a =0 ;
             GMSMarker *marker =[[GMSMarker alloc]init];
             double c = arc4random()%2;
             double d = pow(-1, c);
-            CGFloat a = d *(arc4random() % 999)/1000.0;
-            CGFloat b = d * (arc4random() % 999)/1000.0;
+            CGFloat a = d *(arc4random() % 999)/100000.0;
+            CGFloat b = d * (arc4random() % 999)/100000.0;
             
             marker.position =CLLocationCoordinate2DMake(curLocation.coordinate.latitude +a, curLocation.coordinate.longitude+b);
             marker.title =[NSString stringWithFormat:@"第%d个",i+1];
@@ -207,9 +207,11 @@ static int a =0 ;
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker{
     
     if (marker ==_marker) {
+        
         return YES;
     }
     WS(blockSelf)
+    self.bottomV.coor = marker.position;
     [UIView animateWithDuration:0.3 animations:^{
         blockSelf.bottomV.frame =CGRectMake(10, screenHeight -153, screenWigth-20, 153);
     }];

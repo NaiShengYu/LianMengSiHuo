@@ -18,7 +18,7 @@
         [self.contentView addSubview:_imgBut];
         [_imgBut mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.offset =0;
-            make.centerY.offset =-20;
+            make.centerY.offset =-10;
             make.size.mas_equalTo(CGSizeMake(70, 70));
         }];
         _imgBut.layer.cornerRadius =35;

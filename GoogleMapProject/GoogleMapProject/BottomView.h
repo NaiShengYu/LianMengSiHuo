@@ -18,4 +18,7 @@
 
 @property (nonatomic,strong)UILabel *juliLab;
 
+@property (nonatomic,weak)UIViewController *vc;
+
+@property (nonatomic,assign)CLLocationCoordinate2D coor;
 @end

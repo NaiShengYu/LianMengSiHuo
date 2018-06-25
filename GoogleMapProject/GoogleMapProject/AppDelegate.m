@@ -10,6 +10,7 @@
 #import "LoginViewController.h"
 #import "HomePageViewController.h"
 #import "LeftViewController.h"
+#import "ViewController.h"
 @import GoogleMaps;
 @interface AppDelegate ()
 
@@ -21,6 +22,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     //
+    [GMSServices provideAPIKey:@"AIzaSyBUuB_ESkwf_2qx5SpiE5IWuMbg1wpiMYM"];
+
     _window =[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     _window.backgroundColor =[UIColor whiteColor];
     [_window makeKeyAndVisible];
@@ -40,8 +43,8 @@
     homePageVC.drawerController =self.drawerController;
     leftVC.homePageVC =homePageVC;
     leftVC.drawerController =self.drawerController;
-    _window.rootViewController =self.drawerController;
-    
+//    _window.rootViewController =self.drawerController;
+    _window.rootViewController =[[ViewController alloc]init];
     
     [SVProgressHUD setDefaultStyle:(SVProgressHUDStyleCustom)];
     [SVProgressHUD setBackgroundColor:HEXCOLOR(0x303132)];
@@ -52,7 +55,6 @@
     [SVProgressHUD setDefaultMaskType:(SVProgressHUDMaskTypeClear)];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(HUDDismiss) name:SVProgressHUDDidReceiveTouchEventNotification object:nil];
     [SVProgressHUD setOffsetFromCenter:UIOffsetMake(0, 50)];
-    [GMSServices provideAPIKey:@"AIzaSyBUuB_ESkwf_2qx5SpiE5IWuMbg1wpiMYM"];
     return YES;
 }
 

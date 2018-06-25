@@ -36,6 +36,7 @@
 		267BBF7B20DBEA8E0005AE5A /* CollectionShopUneditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 267BBF7A20DBEA8E0005AE5A /* CollectionShopUneditCell.m */; };
 		267BBF7E20DBF4930005AE5A /* CollectionShopEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 267BBF7D20DBF4930005AE5A /* CollectionShopEditCell.m */; };
 		267BBF8120DBFC9E0005AE5A /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 267BBF8020DBFC9E0005AE5A /* CommentCell.m */; };
+		26A608C620E1251300B677FF /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A608C520E1251300B677FF /* ChangePasswordViewController.m */; };
 		C97712E120DB4F2D007AE5F0 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712E020DB4F2D007AE5F0 /* CommentViewController.m */; };
 		C97712E720DB5046007AE5F0 /* BindingPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712E620DB5046007AE5F0 /* BindingPhoneViewController.m */; };
 		C97712EA20DB5062007AE5F0 /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712E920DB5062007AE5F0 /* AboutUsViewController.m */; };
@@ -106,6 +107,8 @@
 		267BBF7D20DBF4930005AE5A /* CollectionShopEditCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionShopEditCell.m; sourceTree = "<group>"; };
 		267BBF7F20DBFC9E0005AE5A /* CommentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
 		267BBF8020DBFC9E0005AE5A /* CommentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
+		26A608C420E1251300B677FF /* ChangePasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
+		26A608C520E1251300B677FF /* ChangePasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
 		2BF73FC6E901B989D43D34C9 /* libPods-GoogleMapProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GoogleMapProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		764BAFDF28E3445530AD6A69 /* Pods-GoogleMapProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleMapProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GoogleMapProject/Pods-GoogleMapProject.debug.xcconfig"; sourceTree = "<group>"; };
 		962BF1968C3B249CC9293335 /* Pods-GoogleMapProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleMapProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoogleMapProject/Pods-GoogleMapProject.release.xcconfig"; sourceTree = "<group>"; };
@@ -253,16 +256,8 @@
 			children = (
 				C97712FA20E09B23007AE5F0 /* Controller */,
 				C97712F920E09B17007AE5F0 /* View */,
-				C97712F820E09B03007AE5F0 /* Model */,
 			);
 			path = PersonData;
-			sourceTree = "<group>";
-		};
-		C97712F820E09B03007AE5F0 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		C97712F920E09B17007AE5F0 /* View */ = {
@@ -287,6 +282,8 @@
 				C977130820E0E93F007AE5F0 /* ChangeSexViewController.m */,
 				C977130A20E0EFAC007AE5F0 /* ChangeTelphoneNumViewController.h */,
 				C977130B20E0EFAC007AE5F0 /* ChangeTelphoneNumViewController.m */,
+				26A608C420E1251300B677FF /* ChangePasswordViewController.h */,
+				26A608C520E1251300B677FF /* ChangePasswordViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -448,6 +445,7 @@
 				C977130C20E0EFAC007AE5F0 /* ChangeTelphoneNumViewController.m in Sources */,
 				26196CB820C55C6E0097D72D /* AppDelegate.m in Sources */,
 				267BBF7E20DBF4930005AE5A /* CollectionShopEditCell.m in Sources */,
+				26A608C620E1251300B677FF /* ChangePasswordViewController.m in Sources */,
 				C977130920E0E93F007AE5F0 /* ChangeSexViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

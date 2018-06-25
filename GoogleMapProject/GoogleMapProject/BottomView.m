@@ -9,7 +9,7 @@
 //
 
 #import "BottomView.h"
-
+#import <MapKit/MapKit.h>
 @implementation BottomView
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -17,6 +17,9 @@
     self =[super initWithFrame:frame];
     if (self) {
         WS(blockSelf);
+        self.backgroundColor =[UIColor whiteColor];
+        self.layer.cornerRadius =5;
+        self.layer.masksToBounds =YES;
         _imageV =[UIImageView new];
         [self addSubview:_imageV];
         _imageV.image =[UIImage imageNamed:@"aaa"];
@@ -34,6 +37,8 @@
             make.right.offset =-20;
             make.size.mas_equalTo(CGSizeMake(40, 40));
         }];
+        [but addTarget:self action:@selector(daohang) forControlEvents:UIControlEventTouchUpInside];
+        
         
         _juliLab =[UILabel new];
         [self addSubview:_juliLab];
@@ -181,13 +186,45 @@
     
     
 }
+- (void)daohang{
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"comgooglemaps://"]]) {
+        NSString *urlString = [[NSString stringWithFormat:@"comgooglemaps://?x-source=%@&x-success=%@&saddr=&daddr=%f,%f&directionsmode=driving",@"联盟",@"lianMeng",self.coor.latitude, self.coor.longitude] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+      BOOL aaa=  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+        
+        NSLog(@"%@",aaa?@"Yes":@"NO");
+    }else{
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"您手机没有谷歌地图"];
+    }
+    
+    return;
+    UIAlertController *alertV =[UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [alertV addAction:[UIAlertAction actionWithTitle:@"谷歌地图" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+       
+        
+    }]] ;
+    
+    if ( [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"http://maps.apple.com/"]]){
+        
+        　　UIAlertAction *action = [UIAlertAction actionWithTitle:@"苹果地图" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            　　MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
+            　　MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:self.coor addressDictionary:nil]];
+            　　[MKMapItem openMapsWithItems:@[currentLocation, toLocation] launchOptions:@{MKLaunchOptionsDirectionsModeKey: 　　　　MKLaunchOptionsDirectionsModeDriving,MKLaunchOptionsShowsTrafficKey: [NSNumber numberWithBool:YES]}];
+            
+        }];
+        
+        　　[alertV addAction:action];
+    }
+    
+    [alertV addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+    [_vc presentViewController:alertV animated:YES completion:nil];
+    
+    
+    
 }
-*/
 
 @end
