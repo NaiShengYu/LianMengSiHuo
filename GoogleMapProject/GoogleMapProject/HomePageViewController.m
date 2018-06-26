@@ -43,7 +43,7 @@
     [super viewDidLoad];
 //    self.view.backgroundColor =[UIColor whiteColor];
     [self creatNav];
-    [self.view addSubview:self.collectionV];
+    [self.view addSubview:self.collectionV];    
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -91,6 +91,7 @@
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section ==0) {
         HomePageSectionZeroCell *cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"HomePageSectionZeroCell" forIndexPath:indexPath];
+        cell.VC =self;
         return cell;
     }else if (indexPath.section ==1){
         HomePageSectionOneCell *cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"HomePageSectionOneCell" forIndexPath:indexPath];

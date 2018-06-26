@@ -43,8 +43,8 @@
     homePageVC.drawerController =self.drawerController;
     leftVC.homePageVC =homePageVC;
     leftVC.drawerController =self.drawerController;
-//    _window.rootViewController =self.drawerController;
-    _window.rootViewController =[[ViewController alloc]init];
+    _window.rootViewController =self.drawerController;
+//    _window.rootViewController =[[ViewController alloc]init];
     
     [SVProgressHUD setDefaultStyle:(SVProgressHUDStyleCustom)];
     [SVProgressHUD setBackgroundColor:HEXCOLOR(0x303132)];
@@ -53,8 +53,13 @@
     [SVProgressHUD setMinimumSize:CGSizeMake(260, 44)];
     [SVProgressHUD setCornerRadius:5];
     [SVProgressHUD setDefaultMaskType:(SVProgressHUDMaskTypeClear)];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(HUDDismiss) name:SVProgressHUDDidReceiveTouchEventNotification object:nil];
-    [SVProgressHUD setOffsetFromCenter:UIOffsetMake(0, 50)];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardDidShow) name:UIKeyboardDidShowNotification object:nil];
+    
+//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyBoardHiden) name:UIKeyboardDidHideNotification object:nil];
+    
     return YES;
 }
 
@@ -63,6 +68,18 @@
     [SVProgressHUD popActivity];
     
 }
+- (void)keyBoardDidShow{
+    DLog(@"键盘出现了");
+    [SVProgressHUD setOffsetFromCenter:UIOffsetMake(0,100)];
+
+}
+//- (void)keyBoardHiden{
+//    
+//    DLog(@"键盘消失了");
+////    [SVProgressHUD setOffsetFromCenter:UIOffsetMake(0, 0)];
+//
+//}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

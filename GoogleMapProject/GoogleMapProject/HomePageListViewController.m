@@ -6,15 +6,16 @@
 //  Copyright © 2018年 俞乃胜. All rights reserved.
 //
 
-#import "CollectionShopViewController.h"
-#import "NavHeader.h"
+#import "HomePageListViewController.h"
+#import "ShopInfoViewController.h"
+#import "TopView.h"
 #import "CollectionShopUneditCell.h"
-#import "CollectionShopEditCell.h"
 #import "FilterView.h"
 
+#import "ViewController.h"
 #import "FilterItem.h"
 #import "FilterHeaderModel.h"
-@interface CollectionShopViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface HomePageListViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *myTable;
 @property (nonatomic,strong)NSMutableArray *dataArray;
 @property (nonatomic,strong)UIButton *deleteBut;
@@ -24,10 +25,9 @@
 @property (nonatomic,strong)FilterView *filterV;
 
 
-@property (nonatomic,assign)BOOL isEdit;
 @end
 
-@implementation CollectionShopViewController
+@implementation HomePageListViewController
 
 - (FilterView *)filterV{
     if (!_filterV) {
@@ -43,14 +43,12 @@
         _myTable.delegate =self;
         _myTable.dataSource =self;
         [_myTable registerClass:[CollectionShopUneditCell class] forCellReuseIdentifier:@"CollectionShopUneditCell"];
-        [_myTable registerClass:[CollectionShopEditCell class] forCellReuseIdentifier:@"CollectionShopEditCell"];
     }
     return _myTable;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _isEdit =NO;
     self.dataArray =[[NSMutableArray alloc]initWithObjects:@"1",@"1",@"1",@"1",@"1",@"1", nil];
     
     
@@ -82,39 +80,25 @@
     item5.isSelect =NO;
     [headerModel.itemsArray addObject:item5];
     self.filterArray =[[NSMutableArray alloc]initWithObjects:headerModel, nil];
-
-    
     self.view.backgroundColor =[UIColor whiteColor];
-  
-
     [self.view addSubview:self.myTable];
-    
-    _deleteBut =[[UIButton alloc]initWithFrame:CGRectMake(0, screenHeight-45, screenWigth, 45)];
-    [_deleteBut setTitle:@"删除" forState:UIControlStateNormal];
-    [_deleteBut setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    _deleteBut.backgroundColor =[UIColor whiteColor];
-    _deleteBut.hidden =YES;
-    [self.view addSubview:_deleteBut];
-    UIView *lineV =[[UIView alloc]initWithFrame:CGRectMake(0, 0, screenWigth, 1)];
-    lineV.backgroundColor =[UIColor groupTableViewBackgroundColor];
-    [_deleteBut addSubview:lineV];
-    
     self.filterV.dataArray =self.filterArray;
     [self.view addSubview:self.filterV];
     
-    
-    NavHeader *header =[[NavHeader alloc]initWithFrame:CGRectMake(0, 0, screenWigth, MaxY)];
-    header.centerLab.text = @"我的收藏";
-    [self.view addSubview:header];
-    [header.backBaut addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-    [header.rightBut addTarget:self action:@selector(changeEdit:) forControlEvents:UIControlEventTouchUpInside];
-    [header.chooseBut addTarget:self action:@selector(chooseBut:) forControlEvents:UIControlEventTouchUpInside];
+   TopView *topV=[[TopView alloc]initWithFrame:CGRectMake(0, 0,screenWigth , MaxY)];
+    [topV.rightBut setImage:[UIImage imageNamed:@"列表_03"] forState:UIControlStateNormal];
+    [topV.rightBut addTarget:self action:@selector(goMap) forControlEvents:UIControlEventTouchUpInside];
+    [topV.backBut addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [topV.chooseBut addTarget:self action:@selector(chooseBut:) forControlEvents:UIControlEventTouchUpInside];
+
+    [self.view addSubview:topV];
     
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden =YES;
 }
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataArray.count;
@@ -136,17 +120,14 @@
     return nil;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (self.isEdit ==NO) {
         CollectionShopUneditCell *cell =[tableView dequeueReusableCellWithIdentifier:@"CollectionShopUneditCell" forIndexPath:indexPath];
+    cell.topickNumLab.text = @"200 ￥ 12432条评论";
         return cell;
-    }else{
-        CollectionShopEditCell *cell =[tableView dequeueReusableCellWithIdentifier:@"CollectionShopEditCell" forIndexPath:indexPath];
-        return cell;
-    }
-  
+   
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    ShopInfoViewController *vc = [[ShopInfoViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 #pragma mark --让cell的横线到最左边
@@ -164,6 +145,13 @@
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
 }
+
+- (void)goMap{
+    
+    ViewController *VC =[[ViewController alloc]init];
+    [self.navigationController pushViewController:VC animated:YES];
+    
+}
 - (void)chooseBut:(UIButton *)but{
     
     but.selected = !but.selected;
@@ -176,30 +164,11 @@
             self.filterV.frame =CGRectMake(0, 0, screenWigth, 0);
         }];
     }
-    
-    
-    
-    
+ 
 }
 
-- (void)changeEdit:(UIButton *)but{
-    _isEdit =!_isEdit;
-    but.selected =!but.selected;
-    WS(blockSelf);
-    if (_isEdit==YES) {
-        self.deleteBut.hidden =NO;
-        [UIView animateWithDuration:0.4 animations:^{
-            blockSelf.myTable.frame =CGRectMake(0, MaxY, screenWigth, screenHeight-44-MaxY);
-        }];
-    }else{
-        self.deleteBut.hidden =YES;
-        [UIView animateWithDuration:0.4 animations:^{
-            blockSelf.myTable.frame =CGRectMake(0, MaxY, screenWigth, screenHeight-MaxY);
-        }];
-        
-    }
-    [self.myTable reloadData];
-}
+
+
 - (void)goBack{
     [self.navigationController popViewControllerAnimated:YES];
 }

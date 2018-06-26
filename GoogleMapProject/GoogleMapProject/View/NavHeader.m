@@ -48,12 +48,14 @@
             make.left.equalTo(blockSelf.backBaut.mas_right).offset =5;
         }];
         [_chooseBut setImage:[UIImage imageNamed:@"12"] forState:UIControlStateNormal];
+        [_chooseBut setTitle:@" 取消" forState:UIControlStateSelected];
         [_chooseBut setTitle:@" 筛选" forState:UIControlStateNormal];
         _chooseBut.titleLabel.font =FontSize(14);
 //        _chooseBut.backgroundColor =RGBA(156, 37, 29, 1);//浅一点
         _chooseBut.backgroundColor =RGBA(133, 31, 24, 1);
         _chooseBut.layer.cornerRadius =2;
         _chooseBut.layer.masksToBounds =YES;
+        
         
      
         _centerLab =[UILabel new];

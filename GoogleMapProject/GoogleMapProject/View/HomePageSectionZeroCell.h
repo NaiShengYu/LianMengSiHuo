@@ -12,7 +12,9 @@
 @interface HomePageSectionZeroCell : UICollectionViewCell
 @property (nonatomic,strong)GMSMapView *mapV ;
 
-@property (nonatomic,strong)UILabel *titleLab;
+@property (nonatomic,strong)UIButton *titleBut;
 
 @property (nonatomic,strong)UITableView *tab;
+
+@property (nonatomic,weak)UIViewController *VC;
 @end

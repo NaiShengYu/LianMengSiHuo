@@ -37,7 +37,9 @@
     _mapV.myLocationEnabled = YES;
     _mapV.delegate =self;
     _mapV.settings.compassButton = YES;//显示指南针
+    
     _mapV.contentScaleFactor = 100;
+
     
     [self.view addSubview:_mapV];
 
@@ -65,7 +67,8 @@
     
     self.topV=[[TopView alloc]initWithFrame:CGRectMake(0, 0,screenWigth , MaxY)];
     [self.view addSubview:self.topV];
-    
+    [_topV.backBut addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+
     
     
     UIView *bacv =[[UIView alloc]initWithFrame:CGRectMake(self.view.bounds.size.width-80, MaxY+80, 60, 120)];
@@ -177,8 +180,8 @@ static int a =0 ;
         GMSMarker *marker =[[GMSMarker alloc]init];
         double c = arc4random()%2;
         double d = pow(-1, c);
-        CGFloat a = d *(arc4random() % 999)/1000.0;
-        CGFloat b = d * (arc4random() % 999)/1000.0;
+        CGFloat a = d *(arc4random() % 999)/100000.0;
+        CGFloat b = d * (arc4random() % 999)/100000.0;
         
         marker.position =CLLocationCoordinate2DMake(BIGposition2D.latitude +a, BIGposition2D.longitude+b);
         marker.title =[NSString stringWithFormat:@"第%d个",i+1];
@@ -246,6 +249,8 @@ static int a =0 ;
     
 }
 
-
+- (void)goBack{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 @end

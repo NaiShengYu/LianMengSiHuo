@@ -7,6 +7,7 @@
 //
 
 #import "HomePageSectionZeroCell.h"
+#import "HomePageListViewController.h"
 @interface HomePageSectionZeroCell()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong)NSMutableArray *titlesArray;
@@ -32,25 +33,25 @@
         backView.backgroundColor =[UIColor whiteColor];
         backView.alpha =0.6;
         
-        _titleLab =[UILabel new];
-        [self.contentView addSubview:_titleLab];
-        [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        _titleBut =[UIButton new];
+        [self.contentView addSubview:_titleBut];
+        [_titleBut mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.offset =20;
             make.left.offset =10;
             make.right.offset =-10;
             make.height.offset =60;
         }];
-        _titleLab.textAlignment =NSTextAlignmentCenter;
-        _titleLab.numberOfLines =2;
-        _titleLab.text =@"巴黎\nParis";
-  
+        _titleBut.titleLabel.numberOfLines =2;
+        [_titleBut setTitle:@"巴黎\nParis" forState:UIControlStateNormal];
+        [_titleBut setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        
         _tab =[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStyleGrouped];
         _tab.delegate =self;
         _tab.dataSource =self;
         [_tab registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
         [self.contentView addSubview:_tab];
         [_tab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(blockSelf.titleLab.mas_bottom).offset =20;
+            make.top.equalTo(blockSelf.titleBut.mas_bottom).offset =20;
             make.left.offset =20;
             make.right.offset =-20;
             make.bottom.offset =-20;
@@ -89,6 +90,11 @@
     cell.textLabel.text =self.titlesArray[indexPath.row];
     cell.imageView.image =[UIImage imageNamed:@"timg"];
     return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [self.VC.navigationController pushViewController:[HomePageListViewController new] animated:YES];
+    
 }
 #pragma mark --让cell的横线到最左边
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{

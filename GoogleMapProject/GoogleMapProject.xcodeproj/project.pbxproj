@@ -47,6 +47,18 @@
 		C977130620E0DF69007AE5F0 /* ChangePersonNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C977130520E0DF69007AE5F0 /* ChangePersonNameViewController.m */; };
 		C977130920E0E93F007AE5F0 /* ChangeSexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C977130820E0E93F007AE5F0 /* ChangeSexViewController.m */; };
 		C977130C20E0EFAC007AE5F0 /* ChangeTelphoneNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C977130B20E0EFAC007AE5F0 /* ChangeTelphoneNumViewController.m */; };
+		C977130F20E1D28B007AE5F0 /* FilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = C977130E20E1D28B007AE5F0 /* FilterView.m */; };
+		C977131220E1DFD9007AE5F0 /* FilterHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = C977131120E1DFD9007AE5F0 /* FilterHeader.m */; };
+		C977131620E1EECC007AE5F0 /* FilterHeaderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C977131520E1EECC007AE5F0 /* FilterHeaderModel.m */; };
+		C977131920E1EF42007AE5F0 /* FilterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C977131820E1EF42007AE5F0 /* FilterItem.m */; };
+		C977131C20E1F845007AE5F0 /* CustomBut.m in Sources */ = {isa = PBXBuildFile; fileRef = C977131B20E1F845007AE5F0 /* CustomBut.m */; };
+		C977131F20E1F87E007AE5F0 /* FilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C977131E20E1F87E007AE5F0 /* FilterCell.m */; };
+		C977132220E20688007AE5F0 /* HomePageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C977132120E20688007AE5F0 /* HomePageListViewController.m */; };
+		C977132520E212FB007AE5F0 /* ShopInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C977132420E212FB007AE5F0 /* ShopInfoViewController.m */; };
+		C977132820E214F7007AE5F0 /* ShopInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C977132720E214F7007AE5F0 /* ShopInfoTableViewCell.m */; };
+		C977132E20E23249007AE5F0 /* ShopInfoCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C977132D20E23249007AE5F0 /* ShopInfoCommentTableViewCell.m */; };
+		C977133120E23BAF007AE5F0 /* ShopInfoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = C977133020E23BAF007AE5F0 /* ShopInfoFooter.m */; };
+		C977133420E23FD4007AE5F0 /* ShopInfoNavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = C977133320E23FD4007AE5F0 /* ShopInfoNavBar.m */; };
 		F4FF636EA87F22A1DB12DE83 /* libPods-GoogleMapProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF73FC6E901B989D43D34C9 /* libPods-GoogleMapProject.a */; };
 /* End PBXBuildFile section */
 
@@ -132,6 +144,30 @@
 		C977130820E0E93F007AE5F0 /* ChangeSexViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeSexViewController.m; sourceTree = "<group>"; };
 		C977130A20E0EFAC007AE5F0 /* ChangeTelphoneNumViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeTelphoneNumViewController.h; sourceTree = "<group>"; };
 		C977130B20E0EFAC007AE5F0 /* ChangeTelphoneNumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeTelphoneNumViewController.m; sourceTree = "<group>"; };
+		C977130D20E1D28B007AE5F0 /* FilterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterView.h; sourceTree = "<group>"; };
+		C977130E20E1D28B007AE5F0 /* FilterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterView.m; sourceTree = "<group>"; };
+		C977131020E1DFD9007AE5F0 /* FilterHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterHeader.h; sourceTree = "<group>"; };
+		C977131120E1DFD9007AE5F0 /* FilterHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterHeader.m; sourceTree = "<group>"; };
+		C977131420E1EECC007AE5F0 /* FilterHeaderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterHeaderModel.h; sourceTree = "<group>"; };
+		C977131520E1EECC007AE5F0 /* FilterHeaderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterHeaderModel.m; sourceTree = "<group>"; };
+		C977131720E1EF42007AE5F0 /* FilterItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterItem.h; sourceTree = "<group>"; };
+		C977131820E1EF42007AE5F0 /* FilterItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterItem.m; sourceTree = "<group>"; };
+		C977131A20E1F845007AE5F0 /* CustomBut.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomBut.h; sourceTree = "<group>"; };
+		C977131B20E1F845007AE5F0 /* CustomBut.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomBut.m; sourceTree = "<group>"; };
+		C977131D20E1F87E007AE5F0 /* FilterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterCell.h; sourceTree = "<group>"; };
+		C977131E20E1F87E007AE5F0 /* FilterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterCell.m; sourceTree = "<group>"; };
+		C977132020E20688007AE5F0 /* HomePageListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageListViewController.h; sourceTree = "<group>"; };
+		C977132120E20688007AE5F0 /* HomePageListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageListViewController.m; sourceTree = "<group>"; };
+		C977132320E212FB007AE5F0 /* ShopInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopInfoViewController.h; sourceTree = "<group>"; };
+		C977132420E212FB007AE5F0 /* ShopInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopInfoViewController.m; sourceTree = "<group>"; };
+		C977132620E214F7007AE5F0 /* ShopInfoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopInfoTableViewCell.h; sourceTree = "<group>"; };
+		C977132720E214F7007AE5F0 /* ShopInfoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopInfoTableViewCell.m; sourceTree = "<group>"; };
+		C977132C20E23249007AE5F0 /* ShopInfoCommentTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopInfoCommentTableViewCell.h; sourceTree = "<group>"; };
+		C977132D20E23249007AE5F0 /* ShopInfoCommentTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopInfoCommentTableViewCell.m; sourceTree = "<group>"; };
+		C977132F20E23BAF007AE5F0 /* ShopInfoFooter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopInfoFooter.h; sourceTree = "<group>"; };
+		C977133020E23BAF007AE5F0 /* ShopInfoFooter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopInfoFooter.m; sourceTree = "<group>"; };
+		C977133220E23FD4007AE5F0 /* ShopInfoNavBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopInfoNavBar.h; sourceTree = "<group>"; };
+		C977133320E23FD4007AE5F0 /* ShopInfoNavBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopInfoNavBar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +203,7 @@
 		26196CB520C55C6E0097D72D /* GoogleMapProject */ = {
 			isa = PBXGroup;
 			children = (
+				C977131320E1EEA9007AE5F0 /* Model */,
 				C97712F720E09AF8007AE5F0 /* PersonData */,
 				267BBF5120DA7CF50005AE5A /* View */,
 				26196CB620C55C6E0097D72D /* AppDelegate.h */,
@@ -196,6 +233,8 @@
 				267BBF4E20D941D20005AE5A /* FogotSecondViewController.m */,
 				267BBF5520DA840A0005AE5A /* HomePageViewController.h */,
 				267BBF5620DA840A0005AE5A /* HomePageViewController.m */,
+				C977132020E20688007AE5F0 /* HomePageListViewController.h */,
+				C977132120E20688007AE5F0 /* HomePageListViewController.m */,
 				267BBF6A20DAAEE60005AE5A /* LeftViewController.h */,
 				267BBF6B20DAAEE60005AE5A /* LeftViewController.m */,
 				267BBF7320DAB9090005AE5A /* CollectionShopViewController.h */,
@@ -208,6 +247,8 @@
 				C97712E920DB5062007AE5F0 /* AboutUsViewController.m */,
 				C97712EB20DB5085007AE5F0 /* VersionInformationViewController.h */,
 				C97712EC20DB5085007AE5F0 /* VersionInformationViewController.m */,
+				C977132320E212FB007AE5F0 /* ShopInfoViewController.h */,
+				C977132420E212FB007AE5F0 /* ShopInfoViewController.m */,
 			);
 			path = GoogleMapProject;
 			sourceTree = "<group>";
@@ -239,6 +280,22 @@
 				267BBF7D20DBF4930005AE5A /* CollectionShopEditCell.m */,
 				267BBF7F20DBFC9E0005AE5A /* CommentCell.h */,
 				267BBF8020DBFC9E0005AE5A /* CommentCell.m */,
+				C977130D20E1D28B007AE5F0 /* FilterView.h */,
+				C977130E20E1D28B007AE5F0 /* FilterView.m */,
+				C977131020E1DFD9007AE5F0 /* FilterHeader.h */,
+				C977131120E1DFD9007AE5F0 /* FilterHeader.m */,
+				C977131D20E1F87E007AE5F0 /* FilterCell.h */,
+				C977131E20E1F87E007AE5F0 /* FilterCell.m */,
+				C977131A20E1F845007AE5F0 /* CustomBut.h */,
+				C977131B20E1F845007AE5F0 /* CustomBut.m */,
+				C977132620E214F7007AE5F0 /* ShopInfoTableViewCell.h */,
+				C977132720E214F7007AE5F0 /* ShopInfoTableViewCell.m */,
+				C977132C20E23249007AE5F0 /* ShopInfoCommentTableViewCell.h */,
+				C977132D20E23249007AE5F0 /* ShopInfoCommentTableViewCell.m */,
+				C977132F20E23BAF007AE5F0 /* ShopInfoFooter.h */,
+				C977133020E23BAF007AE5F0 /* ShopInfoFooter.m */,
+				C977133220E23FD4007AE5F0 /* ShopInfoNavBar.h */,
+				C977133320E23FD4007AE5F0 /* ShopInfoNavBar.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -286,6 +343,17 @@
 				26A608C520E1251300B677FF /* ChangePasswordViewController.m */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		C977131320E1EEA9007AE5F0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C977131420E1EECC007AE5F0 /* FilterHeaderModel.h */,
+				C977131520E1EECC007AE5F0 /* FilterHeaderModel.m */,
+				C977131720E1EF42007AE5F0 /* FilterItem.h */,
+				C977131820E1EF42007AE5F0 /* FilterItem.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		D9AA7F0C19CCA884D174764A /* Pods */ = {
@@ -410,6 +478,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C977133120E23BAF007AE5F0 /* ShopInfoFooter.m in Sources */,
 				267BBF6020DA99460005AE5A /* HomePageSectionOneCell.m in Sources */,
 				267BBF6C20DAAEE60005AE5A /* LeftViewController.m in Sources */,
 				C97712ED20DB5085007AE5F0 /* VersionInformationViewController.m in Sources */,
@@ -417,6 +486,7 @@
 				C97712E120DB4F2D007AE5F0 /* CommentViewController.m in Sources */,
 				260C46D220CD6736008952B4 /* TopView.m in Sources */,
 				C977130020E09F73007AE5F0 /* PersonImageCell.m in Sources */,
+				C977132520E212FB007AE5F0 /* ShopInfoViewController.m in Sources */,
 				267BBF7520DAB9090005AE5A /* CollectionShopViewController.m in Sources */,
 				26196CC120C55C6E0097D72D /* GoogleMapProject.xcdatamodeld in Sources */,
 				C977130320E0B768007AE5F0 /* PersonDataCell.m in Sources */,
@@ -429,24 +499,34 @@
 				267BBF5720DA840A0005AE5A /* HomePageViewController.m in Sources */,
 				C97712EA20DB5062007AE5F0 /* AboutUsViewController.m in Sources */,
 				C977130620E0DF69007AE5F0 /* ChangePersonNameViewController.m in Sources */,
+				C977132E20E23249007AE5F0 /* ShopInfoCommentTableViewCell.m in Sources */,
 				C97712FD20E09B4A007AE5F0 /* PersonDataController.m in Sources */,
 				267BBF8120DBFC9E0005AE5A /* CommentCell.m in Sources */,
 				267BBF4320D913760005AE5A /* LoginViewController.m in Sources */,
 				267BBF4920D92B450005AE5A /* FogotViewController.m in Sources */,
 				267BBF4C20D93D4D0005AE5A /* PubulicObj.m in Sources */,
+				C977132820E214F7007AE5F0 /* ShopInfoTableViewCell.m in Sources */,
 				260C46CF20CD5841008952B4 /* BottomView.m in Sources */,
 				267BBF6320DA9FC20005AE5A /* HomePageSecitonThreeCell.m in Sources */,
+				C977130F20E1D28B007AE5F0 /* FilterView.m in Sources */,
 				267BBF6F20DAB2060005AE5A /* LeftViewHeader.m in Sources */,
+				C977132220E20688007AE5F0 /* HomePageListViewController.m in Sources */,
 				267BBF5D20DA912E0005AE5A /* HomePageSectionZeroCell.m in Sources */,
 				C97712E720DB5046007AE5F0 /* BindingPhoneViewController.m in Sources */,
 				267BBF6620DAA1D30005AE5A /* HomePageSectionOneheader.m in Sources */,
+				C977131220E1DFD9007AE5F0 /* FilterHeader.m in Sources */,
 				267BBF4620D92B330005AE5A /* RegistViewController.m in Sources */,
 				267BBF7B20DBEA8E0005AE5A /* CollectionShopUneditCell.m in Sources */,
+				C977131C20E1F845007AE5F0 /* CustomBut.m in Sources */,
 				C977130C20E0EFAC007AE5F0 /* ChangeTelphoneNumViewController.m in Sources */,
 				26196CB820C55C6E0097D72D /* AppDelegate.m in Sources */,
 				267BBF7E20DBF4930005AE5A /* CollectionShopEditCell.m in Sources */,
 				26A608C620E1251300B677FF /* ChangePasswordViewController.m in Sources */,
+				C977131920E1EF42007AE5F0 /* FilterItem.m in Sources */,
+				C977131620E1EECC007AE5F0 /* FilterHeaderModel.m in Sources */,
+				C977131F20E1F87E007AE5F0 /* FilterCell.m in Sources */,
 				C977130920E0E93F007AE5F0 /* ChangeSexViewController.m in Sources */,
+				C977133420E23FD4007AE5F0 /* ShopInfoNavBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
