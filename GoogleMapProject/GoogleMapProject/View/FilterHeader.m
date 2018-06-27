@@ -43,11 +43,20 @@
 - (void)setHeaderModel:(FilterHeaderModel *)headerModel{
     
     _headerModel = headerModel;
+    NSString *sss =_headerModel.title;
+    int i =0;
+    
     for (FilterItem *item in _headerModel.itemsArray) {
         if (item.isSelect ==YES) {
-            _titleLab.text =[NSString stringWithFormat:@"%@  %@",_headerModel.title,item.title];
+            if (i ==0) {
+                sss =[NSString stringWithFormat:@"%@  %@",sss,item.title];
+                i =1;
+            }else{
+                sss =[NSString stringWithFormat:@"%@，%@",sss,item.title];
+            }
         }
     }
+    _titleLab.text =sss;
     if (_headerModel.isSelect ==YES) {
         _img.transform = CGAffineTransformMakeRotation(0);
 

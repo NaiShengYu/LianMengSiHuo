@@ -15,6 +15,8 @@
 #import "AboutUsViewController.h"
 #import "VersionInformationViewController.h"
 #import "PersonDataController.h"
+
+#import "LoginViewController.h"
 @interface LeftViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *myTable;
 @property (nonatomic,strong)NSMutableArray *titlesArray;
@@ -38,6 +40,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    
     self.navigationController.navigationBar.translucent =NO;
     _titlesArray =[[NSMutableArray alloc]initWithObjects:@"我的收藏",@"我的点评",@"忘记密码",@"绑定手机",@"关于我们",@"版本信息", nil];
     
@@ -48,8 +52,13 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.myTable reloadData];
     self.navigationController.navigationBar.hidden =YES;
-    self.automaticallyAdjustsScrollViewInsets = NO;
+//    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.myTable.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    UIWindow *window = [[UIApplication sharedApplication].delegate window];
+    window.backgroundColor =zhuse;
+
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -70,6 +79,16 @@
     
     LeftViewHeader *header =[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"LeftViewHeader"];
     [header.imgBut addTarget:self action:@selector(changeUserData) forControlEvents:UIControlEventTouchUpInside];
+    
+    if ([CustomAccount sharedCustomAccount].loginType ==1) {
+        [header.titleBut setTitle:@"大佬" forState:UIControlStateNormal];
+        header.headerImgV.image =[UIImage imageNamed:@"timg-2"];
+
+    }else{
+        header.headerImgV.image =[UIImage imageNamed:@""];
+        [header.titleBut setTitle:@"未登录" forState:UIControlStateNormal];
+    }
+    
     return header;
     
 }
@@ -131,13 +150,18 @@
 }
 - (void)changeUserData{
     
-    PersonDataController *dataVC =[[PersonDataController alloc]initWithStyle:UITableViewStyleGrouped];
-    [self.homePageVC.navigationController pushViewController:dataVC animated:NO];
-    [self.drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {
-    }];
-    
-    
-    
+    if ([CustomAccount sharedCustomAccount].loginType ==1) {
+        PersonDataController *dataVC =[[PersonDataController alloc]initWithStyle:UITableViewStyleGrouped];
+        [self.homePageVC.navigationController pushViewController:dataVC animated:NO];
+        [self.drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {
+        }];
+    }else{
+        [self.homePageVC.navigationController pushViewController:[LoginViewController new] animated:NO];
+        [self.drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {
+        }];
+
+    }
+  
     
 }
 @end

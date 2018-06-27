@@ -94,7 +94,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [self.VC.navigationController pushViewController:[HomePageListViewController new] animated:YES];
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 #pragma mark --让cell的横线到最左边
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{

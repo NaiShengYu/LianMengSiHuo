@@ -7,6 +7,8 @@
 //
 
 #import "HomePageViewController.h"
+#import "ShopInfoViewController.h"
+
 #import "HomePageNavView.h"
 #import "HomePageSectionZeroCell.h"
 #import "HomePageSectionOneCell.h"
@@ -105,6 +107,16 @@
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+
+    if (indexPath.section >0) {
+        ShopInfoViewController *vc = [[ShopInfoViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+
+    }
+ 
+}
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section ==0)return CGSizeMake(screenWigth, 300);
     else if (indexPath.section ==1)return CGSizeMake(screenWigth-30, 190);
@@ -115,9 +127,6 @@
     else if (section ==1)return CGSizeMake(screenWigth, 30);
     else return CGSizeMake(screenWigth, 30);
 
-    
-    
-    
 }
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     if (section ==0) {

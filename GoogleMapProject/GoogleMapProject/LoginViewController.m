@@ -25,9 +25,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor =zhuse;
 
-    
+    UIImageView *imgV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"登录背景"]];
+    imgV.frame =self.view.bounds;
+    [self.view addSubview:imgV];
 
     [self creatView];
     [self CreatThirdPartyLanded];
@@ -57,7 +58,7 @@
         make.width.offset =44;
         make.height.offset =44;
     }];
-    rightBut.backgroundColor =[UIColor whiteColor];
+    [rightBut setImage:[UIImage imageNamed:@"登录_03"] forState:UIControlStateNormal];
     
     UIImageView *imgV =[UIImageView new];
     [containerView addSubview:imgV];
@@ -66,7 +67,7 @@
         make.top.equalTo(rightBut.mas_bottom).offset =40;
         make.size.mas_equalTo(CGSizeMake(90, 90));
     }];
-    imgV.backgroundColor =[UIColor whiteColor];
+    imgV.image =[UIImage imageNamed:@"登录_07"];
     
     UIView *V1 =[UIView new];
     [containerView addSubview:V1];
@@ -102,7 +103,7 @@
         make.top.right.bottom.offset =0;
         make.width.offset =50;
     }];
-    cancelBut.backgroundColor =[UIColor orangeColor];
+    [cancelBut setImage:[UIImage imageNamed:@"登录_11"] forState:UIControlStateNormal];
     [cancelBut addTarget:self action:@selector(clearNameTF) forControlEvents:UIControlEventTouchUpInside];
     
     UIView *V2 =[UIView new];
@@ -139,7 +140,10 @@
         make.top.right.bottom.offset =0;
         make.width.offset =50;
     }];
-    showBut.backgroundColor =[UIColor orangeColor];
+    [showBut setImage:[UIImage imageNamed:@"登录_19"] forState:UIControlStateNormal];
+    [showBut setImage:[UIImage imageNamed:@"登录_23"] forState:UIControlStateHighlighted];
+    [showBut setImage:[UIImage imageNamed:@"登录_23"] forState:UIControlStateSelected];
+
     [showBut addTarget:self action:@selector(changePassword:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *loginBut =[UIButton new];
@@ -151,8 +155,10 @@
         make.height.offset =50;
     }];
     loginBut.backgroundColor =RGBA(239, 181, 64, 1);
-    [loginBut setTitle:@"登陆 Login" forState:UIControlStateNormal];
+//    [loginBut setTitle:@"登陆 Login" forState:UIControlStateNormal];
     [loginBut addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
+    [loginBut setBackgroundImage:[UIImage imageNamed:@"登录_27"] forState:UIControlStateNormal];
+    
     
     UIButton *fogotBut =[UIButton new];
     [containerView addSubview:fogotBut];
@@ -187,7 +193,7 @@
     [containerView addSubview:lab];
     [lab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.offset =0;
-        make.top.equalTo(fogotBut.mas_bottom).offset =40;
+        make.top.equalTo(fogotBut.mas_bottom).offset =60;
     }];
     lab.text =@"第三方登陆 Or Log In With";
     lab.textColor =[UIColor whiteColor];
@@ -216,29 +222,32 @@
     [containerView addSubview:weiXin];
     [weiXin mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(lab.mas_bottom).offset =30;
-        make.right.equalTo(containerView.mas_centerX).offset =-10;
+        make.left.offset =30;
+        
         make.width.offset =60;
         make.height.offset =60;
     }];
-    [weiXin setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-    weiXin.backgroundColor =[UIColor orangeColor];
+    [weiXin setImage:[UIImage imageNamed:@"登录_42"] forState:UIControlStateNormal];
+    weiXin.imageView.contentMode = UIViewContentModeScaleAspectFill;
     
     UIButton *QQ =[UIButton new];
     [containerView addSubview:QQ];
     [QQ mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(lab.mas_bottom).offset =30;
-        make.left.equalTo(containerView.mas_centerX).offset =10;
+        make.left.equalTo(weiXin.mas_right).offset =30;
         make.width.offset =60;
         make.height.offset =60;
     }];
-    [QQ setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-    QQ.backgroundColor =[UIColor orangeColor];
+    QQ.imageView.contentMode = UIViewContentModeScaleAspectFill;
+
+    [QQ setImage:[UIImage imageNamed:@"登录_39"] forState:UIControlStateNormal];
    
     _moreBut =[UIButton new];
     [containerView addSubview:_moreBut];
     [_moreBut mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(QQ.mas_bottom).offset =30;
-        make.centerX.equalTo(containerView.mas_centerX).offset =0;
+        make.top.equalTo(lab.mas_bottom).offset =30;
+        make.left.equalTo(QQ.mas_right).offset =30;
+        make.right.offset =-20;
         make.height.offset =60;
     }];
     [_moreBut setTitle:@"更多登陆方式>>" forState:UIControlStateNormal];
@@ -246,7 +255,7 @@
     [_moreBut addTarget:self action:@selector(thirdLanded:) forControlEvents:UIControlEventTouchUpInside];
 
     [containerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(blockSelf.moreBut.mas_bottom).offset(30);// 这里放最后一个view的底部
+        make.bottom.equalTo(blockSelf.moreBut.mas_bottom).offset(20);// 这里放最后一个view的底部
     }];
     
 }
@@ -314,8 +323,11 @@
 }
 #pragma mark -- 登陆
 - (void)login{
-    UIWindow *window =[[UIApplication sharedApplication].delegate window];
-    window.rootViewController =[[HomePageViewController alloc]init];
+//    UIWindow *window =[[UIApplication sharedApplication].delegate window];
+//    window.rootViewController =[[HomePageViewController alloc]init];
+//    
+    [CustomAccount sharedCustomAccount].loginType =1;
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark --进入忘记密码界面

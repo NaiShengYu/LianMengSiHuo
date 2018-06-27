@@ -25,7 +25,7 @@
     [GMSServices provideAPIKey:@"AIzaSyBUuB_ESkwf_2qx5SpiE5IWuMbg1wpiMYM"];
 
     _window =[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    _window.backgroundColor =[UIColor whiteColor];
+   
     [_window makeKeyAndVisible];
     
     

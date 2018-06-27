@@ -11,4 +11,6 @@
 @interface LeftViewHeader : UITableViewHeaderFooterView
 @property (nonatomic,strong)UIButton *imgBut;
 @property (nonatomic,strong)UIButton *titleBut;
+@property (nonatomic,strong)UIImageView *headerImgV;
+
 @end

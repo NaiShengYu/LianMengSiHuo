@@ -12,7 +12,12 @@
 #import <SVProgressHUD.h>
 #import <MMDrawerController.h>
 #import <MMDrawerBarButtonItem.h>
+#import <SDImageCache.h>
+#import <UIImageView+WebCache.h>
+#import <UIButton+WebCache.h>
+#import <TZImagePickerController.h>
 #import "PubulicObj.h"
+#import "CustomAccount.h"
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 //字体大小

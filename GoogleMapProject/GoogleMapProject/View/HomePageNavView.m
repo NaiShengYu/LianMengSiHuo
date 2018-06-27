@@ -63,11 +63,11 @@
         [_cancelBut mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(blockSelf.rightBut.mas_left).offset =-10;
             make.centerY.equalTo(blockSelf.rightBut.mas_centerY).offset =0;
-            make.right.offset =30;
+            make.width.offset =30;
             make.height.offset =30;
             
         }];
-        _cancelBut.backgroundColor =[UIColor whiteColor];
+        [_cancelBut setImage:[UIImage imageNamed:@"登录_11"] forState:UIControlStateNormal];
         
         
     }

@@ -7,6 +7,8 @@
 //
 
 #import "ShopInfoViewController.h"
+#import "ShopCommentViewController.h"
+
 #import "ShopInfoCommentTableViewCell.h"
 #import "ShopInfoTableViewCell.h"
 #import "ShopInfoFooter.h"
@@ -23,7 +25,7 @@
 
 - (UITableView *)myTable{
     if(!_myTable){
-        _myTable =[[UITableView alloc]initWithFrame:CGRectMake(0, MaxY, screenWigth, screenHeight-MaxY) style:UITableViewStyleGrouped];
+        _myTable =[[UITableView alloc]initWithFrame:CGRectMake(0, MaxY, screenWigth, screenHeight-MaxY-TabbarHeight) style:UITableViewStyleGrouped];
         _myTable.delegate =self;
         _myTable.dataSource =self;
         _myTable.separatorStyle =UITableViewCellSeparatorStyleNone;
@@ -48,9 +50,26 @@
     [navbar.collectionBut addTarget:self action:@selector(collectionBut) forControlEvents:UIControlEventTouchUpInside];
     
     
+    UIButton *bottomBut =[[UIButton alloc]initWithFrame:CGRectMake(0, screenHeight-TabbarHeight, screenWigth, TabbarHeight)];
+    [bottomBut setImage:[UIImage imageNamed:@"详情_22"] forState:UIControlStateNormal];
+    [bottomBut setTitle:@"  评论" forState:UIControlStateNormal];
+    [bottomBut setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    bottomBut.backgroundColor =[UIColor whiteColor];
+    [bottomBut addTarget:self action:@selector(commentBut) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:bottomBut];
+    UIView *lineV =[[UIView alloc]initWithFrame:CGRectMake(0, 0, screenWigth, 1)];
+    lineV.backgroundColor =[UIColor groupTableViewBackgroundColor];
+    [bottomBut addSubview:lineV];
+    
+    
     
 
 }
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden =YES;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
     return self.dataArray.count+1;
@@ -123,6 +142,13 @@
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
 }
+
+- (void)commentBut{
+    ShopCommentViewController *commentVC =[[ShopCommentViewController alloc]init];
+    [self.navigationController pushViewController:commentVC animated:YES];
+    
+}
+
 - (void)collectionBut{
 
 }

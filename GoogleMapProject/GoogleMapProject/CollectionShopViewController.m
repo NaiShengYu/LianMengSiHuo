@@ -7,6 +7,7 @@
 //
 
 #import "CollectionShopViewController.h"
+#import "ShopInfoViewController.h"
 #import "NavHeader.h"
 #import "CollectionShopUneditCell.h"
 #import "CollectionShopEditCell.h"
@@ -89,7 +90,7 @@
 
     [self.view addSubview:self.myTable];
     
-    _deleteBut =[[UIButton alloc]initWithFrame:CGRectMake(0, screenHeight-45, screenWigth, 45)];
+    _deleteBut =[[UIButton alloc]initWithFrame:CGRectMake(0, screenHeight-TabbarHeight, screenWigth, TabbarHeight)];
     [_deleteBut setTitle:@"删除" forState:UIControlStateNormal];
     [_deleteBut setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     _deleteBut.backgroundColor =[UIColor whiteColor];
@@ -146,7 +147,9 @@
   
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    ShopInfoViewController *vc = [[ShopInfoViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 #pragma mark --让cell的横线到最左边
@@ -189,7 +192,7 @@
     if (_isEdit==YES) {
         self.deleteBut.hidden =NO;
         [UIView animateWithDuration:0.4 animations:^{
-            blockSelf.myTable.frame =CGRectMake(0, MaxY, screenWigth, screenHeight-44-MaxY);
+            blockSelf.myTable.frame =CGRectMake(0, MaxY, screenWigth, screenHeight-TabbarHeight-MaxY);
         }];
     }else{
         self.deleteBut.hidden =YES;
