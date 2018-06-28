@@ -70,6 +70,12 @@
 		C977137620E33D31007AE5F0 /* YFScaleScrollViewView.m in Sources */ = {isa = PBXBuildFile; fileRef = C977137420E33D31007AE5F0 /* YFScaleScrollViewView.m */; };
 		C977137C20E358AD007AE5F0 /* CustomAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = C977137B20E358AD007AE5F0 /* CustomAccount.m */; };
 		C977137F20E37913007AE5F0 /* FiterOtherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C977137E20E37913007AE5F0 /* FiterOtherCell.m */; };
+		C977138220E475ED007AE5F0 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C977138120E475ED007AE5F0 /* FirstViewController.m */; };
+		C977138820E47DF3007AE5F0 /* CustormAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C977138720E47DF3007AE5F0 /* CustormAlertView.m */; };
+		C977138B20E4B854007AE5F0 /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C977138A20E4B854007AE5F0 /* SearchResultViewController.m */; };
+		C977138E20E4BE35007AE5F0 /* SearchResultHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = C977138D20E4BE35007AE5F0 /* SearchResultHeader.m */; };
+		C977139120E4BFF0007AE5F0 /* SearchResultSectionZeroCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C977139020E4BFF0007AE5F0 /* SearchResultSectionZeroCell.m */; };
+		C977139420E4C1B1007AE5F0 /* SearchResultSectionOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C977139320E4C1B1007AE5F0 /* SearchResultSectionOneCell.m */; };
 		F4FF636EA87F22A1DB12DE83 /* libPods-GoogleMapProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF73FC6E901B989D43D34C9 /* libPods-GoogleMapProject.a */; };
 /* End PBXBuildFile section */
 
@@ -201,6 +207,18 @@
 		C977137B20E358AD007AE5F0 /* CustomAccount.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomAccount.m; sourceTree = "<group>"; };
 		C977137D20E37913007AE5F0 /* FiterOtherCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FiterOtherCell.h; sourceTree = "<group>"; };
 		C977137E20E37913007AE5F0 /* FiterOtherCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FiterOtherCell.m; sourceTree = "<group>"; };
+		C977138020E475ED007AE5F0 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		C977138120E475ED007AE5F0 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		C977138620E47DF3007AE5F0 /* CustormAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustormAlertView.h; sourceTree = "<group>"; };
+		C977138720E47DF3007AE5F0 /* CustormAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustormAlertView.m; sourceTree = "<group>"; };
+		C977138920E4B854007AE5F0 /* SearchResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultViewController.h; sourceTree = "<group>"; };
+		C977138A20E4B854007AE5F0 /* SearchResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultViewController.m; sourceTree = "<group>"; };
+		C977138C20E4BE35007AE5F0 /* SearchResultHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultHeader.h; sourceTree = "<group>"; };
+		C977138D20E4BE35007AE5F0 /* SearchResultHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultHeader.m; sourceTree = "<group>"; };
+		C977138F20E4BFF0007AE5F0 /* SearchResultSectionZeroCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultSectionZeroCell.h; sourceTree = "<group>"; };
+		C977139020E4BFF0007AE5F0 /* SearchResultSectionZeroCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultSectionZeroCell.m; sourceTree = "<group>"; };
+		C977139220E4C1B1007AE5F0 /* SearchResultSectionOneCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultSectionOneCell.h; sourceTree = "<group>"; };
+		C977139320E4C1B1007AE5F0 /* SearchResultSectionOneCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultSectionOneCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,6 +259,8 @@
 				267BBF5120DA7CF50005AE5A /* View */,
 				26196CB620C55C6E0097D72D /* AppDelegate.h */,
 				26196CB720C55C6E0097D72D /* AppDelegate.m */,
+				C977138020E475ED007AE5F0 /* FirstViewController.h */,
+				C977138120E475ED007AE5F0 /* FirstViewController.m */,
 				26196CB920C55C6E0097D72D /* ViewController.h */,
 				26196CBA20C55C6E0097D72D /* ViewController.m */,
 				260C46CD20CD5841008952B4 /* BottomView.h */,
@@ -288,6 +308,8 @@
 				C977132420E212FB007AE5F0 /* ShopInfoViewController.m */,
 				C977133820E32217007AE5F0 /* ShopCommentViewController.h */,
 				C977133920E32217007AE5F0 /* ShopCommentViewController.m */,
+				C977138920E4B854007AE5F0 /* SearchResultViewController.h */,
+				C977138A20E4B854007AE5F0 /* SearchResultViewController.m */,
 			);
 			path = GoogleMapProject;
 			sourceTree = "<group>";
@@ -351,6 +373,14 @@
 				C977134520E3392F007AE5F0 /* ShopCommentSectionOneCell.m */,
 				C977134720E33BCB007AE5F0 /* ShopCommentSectionThreeCell.h */,
 				C977134820E33BCB007AE5F0 /* ShopCommentSectionThreeCell.m */,
+				C977138620E47DF3007AE5F0 /* CustormAlertView.h */,
+				C977138720E47DF3007AE5F0 /* CustormAlertView.m */,
+				C977138C20E4BE35007AE5F0 /* SearchResultHeader.h */,
+				C977138D20E4BE35007AE5F0 /* SearchResultHeader.m */,
+				C977138F20E4BFF0007AE5F0 /* SearchResultSectionZeroCell.h */,
+				C977139020E4BFF0007AE5F0 /* SearchResultSectionZeroCell.m */,
+				C977139220E4C1B1007AE5F0 /* SearchResultSectionOneCell.h */,
+				C977139320E4C1B1007AE5F0 /* SearchResultSectionOneCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -536,16 +566,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				C977133120E23BAF007AE5F0 /* ShopInfoFooter.m in Sources */,
+				C977138820E47DF3007AE5F0 /* CustormAlertView.m in Sources */,
 				267BBF6020DA99460005AE5A /* HomePageSectionOneCell.m in Sources */,
 				267BBF6C20DAAEE60005AE5A /* LeftViewController.m in Sources */,
 				C977134020E32820007AE5F0 /* ShopCommentSectionZeroHeader.m in Sources */,
 				C97712ED20DB5085007AE5F0 /* VersionInformationViewController.m in Sources */,
 				267BBF6920DAA1F50005AE5A /* HomePageSectionTowheader.m in Sources */,
+				C977139120E4BFF0007AE5F0 /* SearchResultSectionZeroCell.m in Sources */,
 				C97712E120DB4F2D007AE5F0 /* CommentViewController.m in Sources */,
 				C977134320E33129007AE5F0 /* ShopCommentSectionZeroCell.m in Sources */,
 				260C46D220CD6736008952B4 /* TopView.m in Sources */,
 				C977130020E09F73007AE5F0 /* PersonImageCell.m in Sources */,
+				C977138B20E4B854007AE5F0 /* SearchResultViewController.m in Sources */,
 				C977132520E212FB007AE5F0 /* ShopInfoViewController.m in Sources */,
+				C977138E20E4BE35007AE5F0 /* SearchResultHeader.m in Sources */,
 				267BBF7520DAB9090005AE5A /* CollectionShopViewController.m in Sources */,
 				26196CC120C55C6E0097D72D /* GoogleMapProject.xcdatamodeld in Sources */,
 				C977130320E0B768007AE5F0 /* PersonDataCell.m in Sources */,
@@ -580,6 +614,7 @@
 				267BBF5D20DA912E0005AE5A /* HomePageSectionZeroCell.m in Sources */,
 				C97712E720DB5046007AE5F0 /* BindingPhoneViewController.m in Sources */,
 				267BBF6620DAA1D30005AE5A /* HomePageSectionOneheader.m in Sources */,
+				C977138220E475ED007AE5F0 /* FirstViewController.m in Sources */,
 				C977131220E1DFD9007AE5F0 /* FilterHeader.m in Sources */,
 				267BBF4620D92B330005AE5A /* RegistViewController.m in Sources */,
 				C977137F20E37913007AE5F0 /* FiterOtherCell.m in Sources */,
@@ -589,6 +624,7 @@
 				26196CB820C55C6E0097D72D /* AppDelegate.m in Sources */,
 				267BBF7E20DBF4930005AE5A /* CollectionShopEditCell.m in Sources */,
 				26A608C620E1251300B677FF /* ChangePasswordViewController.m in Sources */,
+				C977139420E4C1B1007AE5F0 /* SearchResultSectionOneCell.m in Sources */,
 				C977131920E1EF42007AE5F0 /* FilterItem.m in Sources */,
 				C977131620E1EECC007AE5F0 /* FilterHeaderModel.m in Sources */,
 				C977133720E31FFD007AE5F0 /* CWStarRateView.m in Sources */,
@@ -735,6 +771,7 @@
 			baseConfigurationReference = 764BAFDF28E3445530AD6A69 /* Pods-GoogleMapProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JKC6848PHQ;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -761,6 +798,7 @@
 			baseConfigurationReference = 962BF1968C3B249CC9293335 /* Pods-GoogleMapProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JKC6848PHQ;
 				FRAMEWORK_SEARCH_PATHS = (

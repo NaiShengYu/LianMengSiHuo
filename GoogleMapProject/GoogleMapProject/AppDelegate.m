@@ -7,10 +7,11 @@
 //
 
 #import "AppDelegate.h"
-#import "LoginViewController.h"
-#import "HomePageViewController.h"
-#import "LeftViewController.h"
-#import "ViewController.h"
+
+
+#import "FirstViewController.h"
+#import "CustormAlertView.h"
+
 @import GoogleMaps;
 @interface AppDelegate ()
 
@@ -25,26 +26,11 @@
     [GMSServices provideAPIKey:@"AIzaSyBUuB_ESkwf_2qx5SpiE5IWuMbg1wpiMYM"];
 
     _window =[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-   
     [_window makeKeyAndVisible];
-    
-    
-    LeftViewController *leftVC =[[LeftViewController alloc]init];
-    
-    HomePageViewController *homePageVC =[[HomePageViewController alloc]init];
-    UINavigationController *nav =[[UINavigationController alloc]initWithRootViewController:homePageVC];
+    _window.rootViewController =[[FirstViewController alloc]init];
 
-    self.drawerController =[[MMDrawerController alloc]initWithCenterViewController:nav leftDrawerViewController:leftVC];
-    //4、设置打开/关闭抽屉的手势
-    self.drawerController.openDrawerGestureModeMask =MMOpenDrawerGestureModeAll;
-    self.drawerController.closeDrawerGestureModeMask =MMCloseDrawerGestureModeAll;
     
-    self.drawerController.maximumLeftDrawerWidth =200;
-    homePageVC.drawerController =self.drawerController;
-    leftVC.homePageVC =homePageVC;
-    leftVC.drawerController =self.drawerController;
-    _window.rootViewController =self.drawerController;
-//    _window.rootViewController =[[ViewController alloc]init];
+  
     
     [SVProgressHUD setDefaultStyle:(SVProgressHUDStyleCustom)];
     [SVProgressHUD setBackgroundColor:HEXCOLOR(0x303132)];
@@ -60,9 +46,17 @@
     
 //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyBoardHiden) name:UIKeyboardDidHideNotification object:nil];
     
+    [self performSelector:@selector(showUpdata) withObject:nil afterDelay:10];
+    
     return YES;
 }
 
+- (void)showUpdata{
+    
+    CustormAlertView *alert =[[CustormAlertView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    [_window addSubview:alert];
+    
+}
 - (void)HUDDismiss{
     
     [SVProgressHUD popActivity];

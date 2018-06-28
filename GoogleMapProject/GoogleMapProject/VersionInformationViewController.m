@@ -122,14 +122,18 @@
 
 - (void)updata{
     
-    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
-    NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
-    _versonLab.text  =[NSString stringWithFormat:@"当前版本：%@\n(最新版本)",app_Version];
-    _upBut.hidden =YES;
-    _textV.hidden =YES;
-    
-    
-    
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"itms-apps://"]]) {
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/cn/app/id1144816653?mt=8"] options:@{} completionHandler:^(BOOL success) {
+                NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+                NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+                self.versonLab.text  =[NSString stringWithFormat:@"当前版本：%@\n(最新版本)",app_Version];
+                self.upBut.hidden =YES;
+                self.textV.hidden =YES;
+        }];
+        
+    }
+ 
 }
 
 #pragma mark --自定义导航栏
