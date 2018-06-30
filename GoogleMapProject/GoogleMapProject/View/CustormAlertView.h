@@ -15,4 +15,7 @@
 @property (nonatomic,strong)UITextView *textV;
 @property (nonatomic,strong)UIButton *upBut;
 
+@property (nonatomic,strong)UILabel *versionLab;
+
+
 @end

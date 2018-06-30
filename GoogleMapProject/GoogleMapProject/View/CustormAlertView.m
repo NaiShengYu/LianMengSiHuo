@@ -14,6 +14,8 @@
     
     self = [super initWithFrame:frame];
     if (self) {
+    
+        
         _backBut =[[UIButton alloc]init];
         [self addSubview:_backBut];
         [_backBut mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -22,7 +24,7 @@
         _backBut.backgroundColor =[UIColor blackColor];
         _backBut.alpha =0.4;
         [_backBut addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
-        
+
         WS(blockSelf);
         UIView *backView = [UIView new];
         [self addSubview:backView];
@@ -39,33 +41,55 @@
                make.height.offset =400;
            }
         }];
-        backView.layer.cornerRadius =8;
-        backView.layer.masksToBounds =YES;
+        backView.layer.cornerRadius =10;
+//        backView.layer.masksToBounds =YES;//有阴影不需要这句话
         backView.layer.shadowColor =[UIColor blackColor].CGColor;
         backView.layer.shadowRadius =8;
         backView.layer.shadowOpacity =0.8;
+        backView.layer.shadowOffset =CGSizeMake(0, 0);
         backView.backgroundColor =[UIColor whiteColor];
-        
+
         UIImageView *imgV =[UIImageView new];
         [backView addSubview:imgV];
         [imgV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.right.offset =0;
+            make.left.offset =-1;
+            make.top.right.offset =0;
             make.height.offset =90;
         }];
-        imgV.backgroundColor =zhuse;
-        
+        imgV.image =[UIImage imageNamed:@"提示框"];
+
+        UILabel *alertLab =[UILabel new];
+        [imgV addSubview:alertLab];
+        [alertLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.offset =20;
+            make.left.offset =(60/401.0*screenWigth);
+        }];
+        alertLab.text = @"版本更新";
+        alertLab.textColor = [UIColor whiteColor];
+        alertLab.font = FontSize(22);
+
+        _versionLab =[UILabel new];
+        [imgV addSubview:_versionLab];
+        [_versionLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(alertLab.mas_bottom).offset =1;
+            make.right.equalTo(alertLab).offset =-15;
+
+        }];
+        _versionLab.text = @"V2.0";
+        _versionLab.textColor = [UIColor whiteColor];
+        _versionLab.font = FontSize(16);
+
         _cancelBut = [UIButton new];
         [backView addSubview:_cancelBut];
         [_cancelBut mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.offset =0;
             make.right.offset =0;
             make.size.mas_equalTo(CGSizeMake(30, 30));
-            
         }];
         [_cancelBut addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
-        _cancelBut.backgroundColor =[UIColor orangeColor];
-        [_cancelBut setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-        
+        [_cancelBut setImage:[UIImage imageNamed:@"提示框1"] forState:UIControlStateNormal];
+        [_cancelBut setImageEdgeInsets:UIEdgeInsetsMake(10, 0, 0, 10)];
+
         _textV =[UITextView new];
         [backView addSubview:_textV];
         [_textV mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -78,7 +102,7 @@
         _textV.textColor =[UIColor grayColor];
         _textV.font =FontSize(17);
         _textV.text =@"先帝创业未半而中道崩殂，今天下三分，益州疲弊，此诚危急存亡之秋也。然侍卫之臣不懈于内，忠志之士忘身于外者，盖追先帝之殊遇，欲报之于陛下也。诚宜开张圣听，以光先帝遗德，恢弘志士之气，不宜妄自菲薄，引喻失义，以塞忠谏之路也。\n宫中府中，俱为一体，陟罚臧否，不宜异同。若有作奸犯科及为忠善者，宜付有司论其刑赏，以昭陛下平明之理，不宜偏私，使内外异法也。\n侍中、侍郎郭攸之、费祎、董允等，此皆良实，志虑忠纯，是以先帝简拔以遗陛下。愚以为宫中之事，事无大小，悉以咨之，然后施行，必能裨补阙漏，有所广益。";
-   
+
         _upBut =[[UIButton alloc]init];
         [backView addSubview:_upBut];
         [_upBut mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -96,11 +120,22 @@
         _upBut.layer.cornerRadius =5;
         _upBut.layer.masksToBounds = YES;
         [_upBut addTarget:self action:@selector(updata) forControlEvents:UIControlEventTouchUpInside];
-        
+
     }
     return self;
 }
 
+
+
+- (NSString *)computeDateWithDays:(NSInteger)days
+{
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *myDate = [NSDate date];
+    NSDate *newDate = [myDate dateByAddingTimeInterval:-60 * 60 * 24 * days];
+    
+    return [dateFormatter stringFromDate:newDate];
+}
 - (void)updata{
     WS(blockSelf);
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"itms-apps://"]]) {

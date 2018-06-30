@@ -260,6 +260,7 @@
     
 }
 
+#pragma --mark -- 创建更多登录方式界面
 - (void)CreatThirdPartyLanded{
     
     _thirdLandedBackBut =[[UIButton alloc]initWithFrame:self.view.bounds];
@@ -272,6 +273,8 @@
     _thirdLandedView =[[ThirdPartyLandedView alloc]initWithFrame:CGRectMake(0, screenHeight, screenHeight, 170)];
     [self.view addSubview:_thirdLandedView];
 }
+
+#pragma mark --显示更多登陆方式
 - (void)thirdLanded:(UIButton *)but{
     WS(blockSelf);
     but.selected =!but.selected;
@@ -338,9 +341,6 @@
 }
 #pragma mark --进入注册界面
 - (void)registBut{
-    
     [self.navigationController pushViewController:[RegistViewController new] animated:YES];
-
-    
 }
 @end

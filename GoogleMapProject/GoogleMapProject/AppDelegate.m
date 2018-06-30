@@ -46,7 +46,7 @@
     
 //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyBoardHiden) name:UIKeyboardDidHideNotification object:nil];
     
-    [self performSelector:@selector(showUpdata) withObject:nil afterDelay:10];
+    [self performSelector:@selector(showUpdata) withObject:nil afterDelay:4];
     
     return YES;
 }

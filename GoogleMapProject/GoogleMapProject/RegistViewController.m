@@ -71,7 +71,6 @@
     _lineView.backgroundColor = zhuse;
     [backView addSubview:_lineView];
     
-    
 }
 
 - (void)selectChange:(UIButton *)but{
@@ -79,7 +78,6 @@
         return;
     }
     WS(blockSelf);
-    
     
     [_timer invalidate];
     _timer =nil;
