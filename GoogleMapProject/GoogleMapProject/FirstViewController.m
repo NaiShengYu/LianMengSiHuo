@@ -74,14 +74,14 @@
     self.drawerController.openDrawerGestureModeMask =MMOpenDrawerGestureModeAll;
     self.drawerController.closeDrawerGestureModeMask =MMCloseDrawerGestureModeAll;
     
-    self.drawerController.maximumLeftDrawerWidth =200;
+    self.drawerController.maximumLeftDrawerWidth =screenWigth/4*3;
     homePageVC.drawerController =self.drawerController;
     leftVC.homePageVC =homePageVC;
     leftVC.drawerController =self.drawerController;
     
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
-//    window.rootViewController =self.drawerController;
-    window.rootViewController = [[UINavigationController alloc]initWithRootViewController:[SearchResultViewController new]];
+    window.rootViewController =self.drawerController;
+//    window.rootViewController = [[UINavigationController alloc]initWithRootViewController:[SearchResultViewController new]];
 
 }
 

@@ -139,6 +139,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (self.isEdit ==NO) {
         CollectionShopUneditCell *cell =[tableView dequeueReusableCellWithIdentifier:@"CollectionShopUneditCell" forIndexPath:indexPath];
+        cell.imgV.hidden =YES;
         return cell;
     }else{
         CollectionShopEditCell *cell =[tableView dequeueReusableCellWithIdentifier:@"CollectionShopEditCell" forIndexPath:indexPath];
@@ -147,10 +148,16 @@
   
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(self.isEdit ==YES){
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        return;
+    }
+    
+    
     ShopInfoViewController *vc = [[ShopInfoViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+ 
 }
 #pragma mark --让cell的横线到最左边
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{

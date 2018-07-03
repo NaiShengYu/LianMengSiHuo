@@ -7,7 +7,13 @@
 //
 
 #import "TopView.h"
+#import "SearchKeyViewController.h"
+#import "ViewController.h"
 
+#import "HomePageListViewController.h"
+
+@interface TopView ()<UITextFieldDelegate>
+@end
 @implementation TopView
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -16,22 +22,20 @@
     if (self) {
         WS(blockSelf);
         self.backgroundColor =RGBA(167, 38, 30, 1);
-        _backBut =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 44, MaxY)];
+        _backBut =[[UIButton alloc]initWithFrame:CGRectMake(0, MaxY-44, 44, 44)];
         [self addSubview:_backBut];
-        [_backBut setImageEdgeInsets:UIEdgeInsetsMake(15, 0, 0, 0)];
-
         [_backBut setImage:[UIImage imageNamed:@"06"] forState:UIControlStateNormal];
         
         _chooseBut =[UIButton new];
         [self addSubview:_chooseBut];
         [_chooseBut mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.offset =35;
-            make.bottom.offset =-5;
-            make.width.offset =70;
+            make.height.offset =28;
+            make.bottom.offset =-5-3.5;
+            make.width.offset =60;
             make.left.equalTo(blockSelf.backBut.mas_right).offset =5;
         }];
         [_chooseBut setImage:[UIImage imageNamed:@"12"] forState:UIControlStateNormal];
-        [_chooseBut setTitle:@" 取消" forState:UIControlStateSelected];
+        [_chooseBut setTitle:@" 关闭" forState:UIControlStateSelected];
         [_chooseBut setTitle:@" 筛选" forState:UIControlStateNormal];
         _chooseBut.titleLabel.font =FontSize(14);
         //        _chooseBut.backgroundColor =RGBA(156, 37, 29, 1);//浅一点
@@ -48,9 +52,9 @@
             make.right.offset =-10;
             make.width.offset =50;
         }];
-        
         [self addSubview:_rightBut];
         [_rightBut setImage:[UIImage imageNamed:@"09"] forState:UIControlStateNormal];
+        [_rightBut addTarget:self action:@selector(goMap) forControlEvents:UIControlEventTouchUpInside];
         
         UIImageView *img =[UIImageView new];
         [self addSubview:img];
@@ -72,7 +76,7 @@
         }];
         _searchBar.placeholder =@"你想去的地方";
         _searchBar.backgroundColor=[UIColor clearColor];
-      
+        _searchBar.delegate =self;
         UIView *lineView =[UIView new];
         [self addSubview:lineView];
         [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -88,5 +92,30 @@
     
     return self;
 }
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    [textField resignFirstResponder];
+    [self.vc.navigationController pushViewController:[SearchKeyViewController new] animated:NO];
+}
+
+
+- (void)goMap{
+    if ([self.vc isKindOfClass:[HomePageListViewController class]]) {
+        ViewController *vc =[[ViewController alloc]init];
+        [UIView transitionWithView:[[UIApplication sharedApplication].delegate window] duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
+            [self.vc.navigationController pushViewController:vc animated:NO];
+        } completion:^(BOOL finished) {
+        }];
+    }else{
+        HomePageListViewController *vc =[[HomePageListViewController alloc]init];
+        [UIView transitionWithView:[[UIApplication sharedApplication].delegate window] duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
+            [self.vc.navigationController pushViewController:vc animated:NO];
+        } completion:^(BOOL finished) {
+        }];        
+    }
+    
+    
+}
+
 
 @end

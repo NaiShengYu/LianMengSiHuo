@@ -37,6 +37,30 @@
             } make.width.equalTo(blockSelf.imageV.mas_height).multipliedBy(1.65);
         }];
         
+        UIView *picturebackView =[UIView new];
+        [_imageV addSubview:picturebackView];
+        [picturebackView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.bottom.right.offset =0;
+            make.height.offset =20;
+        }];
+        picturebackView.backgroundColor =[UIColor blackColor];
+        picturebackView.alpha = 0.4;
+        
+        _pictureNumLab =[UILabel new];
+        [_imageV addSubview:_pictureNumLab];
+        [_pictureNumLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.offset =15;
+            make.left.offset =10;
+            make.bottom.offset =-2.5;
+            make.right.offset =-10;
+            
+        }];
+        _pictureNumLab.text =@"123张图片";
+        _pictureNumLab.textAlignment =NSTextAlignmentCenter;
+        _pictureNumLab.adjustsFontSizeToFitWidth =YES;
+        _pictureNumLab.textColor = [UIColor whiteColor];
+        _pictureNumLab.font =FontSize(12);
+        
         _titleLab =[UILabel new];
         [backView addSubview:_titleLab];
         [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -93,20 +117,37 @@
         }];
         
         _juliLab =[UILabel new];
-        [backView addSubview:_juliLab];
+        [self addSubview:_juliLab];
         _juliLab.backgroundColor =RGBA(245, 245, 245, 1);
         [_juliLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(img5.mas_centerY).offset =0;
             make.right.offset =-15;
-            make.width.offset =50;
-            make.height.offset =25;
+            make.width.lessThanOrEqualTo(@70);
+            
         }];
         _juliLab.adjustsFontSizeToFitWidth =YES;
-        _juliLab.layer.cornerRadius =10;
-        _juliLab.layer.masksToBounds =YES;
+        
         _juliLab.text =@"200m";
-        _juliLab.font =FontSize(14);
+        _juliLab.font =FontSize(10);
         _juliLab.textAlignment =NSTextAlignmentCenter;
+        
+        
+        UIView *V1 =[UIView new];
+        [self.contentView addSubview:V1];
+        [V1 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(blockSelf.juliLab).offset =-5;
+            make.top.equalTo(blockSelf.juliLab).offset =-3;
+            make.right.equalTo(blockSelf.juliLab).offset =5;
+            make.bottom.equalTo(blockSelf.juliLab).offset =3;
+        }];
+        V1.backgroundColor =RGBA(245, 245, 245, 1);
+        V1.layer.cornerRadius =10;
+        V1.layer.borderColor =RGBA(231, 231, 231, 1).CGColor;
+        V1.layer.borderWidth =1;
+        V1.layer.masksToBounds =YES;
+        
+        
+        
         
         _topickNumLab =[UILabel new];
         [backView addSubview:_topickNumLab];
@@ -116,7 +157,7 @@
             make.left.equalTo(blockSelf.imageV.mas_right).offset =10;
             
         }];
-        _topickNumLab.font =FontSize(15);
+        _topickNumLab.font =FontSize(11);
         _topickNumLab.textColor =RGBA(204, 204, 204, 1);
         
         _speciesLab =[UILabel new];
@@ -127,7 +168,7 @@
             make.right.offset =-10;
         }];
         _speciesLab.numberOfLines =2;
-        _speciesLab.font =FontSize(15);
+        _speciesLab.font =FontSize(11);
         _speciesLab.textColor =[UIColor grayColor];
         _speciesLab.minimumFontSize =13;
         _speciesLab.text =@"当地热门菜品，法餐，意大利菜";

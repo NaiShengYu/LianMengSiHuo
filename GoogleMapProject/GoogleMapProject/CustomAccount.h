@@ -12,5 +12,7 @@
 
 @property (nonatomic,assign)NSInteger loginType;
 
+@property (nonatomic,assign)CLLocationCoordinate2D curCoordinate2D;
+
 + (CustomAccount *)sharedCustomAccount;
 @end

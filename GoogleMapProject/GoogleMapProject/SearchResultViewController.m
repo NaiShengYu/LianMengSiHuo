@@ -10,6 +10,8 @@
 #import "SearchResultHeader.h"
 #import "SearchResultSectionZeroCell.h"
 #import "SearchResultSectionOneCell.h"
+
+#import "ShopInfoViewController.h"
 @interface SearchResultViewController()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *myTable;
 @property (nonatomic,strong)NSMutableArray *dataArray;
@@ -34,15 +36,19 @@
     [self ziDingYiDaoHangLan];
     self.dataArray =[[NSMutableArray alloc]initWithObjects:@"目的地",@"餐厅",@"购物",nil];
     [self.view addSubview:self.myTable];
-    
+    self.title =@"搜索";
     UILabel *titleLab =[[UILabel alloc]initWithFrame:CGRectMake(10, 0, screenWigth-20, 50)];
     [self.view addSubview:titleLab];
-    NSString *KeyStr = @"百年老店";
-    NSMutableAttributedString *att = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"搜索%@得到的内容",KeyStr]];
-    [att addAttribute:NSForegroundColorAttributeName value:zhuse range:NSMakeRange(2, KeyStr.length)];
+    NSMutableAttributedString *att = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"搜索%@得到的内容",self.searchKey]];
+    [att addAttribute:NSForegroundColorAttributeName value:zhuse range:NSMakeRange(2, self.searchKey.length)];
     titleLab.attributedText =att;
     
 }
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden =NO;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return self.dataArray.count;
 }
@@ -57,7 +63,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 130;
+    return 120;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -82,7 +88,8 @@
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    ShopInfoViewController *vc = [[ShopInfoViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 #pragma mark --让cell的横线到最左边
@@ -109,20 +116,20 @@
     self.navigationController.navigationBar.barTintColor =zhuse;
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor],
                                                                       NSFontAttributeName : [UIFont fontWithName:@"Helvetica-Bold" size:17]}];
-//    self.view.backgroundColor =[UIColor groupTableViewBackgroundColor];
-//    UIButton *img =[[UIButton alloc]init];
-//    [img sizeToFit];
-//    [img addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-//    [img setImage:[UIImage imageNamed:@"turn_back"]
-//         forState:UIControlStateNormal];
-//    [img setImageEdgeInsets:UIEdgeInsetsMake(0, -8, 0, 8)];
-//    UIBarButtonItem *left =[[UIBarButtonItem alloc]initWithCustomView:img];
-//    left.tintColor =[UIColor lightGrayColor];
-//    self.navigationItem.leftBarButtonItem =left;
+    self.view.backgroundColor =[UIColor groupTableViewBackgroundColor];
+    UIButton *img =[[UIButton alloc]init];
+    [img sizeToFit];
+    [img addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [img setImage:[UIImage imageNamed:@"turn_back"]
+         forState:UIControlStateNormal];
+    [img setImageEdgeInsets:UIEdgeInsetsMake(0, -8, 0, 8)];
+    UIBarButtonItem *left =[[UIBarButtonItem alloc]initWithCustomView:img];
+    left.tintColor =[UIColor lightGrayColor];
+    self.navigationItem.leftBarButtonItem =left;
 }
 - (void)goBack{
 
-//    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

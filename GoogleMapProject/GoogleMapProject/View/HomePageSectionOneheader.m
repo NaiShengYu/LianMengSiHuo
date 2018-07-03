@@ -13,35 +13,19 @@
     self =[super initWithFrame:frame];
     if (self) {
         
-        UILabel *titleLab =[UILabel new];
-        [self addSubview:titleLab];
-        [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.offset =0;
+    
+        UIImageView *titleImg =[UIImageView new];
+        [self addSubview:titleImg];
+        [titleImg mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.offset =0;
+            make.width.offset =screenWigth/3*2;
+            make.top.offset =0;
+            make.bottom.offset =-5;
         }];
-        titleLab.text =@"推荐TOPChoice";
-        titleLab.font =FontSize(15);
+        titleImg.image = [UIImage imageNamed:@"首页-搜索_03"];
         
-        UIView *leftView =[UIView new];
-        [self addSubview:leftView];
-        [leftView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.offset =70;
-            make.right.equalTo(titleLab.mas_left).offset =-10;
-            make.centerY.equalTo(titleLab.mas_centerY).offset =0;
-            make.height.offset =1;
-        }];
-        leftView.backgroundColor =[UIColor grayColor];
         
-        UIView *rightView =[UIView new];
-        [self addSubview:rightView];
-        [rightView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.offset =70;
-            make.left.equalTo(titleLab.mas_right).offset =15;
-            make.centerY.equalTo(titleLab.mas_centerY).offset =0;
-            make.height.offset =1;
-        }];
-        rightView.backgroundColor =[UIColor grayColor];
-        
+     
     }
     return self;
     

@@ -8,12 +8,13 @@
 
 #import "AppDelegate.h"
 
-
+#import "KNLocationConverter.h"
 #import "FirstViewController.h"
 #import "CustormAlertView.h"
 
 @import GoogleMaps;
-@interface AppDelegate ()
+@interface AppDelegate ()<CLLocationManagerDelegate>
+@property (nonatomic,strong)CLLocationManager *locationManager;
 
 @end
 
@@ -25,12 +26,18 @@
     //
     [GMSServices provideAPIKey:@"AIzaSyBUuB_ESkwf_2qx5SpiE5IWuMbg1wpiMYM"];
 
+    if (self.locationManager == nil) {
+        self.locationManager = [[CLLocationManager alloc]init];
+    }
+    self.locationManager.delegate =self;
+    [self.locationManager requestWhenInUseAuthorization];
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;//最精确的定位
+    self.locationManager.distanceFilter = kCLDistanceFilterNone; // 默认是kCLDistanceFilterNone，也可以设置其他值，表示用户移动的距离小于该范围内就不会接收到通知
+    [self.locationManager startUpdatingLocation];
+    
     _window =[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     [_window makeKeyAndVisible];
-    _window.rootViewController =[[FirstViewController alloc]init];
-
-    
-  
+    _window.rootViewController =[[FirstViewController alloc]init];  
     
     [SVProgressHUD setDefaultStyle:(SVProgressHUDStyleCustom)];
     [SVProgressHUD setBackgroundColor:HEXCOLOR(0x303132)];
@@ -50,6 +57,16 @@
     
     return YES;
 }
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
+    CLLocation *curLocation = [locations lastObject];
+    // 通过location  或得到当前位置的经纬度
+    CLLocationCoordinate2D curCoordinate2D = curLocation.coordinate;
+    [CustomAccount sharedCustomAccount].curCoordinate2D =[KNLocationConverter transformFromWGSToGCJ:curCoordinate2D];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"locationUpLode" object:nil];
+}
+
+
 
 - (void)showUpdata{
     

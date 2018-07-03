@@ -25,7 +25,7 @@
                 make.left.offset =20;
                 make.top.offset =30;
                 make.bottom.offset =-30;
-            } make.width.equalTo(blockSelf.imageV.mas_height).multipliedBy(1.65);
+            } make.width.equalTo(blockSelf.imageV.mas_height).multipliedBy(1.5);
         }];
         
         _titleLab =[UILabel new];

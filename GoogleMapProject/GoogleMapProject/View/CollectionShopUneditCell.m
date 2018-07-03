@@ -27,6 +27,30 @@
                 make.bottom.offset =-30;
             } make.width.equalTo(blockSelf.imageV.mas_height).multipliedBy(1.65);
         }];
+        
+        _imgV =[UIImageView new];
+        [_imageV addSubview:_imgV];
+        [_imgV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.offset =0;
+            make.left.offset =18;
+            make.width.offset =25;
+            make.height.offset =45;
+        }];
+        _imgV.image =[UIImage imageNamed:@"列表_07"];
+        
+        _numLab = [UILabel new];
+        [_imgV addSubview:_numLab];
+        [_numLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.offset =6;
+            make.left.offset =5;
+            make.right.offset =-5;
+        }];
+        _numLab.adjustsFontSizeToFitWidth =YES;
+        _numLab.numberOfLines =2;
+        _numLab.font =FontSize(10);
+        _numLab.textColor = [UIColor whiteColor];
+        _numLab.textAlignment =NSTextAlignmentCenter;
+        
                 
         _titleLab =[UILabel new];
         [self addSubview:_titleLab];
@@ -89,16 +113,30 @@
         [_juliLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(img5.mas_centerY).offset =0;
             make.right.offset =-15;
-            make.width.offset =50;
-            make.height.offset =25;
+            make.width.lessThanOrEqualTo(@70);
+            
         }];
         _juliLab.adjustsFontSizeToFitWidth =YES;
-        _juliLab.layer.cornerRadius =10;
-        _juliLab.layer.masksToBounds =YES;
+        
         _juliLab.text =@"200m";
-        _juliLab.font =FontSize(14);
+        _juliLab.font =FontSize(10);
         _juliLab.textAlignment =NSTextAlignmentCenter;
+        
       
+        UIView *V1 =[UIView new];
+        [self.contentView addSubview:V1];
+        [V1 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(blockSelf.juliLab).offset =-5;
+            make.top.equalTo(blockSelf.juliLab).offset =-3;
+            make.right.equalTo(blockSelf.juliLab).offset =5;
+            make.bottom.equalTo(blockSelf.juliLab).offset =3;
+        }];
+        V1.backgroundColor =RGBA(245, 245, 245, 1);
+        V1.layer.cornerRadius =10;
+        V1.layer.borderColor =RGBA(231, 231, 231, 1).CGColor;
+        V1.layer.borderWidth =1;
+        V1.layer.masksToBounds =YES;
+        
         _topickNumLab =[UILabel new];
         [self addSubview:_topickNumLab];
         _topickNumLab.text =@"12432条评论";
@@ -107,7 +145,7 @@
             make.left.equalTo(blockSelf.imageV.mas_right).offset =10;
             
         }];
-        _topickNumLab.font =FontSize(15);
+        _topickNumLab.font =FontSize(11);
         _topickNumLab.textColor =RGBA(204, 204, 204, 1);
         
         _speciesLab =[UILabel new];
@@ -118,9 +156,9 @@
             make.right.offset =-10;
         }];
         _speciesLab.numberOfLines =2;
-        _speciesLab.font =FontSize(15);
+        _speciesLab.font =FontSize(11);
         _speciesLab.textColor =[UIColor grayColor];
-        _speciesLab.minimumFontSize =13;
+        _speciesLab.minimumFontSize =10;
         _speciesLab.text =@"当地热门菜品，法餐，意大利菜";
      
         

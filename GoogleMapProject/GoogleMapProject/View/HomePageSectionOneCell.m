@@ -90,7 +90,7 @@
         _juliLab.adjustsFontSizeToFitWidth =YES;
       
         _juliLab.text =@"2000m";
-        _juliLab.font =FontSize(14);
+        _juliLab.font =FontSize(10);
         _juliLab.textAlignment =NSTextAlignmentCenter;
         
         UIView *V1 =[UIView new];
@@ -102,7 +102,7 @@
             make.bottom.equalTo(blockSelf.juliLab).offset =3;
         }];
         V1.backgroundColor =RGBA(245, 245, 245, 1);
-        V1.layer.cornerRadius =3;
+        V1.layer.cornerRadius =10;
         V1.layer.borderColor =RGBA(231, 231, 231, 1).CGColor;
         V1.layer.borderWidth =1;
         V1.layer.masksToBounds =YES;

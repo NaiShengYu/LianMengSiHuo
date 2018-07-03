@@ -16,9 +16,8 @@
     if (self) {
         WS(blockSelf);
         self.backgroundColor =RGBA(167, 38, 30, 1);
-        _backBaut =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 44, MaxY)];
+        _backBaut =[[UIButton alloc]initWithFrame:CGRectMake(0, MaxY-44, 44, 44)];
         [self addSubview:_backBaut];
-        [_backBaut setImageEdgeInsets:UIEdgeInsetsMake(15, 0, 0, 0)];
         [_backBaut setImage:[UIImage imageNamed:@"06"] forState:UIControlStateNormal];
         
         _shareBut =[UIButton new];

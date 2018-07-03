@@ -18,4 +18,6 @@
 
 @property (nonatomic,strong)UIButton *rightBut;
 
+@property (nonatomic,weak)UIViewController *vc;
+
 @end

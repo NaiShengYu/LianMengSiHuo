@@ -21,6 +21,7 @@
 
 @property (nonatomic,strong)UILabel *juliLab;
 
-
+@property (nonatomic,strong)UILabel *numLab;
+@property (nonatomic,strong)UIImageView *imgV;
 
 @end

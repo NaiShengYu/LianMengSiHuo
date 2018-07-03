@@ -20,6 +20,7 @@
 @interface LeftViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *myTable;
 @property (nonatomic,strong)NSMutableArray *titlesArray;
+@property (nonatomic,strong)NSMutableArray *imgArray;
 
 
 @end
@@ -44,7 +45,8 @@
     
     self.navigationController.navigationBar.translucent =NO;
     _titlesArray =[[NSMutableArray alloc]initWithObjects:@"我的收藏",@"我的点评",@"忘记密码",@"绑定手机",@"关于我们",@"版本信息", nil];
-    
+    _imgArray =[[NSMutableArray alloc]initWithObjects:@"个人中心_11",@"个人中心_14",@"个人中心_16",@"个人中心_18",@"个人中心_20",@"个人中心_22", nil];
+
     [self.view addSubview:self.myTable];
     [self.myTable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.insets =UIEdgeInsetsMake(0, 0, 0, 0);
@@ -75,6 +77,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0.1;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 50;
+}
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
     LeftViewHeader *header =[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"LeftViewHeader"];
@@ -85,7 +90,7 @@
         header.headerImgV.image =[UIImage imageNamed:@"timg-2"];
 
     }else{
-        header.headerImgV.image =[UIImage imageNamed:@""];
+        header.headerImgV.image =[UIImage imageNamed:@"个人中心_07"];
         [header.titleBut setTitle:@"未登录" forState:UIControlStateNormal];
     }
     
@@ -101,7 +106,8 @@
     
     UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.textLabel.text =self.titlesArray[indexPath.row];
-    cell.imageView.image =[UIImage imageNamed:@"timg"];
+    cell.imageView.image =[UIImage imageNamed:self.imgArray[indexPath.row]];
+    cell.textLabel.font =FontSize(16);
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

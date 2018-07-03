@@ -15,7 +15,7 @@
 
 #import "FilterItem.h"
 #import "FilterHeaderModel.h"
-@interface ViewController ()<GMSMapViewDelegate,CLLocationManagerDelegate>
+@interface ViewController ()<GMSMapViewDelegate>
 {
     
     GMSMarker *_marker;
@@ -24,7 +24,6 @@
 
 }
 @property (nonatomic,strong)GMSMapView *mapV ;
-@property (nonatomic,strong)CLLocationManager *locationManager;
 
 @property (nonatomic,strong)NSMutableArray *markersArray;
 
@@ -196,8 +195,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
     self.markersArray =[[NSMutableArray alloc]init];
     GMSCameraPosition *position = [GMSCameraPosition cameraWithLatitude:-33.86 longitude:151.20 zoom:14];
     _mapV =[GMSMapView mapWithFrame:self.view.bounds camera:position];
@@ -210,48 +207,32 @@
     
     [self.view addSubview:_mapV];
 
-    if (self.locationManager == nil) {
-        self.locationManager = [[CLLocationManager alloc]init];
-    }
-    self.locationManager.delegate =self;
-    [self.locationManager requestWhenInUseAuthorization];
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;//最精确的定位
-    self.locationManager.distanceFilter = kCLDistanceFilterNone; // 默认是kCLDistanceFilterNone，也可以设置其他值，表示用户移动的距离小于该范围内就不会接收到通知
-    [self.locationManager startUpdatingLocation];
 
     
-     self.bottomV=[[BottomView alloc]initWithFrame:CGRectMake(10, self.view.bounds.size.height, self.view.bounds.size.width-20, 153)];
- 
+     self.bottomV=[[BottomView alloc]initWithFrame:CGRectMake(10, screenHeight -153, screenWigth-20, 153)];
     self.bottomV.vc =self;
     [self.view addSubview:self.bottomV];
     
-    UITapGestureRecognizer *tap =[[UITapGestureRecognizer alloc]init];
-    [tap addTarget:self action:@selector(viewDismiss)];
-    [self.bottomV addGestureRecognizer:tap];
+
 //    UIWebView *web =[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.width)];
 //    [web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.xkddyz.com/admin/index.php"]]];
 //    [self.view addSubview:web];
-    
-  
-  
-
-    
-    
-    UIView *bacv =[[UIView alloc]initWithFrame:CGRectMake(self.view.bounds.size.width-80, MaxY+80, 60, 120)];
+ 
+    UIView *bacv =[[UIView alloc]initWithFrame:CGRectMake(self.view.bounds.size.width-70, MaxY+60, 60, 120)];
     bacv.backgroundColor =[UIColor clearColor];
     [self.view addSubview:bacv];
     
-    UIView *bacv1 =[[UIView alloc]initWithFrame:CGRectMake(0, 0, 60, 150)];
+    UIView *bacv1 =[[UIView alloc]initWithFrame:CGRectMake(0, 0, 50, 110)];
     bacv1.backgroundColor =[UIColor whiteColor];
     bacv1.alpha =0.4;
     [bacv addSubview:bacv1];
     
-    UIButton *but =[[UIButton alloc]initWithFrame:CGRectMake(0, 10, 60, 60)];
+    UIButton *but =[[UIButton alloc]initWithFrame:CGRectMake(0, 5, 50, 50)];
     [but addTarget:self action:@selector(saoMiao) forControlEvents:UIControlEventTouchUpInside];
     [but setImage:[UIImage imageNamed:@"19"] forState:UIControlStateNormal];
     [bacv addSubview:but];
     
-    UIButton *but1 =[[UIButton alloc]initWithFrame:CGRectMake(0, 80, 60, 60)];
+    UIButton *but1 =[[UIButton alloc]initWithFrame:CGRectMake(0, 55, 50, 50)];
     [but1 addTarget:self action:@selector(currentCenter) forControlEvents:UIControlEventTouchUpInside];
     [but1 setImage:[UIImage imageNamed:@"22"] forState:UIControlStateNormal];
     [bacv addSubview:but1];
@@ -260,9 +241,25 @@
     self.view.backgroundColor =[UIColor whiteColor];
     TopView*topV=[[TopView alloc]initWithFrame:CGRectMake(0, 0,screenWigth , MaxY)];
     [self.view addSubview:topV];
+    topV.vc =self;
     [topV.backBut addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [topV.chooseBut addTarget:self action:@selector(chooseBut:) forControlEvents:UIControlEventTouchUpInside];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.hidden =YES;
+    if ([CustomAccount sharedCustomAccount].curCoordinate2D.latitude==0 && [CustomAccount sharedCustomAccount].curCoordinate2D.longitude==0) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLocation) name:@"locationUpLode" object:nil];
+    }else{
+        [self currentLocation];
+    }
+    
+}
+
+- (void)getLocation{
+    [self currentLocation];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"locationUpLode" object:nil];
 }
 
 - (void)currentCenter{
@@ -275,21 +272,18 @@
 }
 static int a =0 ;
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
+- (void)currentLocation{
     
-    CLLocation *curLocation = [locations lastObject];
     // 通过location  或得到当前位置的经纬度
-    CLLocationCoordinate2D curCoordinate2D = curLocation.coordinate;
+    CLLocationCoordinate2D curCoordinate2D = [CustomAccount sharedCustomAccount].curCoordinate2D;
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:curCoordinate2D.latitude longitude:curCoordinate2D.longitude zoom:14];
-     position2D = CLLocationCoordinate2DMake(curLocation.coordinate.latitude, curLocation.coordinate.longitude);//可以吧这个存起来
-    
-    BIGposition2D = CLLocationCoordinate2DMake(curLocation.coordinate.latitude, curLocation.coordinate.longitude);//可以吧这个存起来
-
+     position2D = curCoordinate2D;//可以吧这个存起来
+    BIGposition2D = curCoordinate2D;//可以吧这个存起来
     
     if (a ==0) {
         a +=1;
         _marker =[[GMSMarker alloc]init];
-        _marker.position =CLLocationCoordinate2DMake(curLocation.coordinate.latitude, curLocation.coordinate.longitude);
+        _marker.position =CLLocationCoordinate2DMake(curCoordinate2D.latitude, curCoordinate2D.longitude);
         _marker.icon =[UIImage imageNamed:@"25"];
         _marker.draggable =YES;
         _marker.map = self.mapV;
@@ -301,7 +295,7 @@ static int a =0 ;
             CGFloat a = d *(arc4random() % 999)/100000.0;
             CGFloat b = d * (arc4random() % 999)/100000.0;
             
-            marker.position =CLLocationCoordinate2DMake(curLocation.coordinate.latitude +a, curLocation.coordinate.longitude+b);
+            marker.position =CLLocationCoordinate2DMake(curCoordinate2D.latitude +a, curCoordinate2D.longitude+b);
             marker.title =[NSString stringWithFormat:@"第%d个",i+1];
             //        marker.icon = [UIImage imageNamed:@"25"];\
             
@@ -314,18 +308,13 @@ static int a =0 ;
             view.layer.masksToBounds =YES;
             view.textAlignment =NSTextAlignmentCenter;
             marker.iconView =view;
-            
             marker.map =self.mapV;
-            
             [self.markersArray addObject:marker];
             
         }
     }
   
     self.mapV.camera = camera;//这句话很重要很重要，将我们获取到的经纬度转成影像并赋值给地图的camera属性
-    
-  
-    [self.locationManager stopUpdatingLocation];//定位成功后停止定位
 }
 
 
@@ -398,10 +387,10 @@ static int a =0 ;
 
 - (void)mapView:(GMSMapView *)mapView didTapAtCoordinate:(CLLocationCoordinate2D)coordinate{
     
-    if (self.bottomV.frame.origin.y <screenHeight) {
-        [self viewDismiss];
-        return;
-    }
+//    if (self.bottomV.frame.origin.y <screenHeight) {
+//        [self viewDismiss];
+//        return;
+//    }
     
     _marker.position =coordinate;
     BIGposition2D =coordinate;

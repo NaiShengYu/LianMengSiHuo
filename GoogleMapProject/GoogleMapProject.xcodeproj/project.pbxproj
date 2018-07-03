@@ -16,6 +16,9 @@
 		26196CC320C55C6F0097D72D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26196CC220C55C6F0097D72D /* Assets.xcassets */; };
 		26196CC620C55C6F0097D72D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26196CC420C55C6F0097D72D /* LaunchScreen.storyboard */; };
 		26196CC920C55C6F0097D72D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 26196CC820C55C6F0097D72D /* main.m */; };
+		265F8D1420EBA9FF00620F3E /* KNLocationConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 265F8D1320EBA9FF00620F3E /* KNLocationConverter.m */; };
+		265F8D1720EBC29600620F3E /* SearchKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265F8D1620EBC29600620F3E /* SearchKeyViewController.m */; };
+		265F8D1A20EBC8BA00620F3E /* SearchKeyNavVar.m in Sources */ = {isa = PBXBuildFile; fileRef = 265F8D1920EBC8BA00620F3E /* SearchKeyNavVar.m */; };
 		267BBF4320D913760005AE5A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 267BBF4220D913760005AE5A /* LoginViewController.m */; };
 		267BBF4620D92B330005AE5A /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 267BBF4520D92B330005AE5A /* RegistViewController.m */; };
 		267BBF4920D92B450005AE5A /* FogotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 267BBF4820D92B450005AE5A /* FogotViewController.m */; };
@@ -36,6 +39,8 @@
 		267BBF7B20DBEA8E0005AE5A /* CollectionShopUneditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 267BBF7A20DBEA8E0005AE5A /* CollectionShopUneditCell.m */; };
 		267BBF7E20DBF4930005AE5A /* CollectionShopEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 267BBF7D20DBF4930005AE5A /* CollectionShopEditCell.m */; };
 		267BBF8120DBFC9E0005AE5A /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 267BBF8020DBFC9E0005AE5A /* CommentCell.m */; };
+		26904EB520E78A2200084B5F /* HomePageMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26904EB420E78A2200084B5F /* HomePageMapViewController.m */; };
+		26904EB820E78CD000084B5F /* YNSFunctionBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 26904EB720E78CD000084B5F /* YNSFunctionBar.m */; };
 		26A608C620E1251300B677FF /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A608C520E1251300B677FF /* ChangePasswordViewController.m */; };
 		C97712E120DB4F2D007AE5F0 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712E020DB4F2D007AE5F0 /* CommentViewController.m */; };
 		C97712E720DB5046007AE5F0 /* BindingPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712E620DB5046007AE5F0 /* BindingPhoneViewController.m */; };
@@ -96,6 +101,12 @@
 		26196CC520C55C6F0097D72D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		26196CC720C55C6F0097D72D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26196CC820C55C6F0097D72D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		265F8D1220EBA9FF00620F3E /* KNLocationConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KNLocationConverter.h; sourceTree = "<group>"; };
+		265F8D1320EBA9FF00620F3E /* KNLocationConverter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KNLocationConverter.m; sourceTree = "<group>"; };
+		265F8D1520EBC29600620F3E /* SearchKeyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchKeyViewController.h; sourceTree = "<group>"; };
+		265F8D1620EBC29600620F3E /* SearchKeyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchKeyViewController.m; sourceTree = "<group>"; };
+		265F8D1820EBC8BA00620F3E /* SearchKeyNavVar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchKeyNavVar.h; sourceTree = "<group>"; };
+		265F8D1920EBC8BA00620F3E /* SearchKeyNavVar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchKeyNavVar.m; sourceTree = "<group>"; };
 		267BBF4120D913760005AE5A /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		267BBF4220D913760005AE5A /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		267BBF4420D92B330005AE5A /* RegistViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
@@ -136,6 +147,10 @@
 		267BBF7D20DBF4930005AE5A /* CollectionShopEditCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionShopEditCell.m; sourceTree = "<group>"; };
 		267BBF7F20DBFC9E0005AE5A /* CommentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
 		267BBF8020DBFC9E0005AE5A /* CommentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
+		26904EB320E78A2200084B5F /* HomePageMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageMapViewController.h; sourceTree = "<group>"; };
+		26904EB420E78A2200084B5F /* HomePageMapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageMapViewController.m; sourceTree = "<group>"; };
+		26904EB620E78CD000084B5F /* YNSFunctionBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YNSFunctionBar.h; sourceTree = "<group>"; };
+		26904EB720E78CD000084B5F /* YNSFunctionBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YNSFunctionBar.m; sourceTree = "<group>"; };
 		26A608C420E1251300B677FF /* ChangePasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
 		26A608C520E1251300B677FF /* ChangePasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
 		2BF73FC6E901B989D43D34C9 /* libPods-GoogleMapProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GoogleMapProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -263,6 +278,10 @@
 				C977138120E475ED007AE5F0 /* FirstViewController.m */,
 				26196CB920C55C6E0097D72D /* ViewController.h */,
 				26196CBA20C55C6E0097D72D /* ViewController.m */,
+				26904EB320E78A2200084B5F /* HomePageMapViewController.h */,
+				26904EB420E78A2200084B5F /* HomePageMapViewController.m */,
+				26904EB620E78CD000084B5F /* YNSFunctionBar.h */,
+				26904EB720E78CD000084B5F /* YNSFunctionBar.m */,
 				260C46CD20CD5841008952B4 /* BottomView.h */,
 				260C46CE20CD5841008952B4 /* BottomView.m */,
 				260C46D020CD6736008952B4 /* TopView.h */,
@@ -273,6 +292,8 @@
 				26196CC220C55C6F0097D72D /* Assets.xcassets */,
 				267BBF4A20D93D4D0005AE5A /* PubulicObj.h */,
 				267BBF4B20D93D4D0005AE5A /* PubulicObj.m */,
+				265F8D1220EBA9FF00620F3E /* KNLocationConverter.h */,
+				265F8D1320EBA9FF00620F3E /* KNLocationConverter.m */,
 				C977133620E31FFD007AE5F0 /* CWStarRateView.h */,
 				C977133520E31FFD007AE5F0 /* CWStarRateView.m */,
 				26196CC420C55C6F0097D72D /* LaunchScreen.storyboard */,
@@ -308,6 +329,8 @@
 				C977132420E212FB007AE5F0 /* ShopInfoViewController.m */,
 				C977133820E32217007AE5F0 /* ShopCommentViewController.h */,
 				C977133920E32217007AE5F0 /* ShopCommentViewController.m */,
+				265F8D1520EBC29600620F3E /* SearchKeyViewController.h */,
+				265F8D1620EBC29600620F3E /* SearchKeyViewController.m */,
 				C977138920E4B854007AE5F0 /* SearchResultViewController.h */,
 				C977138A20E4B854007AE5F0 /* SearchResultViewController.m */,
 			);
@@ -375,6 +398,8 @@
 				C977134820E33BCB007AE5F0 /* ShopCommentSectionThreeCell.m */,
 				C977138620E47DF3007AE5F0 /* CustormAlertView.h */,
 				C977138720E47DF3007AE5F0 /* CustormAlertView.m */,
+				265F8D1820EBC8BA00620F3E /* SearchKeyNavVar.h */,
+				265F8D1920EBC8BA00620F3E /* SearchKeyNavVar.m */,
 				C977138C20E4BE35007AE5F0 /* SearchResultHeader.h */,
 				C977138D20E4BE35007AE5F0 /* SearchResultHeader.m */,
 				C977138F20E4BFF0007AE5F0 /* SearchResultSectionZeroCell.h */,
@@ -579,11 +604,14 @@
 				C977130020E09F73007AE5F0 /* PersonImageCell.m in Sources */,
 				C977138B20E4B854007AE5F0 /* SearchResultViewController.m in Sources */,
 				C977132520E212FB007AE5F0 /* ShopInfoViewController.m in Sources */,
+				265F8D1720EBC29600620F3E /* SearchKeyViewController.m in Sources */,
 				C977138E20E4BE35007AE5F0 /* SearchResultHeader.m in Sources */,
 				267BBF7520DAB9090005AE5A /* CollectionShopViewController.m in Sources */,
 				26196CC120C55C6E0097D72D /* GoogleMapProject.xcdatamodeld in Sources */,
 				C977130320E0B768007AE5F0 /* PersonDataCell.m in Sources */,
+				26904EB520E78A2200084B5F /* HomePageMapViewController.m in Sources */,
 				267BBF4F20D941D20005AE5A /* FogotSecondViewController.m in Sources */,
+				26904EB820E78CD000084B5F /* YNSFunctionBar.m in Sources */,
 				267BBF5420DA7D4F0005AE5A /* ThirdPartyLandedView.m in Sources */,
 				26196CBB20C55C6E0097D72D /* ViewController.m in Sources */,
 				267BBF7820DBDFA50005AE5A /* NavHeader.m in Sources */,
@@ -618,6 +646,7 @@
 				C977131220E1DFD9007AE5F0 /* FilterHeader.m in Sources */,
 				267BBF4620D92B330005AE5A /* RegistViewController.m in Sources */,
 				C977137F20E37913007AE5F0 /* FiterOtherCell.m in Sources */,
+				265F8D1A20EBC8BA00620F3E /* SearchKeyNavVar.m in Sources */,
 				267BBF7B20DBEA8E0005AE5A /* CollectionShopUneditCell.m in Sources */,
 				C977131C20E1F845007AE5F0 /* CustomBut.m in Sources */,
 				C977130C20E0EFAC007AE5F0 /* ChangeTelphoneNumViewController.m in Sources */,
@@ -625,6 +654,7 @@
 				267BBF7E20DBF4930005AE5A /* CollectionShopEditCell.m in Sources */,
 				26A608C620E1251300B677FF /* ChangePasswordViewController.m in Sources */,
 				C977139420E4C1B1007AE5F0 /* SearchResultSectionOneCell.m in Sources */,
+				265F8D1420EBA9FF00620F3E /* KNLocationConverter.m in Sources */,
 				C977131920E1EF42007AE5F0 /* FilterItem.m in Sources */,
 				C977131620E1EECC007AE5F0 /* FilterHeaderModel.m in Sources */,
 				C977133720E31FFD007AE5F0 /* CWStarRateView.m in Sources */,

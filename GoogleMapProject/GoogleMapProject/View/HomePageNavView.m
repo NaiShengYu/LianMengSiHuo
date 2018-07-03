@@ -7,6 +7,9 @@
 //
 
 #import "HomePageNavView.h"
+#import "SearchKeyViewController.h"
+@interface HomePageNavView()<UITextFieldDelegate>
+@end
 
 @implementation HomePageNavView
 
@@ -17,14 +20,15 @@
     if (self) {
         WS(blockSelf);
         self.backgroundColor =RGBA(167, 38, 30, 1);
-        _backBut =[[UIButton alloc]initWithFrame:CGRectMake(0, MaxY-44, 44, 44)];
+        _backBut =[[UIButton alloc]initWithFrame:CGRectMake(8, MaxY-44+8, 44-16, 44-16)];
         [self addSubview:_backBut];
-        [_backBut setImage:[UIImage imageNamed:@"06"] forState:UIControlStateNormal];
+        [_backBut setImage:[UIImage imageNamed:@"个人中心_07"] forState:UIControlStateNormal];
         
         _rightBut =[[UIButton alloc]initWithFrame:CGRectMake(screenWigth-52, MaxY-44, 44, 44)];
         NSLog(@"%f",MaxY);
         [self addSubview:_rightBut];
-        [_rightBut setImage:[UIImage imageNamed:@"09"] forState:UIControlStateNormal];
+        [_rightBut setImage:[UIImage imageNamed:@"首页2_03"] forState:UIControlStateNormal];
+        [_rightBut setImageEdgeInsets:UIEdgeInsetsMake(10, 12, 10, 12)];
         
         UIImageView *img =[UIImageView new];
         [self addSubview:img];
@@ -44,8 +48,13 @@
             make.right.equalTo(blockSelf.rightBut.mas_left).offset =-45;
             make.height.offset =35;
         }];
-        _searchBar.placeholder =@"你想去的地方";
+        _searchBar.returnKeyType = UIReturnKeySearch;
+        _searchBar.delegate =self;
         _searchBar.backgroundColor=[UIColor clearColor];
+        _searchBar.font =FontSize(14);
+        NSMutableAttributedString *att =[[NSMutableAttributedString alloc]initWithString:@"你想去的地方"];
+        [att addAttribute:NSForegroundColorAttributeName value:RGBA(179, 97, 95, 1) range:NSMakeRange(0, 6)];
+        _searchBar.attributedPlaceholder =att;
         
         UIView *lineView =[UIView new];
         [self addSubview:lineView];
@@ -68,11 +77,16 @@
             
         }];
         [_cancelBut setImage:[UIImage imageNamed:@"登录_11"] forState:UIControlStateNormal];
-        
-        
+        [_cancelBut setImageEdgeInsets:UIEdgeInsetsMake(7.5,7.5, 7.5, 7.5)];
+        [_cancelBut addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
     }
-    
     return self;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    [textField resignFirstResponder];
+    [self.vc.navigationController pushViewController:[SearchKeyViewController new] animated:NO];
+
 }
 
 

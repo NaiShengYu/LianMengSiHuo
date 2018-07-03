@@ -10,6 +10,7 @@
 
 #import "BottomView.h"
 #import <MapKit/MapKit.h>
+#import "ShopInfoViewController.h"
 @implementation BottomView
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -28,7 +29,8 @@
             make.bottom.offset =-20;
             make.width.equalTo(blockSelf.imageV.mas_height).multipliedBy(1.2);
         }];
-        
+        _imageV.userInteractionEnabled = YES;
+
         UIButton *but =[[UIButton alloc]init];
         [self addSubview:but];
         [but setImage:[UIImage imageNamed:@"29"] forState:UIControlStateNormal];
@@ -67,6 +69,7 @@
         _titleLab.numberOfLines =2;
         _titleLab.minimumFontSize =12;
         _titleLab.text =@"Le cafe to you";
+        _titleLab.userInteractionEnabled = YES;
         
         UIImageView *img1 = [UIImageView new];
         img1.image =[UIImage imageNamed:@"32"];
@@ -179,6 +182,14 @@
         _topickNumLab.textColor =RGBA(204, 204, 204, 1);
         
         
+        UITapGestureRecognizer *tap =[[UITapGestureRecognizer alloc]init];
+        [tap addTarget:self action:@selector(goInfo)];
+        [self.titleLab addGestureRecognizer:tap];
+        
+        UITapGestureRecognizer *tap1 =[[UITapGestureRecognizer alloc]init];
+        [tap1 addTarget:self action:@selector(goInfo)];
+        [self.titleLab addGestureRecognizer:tap1];
+        [self.imageV addGestureRecognizer:tap1];
     }
     
     
@@ -229,6 +240,13 @@
     
     
     
+}
+
+
+- (void)goInfo{
+    
+    ShopInfoViewController *vc = [[ShopInfoViewController alloc]init];
+    [self.vc.navigationController pushViewController:vc animated:YES];
 }
 
 @end

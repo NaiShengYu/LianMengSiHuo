@@ -8,9 +8,12 @@
 
 #import "HomePageSectionZeroCell.h"
 #import "HomePageListViewController.h"
+#import "HomePageMapViewController.h"
+
 @interface HomePageSectionZeroCell()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong)NSMutableArray *titlesArray;
+@property (nonatomic,strong)NSMutableArray *imgArray;
 @end
 @implementation HomePageSectionZeroCell
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -18,7 +21,8 @@
     if (self) {
         WS(blockSelf);
         _titlesArray =[[NSMutableArray alloc]initWithObjects:@"景点 Attractions",@"餐厅 Restaurant",@"购物 Shopping",@"酒店 Hotel", nil];
-        
+        _imgArray =[[NSMutableArray alloc]initWithObjects:@"首页_03",@"首页_06",@"首页_09",@"首页_13", nil];
+
         _mapV =[[GMSMapView alloc]initWithFrame:frame];
         [self.contentView addSubview:_mapV];
         
@@ -41,9 +45,14 @@
             make.right.offset =-10;
             make.height.offset =60;
         }];
+        [_titleBut addTarget:self action:@selector(goMap) forControlEvents:UIControlEventTouchUpInside];
         _titleBut.titleLabel.numberOfLines =2;
-        [_titleBut setTitle:@"巴黎\nParis" forState:UIControlStateNormal];
+        NSMutableAttributedString *att = [[NSMutableAttributedString alloc]initWithString:@"巴黎\nParis"];
+        _titleBut.titleLabel.font =FontSize(15);
+        [att addAttribute:NSFontAttributeName value:FontSize(18) range:NSMakeRange(0, 2)];
+        [_titleBut setAttributedTitle:att forState:UIControlStateNormal];
         [_titleBut setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _titleBut.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
         
         _tab =[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStyleGrouped];
         _tab.delegate =self;
@@ -86,9 +95,19 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    cell.textLabel.font =FontSize(13);
+    cell.textLabel.textColor =RGBA(208, 208, 208, 1);
+    NSMutableAttributedString *att = [[NSMutableAttributedString alloc]initWithString:self.titlesArray[indexPath.row]];
+    [att addAttribute:NSFontAttributeName value:FontSize(18) range:NSMakeRange(0, 2)];
+    [att addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, 2)];
     cell.accessoryType =UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.text =self.titlesArray[indexPath.row];
-    cell.imageView.image =[UIImage imageNamed:@"timg"];
+    cell.textLabel.attributedText = att;
+    
+    cell.imageView.image =[UIImage imageNamed:self.imgArray[indexPath.row]];
+    
+    
+    
+    
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -110,5 +129,15 @@
     if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
+}
+
+- (void)goMap{
+    HomePageMapViewController *vc =[[HomePageMapViewController alloc]init];
+    [UIView transitionWithView:[[UIApplication sharedApplication].delegate window] duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
+        [self.VC.navigationController pushViewController:vc animated:NO];
+        
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 @end

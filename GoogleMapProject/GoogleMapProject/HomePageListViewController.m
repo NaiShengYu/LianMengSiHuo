@@ -207,10 +207,9 @@
     
    TopView *topV=[[TopView alloc]initWithFrame:CGRectMake(0, 0,screenWigth , MaxY)];
     [topV.rightBut setImage:[UIImage imageNamed:@"列表_03"] forState:UIControlStateNormal];
-    [topV.rightBut addTarget:self action:@selector(goMap) forControlEvents:UIControlEventTouchUpInside];
     [topV.backBut addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [topV.chooseBut addTarget:self action:@selector(chooseBut:) forControlEvents:UIControlEventTouchUpInside];
-
+    topV.vc =self;
     [self.view addSubview:topV];
     
 }
@@ -242,6 +241,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
         CollectionShopUneditCell *cell =[tableView dequeueReusableCellWithIdentifier:@"CollectionShopUneditCell" forIndexPath:indexPath];
     cell.topickNumLab.text = @"200 ￥ 12432条评论";
+    cell.numLab.text =[NSString stringWithFormat:@"Top\n%ld",indexPath.row+1];
         return cell;
    
 }
@@ -266,12 +266,6 @@
     }
 }
 
-- (void)goMap{
-    
-    ViewController *VC =[[ViewController alloc]init];
-    [self.navigationController pushViewController:VC animated:YES];
-    
-}
 - (void)chooseBut:(UIButton *)but{
     
     but.selected = !but.selected;

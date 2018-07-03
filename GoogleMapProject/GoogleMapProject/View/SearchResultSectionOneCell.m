@@ -25,7 +25,7 @@
                 make.left.offset =20;
                 make.top.offset =30;
                 make.bottom.offset =-30;
-            } make.width.equalTo(blockSelf.imageV.mas_height).multipliedBy(1.65);
+            } make.width.equalTo(blockSelf.imageV.mas_height).multipliedBy(1.5);
         }];
         
         _titleLab =[UILabel new];
@@ -92,9 +92,9 @@
             make.right.offset =-10;
         }];
         _speciesLab.numberOfLines =2;
-        _speciesLab.font =FontSize(15);
+        _speciesLab.font =FontSize(11);
         _speciesLab.textColor =[UIColor grayColor];
-        _speciesLab.minimumFontSize =13;
+        _speciesLab.minimumFontSize =10;
         _speciesLab.text =@"当地热门菜品，法餐，意大利菜";
         
         

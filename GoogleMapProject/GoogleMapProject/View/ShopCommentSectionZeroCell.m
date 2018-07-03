@@ -21,7 +21,7 @@
         [self.contentView addSubview:_leftLab];
         
         _starRateView = [[CWStarRateView alloc] initWithFrame:CGRectMake(90,10, screenWigth-140, 60) numberOfStars:5];
-        _starRateView.scorePercent = 1;
+        _starRateView.scorePercent = 0;
         _starRateView.hasAnimation = YES;
         _starRateView.delegate =self;
         [self.contentView addSubview:_starRateView];

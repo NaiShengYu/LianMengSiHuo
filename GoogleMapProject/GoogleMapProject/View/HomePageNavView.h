@@ -17,4 +17,6 @@
 
 @property (nonatomic,strong)UIButton *cancelBut;
 
+@property (nonatomic,weak)UIViewController *vc;
+
 @end

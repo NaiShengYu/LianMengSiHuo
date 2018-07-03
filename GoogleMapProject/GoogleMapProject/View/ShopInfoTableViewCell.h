@@ -34,6 +34,7 @@
 
 @property (nonatomic,strong)UILabel *telNum;
 
-
+//图片张数
+@property (nonatomic,strong)UILabel *pictureNumLab;
 
 @end

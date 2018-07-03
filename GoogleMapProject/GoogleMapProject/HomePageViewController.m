@@ -62,6 +62,7 @@
 
 - (void)creatNav{
     HomePageNavView *navView = [[HomePageNavView alloc]initWithFrame:CGRectMake(0, 0, screenWigth, MaxY)];
+    navView.vc =self;
     [navView.backBut addTarget:self action:@selector(showLeftVC) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:navView];
 }
@@ -144,9 +145,6 @@
 #pragma mark --出现左菜单
 - (void)showLeftVC{
     [self.drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:^(BOOL finished) {
-        
     }];
- 
-    
 }
 @end
