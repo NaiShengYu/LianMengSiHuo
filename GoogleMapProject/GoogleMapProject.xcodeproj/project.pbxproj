@@ -42,6 +42,10 @@
 		26904EB520E78A2200084B5F /* HomePageMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26904EB420E78A2200084B5F /* HomePageMapViewController.m */; };
 		26904EB820E78CD000084B5F /* YNSFunctionBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 26904EB720E78CD000084B5F /* YNSFunctionBar.m */; };
 		26A608C620E1251300B677FF /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A608C520E1251300B677FF /* ChangePasswordViewController.m */; };
+		C938504720EC9F85007AF5A7 /* YFScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = C938504320EC9F85007AF5A7 /* YFScrollView.m */; };
+		C938504820EC9F85007AF5A7 /* YFScaleScrollViewView.m in Sources */ = {isa = PBXBuildFile; fileRef = C938504620EC9F85007AF5A7 /* YFScaleScrollViewView.m */; };
+		C938504B20ECAD10007AF5A7 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C938504A20ECAD10007AF5A7 /* TestViewController.m */; };
+		C938504E20ECB44A007AF5A7 /* CustomBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = C938504D20ECB44A007AF5A7 /* CustomBrowser.m */; };
 		C97712E120DB4F2D007AE5F0 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712E020DB4F2D007AE5F0 /* CommentViewController.m */; };
 		C97712E720DB5046007AE5F0 /* BindingPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712E620DB5046007AE5F0 /* BindingPhoneViewController.m */; };
 		C97712EA20DB5062007AE5F0 /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712E920DB5062007AE5F0 /* AboutUsViewController.m */; };
@@ -71,8 +75,6 @@
 		C977134320E33129007AE5F0 /* ShopCommentSectionZeroCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C977134220E33129007AE5F0 /* ShopCommentSectionZeroCell.m */; };
 		C977134620E3392F007AE5F0 /* ShopCommentSectionOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C977134520E3392F007AE5F0 /* ShopCommentSectionOneCell.m */; };
 		C977134920E33BCB007AE5F0 /* ShopCommentSectionThreeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C977134820E33BCB007AE5F0 /* ShopCommentSectionThreeCell.m */; };
-		C977137520E33D31007AE5F0 /* YFScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = C977137120E33D30007AE5F0 /* YFScrollView.m */; };
-		C977137620E33D31007AE5F0 /* YFScaleScrollViewView.m in Sources */ = {isa = PBXBuildFile; fileRef = C977137420E33D31007AE5F0 /* YFScaleScrollViewView.m */; };
 		C977137C20E358AD007AE5F0 /* CustomAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = C977137B20E358AD007AE5F0 /* CustomAccount.m */; };
 		C977137F20E37913007AE5F0 /* FiterOtherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C977137E20E37913007AE5F0 /* FiterOtherCell.m */; };
 		C977138220E475ED007AE5F0 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C977138120E475ED007AE5F0 /* FirstViewController.m */; };
@@ -156,6 +158,14 @@
 		2BF73FC6E901B989D43D34C9 /* libPods-GoogleMapProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GoogleMapProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		764BAFDF28E3445530AD6A69 /* Pods-GoogleMapProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleMapProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GoogleMapProject/Pods-GoogleMapProject.debug.xcconfig"; sourceTree = "<group>"; };
 		962BF1968C3B249CC9293335 /* Pods-GoogleMapProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleMapProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoogleMapProject/Pods-GoogleMapProject.release.xcconfig"; sourceTree = "<group>"; };
+		C938504320EC9F85007AF5A7 /* YFScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YFScrollView.m; sourceTree = "<group>"; };
+		C938504420EC9F85007AF5A7 /* YFScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YFScrollView.h; sourceTree = "<group>"; };
+		C938504520EC9F85007AF5A7 /* YFScaleScrollViewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YFScaleScrollViewView.h; sourceTree = "<group>"; };
+		C938504620EC9F85007AF5A7 /* YFScaleScrollViewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YFScaleScrollViewView.m; sourceTree = "<group>"; };
+		C938504920ECAD10007AF5A7 /* TestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		C938504A20ECAD10007AF5A7 /* TestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		C938504C20ECB44A007AF5A7 /* CustomBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomBrowser.h; sourceTree = "<group>"; };
+		C938504D20ECB44A007AF5A7 /* CustomBrowser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomBrowser.m; sourceTree = "<group>"; };
 		C97712DF20DB4F2D007AE5F0 /* CommentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
 		C97712E020DB4F2D007AE5F0 /* CommentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
 		C97712E520DB5046007AE5F0 /* BindingPhoneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BindingPhoneViewController.h; sourceTree = "<group>"; };
@@ -214,10 +224,6 @@
 		C977134520E3392F007AE5F0 /* ShopCommentSectionOneCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopCommentSectionOneCell.m; sourceTree = "<group>"; };
 		C977134720E33BCB007AE5F0 /* ShopCommentSectionThreeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopCommentSectionThreeCell.h; sourceTree = "<group>"; };
 		C977134820E33BCB007AE5F0 /* ShopCommentSectionThreeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopCommentSectionThreeCell.m; sourceTree = "<group>"; };
-		C977137120E33D30007AE5F0 /* YFScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YFScrollView.m; sourceTree = "<group>"; };
-		C977137220E33D31007AE5F0 /* YFScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YFScrollView.h; sourceTree = "<group>"; };
-		C977137320E33D31007AE5F0 /* YFScaleScrollViewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YFScaleScrollViewView.h; sourceTree = "<group>"; };
-		C977137420E33D31007AE5F0 /* YFScaleScrollViewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YFScaleScrollViewView.m; sourceTree = "<group>"; };
 		C977137A20E358AD007AE5F0 /* CustomAccount.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomAccount.h; sourceTree = "<group>"; };
 		C977137B20E358AD007AE5F0 /* CustomAccount.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomAccount.m; sourceTree = "<group>"; };
 		C977137D20E37913007AE5F0 /* FiterOtherCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FiterOtherCell.h; sourceTree = "<group>"; };
@@ -269,11 +275,16 @@
 		26196CB520C55C6E0097D72D /* GoogleMapProject */ = {
 			isa = PBXGroup;
 			children = (
+				C938504220EC9F61007AF5A7 /* Public */,
 				C977131320E1EEA9007AE5F0 /* Model */,
 				C97712F720E09AF8007AE5F0 /* PersonData */,
 				267BBF5120DA7CF50005AE5A /* View */,
 				26196CB620C55C6E0097D72D /* AppDelegate.h */,
 				26196CB720C55C6E0097D72D /* AppDelegate.m */,
+				C938504920ECAD10007AF5A7 /* TestViewController.h */,
+				C938504A20ECAD10007AF5A7 /* TestViewController.m */,
+				C938504C20ECB44A007AF5A7 /* CustomBrowser.h */,
+				C938504D20ECB44A007AF5A7 /* CustomBrowser.m */,
 				C977138020E475ED007AE5F0 /* FirstViewController.h */,
 				C977138120E475ED007AE5F0 /* FirstViewController.m */,
 				26196CB920C55C6E0097D72D /* ViewController.h */,
@@ -340,10 +351,6 @@
 		267BBF5120DA7CF50005AE5A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C977137320E33D31007AE5F0 /* YFScaleScrollViewView.h */,
-				C977137420E33D31007AE5F0 /* YFScaleScrollViewView.m */,
-				C977137220E33D31007AE5F0 /* YFScrollView.h */,
-				C977137120E33D30007AE5F0 /* YFScrollView.m */,
 				267BBF5220DA7D4F0005AE5A /* ThirdPartyLandedView.h */,
 				267BBF5320DA7D4F0005AE5A /* ThirdPartyLandedView.m */,
 				267BBF5820DA89A10005AE5A /* HomePageNavView.h */,
@@ -416,6 +423,17 @@
 				2BF73FC6E901B989D43D34C9 /* libPods-GoogleMapProject.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C938504220EC9F61007AF5A7 /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				C938504520EC9F85007AF5A7 /* YFScaleScrollViewView.h */,
+				C938504620EC9F85007AF5A7 /* YFScaleScrollViewView.m */,
+				C938504420EC9F85007AF5A7 /* YFScrollView.h */,
+				C938504320EC9F85007AF5A7 /* YFScrollView.m */,
+			);
+			path = Public;
 			sourceTree = "<group>";
 		};
 		C97712F720E09AF8007AE5F0 /* PersonData */ = {
@@ -569,12 +587,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-GoogleMapProject/Pods-GoogleMapProject-resources.sh",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/MWPhotoBrowser/MWPhotoBrowser.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_ROOT}/TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MWPhotoBrowser.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TZImagePickerController.bundle",
 			);
@@ -596,6 +616,7 @@
 				267BBF6C20DAAEE60005AE5A /* LeftViewController.m in Sources */,
 				C977134020E32820007AE5F0 /* ShopCommentSectionZeroHeader.m in Sources */,
 				C97712ED20DB5085007AE5F0 /* VersionInformationViewController.m in Sources */,
+				C938504B20ECAD10007AF5A7 /* TestViewController.m in Sources */,
 				267BBF6920DAA1F50005AE5A /* HomePageSectionTowheader.m in Sources */,
 				C977139120E4BFF0007AE5F0 /* SearchResultSectionZeroCell.m in Sources */,
 				C97712E120DB4F2D007AE5F0 /* CommentViewController.m in Sources */,
@@ -627,12 +648,10 @@
 				267BBF8120DBFC9E0005AE5A /* CommentCell.m in Sources */,
 				C977134620E3392F007AE5F0 /* ShopCommentSectionOneCell.m in Sources */,
 				C977133D20E32326007AE5F0 /* ShopCommentNavBar.m in Sources */,
-				C977137620E33D31007AE5F0 /* YFScaleScrollViewView.m in Sources */,
 				267BBF4320D913760005AE5A /* LoginViewController.m in Sources */,
 				267BBF4920D92B450005AE5A /* FogotViewController.m in Sources */,
 				267BBF4C20D93D4D0005AE5A /* PubulicObj.m in Sources */,
 				C977137C20E358AD007AE5F0 /* CustomAccount.m in Sources */,
-				C977137520E33D31007AE5F0 /* YFScrollView.m in Sources */,
 				C977132820E214F7007AE5F0 /* ShopInfoTableViewCell.m in Sources */,
 				260C46CF20CD5841008952B4 /* BottomView.m in Sources */,
 				267BBF6320DA9FC20005AE5A /* HomePageSecitonThreeCell.m in Sources */,
@@ -640,6 +659,7 @@
 				267BBF6F20DAB2060005AE5A /* LeftViewHeader.m in Sources */,
 				C977132220E20688007AE5F0 /* HomePageListViewController.m in Sources */,
 				267BBF5D20DA912E0005AE5A /* HomePageSectionZeroCell.m in Sources */,
+				C938504E20ECB44A007AF5A7 /* CustomBrowser.m in Sources */,
 				C97712E720DB5046007AE5F0 /* BindingPhoneViewController.m in Sources */,
 				267BBF6620DAA1D30005AE5A /* HomePageSectionOneheader.m in Sources */,
 				C977138220E475ED007AE5F0 /* FirstViewController.m in Sources */,
@@ -656,6 +676,8 @@
 				C977139420E4C1B1007AE5F0 /* SearchResultSectionOneCell.m in Sources */,
 				265F8D1420EBA9FF00620F3E /* KNLocationConverter.m in Sources */,
 				C977131920E1EF42007AE5F0 /* FilterItem.m in Sources */,
+				C938504820EC9F85007AF5A7 /* YFScaleScrollViewView.m in Sources */,
+				C938504720EC9F85007AF5A7 /* YFScrollView.m in Sources */,
 				C977131620E1EECC007AE5F0 /* FilterHeaderModel.m in Sources */,
 				C977133720E31FFD007AE5F0 /* CWStarRateView.m in Sources */,
 				C977131F20E1F87E007AE5F0 /* FilterCell.m in Sources */,

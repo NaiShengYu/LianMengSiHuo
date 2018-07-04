@@ -12,6 +12,8 @@
 #import "FirstViewController.h"
 #import "CustormAlertView.h"
 
+#import "TestViewController.h"
+
 @import GoogleMaps;
 @interface AppDelegate ()<CLLocationManagerDelegate>
 @property (nonatomic,strong)CLLocationManager *locationManager;
@@ -37,8 +39,9 @@
     
     _window =[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     [_window makeKeyAndVisible];
-    _window.rootViewController =[[FirstViewController alloc]init];  
-    
+    _window.rootViewController =[[FirstViewController alloc]init];
+//    _window.rootViewController =[[UINavigationController alloc]initWithRootViewController:[[TestViewController alloc]init]];
+
     [SVProgressHUD setDefaultStyle:(SVProgressHUDStyleCustom)];
     [SVProgressHUD setBackgroundColor:HEXCOLOR(0x303132)];
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]];

@@ -4,6 +4,6 @@ pod 'Masonry', '~> 0.6.4'
 pod 'GoogleMaps'
 pod 'SVProgressHUD'
 pod 'MMDrawerController'
-pod 'SDWebImage', '~> 4.2.3'
 pod 'TZImagePickerController', '~> 1.9.8'
+pod "MWPhotoBrowser"
 end

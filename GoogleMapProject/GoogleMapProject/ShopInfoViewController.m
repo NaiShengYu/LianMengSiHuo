@@ -60,20 +60,18 @@
     UIView *lineV =[[UIView alloc]initWithFrame:CGRectMake(0, 0, screenWigth, 1)];
     lineV.backgroundColor =[UIColor groupTableViewBackgroundColor];
     [bottomBut addSubview:lineV];
-    
-    
-    
-
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden =YES;
 }
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBar.hidden =NO;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    
     return self.dataArray.count+1;
-
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -113,6 +111,7 @@
    
     if (indexPath.section ==0) {
         ShopInfoTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"ShopInfoTableViewCell" forIndexPath:indexPath];
+        cell.VC = self;
         cell.infoLab.text =@"一举手，前後左右要有定向.起动举动未能由己，要悉心体认，随人所动，随曲就伸，不丢不顶. 勿自伸缩.彼有力，我亦有力，我力在先.彼无力，我亦无力，我意仍在先.要刻刻留心.挨何处，心要用在何处，须向不丢不顶中讨消息.切记一静无有不静，静须静如山岳.所谓他强由他强，清风拂山冈.一动无有不动，动当动若江河，所谓他横任他横，明月照大江.从此做去，一年半载，便能施於身.此全是用意不是用劲.久之，则人为我制，我不为人制矣.";
         cell.textLabel.numberOfLines =0;
         return cell;

@@ -37,4 +37,9 @@
 //图片张数
 @property (nonatomic,strong)UILabel *pictureNumLab;
 
+@property (nonatomic,weak)UIViewController *VC;
+
+@property (nonatomic,strong)NSMutableArray *dataArray;
+
+
 @end

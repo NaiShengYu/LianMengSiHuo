@@ -188,7 +188,6 @@
         
         UITapGestureRecognizer *tap1 =[[UITapGestureRecognizer alloc]init];
         [tap1 addTarget:self action:@selector(goInfo)];
-        [self.titleLab addGestureRecognizer:tap1];
         [self.imageV addGestureRecognizer:tap1];
     }
     

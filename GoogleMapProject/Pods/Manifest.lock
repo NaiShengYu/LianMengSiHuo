@@ -14,12 +14,14 @@ PODS:
   - AFNetworking/Serialization (3.0.4)
   - AFNetworking/UIKit (3.0.4):
     - AFNetworking/NSURLSession
+  - DACircularProgress (2.3.1)
   - GoogleMaps (2.5.0):
     - GoogleMaps/Maps (= 2.5.0)
   - GoogleMaps/Base (2.5.0)
   - GoogleMaps/Maps (2.5.0):
     - GoogleMaps/Base
   - Masonry (0.6.4)
+  - MBProgressHUD (0.9.2)
   - MMDrawerController (0.6.0):
     - MMDrawerController/Core (= 0.6.0)
     - MMDrawerController/MMDrawerBarButtonItem (= 0.6.0)
@@ -32,9 +34,13 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.6.0):
     - MMDrawerController/Core
-  - SDWebImage (4.2.3):
-    - SDWebImage/Core (= 4.2.3)
-  - SDWebImage/Core (4.2.3)
+  - MWPhotoBrowser (2.1.2):
+    - DACircularProgress (~> 2.3)
+    - MBProgressHUD (~> 0.9)
+    - "SDWebImage (!= 3.7.2, ~> 3.7)"
+  - SDWebImage (3.8.2):
+    - SDWebImage/Core (= 3.8.2)
+  - SDWebImage/Core (3.8.2)
   - SVProgressHUD (2.2.2)
   - TZImagePickerController (1.9.8)
 
@@ -43,29 +49,35 @@ DEPENDENCIES:
   - GoogleMaps
   - Masonry (~> 0.6.4)
   - MMDrawerController
-  - SDWebImage (~> 4.2.3)
+  - MWPhotoBrowser
   - SVProgressHUD
   - TZImagePickerController (~> 1.9.8)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
+    - DACircularProgress
     - GoogleMaps
     - Masonry
+    - MBProgressHUD
     - MMDrawerController
+    - MWPhotoBrowser
     - SDWebImage
     - SVProgressHUD
     - TZImagePickerController
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
+  DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   GoogleMaps: c087b8e5dfe87ca6ebf59adb9b4894a4146bec4f
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
-  SDWebImage: 791bb72962b3492327ddcac4b1880bd1b5458431
+  MWPhotoBrowser: 5836d7aa041dc05a13de380c246826578adc5ea5
+  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
   TZImagePickerController: 3b9413ae5d049b1fdc5b0c720ad283f35b679a50
 
-PODFILE CHECKSUM: 24bce7273ef944d1bc65a41ab3326165c71b5aeb
+PODFILE CHECKSUM: 69dfe73cfde2ed139c5e2ce9fedca4cbd3d719c1
 
 COCOAPODS: 1.5.2
