@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CommentModel.h"
 @interface CommentCell : UITableViewCell
 
 @property (nonatomic,strong)UILabel *timeLab;
@@ -20,5 +20,7 @@
 
 
 @property (nonatomic,strong)UILabel *speciesLab;
+
+@property (nonatomic,strong)CommentModel *model;
 
 @end

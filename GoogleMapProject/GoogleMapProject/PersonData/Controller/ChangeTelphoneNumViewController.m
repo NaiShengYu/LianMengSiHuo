@@ -15,6 +15,7 @@
 @property (nonatomic,strong)UITextField *phoneTF;
 @property (nonatomic,strong)UITextField *codeTF;
 @property (nonatomic,strong)NSTimer *timer;
+@property (nonatomic,copy)NSString *code;
 
 @end
 
@@ -29,8 +30,8 @@
     
 }
 - (void)viewDidDisappear:(BOOL)animated{
-    [_timer invalidate];
-    _timer =nil;
+    [super viewDidDisappear:animated];
+    [self startGetCode];
 }
 - (void)creatView{
     WS(blockSelf);
@@ -167,61 +168,80 @@
     
 }
 - (void)update{
-    [SVProgressHUD showSuccessWithStatus:@"手机号绑定成功"];
-    NSString *phone =@"";
-    @try {
-        phone=[self.phoneTF.text substringWithRange:NSMakeRange(3, 4)];
-        phone = [self.phoneTF.text stringByReplacingOccurrencesOfString:phone withString:@"****"];
-    } @catch (NSException *exception) {
-        
-    } @finally {
-        
+    
+    WS(blockSelf);
+    if (_phoneTF.text.length ==0 ||_phoneTF.text ==nil) {
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"请输入电话号码"];
+        return;
+    }
+    if (![[PubulicObj valiMobile:_phoneTF.text] isEqualToString:@"是"]) {
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"请正确手机号"];
+        return;
+    }
+    if (_codeTF.text.length ==0 ||_codeTF.text ==nil) {
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"请输入验证码"];
+        return;
+    }
+    if (![_codeTF.text isEqualToString:self.code]) {
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"验证码不正确"];
+        return;
     }
     
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSString *url = [NSString stringWithFormat:@"%@app_user.php",BaseURL];
+    DLog(@"url==%@",url);
+    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+    [param setObject:@"user_change_phone" forKey:@"app"];
+    [param setObject:[user objectForKey:USERID] forKey:@"userid"];
+    [param setObject:_phoneTF.text forKey:@"phone"];
     
-    if (self.changetelNumBlock) {
-        self.changetelNumBlock(phone);
-    }
-    [self.navigationController popViewControllerAnimated:YES];
-    
-    
+    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+        if ([responseObject[@"code"] integerValue] ==1) {
+            [user setObject:blockSelf.phoneTF.text forKey:PHONE];
+            [user synchronize];
+            [SVProgressHUD showSuccessWithStatus:@"修改手机号成功"];
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        }else{
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
+        }
+    } failure:^(NSError *error) {
+        
+    } isShowHUD:YES];
     
 }
 #pragma  mark --获取验证码
 - (void)getCode{
     WS(blockSelf);
-    
-    [SVProgressHUD setMinimumDismissTimeInterval:1];
     if (_phoneTF.text.length ==0 ||_phoneTF.text ==nil) {
-        [SVProgressHUD showErrorWithStatus:@"请输入手机号码!"];
-        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"请输入手机号码!"];
+            [SVProgressHUD showErrorWithStatus:@"请输入电话号码"];
         return;
     }
-    if (![[PubulicObj valiMobile:_phoneTF.text] isEqualToString:@"是"]) {
-        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"请填写正确手机号!"];
-        return;
+        if (![[PubulicObj valiMobile:_phoneTF.text] isEqualToString:@"是"]) {
+            [SVProgressHUD showErrorWithStatus:@"请正确手机号"];
+            return;
     }
-    [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"验证码已发送至手机!"];
-    
-    
-    
-    
     _timerBut.enabled =NO;
     _timer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(changeTime) userInfo:nil repeats:YES];
     [_timer fire];
     
-    //    NSString *urlstr =[NSString stringWithFormat:@"%@jx_user.php?app=user_code&phone=%@",BaseURL,_numbelTF.text];
-    //    DLog(@"urlstr=%@",urlstr);
-    //    [AFNetRequest HttpGetCallBack:urlstr Parameters:nil success:^(id responseObject) {
-    //        DLog(@"responseObject==%@",responseObject);
-    //        if ([responseObject[@"code"] integerValue] ==1) {
-    //            NSDictionary *dic =responseObject[@"data"];
-    //            blockSelf.code =dic[@"code"];
-    //        }
-    //
-    //    } failure:^(NSError *error) {
-    //
-    //    } isShowHUD:YES];
+    NSString *url = [NSString stringWithFormat:@"%@app_user.php",BaseURL];
+    DLog(@"url==%@",url);
+    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+        [param setObject:@"sms_code" forKey:@"app"];
+        [param setObject:_phoneTF.text forKey:@"phone"];
+  
+    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+        if ([responseObject[@"code"] integerValue] ==1) {
+            self.code = [NSString stringWithFormat:@"%@",responseObject[@"data"]];
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"发送成功"];
+        }else{
+            [blockSelf startGetCode];
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [blockSelf startGetCode];
+    } isShowHUD:YES];
     
     
 }
@@ -237,15 +257,18 @@
         [_timerBut setTitle:[NSString stringWithFormat:@"%@s",str] forState:UIControlStateNormal];
         _timerBut.backgroundColor =[UIColor groupTableViewBackgroundColor];
     }else{
-        [_timer invalidate];
-        _timer =nil;
-        time =60;
-        [_timerBut setTitle:@"获取验证码" forState:UIControlStateNormal];
-        _timerBut.enabled =YES;
-        _timerBut.backgroundColor =[UIColor whiteColor];
+        [self startGetCode];
         
     }
-    
+}
+//可以重新获取验证码
+- (void)startGetCode{
+    [_timer invalidate];
+    _timer =nil;
+    time =60;
+    [_timerBut setTitle:@"获取验证码" forState:UIControlStateNormal];
+    _timerBut.enabled =YES;
+    _timerBut.backgroundColor =[UIColor whiteColor];
     
 }
 

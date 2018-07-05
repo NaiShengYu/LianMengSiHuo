@@ -31,7 +31,7 @@
     self.title =@"修改性别";
     self.view.backgroundColor =[UIColor whiteColor];
     [self ziDingYiDaoHangLan];
-    self.dataArray =[[NSMutableArray alloc]initWithObjects:@"男",@"女", nil];
+    self.dataArray =[[NSMutableArray alloc]initWithObjects:@"无",@"男",@"女", nil];
     
     [self.view addSubview:self.myTable];
     
@@ -63,8 +63,41 @@
         self.changeSexBlock(self.sex);
     }
     [self.navigationController popViewControllerAnimated:YES];
+//    NSString *sexNum = @"0";
+//    if ([self.sex isEqualToString:@"无"]) {
+//        sexNum = @"0";
+//    }
+//    if ([self.sex isEqualToString:@"男"]) {
+//        sexNum = @"1";
+//    }
+//    if ([self.sex isEqualToString:@"女"]) {
+//        sexNum = @"2";
+//    }
     
     
+//    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+//    NSString *url = [NSString stringWithFormat:@"%@app_user.php",BaseURL];
+//    DLog(@"url==%@",url);
+//    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+//    [param setObject:@"user_change_nickname" forKey:@"app"];
+//    [param setObject:[user objectForKey:USERID] forKey:@"userid"];
+//    [param setObject:sexNum forKey:@"nickname"];
+//
+//    WS(blockSelf);
+//    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+//        if ([responseObject[@"code"] integerValue] ==1) {
+//            [user setObject:sexNum forKey:NICKNAME];
+//            [user synchronize];
+//            [SVProgressHUD showSuccessWithStatus:@"修改昵称成功"];
+//            [self.navigationController popViewControllerAnimated:YES];
+//        }else{
+//            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
+//        }
+//    } failure:^(NSError *error) {
+//
+//    } isShowHUD:YES];
+//
+//
     
     
 }

@@ -9,7 +9,6 @@
 #import "FilterView.h"
 #import "FilterHeader.h"
 #import "FilterHeaderModel.h"
-#import "FilterItem.h"
 #import "FilterCell.h"
 #import "FiterOtherCell.h"
 
@@ -138,7 +137,11 @@
         for (FilterItem *item1  in model.itemsArray) {
             item1.isSelect =NO;
         }
+        
         item.isSelect =YES;
+        if (self.selectChangeBLock) {
+            self.selectChangeBLock(item);
+        }
         [tableView reloadData];
     };
     return cell;

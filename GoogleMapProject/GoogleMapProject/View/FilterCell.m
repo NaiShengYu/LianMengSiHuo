@@ -50,9 +50,7 @@
     if (self.changeItemSelect) {
         self.changeItemSelect(YES);
     }
-    
-    
-    
+  
 }
 
 @end

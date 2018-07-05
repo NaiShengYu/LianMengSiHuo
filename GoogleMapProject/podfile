@@ -6,4 +6,5 @@ pod 'SVProgressHUD'
 pod 'MMDrawerController'
 pod 'TZImagePickerController', '~> 1.9.8'
 pod "MWPhotoBrowser"
+pod 'MJRefresh'
 end

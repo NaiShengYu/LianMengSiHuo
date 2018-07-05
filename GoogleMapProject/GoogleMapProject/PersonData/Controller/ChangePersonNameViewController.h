@@ -12,5 +12,4 @@
 
 @property (nonatomic,copy)NSString *nickName;
 
-@property (nonatomic,copy)void (^changeSuccussBlock)(NSString *name);
 @end

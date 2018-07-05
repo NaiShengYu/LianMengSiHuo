@@ -79,7 +79,7 @@
     _PasswordTF =[UITextField new];
     [backV1 addSubview:_PasswordTF];
     [_PasswordTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset =10;
+        make.left.equalTo(lineV1).offset =10;
         make.right.offset =-10;
         make.height.offset =40;
         make.centerY.equalTo(phoneLab.mas_centerY).offset =0;
@@ -150,11 +150,54 @@
     updataBut.backgroundColor =zhuse;
     [updataBut setTitle:@"提交" forState:UIControlStateNormal];
     updataBut.layer.cornerRadius =5;
+    [updataBut addTarget:self action:@selector(upData) forControlEvents:UIControlEventTouchUpInside];
     updataBut.layer.masksToBounds =YES;
 
 //
     
 }
+- (void)upData{
+    
+    WS(blockSelf);
+    if (_PasswordTF.text.length ==0 ||_PasswordTF.text ==nil) {
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"请输入新密码"];
+        return;
+    }
+   
+    if (![_PasswordTF.text isEqualToString:_secondPasswordTF.text]) {
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"两次密码不一致"];
+        return;
+    }
+    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSString *url = [NSString stringWithFormat:@"%@app_user.php",BaseURL];
+    DLog(@"url==%@",url);
+    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+    [param setObject:@"user_forget_pwd" forKey:@"app"];
+    [param setObject:[user objectForKey:USERID] forKey:@"userid"];
+    [param setObject:_PasswordTF forKey:@"phone"];
+    [param setObject:_secondPasswordTF forKey:@"new_pwd"];
+
+    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+        if ([responseObject[@"code"] integerValue] ==1) {
+        
+            [SVProgressHUD showSuccessWithStatus:@"修改密码成功"];
+            [blockSelf.navigationController popToRootViewControllerAnimated:YES];
+            
+        }else{
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
+        }
+    } failure:^(NSError *error) {
+        
+    } isShowHUD:YES];
+    
+    
+    
+    
+    
+    
+}
+
 
 #pragma mark --自定义导航栏
 - (void)ziDingYiDaoHangLan{

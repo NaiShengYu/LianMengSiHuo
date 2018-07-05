@@ -9,6 +9,7 @@
 #import "ChangePasswordViewController.h"
 
 @interface ChangePasswordViewController ()
+@property (nonatomic,strong)UITextField *oldPasswordTF;
 @property (nonatomic,strong)UITextField *PasswordTF;
 @property (nonatomic,strong)UITextField *secondPasswordTF;
 
@@ -66,10 +67,10 @@
     lineV0.backgroundColor =[UIColor groupTableViewBackgroundColor];
     
     
-    _PasswordTF =[UITextField new];
-    [backV0 addSubview:_PasswordTF];
-    [_PasswordTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset =10;
+    _oldPasswordTF =[UITextField new];
+    [backV0 addSubview:_oldPasswordTF];
+    [_oldPasswordTF mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(lineV0).offset =10;
         make.right.offset =-10;
         make.height.offset =40;
         make.centerY.equalTo(ordCode.mas_centerY).offset =0;
@@ -109,7 +110,7 @@
     _PasswordTF =[UITextField new];
     [backV1 addSubview:_PasswordTF];
     [_PasswordTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset =10;
+        make.left.equalTo(lineV1).offset =10;
         make.right.offset =-10;
         make.height.offset =40;
         make.centerY.equalTo(phoneLab.mas_centerY).offset =0;
@@ -189,7 +190,50 @@
 }
 
 - (void)update{
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    if (_oldPasswordTF.text.length==0 ||_oldPasswordTF.text ==nil) {
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"请输入旧密码"];
+        return;
+    }
+    if (_PasswordTF.text.length==0 ||_PasswordTF.text ==nil) {
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"请输入新密码"];
+        return;
+    }
+    if (![_secondPasswordTF.text isEqualToString:_PasswordTF.text]) {
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"两次密码不一致"];
+        return;
+    }
+    if (![_oldPasswordTF.text isEqualToString:_PasswordTF.text]) {
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"请更换新的密码"];
+        return;
+    }
+    
+    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSString *url = [NSString stringWithFormat:@"%@app_user.php",BaseURL];
+    DLog(@"url==%@",url);
+    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+    [param setObject:@"user_change_pwd" forKey:@"app"];
+    [param setObject:[user objectForKey:USERID] forKey:@"userid"];
+    [param setObject:_oldPasswordTF.text forKey:@"old_pwd"];
+    [param setObject:_PasswordTF.text forKey:@"new_pwd"];
+
+    WS(blockSelf);
+    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+        if ([responseObject[@"code"] integerValue] ==1) {
+            [SVProgressHUD showSuccessWithStatus:@"修改密码成功"];
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        }else{
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
+        }
+    } failure:^(NSError *error) {
+        
+    } isShowHUD:YES];
+    
+    
+    
+    
 }
 
 #pragma mark --自定义导航栏

@@ -7,10 +7,10 @@
 //
 
 #import "RegistViewController.h"
-
+#import "RegistSecondViewController.h"
 @interface RegistViewController ()
 {
-    NSInteger time;
+   
 }
 @property (nonatomic,strong)UIButton *timerBut;
 @property (nonatomic,strong)UITextField *phoneTF;
@@ -26,13 +26,18 @@
 @property (nonatomic,strong)UIButton *mailBut;
 @property (nonatomic,strong)UIButton *lastBut;
 
+@property (nonatomic,assign) NSInteger time;
+
+@property (nonatomic,copy) NSString *code;
+
 @end
 
 @implementation RegistViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    time =60;
+    _time =60;
+    _code = @"";
     self.title =@"忘记密码";
     [self ziDingYiDaoHangLan];
     [self functionBar];
@@ -81,7 +86,7 @@
     
     [_timer invalidate];
     _timer =nil;
-    time =60;
+    _time =60;
     
     if (but ==_telBut) {
         _phoneLab.text =@"手机号";
@@ -257,66 +262,111 @@
     
 }
 - (void)update{
+    WS(blockSelf)
+    if (_phoneTF.text.length ==0 ||_phoneTF.text ==nil) {
+        if ([_phoneLab.text  isEqual: @"手机号"]) {
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"请输入电话号码"];
+        }else{
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"请输入邮箱!"];
+        }
+        return;
+    }
+    if ([_phoneLab.text  isEqual: @"手机号"]) {
+        if (![[PubulicObj valiMobile:_phoneTF.text] isEqualToString:@"是"]) {
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"请填写正确手机号！"];
+            return;
+        }
+    }
+    if (![self.code isEqualToString:_codeTF.text]) {
+         [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"验证码不正确"];
+    }
     
-//    [self.navigationController pushViewController:[FogotSecondViewController new] animated:YES];
+    RegistSecondViewController *secondVC =[[RegistSecondViewController alloc]init];
+    secondVC.phone = _phoneTF.text;
+    if ([_phoneLab.text  isEqual: @"手机号"]) {
+        secondVC.type =1;
+    }else{
+        secondVC.type =2;
+    }
+    
+    [self.navigationController pushViewController:secondVC animated:YES];
+   
     
 }
 #pragma  mark --获取验证码
 - (void)getCode{
     WS(blockSelf);
-    [SVProgressHUD setMinimumDismissTimeInterval:1];
     if (_phoneTF.text.length ==0 ||_phoneTF.text ==nil) {
-        [SVProgressHUD showErrorWithStatus:@"请输入电话号码"];
+        if ([_phoneLab.text  isEqual: @"手机号"]) {
+            [SVProgressHUD showErrorWithStatus:@"请输入电话号码"];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"请输入邮箱"];
+        }
         return;
     }
+    if ([_phoneLab.text  isEqual: @"手机号"]) {
     if (![[PubulicObj valiMobile:_phoneTF.text] isEqualToString:@"是"]) {
         [SVProgressHUD showErrorWithStatus:@"请正确手机号"];
         return;
+        }
     }
-    
     _timerBut.enabled =NO;
     _timer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(changeTime) userInfo:nil repeats:YES];
     [_timer fire];
     
-    //    NSString *urlstr =[NSString stringWithFormat:@"%@jx_user.php?app=user_code&phone=%@",BaseURL,_numbelTF.text];
-    //    DLog(@"urlstr=%@",urlstr);
-    //    [AFNetRequest HttpGetCallBack:urlstr Parameters:nil success:^(id responseObject) {
-    //        DLog(@"responseObject==%@",responseObject);
-    //        if ([responseObject[@"code"] integerValue] ==1) {
-    //            NSDictionary *dic =responseObject[@"data"];
-    //            blockSelf.code =dic[@"code"];
-    //        }
-    //
-    //    } failure:^(NSError *error) {
-    //
-    //    } isShowHUD:YES];
+    NSString *url = [NSString stringWithFormat:@"%@app_user.php",BaseURL];
+    DLog(@"url==%@",url);
+    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+    if ([_phoneLab.text  isEqual: @"手机号"]) {
+        [param setObject:@"sms_code" forKey:@"app"];
+        [param setObject:_phoneTF.text forKey:@"phone"];
+    }else{
+        [param setObject:@"email_code" forKey:@"app"];
+        [param setObject:_phoneTF.text forKey:@"email"];
+    }
+    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+        if ([responseObject[@"code"] integerValue] ==1) {
+            self.code = [NSString stringWithFormat:@"%@",responseObject[@"data"]];
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"验证码已发送"];
+        }else{
+            [blockSelf startGetCode];
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [blockSelf startGetCode];
+    } isShowHUD:YES];
     
     
 }
 - (void)changeTime{
-    if (time >0) {
-        time -=1;
+    if (_time >0) {
+        _time -=1;
         NSString *str;
-        if (time >9) {
-            str = [NSString stringWithFormat:@"%ld",(long)time];
+        if (_time >9) {
+            str = [NSString stringWithFormat:@"%ld",(long)_time];
         }else{
-            str = [NSString stringWithFormat:@"0%ld",(long)time];
+            str = [NSString stringWithFormat:@"0%ld",(long)_time];
         }
         [_timerBut setTitle:[NSString stringWithFormat:@"%@s",str] forState:UIControlStateNormal];
         _timerBut.backgroundColor =[UIColor groupTableViewBackgroundColor];
     }else{
-        [_timer invalidate];
-        _timer =nil;
-        time =60;
-        [_timerBut setTitle:@"获取验证码" forState:UIControlStateNormal];
-        _timerBut.enabled =YES;
-        _timerBut.backgroundColor =[UIColor whiteColor];
+        [self startGetCode];
         
     }
     
     
 }
 
+- (void)startGetCode{
+    
+    [_timer invalidate];
+    _timer =nil;
+    _time =60;
+    [_timerBut setTitle:@"获取验证码" forState:UIControlStateNormal];
+    _timerBut.enabled =YES;
+    _timerBut.backgroundColor =[UIColor whiteColor];
+
+}
 
 
 #pragma mark --自定义导航栏

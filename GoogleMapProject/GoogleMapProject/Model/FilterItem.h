@@ -13,4 +13,7 @@
 @property (nonatomic,assign)BOOL isSelect;
 
 @property (nonatomic,copy)NSString *title;
+
+@property (nonatomic,copy)NSString *type;
+
 @end

@@ -49,15 +49,15 @@
     [SVProgressHUD setMinimumSize:CGSizeMake(260, 44)];
     [SVProgressHUD setCornerRadius:5];
     [SVProgressHUD setDefaultMaskType:(SVProgressHUDMaskTypeClear)];
-    
+    [SVProgressHUD setMaximumDismissTimeInterval:2];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(HUDDismiss) name:SVProgressHUDDidReceiveTouchEventNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardDidShow) name:UIKeyboardDidShowNotification object:nil];
     
 //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyBoardHiden) name:UIKeyboardDidHideNotification object:nil];
     
-    [self performSelector:@selector(showUpdata) withObject:nil afterDelay:4];
-    
+    [self showUpdata];
     return YES;
 }
 
@@ -73,9 +73,33 @@
 
 - (void)showUpdata{
     
-    CustormAlertView *alert =[[CustormAlertView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    [_window addSubview:alert];
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSString *url = [NSString stringWithFormat:@"%@app_user.php",BaseURL];
+    DLog(@"url==%@",url);
+    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+    [param setObject:@"get_app_version" forKey:@"app"];
+    [param setObject:@"1" forKey:@"os"];
     
+    WS(blockSelf);
+    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+        if ([responseObject[@"code"] integerValue] ==1) {
+            NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+          NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+            NSDictionary *dic =responseObject[@"data"][0];
+            if (![app_Version isEqualToString:dic[@"versionCode"]]) {
+                
+                CustormAlertView *alert =[[CustormAlertView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+                alert.versionLab.text =dic[@"versionCode"];
+                NSString *str = dic[@"content"];
+                str =[str stringByReplacingOccurrencesOfString:instailString withString:@"\r"];
+                alert.textV.text = str;
+                [blockSelf.window addSubview:alert];
+            }
+        }else{
+        }
+    } failure:^(NSError *error) {
+        
+    } isShowHUD:NO];
 }
 - (void)HUDDismiss{
     

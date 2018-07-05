@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FilterItem.h"
+
 @interface FilterView : UIView
 
 @property (nonatomic,strong)NSMutableArray *dataArray;
+
+@property (nonatomic,copy)void (^selectChangeBLock)(FilterItem *selectItem);
 
 @end

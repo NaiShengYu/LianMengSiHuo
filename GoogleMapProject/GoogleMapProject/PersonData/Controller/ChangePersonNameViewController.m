@@ -92,15 +92,35 @@
     
 }
 - (void)update{
-    [SVProgressHUD showSuccessWithStatus:@"修改昵称成功"];
-    
-    if (self.changeSuccussBlock) {
-        self.changeSuccussBlock(self.phoneTF.text);
+    if (_phoneTF.text.length==0 ||_phoneTF.text ==nil) {
+        return;
     }
-    [self.navigationController popViewControllerAnimated:YES];
+    if ([_phoneTF.text isEqualToString:self.nickName]) {
+        return;
+    }
     
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSString *url = [NSString stringWithFormat:@"%@app_user.php",BaseURL];
+    DLog(@"url==%@",url);
+    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+    [param setObject:@"user_change_nickname" forKey:@"app"];
+    [param setObject:[user objectForKey:USERID] forKey:@"userid"];
+    [param setObject:_phoneTF.text forKey:@"nickname"];
     
-    
+    WS(blockSelf);
+    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+        if ([responseObject[@"code"] integerValue] ==1) {
+            [user setObject:blockSelf.phoneTF.text forKey:NICKNAME];
+            [user synchronize];
+            [SVProgressHUD showSuccessWithStatus:@"修改昵称成功"];
+            [self.navigationController popViewControllerAnimated:YES];
+
+        }else{
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
+        }
+    } failure:^(NSError *error) {
+        
+    } isShowHUD:YES];
     
 }
 
