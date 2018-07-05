@@ -25,9 +25,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor whiteColor];
-    
     NSUserDefaults *user =[NSUserDefaults standardUserDefaults];
     NSString *state =[user objectForKey:@"qiDongState"];
+    
+    //判断已经登陆了
+    if ([user objectForKey:USERID]) {
+        [CustomAccount sharedCustomAccount].loginType =1;
+    }
+    
     if ([state integerValue] ==1) {
         [self click];
     }else{

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CollectionShopModel.h"
 
 @interface CollectionShopEditCell : UITableViewCell
 
@@ -22,5 +23,7 @@
 @property (nonatomic,strong)UILabel *speciesLab;
 
 @property (nonatomic,strong)UILabel *juliLab;
+
+@property (nonatomic,strong)CollectionShopModel *collecitonModel;
 
 @end

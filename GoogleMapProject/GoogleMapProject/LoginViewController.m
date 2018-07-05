@@ -328,9 +328,50 @@
 - (void)login{
 //    UIWindow *window =[[UIApplication sharedApplication].delegate window];
 //    window.rootViewController =[[HomePageViewController alloc]init];
-//    
-    [CustomAccount sharedCustomAccount].loginType =1;
-    [self.navigationController popViewControllerAnimated:YES];
+//
+    
+    if (_nameTF.text.length ==0 ||_nameTF.text ==nil) {
+        [SVProgressHUD showErrorWithStatus:@"请输入用户名"];
+        return;
+    }
+    
+    if (_passTF.text.length ==0 ||_passTF.text ==nil) {
+        [SVProgressHUD showErrorWithStatus:@"请输入密码"];
+        return;
+    }
+    NSString *url = [NSString stringWithFormat:@"%@app_user.php",BaseURL];
+    DLog(@"url==%@",url);
+    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+    [param setObject:@"login" forKey:@"app"];
+    [param setObject:_nameTF.text forKey:@"username"];
+    [param setObject:_passTF.text forKey:@"password"];
+
+    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+        if ([responseObject[@"code"] integerValue] ==1) {
+            NSDictionary *dic = responseObject[@"data"][0];
+            NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+            [user setObject:dic[@"userid"] forKey:USERID];
+            [user setObject:dic[@"username"] forKey:USERNAME];
+            [user setObject:dic[@"nickname"] forKey:NICKNAME];
+            [user setObject:dic[@"user_state"] forKey:USERSTATE];
+            [user setObject:dic[@"headpic"] forKey:USERHEADPIC];
+            [user setObject:dic[@"phone"] forKey:PHONE];
+            [user setObject:dic[@"sex"] forKey:SEX];
+            [user setObject:dic[@"email"] forKey:EMAIL];
+            [user synchronize];
+            [CustomAccount sharedCustomAccount].loginType =1;
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        }else{
+            
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
+        }
+        
+        
+    } failure:^(NSError *error) {
+        
+    } isShowHUD:YES];
+    
 }
 
 #pragma mark --进入忘记密码界面

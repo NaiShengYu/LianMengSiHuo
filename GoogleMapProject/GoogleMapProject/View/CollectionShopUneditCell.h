@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CollectionShopModel.h"
 @interface CollectionShopUneditCell : UITableViewCell
 
 
@@ -23,5 +23,7 @@
 
 @property (nonatomic,strong)UILabel *numLab;
 @property (nonatomic,strong)UIImageView *imgV;
+
+@property (nonatomic,strong)CollectionShopModel *collecitonModel;
 
 @end

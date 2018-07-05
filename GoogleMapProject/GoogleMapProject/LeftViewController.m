@@ -58,8 +58,6 @@
     self.navigationController.navigationBar.hidden =YES;
 //    self.automaticallyAdjustsScrollViewInsets = NO;
     self.myTable.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    UIWindow *window = [[UIApplication sharedApplication].delegate window];
-    window.backgroundColor =zhuse;
 
 }
 - (void)viewWillDisappear:(BOOL)animated{
@@ -86,12 +84,13 @@
     [header.imgBut addTarget:self action:@selector(changeUserData) forControlEvents:UIControlEventTouchUpInside];
     
     if ([CustomAccount sharedCustomAccount].loginType ==1) {
-        [header.titleBut setTitle:@"大佬" forState:UIControlStateNormal];
-        header.headerImgV.image =[UIImage imageNamed:@"timg-2"];
-
+        NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+        [header.headerImgV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",allImageURL,[user objectForKey:USERHEADPIC]]] placeholderImage:[UIImage imageNamed:@"个人中心_07"]];
+        [header.titleBut setTitle:[user objectForKey:USERNAME] forState:UIControlStateNormal];
+        
     }else{
-        header.headerImgV.image =[UIImage imageNamed:@"个人中心_07"];
         [header.titleBut setTitle:@"未登录" forState:UIControlStateNormal];
+        header.headerImgV.image =[UIImage imageNamed:@"个人中心_07"];
     }
     
     return header;

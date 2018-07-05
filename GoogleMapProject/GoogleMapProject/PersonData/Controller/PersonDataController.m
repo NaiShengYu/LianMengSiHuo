@@ -18,9 +18,12 @@
 @interface PersonDataController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic,strong)NSMutableArray *titlesArray;
 @property (nonatomic,copy)NSString *name;
+@property (nonatomic,copy)NSString *nickName;
 @property (nonatomic,copy)NSString *sex;
 @property (nonatomic,copy)NSString *telNum;
 @property (nonatomic,strong)UIImage *headerImg;
+@property (nonatomic,copy)NSString *imgURL;
+@property (nonatomic,copy)NSString *email;
 
 @end
 
@@ -29,10 +32,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor lightGrayColor];
-    self.name =@"俞乃胜";
-    self.sex =@"男";
-    self.telNum = @"";
-    _titlesArray =[[NSMutableArray alloc]initWithObjects:@[@"1",@"昵称",@"性别"],@[@"手机号",@"密码"] ,nil];
+  
+    _titlesArray =[[NSMutableArray alloc]initWithObjects:@[@"1",@"昵称",@"性别"],@[@"手机号",@"邮箱",@"密码"] ,nil];
     self.title =@"个人信息";
     self.view.backgroundColor =[UIColor whiteColor];
     [self ziDingYiDaoHangLan];
@@ -50,7 +51,17 @@
     [self.view addSubview:bottomeBut];
     
 }
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    self.name =[user objectForKey:USERNAME];
+    self.nickName =[user objectForKey:NICKNAME];
+    self.sex =[user objectForKey:SEX];
+    self.telNum = [user objectForKey:PHONE];
+    self.imgURL = [user objectForKey:USERHEADPIC];
+    self.email = [user objectForKey:EMAIL];
+    [self.tableView reloadData];
+}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -69,25 +80,55 @@
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 0.1;
+    if (section==0) {
+        return 60;
+    }
+    return 0;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 10;
     
 }
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    
-    return nil;
-}
+
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     return nil;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (section ==0) {
+        UITableViewHeaderFooterView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"header"];
+        if (!header) {
+            header = [[UITableViewHeaderFooterView alloc]initWithReuseIdentifier:@"header"];
+            UILabel *titleLab =[[UILabel alloc]initWithFrame:CGRectMake(10, 0, 70, 60)];
+            titleLab.font =FontSize(18);
+            titleLab.text = @"用户名";
+            [header.contentView addSubview:titleLab];
+            UILabel *nameLab =[[UILabel alloc]initWithFrame:CGRectMake(90, 00, 70, 60)];
+            nameLab.textColor =[UIColor grayColor];
+            nameLab.tag = 890;
+            [header.contentView addSubview:nameLab];
+        }
+        UILabel *lab = [header.contentView viewWithTag:890];
+        lab.text = self.name;
+        
+        return header;
+    }
+    
+    
+    
+    return nil;
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.section ==0 &&indexPath.row ==0) {
         PersonImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PersonImageCell" forIndexPath:indexPath];
-
+        if (self.headerImg ==nil) {
+            [cell.imageV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",allImageURL,self.imgURL]] placeholderImage:[UIImage imageNamed:@"个人中心_07"]];
+        }else{
+            cell.imageV.image = self.headerImg;
+        }
         return cell;
 
         
@@ -98,7 +139,7 @@
         
         if (indexPath.section ==0 ) {
             if (indexPath.row ==1) {
-                cell.nameLab.text =self.name;
+                cell.nameLab.text =self.nickName;
             }
             if (indexPath.row ==2) {
                 cell.otherLab.text =self.sex;
@@ -107,15 +148,22 @@
         
         if (indexPath.section ==1 ) {
             if (indexPath.row ==0) {
+                if (self.telNum.length >8) {
+                    NSString * phone=[self.telNum substringWithRange:NSMakeRange(3, 4)];
+                    phone = [self.telNum stringByReplacingOccurrencesOfString:phone withString:@"****"];
+                }
                 cell.otherLab.text =self.telNum;
             }
             if (indexPath.row ==1) {
+                cell.otherLab.text =self.email;
+            }
+            if (indexPath.row ==2) {
 //                cell.otherLab.text =self.sex;
             }
         }
         
         
-        if (indexPath.row ==1) {
+        if ((indexPath.section ==1 && indexPath.row==2) || (indexPath.section ==0 && indexPath.row==1)) {
             cell.otherLab.textColor =HEXCOLOR(0x4cabfc);
         }else{
             cell.otherLab.textColor =[UIColor grayColor];
@@ -181,12 +229,14 @@
             numVC.changetelNumBlock = ^(NSString *telNum) {
                 self.telNum = telNum;
                 [tableView reloadData];
-
             };
             [self.navigationController pushViewController:numVC animated:YES];
             
         }
         if (indexPath.row ==1) {
+            
+        }
+        if (indexPath.row ==2) {
             [self.navigationController pushViewController:[ChangePasswordViewController new] animated:YES];
         }
     }
@@ -290,6 +340,17 @@
 #pragma mark --退出账号
 - (void)loginOut{
     DLog(@"%f",TabbarHeight);
+    NSUserDefaults *user =[NSUserDefaults standardUserDefaults];
+    [user removeObjectForKey:USERID];
+    [user removeObjectForKey:USERNAME];
+    [user removeObjectForKey:NICKNAME];
+    [user removeObjectForKey:USERSTATE];
+    [user removeObjectForKey:USERHEADPIC];
+    [user removeObjectForKey:PHONE];
+    [user removeObjectForKey:SEX];
+    [user synchronize];
+    [CustomAccount sharedCustomAccount].loginType =0;
+    
 }
 
 @end

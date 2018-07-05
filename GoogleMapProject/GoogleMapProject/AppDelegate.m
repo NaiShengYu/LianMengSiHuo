@@ -49,7 +49,8 @@
     [SVProgressHUD setMinimumSize:CGSizeMake(260, 44)];
     [SVProgressHUD setCornerRadius:5];
     [SVProgressHUD setDefaultMaskType:(SVProgressHUDMaskTypeClear)];
-    
+    [SVProgressHUD setMaximumDismissTimeInterval:2];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(HUDDismiss) name:SVProgressHUDDidReceiveTouchEventNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardDidShow) name:UIKeyboardDidShowNotification object:nil];

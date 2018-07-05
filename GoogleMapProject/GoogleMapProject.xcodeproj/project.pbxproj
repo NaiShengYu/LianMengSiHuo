@@ -46,6 +46,8 @@
 		C938504820EC9F85007AF5A7 /* YFScaleScrollViewView.m in Sources */ = {isa = PBXBuildFile; fileRef = C938504620EC9F85007AF5A7 /* YFScaleScrollViewView.m */; };
 		C938504B20ECAD10007AF5A7 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C938504A20ECAD10007AF5A7 /* TestViewController.m */; };
 		C938504E20ECB44A007AF5A7 /* CustomBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = C938504D20ECB44A007AF5A7 /* CustomBrowser.m */; };
+		C938505120EDA741007AF5A7 /* AFNetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C938505020EDA741007AF5A7 /* AFNetRequest.m */; };
+		C938505420EDE24C007AF5A7 /* CollectionShopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C938505320EDE24B007AF5A7 /* CollectionShopModel.m */; };
 		C97712E120DB4F2D007AE5F0 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712E020DB4F2D007AE5F0 /* CommentViewController.m */; };
 		C97712E720DB5046007AE5F0 /* BindingPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712E620DB5046007AE5F0 /* BindingPhoneViewController.m */; };
 		C97712EA20DB5062007AE5F0 /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712E920DB5062007AE5F0 /* AboutUsViewController.m */; };
@@ -166,6 +168,10 @@
 		C938504A20ECAD10007AF5A7 /* TestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		C938504C20ECB44A007AF5A7 /* CustomBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomBrowser.h; sourceTree = "<group>"; };
 		C938504D20ECB44A007AF5A7 /* CustomBrowser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomBrowser.m; sourceTree = "<group>"; };
+		C938504F20EDA741007AF5A7 /* AFNetRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetRequest.h; sourceTree = "<group>"; };
+		C938505020EDA741007AF5A7 /* AFNetRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetRequest.m; sourceTree = "<group>"; };
+		C938505220EDE24B007AF5A7 /* CollectionShopModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionShopModel.h; sourceTree = "<group>"; };
+		C938505320EDE24B007AF5A7 /* CollectionShopModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionShopModel.m; sourceTree = "<group>"; };
 		C97712DF20DB4F2D007AE5F0 /* CommentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
 		C97712E020DB4F2D007AE5F0 /* CommentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
 		C97712E520DB5046007AE5F0 /* BindingPhoneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BindingPhoneViewController.h; sourceTree = "<group>"; };
@@ -428,6 +434,8 @@
 		C938504220EC9F61007AF5A7 /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				C938504F20EDA741007AF5A7 /* AFNetRequest.h */,
+				C938505020EDA741007AF5A7 /* AFNetRequest.m */,
 				C938504520EC9F85007AF5A7 /* YFScaleScrollViewView.h */,
 				C938504620EC9F85007AF5A7 /* YFScaleScrollViewView.m */,
 				C938504420EC9F85007AF5A7 /* YFScrollView.h */,
@@ -480,6 +488,8 @@
 				C977131520E1EECC007AE5F0 /* FilterHeaderModel.m */,
 				C977131720E1EF42007AE5F0 /* FilterItem.h */,
 				C977131820E1EF42007AE5F0 /* FilterItem.m */,
+				C938505220EDE24B007AF5A7 /* CollectionShopModel.h */,
+				C938505320EDE24B007AF5A7 /* CollectionShopModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -587,6 +597,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-GoogleMapProject/Pods-GoogleMapProject-resources.sh",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/MWPhotoBrowser/MWPhotoBrowser.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_ROOT}/TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle",
@@ -594,6 +605,7 @@
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MWPhotoBrowser.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TZImagePickerController.bundle",
@@ -647,6 +659,7 @@
 				C977134920E33BCB007AE5F0 /* ShopCommentSectionThreeCell.m in Sources */,
 				267BBF8120DBFC9E0005AE5A /* CommentCell.m in Sources */,
 				C977134620E3392F007AE5F0 /* ShopCommentSectionOneCell.m in Sources */,
+				C938505420EDE24C007AF5A7 /* CollectionShopModel.m in Sources */,
 				C977133D20E32326007AE5F0 /* ShopCommentNavBar.m in Sources */,
 				267BBF4320D913760005AE5A /* LoginViewController.m in Sources */,
 				267BBF4920D92B450005AE5A /* FogotViewController.m in Sources */,
@@ -664,6 +677,7 @@
 				267BBF6620DAA1D30005AE5A /* HomePageSectionOneheader.m in Sources */,
 				C977138220E475ED007AE5F0 /* FirstViewController.m in Sources */,
 				C977131220E1DFD9007AE5F0 /* FilterHeader.m in Sources */,
+				C938505120EDA741007AF5A7 /* AFNetRequest.m in Sources */,
 				267BBF4620D92B330005AE5A /* RegistViewController.m in Sources */,
 				C977137F20E37913007AE5F0 /* FiterOtherCell.m in Sources */,
 				265F8D1A20EBC8BA00620F3E /* SearchKeyNavVar.m in Sources */,
