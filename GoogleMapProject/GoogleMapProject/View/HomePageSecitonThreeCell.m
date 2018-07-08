@@ -36,4 +36,16 @@
     }
     return self;
 }
+
+- (void)setModel:(HomePageSectionTowModel *)model{
+    
+    _model =model;
+    [_headerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",allImageURL,model.img]]];
+
+    _titleLab.text =[NSString stringWithFormat:@"%@\n%@",model.name,model.name_e];
+
+    
+    
+    
+}
 @end

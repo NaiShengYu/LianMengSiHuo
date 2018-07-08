@@ -28,12 +28,25 @@
         [self.contentView addSubview:_titleLab];
         [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.offset =10;
-            make.right.offset =-10;
+            make.right.offset =-100;
             make.top.equalTo(blockSelf.headerImage.mas_bottom).offset=8;
         }];
         _titleLab.text =@"cafe tour 百年老店";
         _titleLab.adjustsFontSizeToFitWidth =YES;
         _titleLab.minimumFontSize =12;
+        
+        _redLab =[UILabel new];
+        [self.contentView addSubview:_redLab];
+        [_redLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(blockSelf.titleLab.mas_right).offset =10;
+            make.right.offset =-10;
+            make.centerY.equalTo(blockSelf.titleLab.mas_centerY).offset = 0;
+        }];
+        _redLab.adjustsFontSizeToFitWidth =YES;
+        _redLab.minimumFontSize =12;
+        _redLab.textAlignment =NSTextAlignmentRight;
+        _redLab.font =FontSize(14);
+        
         
         UIImageView *img1 = [UIImageView new];
         img1.image =[UIImage imageNamed:@"32"];
@@ -43,7 +56,8 @@
             make.left.offset =10;
             make.size.mas_equalTo(CGSizeMake(15, 15));
         }];
-        
+        img1.tag =1001;
+
         UIImageView *img2 = [UIImageView new];
         img2.image =[UIImage imageNamed:@"32"];
         [self addSubview:img2];
@@ -52,7 +66,8 @@
             make.left.equalTo(img1.mas_right).offset =1;
             make.size.mas_equalTo(CGSizeMake(15, 15));
         }];
-        
+        img1.tag =1002;
+
         UIImageView *img3 = [UIImageView new];
         img3.image =[UIImage imageNamed:@"32"];
         [self addSubview:img3];
@@ -61,6 +76,8 @@
             make.left.equalTo(img2.mas_right).offset =1;
             make.size.mas_equalTo(CGSizeMake(15, 15));
         }];
+        img1.tag =1003;
+
         UIImageView *img4 = [UIImageView new];
         img4.image =[UIImage imageNamed:@"32"];
         [self addSubview:img4];
@@ -69,6 +86,8 @@
             make.left.equalTo(img3.mas_right).offset =1;
             make.size.mas_equalTo(CGSizeMake(15, 15));
         }];
+        img1.tag =1004;
+
         UIImageView *img5 = [UIImageView new];
         img5.image =[UIImage imageNamed:@"34"];
         [self addSubview:img5];
@@ -77,7 +96,8 @@
             make.left.equalTo(img4.mas_right).offset =1;
             make.size.mas_equalTo(CGSizeMake(15, 15));
         }];
-        
+        img1.tag =1005;
+
         _juliLab =[UILabel new];
         [self addSubview:_juliLab];
         _juliLab.backgroundColor =RGBA(245, 245, 245, 1);
@@ -126,4 +146,39 @@
     return self;
 
 }
+
+- (void)setModel:(HomePageSectionOneModel *)model{
+    
+    _model = model;
+    
+    [_headerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",allImageURL,model.img]]];
+
+    CGFloat jl = [model.distance floatValue];
+    if (jl <10) {
+        _juliLab.text = [NSString stringWithFormat:@"%.fm",jl];
+        
+    }else{
+        _juliLab.text = [NSString stringWithFormat:@"%.fkm",jl];
+    }
+    _talkLab.text =[NSString stringWithFormat:@"%@",model.num];
+    //类型是餐厅和购物的时候显示人均
+    if ([model.type integerValue] ==1 ||[model.type integerValue] ==3 ) {
+        _redLab.text =[NSString stringWithFormat:@"%@",model.red];
+    }else {
+        _redLab.text =@"";
+    }
+    _titleLab.text =[NSString stringWithFormat:@"%@",model.name];
+
+    for(int i =0; i <5;i ++){
+        UIImageView *img = [self.contentView viewWithTag:1001+i];
+        img.image = [UIImage imageNamed:@"34"];
+    }
+    
+    for(int i =0; i <[model.star integerValue];i ++){
+        UIImageView *img = [self.contentView viewWithTag:1001+i];
+        img.image = [UIImage imageNamed:@"32"];
+    }
+    
+}
+
 @end

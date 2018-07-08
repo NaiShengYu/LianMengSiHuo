@@ -14,6 +14,7 @@
 
 @property (nonatomic,strong)NSMutableArray *titlesArray;
 @property (nonatomic,strong)NSMutableArray *imgArray;
+
 @end
 @implementation HomePageSectionZeroCell
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -46,11 +47,12 @@
             make.height.offset =60;
         }];
         [_titleBut addTarget:self action:@selector(goMap) forControlEvents:UIControlEventTouchUpInside];
-        _titleBut.titleLabel.numberOfLines =2;
-        NSMutableAttributedString *att = [[NSMutableAttributedString alloc]initWithString:@"巴黎\nParis"];
-        _titleBut.titleLabel.font =FontSize(15);
-        [att addAttribute:NSFontAttributeName value:FontSize(18) range:NSMakeRange(0, 2)];
-        [_titleBut setAttributedTitle:att forState:UIControlStateNormal];
+//        _titleBut.titleLabel.numberOfLines =2;
+//        NSMutableAttributedString *att = [[NSMutableAttributedString alloc]initWithString:@"巴黎\nParis"];
+//        _titleBut.titleLabel.font =FontSize(15);
+//        [att addAttribute:NSFontAttributeName value:FontSize(18) range:NSMakeRange(0, 2)];
+//        [_titleBut setAttributedTitle:att forState:UIControlStateNormal];
+        _titleBut.titleLabel.font =FontSize(18);
         [_titleBut setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         _titleBut.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
         
@@ -68,6 +70,12 @@
         _tab.bounces =NO;
         _tab.layer.cornerRadius =5;
         _tab.layer.masksToBounds =YES;
+        
+        if ([CustomAccount sharedCustomAccount].cityName ==nil ||[CustomAccount sharedCustomAccount].cityName.length ==0) {
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCityName) name:@"getCityName" object:nil];
+        }else{
+            [self getCityName];
+        }
     }
     return self;
  
@@ -77,10 +85,10 @@
     return 4;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 0.1;
+    return 0;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 0.1;
+    return 0;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
@@ -111,8 +119,9 @@
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    NSArray *arr = @[@"list_map_scenic",@"list_map_food",@"list_map_shop",@"list_map_hotel"];
     [self.VC.navigationController pushViewController:[HomePageListViewController new] animated:YES];
+    [CustomAccount sharedCustomAccount].className =arr[indexPath.row];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 #pragma mark --让cell的横线到最左边
@@ -139,5 +148,20 @@
     } completion:^(BOOL finished) {
         
     }];
+}
+
+- (void)getCityName{
+
+    NSString *string =[CustomAccount sharedCustomAccount].cityName;
+    NSString *shi =[string substringFromIndex:string.length-1];
+    if ([shi isEqualToString:@"市"]) {
+        string =[string substringToIndex:string.length-1];
+    }
+    [_titleBut setTitle:string forState:UIControlStateNormal];
+    
+    GMSCameraPosition *position1 = [GMSCameraPosition cameraWithTarget:[CustomAccount sharedCustomAccount].curCoordinate2D zoom:14];
+    [self.mapV animateToCameraPosition:position1];
+    
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"getCityName" object:nil];
 }
 @end

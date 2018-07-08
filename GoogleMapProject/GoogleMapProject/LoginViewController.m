@@ -59,6 +59,7 @@
         make.height.offset =44;
     }];
     [rightBut setImage:[UIImage imageNamed:@"登录_03"] forState:UIControlStateNormal];
+    [rightBut addTarget:self action:@selector(gohomePage) forControlEvents:UIControlEventTouchUpInside];
     
     UIImageView *imgV =[UIImageView new];
     [containerView addSubview:imgV];
@@ -132,6 +133,7 @@
     }];
     _passTF.backgroundColor =[UIColor clearColor];
     _passTF.placeholder = @"密 码 Password";
+    _passTF.secureTextEntry =YES;
     [_passTF addTarget:self action:@selector(textChange:) forControlEvents:UIControlEventEditingChanged];
 
     UIButton *showBut =[UIButton new];
@@ -140,9 +142,10 @@
         make.top.right.bottom.offset =0;
         make.width.offset =50;
     }];
-    [showBut setImage:[UIImage imageNamed:@"登录_19"] forState:UIControlStateNormal];
-    [showBut setImage:[UIImage imageNamed:@"登录_23"] forState:UIControlStateHighlighted];
-    [showBut setImage:[UIImage imageNamed:@"登录_23"] forState:UIControlStateSelected];
+    [showBut setImage:[UIImage imageNamed:@"登录_23"] forState:UIControlStateNormal];
+    [showBut setImage:[UIImage imageNamed:@"登录_19"] forState:UIControlStateHighlighted];
+    [showBut setImage:[UIImage imageNamed:@"登录_19"] forState:UIControlStateSelected];
+    showBut.selected = YES;
 
     [showBut addTarget:self action:@selector(changePassword:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -383,5 +386,10 @@
 #pragma mark --进入注册界面
 - (void)registBut{
     [self.navigationController pushViewController:[RegistViewController new] animated:YES];
+}
+
+- (void)gohomePage{
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

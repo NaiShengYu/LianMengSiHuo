@@ -10,4 +10,5 @@
 
 @interface FogotSecondViewController : UIViewController
 
+@property (nonatomic,copy)NSString *phoneNum;
 @end

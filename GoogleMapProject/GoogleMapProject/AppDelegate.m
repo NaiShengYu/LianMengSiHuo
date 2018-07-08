@@ -66,7 +66,31 @@
     // 通过location  或得到当前位置的经纬度
     CLLocationCoordinate2D curCoordinate2D = curLocation.coordinate;
     [CustomAccount sharedCustomAccount].curCoordinate2D =[KNLocationConverter transformFromWGSToGCJ:curCoordinate2D];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"locationUpLode" object:nil];
+    
+
+    CLGeocoder  *coder = [[CLGeocoder alloc]init];
+
+    [coder reverseGeocodeLocation:curLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        CLPlacemark *placemark = [placemarks firstObject];
+        DLog(@"%@",placemark.name);
+        DLog(@"%@",placemark.locality);
+        DLog(@"%@",placemark.country);
+        DLog(@"%@",placemark.postalCode);
+        DLog(@"%@",placemark.postalAddress);
+        
+        DLog(@"%@",placemark.addressDictionary);
+
+        if (placemark!=nil) {
+            [CustomAccount sharedCustomAccount].cityName = placemark.addressDictionary[@"City"];
+            
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"getCityName" object:nil];
+        }
+        
+        
+        
+    }];
+    
+    
 }
 
 

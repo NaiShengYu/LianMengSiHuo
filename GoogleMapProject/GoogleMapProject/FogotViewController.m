@@ -186,8 +186,9 @@
         [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"验证码不正确"];
         return;
     }
-    
-    [self.navigationController pushViewController:[FogotSecondViewController new] animated:YES];
+    FogotSecondViewController *secondVC = [FogotSecondViewController new] ;
+    secondVC.phoneNum = self.phoneTF.text;
+    [self.navigationController pushViewController:secondVC animated:YES];
     
 }
 #pragma  mark --获取验证码

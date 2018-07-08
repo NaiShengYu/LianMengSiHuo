@@ -41,6 +41,8 @@
 		267BBF7B20DBEA8E0005AE5A /* CollectionShopUneditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 267BBF7A20DBEA8E0005AE5A /* CollectionShopUneditCell.m */; };
 		267BBF7E20DBF4930005AE5A /* CollectionShopEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 267BBF7D20DBF4930005AE5A /* CollectionShopEditCell.m */; };
 		267BBF8120DBFC9E0005AE5A /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 267BBF8020DBFC9E0005AE5A /* CommentCell.m */; };
+		2682073520F2613A00DE7FE0 /* HomePageSectionOneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2682073420F2613A00DE7FE0 /* HomePageSectionOneModel.m */; };
+		2682073820F261EA00DE7FE0 /* HomePageSectionTowModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2682073720F261EA00DE7FE0 /* HomePageSectionTowModel.m */; };
 		26904EB520E78A2200084B5F /* HomePageMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26904EB420E78A2200084B5F /* HomePageMapViewController.m */; };
 		26904EB820E78CD000084B5F /* YNSFunctionBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 26904EB720E78CD000084B5F /* YNSFunctionBar.m */; };
 		26A608C620E1251300B677FF /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A608C520E1251300B677FF /* ChangePasswordViewController.m */; };
@@ -157,6 +159,10 @@
 		267BBF7D20DBF4930005AE5A /* CollectionShopEditCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionShopEditCell.m; sourceTree = "<group>"; };
 		267BBF7F20DBFC9E0005AE5A /* CommentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
 		267BBF8020DBFC9E0005AE5A /* CommentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
+		2682073320F2613A00DE7FE0 /* HomePageSectionOneModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageSectionOneModel.h; sourceTree = "<group>"; };
+		2682073420F2613A00DE7FE0 /* HomePageSectionOneModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageSectionOneModel.m; sourceTree = "<group>"; };
+		2682073620F261EA00DE7FE0 /* HomePageSectionTowModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageSectionTowModel.h; sourceTree = "<group>"; };
+		2682073720F261EA00DE7FE0 /* HomePageSectionTowModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageSectionTowModel.m; sourceTree = "<group>"; };
 		26904EB320E78A2200084B5F /* HomePageMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageMapViewController.h; sourceTree = "<group>"; };
 		26904EB420E78A2200084B5F /* HomePageMapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageMapViewController.m; sourceTree = "<group>"; };
 		26904EB620E78CD000084B5F /* YNSFunctionBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YNSFunctionBar.h; sourceTree = "<group>"; };
@@ -500,6 +506,10 @@
 				C938505320EDE24B007AF5A7 /* CollectionShopModel.m */,
 				265F8D1E20EE69BE00620F3E /* CommentModel.h */,
 				265F8D1F20EE69BE00620F3E /* CommentModel.m */,
+				2682073320F2613A00DE7FE0 /* HomePageSectionOneModel.h */,
+				2682073420F2613A00DE7FE0 /* HomePageSectionOneModel.m */,
+				2682073620F261EA00DE7FE0 /* HomePageSectionTowModel.h */,
+				2682073720F261EA00DE7FE0 /* HomePageSectionTowModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -648,6 +658,7 @@
 				C977138B20E4B854007AE5F0 /* SearchResultViewController.m in Sources */,
 				C977132520E212FB007AE5F0 /* ShopInfoViewController.m in Sources */,
 				265F8D1720EBC29600620F3E /* SearchKeyViewController.m in Sources */,
+				2682073820F261EA00DE7FE0 /* HomePageSectionTowModel.m in Sources */,
 				C977138E20E4BE35007AE5F0 /* SearchResultHeader.m in Sources */,
 				267BBF7520DAB9090005AE5A /* CollectionShopViewController.m in Sources */,
 				26196CC120C55C6E0097D72D /* GoogleMapProject.xcdatamodeld in Sources */,
@@ -688,6 +699,7 @@
 				C97712E720DB5046007AE5F0 /* BindingPhoneViewController.m in Sources */,
 				267BBF6620DAA1D30005AE5A /* HomePageSectionOneheader.m in Sources */,
 				C977138220E475ED007AE5F0 /* FirstViewController.m in Sources */,
+				2682073520F2613A00DE7FE0 /* HomePageSectionOneModel.m in Sources */,
 				C977131220E1DFD9007AE5F0 /* FilterHeader.m in Sources */,
 				C938505120EDA741007AF5A7 /* AFNetRequest.m in Sources */,
 				267BBF4620D92B330005AE5A /* RegistViewController.m in Sources */,

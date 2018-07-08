@@ -7,14 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "HomePageSectionOneModel.h"
 @interface HomePageSectionOneCell : UICollectionViewCell
 
 @property (nonatomic,strong)UIImageView *headerImage;
 @property (nonatomic,strong)UILabel *titleLab;
 
+@property (nonatomic,strong)UILabel *redLab;
+
+
 @property (nonatomic,strong)UILabel *talkLab;
 
 @property (nonatomic,strong)UILabel *juliLab;
+
+@property (nonatomic,strong)HomePageSectionOneModel *model;
 
 @end

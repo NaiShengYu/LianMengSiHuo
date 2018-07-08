@@ -214,7 +214,6 @@
     
     self.bottomV=[[BottomView alloc]initWithFrame:CGRectMake(10, screenHeight -153-TabbarHeight, screenWigth-20, 153)];
     self.bottomV.vc =self;
-    [self.view addSubview:self.bottomV];
     
  
     //    UIWebView *web =[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.width)];
@@ -248,25 +247,27 @@
     [topV.backBut addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [topV.chooseBut addTarget:self action:@selector(chooseBut:) forControlEvents:UIControlEventTouchUpInside];
     [self creatBottomView];
+    
+    if ([CustomAccount sharedCustomAccount].curCoordinate2D.latitude==0 && [CustomAccount sharedCustomAccount].curCoordinate2D.longitude==0) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLocation) name:@"getCityName" object:nil];
+    }else{
+        [self currentLocation];
+    }
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
         self.navigationController.navigationBar.hidden =YES;
-        if ([CustomAccount sharedCustomAccount].curCoordinate2D.latitude==0 && [CustomAccount sharedCustomAccount].curCoordinate2D.longitude==0) {
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLocation) name:@"locationUpLode" object:nil];
-        }else{
-            [self currentLocation];
-        }
-        
+    
     }
     
 - (void)getLocation{
         [self currentLocation];
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"locationUpLode" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"getCityName" object:nil];
     }
     
 - (void)currentCenter{
-        
+  
         if (position2D.latitude !=0 && position2D.longitude !=0) {
             GMSCameraPosition *position1 = [GMSCameraPosition cameraWithTarget:position2D zoom:14];
             [self.mapV animateToCameraPosition:position1];
@@ -278,7 +279,8 @@
 static int a =0 ;
     
 - (void)currentLocation{
-        
+    [self makeData];
+
         // 通过location  或得到当前位置的经纬度
         CLLocationCoordinate2D curCoordinate2D = [CustomAccount sharedCustomAccount].curCoordinate2D;
         GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:curCoordinate2D.latitude longitude:curCoordinate2D.longitude zoom:14];
@@ -329,13 +331,15 @@ static int a =0 ;
     
 }
 - (void)creatBottomView{
-    
+    WS(blockSelf);
     YNSFunctionBar * backView =[[YNSFunctionBar alloc]init];
     backView.frame =CGRectMake(0, screenHeight-TabbarHeight, screenWigth, TabbarHeight);
     backView.backgroundColor =[UIColor whiteColor];
     [self.view addSubview:backView];
-   
-   
+    [CustomAccount sharedCustomAccount].className =@"list_map_scenic";
+    backView.selectBlock = ^(NSInteger index) {
+        [blockSelf makeData];
+    };
 }
 
 
@@ -451,4 +455,29 @@ static int a =0 ;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
+- (void)makeData{
+    WS(blockSelf);
+    NSString *url = [NSString stringWithFormat:@"%@app_list.php",BaseURL];
+    DLog(@"url==%@",url);
+    CustomAccount *acc = [CustomAccount sharedCustomAccount];
+    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+    [param setObject:acc.className forKey:@"app"];
+    [param setObject:[NSString stringWithFormat:@"%f",BIGposition2D.longitude] forKey:@"lng"];
+    [param setObject:[NSString stringWithFormat:@"%f",BIGposition2D.latitude] forKey:@"lat"];
+    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+        if ([responseObject[@"code"] integerValue] ==1) {
+            
+            if (blockSelf.bottomV ==nil) {
+                [blockSelf.view addSubview:blockSelf.bottomV];
+            }
+        }else{
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"网络错误"];
+        
+    } isShowHUD:YES];
+    
+}
 @end

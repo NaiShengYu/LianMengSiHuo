@@ -15,9 +15,16 @@
 #import "HomePageSecitonThreeCell.h"
 #import "HomePageSectionOneheader.h"
 #import "HomePageSectionTowheader.h"
+
+#import "HomePageSectionOneModel.h"
+#import "HomePageSectionTowModel.h"
 @interface HomePageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic,strong)UICollectionView *collectionV;
+
+@property (nonatomic,strong)NSMutableArray * topArray;
+@property (nonatomic,strong)NSMutableArray * aroundCityArray;
+
 @end
 
 @implementation HomePageViewController
@@ -43,9 +50,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.view.backgroundColor =[UIColor whiteColor];
+    self.view.backgroundColor =[UIColor whiteColor];
+    
+    self.topArray =[[NSMutableArray alloc]init];
+    self.aroundCityArray =[[NSMutableArray alloc]init];
+
     [self creatNav];
-    [self.view addSubview:self.collectionV];    
+    
+    if ([CustomAccount sharedCustomAccount].cityName ==nil ||[CustomAccount sharedCustomAccount].cityName.length ==0) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCityName) name:@"getCityName" object:nil];
+    }else{
+        [self makeData];
+    }
+
+    
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -73,8 +91,8 @@
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     if (section==0)return 1;
-    else if (section==1)return 2;
-    else return 3;
+    else if (section==1)return self.topArray.count;
+    else return self.aroundCityArray.count;
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
@@ -99,12 +117,14 @@
     }else if (indexPath.section ==1){
         HomePageSectionOneCell *cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"HomePageSectionOneCell" forIndexPath:indexPath];
         cell.contentView.backgroundColor =[UIColor whiteColor];
+        cell.model =self.topArray[indexPath.row];
         return cell;
         
     }
     
     HomePageSecitonThreeCell *cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"HomePageSecitonThreeCell" forIndexPath:indexPath];
     cell.contentView.backgroundColor =[UIColor whiteColor];
+    cell.model = self.aroundCityArray[indexPath.row];
     return cell;
 }
 
@@ -146,5 +166,50 @@
 - (void)showLeftVC{
     [self.drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:^(BOOL finished) {
     }];
+}
+
+- (void)makeData{
+    WS(blockSelf);
+    NSString *url = [NSString stringWithFormat:@"%@app_list.php",BaseURL];
+    DLog(@"url==%@",url);
+    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+    CustomAccount *acc = [CustomAccount sharedCustomAccount];
+    [param setObject:@"list_index" forKey:@"app"];
+    [param setObject:acc.cityName forKey:@"city_cn"];
+    [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.longitude] forKey:@"lng"];
+    [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.latitude] forKey:@"lat"];
+    [param setObject:@"" forKey:@"city_en"];
+
+    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+        if ([responseObject[@"code"] integerValue] ==1) {
+            NSDictionary *dataDic =responseObject[@"data"][0];
+            for (NSDictionary *topDic in dataDic[@"top"]) {
+                HomePageSectionOneModel *model = [[HomePageSectionOneModel alloc]initWithDic:topDic];
+                [blockSelf.topArray addObject:model];
+            }
+            for (NSDictionary *cityDic in dataDic[@"around_city"]) {
+                HomePageSectionTowModel *model = [[HomePageSectionTowModel alloc]initWithDic:cityDic];
+                [blockSelf.aroundCityArray addObject:model];
+            }
+
+            [blockSelf.view addSubview:blockSelf.collectionV];
+          
+            
+        }else{
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"网络错误"];
+
+    } isShowHUD:NO];
+    
+}
+
+
+
+//通知获取当前位置
+- (void)getCityName{
+    [self makeData];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"getCityName" object:nil];
 }
 @end

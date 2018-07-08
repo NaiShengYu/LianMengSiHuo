@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "HomePageSectionTowModel.h"
 @interface HomePageSecitonThreeCell : UICollectionViewCell
 @property (nonatomic,strong)UIImageView *headerImage;
 @property (nonatomic,strong)UILabel *titleLab;
+
+@property (nonatomic,strong)HomePageSectionTowModel *model;
 @end

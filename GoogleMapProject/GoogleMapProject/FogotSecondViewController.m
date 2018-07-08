@@ -174,8 +174,7 @@
     DLog(@"url==%@",url);
     NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
     [param setObject:@"user_forget_pwd" forKey:@"app"];
-    [param setObject:[user objectForKey:USERID] forKey:@"userid"];
-    [param setObject:_PasswordTF forKey:@"phone"];
+    [param setObject:self.phoneNum forKey:@"phone"];
     [param setObject:_secondPasswordTF forKey:@"new_pwd"];
 
     [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {

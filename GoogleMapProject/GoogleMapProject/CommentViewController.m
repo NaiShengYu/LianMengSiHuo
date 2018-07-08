@@ -21,6 +21,18 @@
         _myTable.delegate =self;
         _myTable.dataSource =self;
         [_myTable registerClass:[CommentCell class] forCellReuseIdentifier:@"CommentCell"];
+        WS(blockSelf);
+        MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            [blockSelf makeDataIsRefresh:NO];
+        }];
+        _myTable.mj_footer = footer;
+        
+        MJRefreshNormalHeader *header =[MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [blockSelf makeDataIsRefresh:YES];
+        }];
+        header.lastUpdatedTimeLabel.hidden =YES;
+        header.stateLabel.textColor =[UIColor blackColor];
+        _myTable.mj_header =header;
     }
     return _myTable;
 }
@@ -33,7 +45,7 @@
     self.dataArray =[[NSMutableArray alloc]init];
   
     [self.view addSubview:self.myTable];
-    [self makeData];
+    [self makeDataIsRefresh:YES];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -85,29 +97,46 @@
     }
 }
 
-- (void)makeData{
-    
+- (void)makeDataIsRefresh:(BOOL) isRefresh{
+
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSString *url = [NSString stringWithFormat:@"%@app_user.php",BaseURL];
     DLog(@"url==%@",url);
     NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
     [param setObject:@"user_my_comment" forKey:@"app"];
     [param setObject:[user objectForKey:USERID] forKey:@"userid"];
-    
+    if (isRefresh==YES) {
+        [param setObject:@"0" forKey:@"pageno"];
+    }else{
+        [param setObject:[NSString stringWithFormat:@"%lu",(unsigned long)self.dataArray.count] forKey:@"pageno"];
+    }
     WS(blockSelf);
     [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
         if ([responseObject[@"code"] integerValue] ==1) {
-            for (NSDictionary *dic in responseObject[@"data"]) {
+            for (NSDictionary *dic in responseObject[@"data"][0][@"comment"]) {
                 CommentModel *model = [[CommentModel alloc]initWithDic:dic];
                 [blockSelf.dataArray addObject:model];
             }
             
+            NSDictionary *dataDic = responseObject[@"data"][0];
+            if (blockSelf.dataArray.count >=[dataDic[@"comment_num"] integerValue]) {
+                [blockSelf.myTable.mj_footer endRefreshingWithNoMoreData];
+            }else{
+                [blockSelf.myTable.mj_footer endRefreshing];
+            }
+            [blockSelf.myTable.mj_header endRefreshing];
             [blockSelf.myTable reloadData];
+            
         }else{
+            [blockSelf.myTable.mj_header endRefreshing];
+            [blockSelf.myTable.mj_footer endRefreshing];
+            
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
         }
     } failure:^(NSError *error) {
-        
+        [blockSelf.myTable.mj_header endRefreshing];
+        [blockSelf.myTable.mj_footer endRefreshing];
     } isShowHUD:YES];
   
 }
