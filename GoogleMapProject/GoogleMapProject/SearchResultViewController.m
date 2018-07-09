@@ -10,11 +10,23 @@
 #import "SearchResultHeader.h"
 #import "SearchResultSectionZeroCell.h"
 #import "SearchResultSectionOneCell.h"
-
+#import "SearchResultFooter.h"
 #import "ShopInfoViewController.h"
 @interface SearchResultViewController()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *myTable;
-@property (nonatomic,strong)NSMutableArray *dataArray;
+@property (nonatomic,strong)NSMutableArray *citysArray;
+@property (nonatomic,strong)NSMutableArray *foodsArray;
+@property (nonatomic,strong)NSMutableArray *scenicsArray;
+@property (nonatomic,strong)NSMutableArray *shopsArray;
+@property (nonatomic,strong)NSMutableArray *hotelsArray;
+@property (nonatomic,strong)NSMutableArray *titleArray;
+
+@property (nonatomic,assign)BOOL foodsIsMore;
+@property (nonatomic,assign)BOOL scenicsIsMore;
+@property (nonatomic,assign)BOOL shopsIsMore;
+@property (nonatomic,assign)BOOL hotelsIsMore;
+
+
 
 @end
 
@@ -27,14 +39,26 @@
         [_myTable registerClass:[SearchResultSectionZeroCell class] forCellReuseIdentifier:@"SearchResultSectionZeroCell"];
         [_myTable registerClass:[SearchResultSectionOneCell class] forCellReuseIdentifier:@"SearchResultSectionOneCell"];
         [_myTable registerClass:[SearchResultHeader class] forHeaderFooterViewReuseIdentifier:@"SearchResultHeader"];
+        [_myTable registerClass:[SearchResultFooter class] forHeaderFooterViewReuseIdentifier:@"SearchResultFooter"];
     }
     return _myTable;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor whiteColor];
+    self.foodsIsMore = YES;
+    self.shopsIsMore = YES;
+    self.hotelsIsMore = YES;
+    self.scenicsIsMore = YES;
+    
+    
     [self ziDingYiDaoHangLan];
-    self.dataArray =[[NSMutableArray alloc]initWithObjects:@"目的地",@"餐厅",@"购物",nil];
+    self.citysArray =[[NSMutableArray alloc]init];
+    self.foodsArray =[[NSMutableArray alloc]init];
+    self.scenicsArray =[[NSMutableArray alloc]init];
+    self.shopsArray =[[NSMutableArray alloc]init];
+    self.hotelsArray =[[NSMutableArray alloc]init];
+    self.titleArray =[[NSMutableArray alloc]initWithObjects:@"目的地",@"餐厅",@"景点",@"购物",@"酒店", nil];
     [self.view addSubview:self.myTable];
     self.title =@"搜索";
     UILabel *titleLab =[[UILabel alloc]initWithFrame:CGRectMake(10, 0, screenWigth-20, 50)];
@@ -43,6 +67,8 @@
     [att addAttribute:NSForegroundColorAttributeName value:zhuse range:NSMakeRange(2, self.searchKey.length)];
     titleLab.attributedText =att;
     
+    [self makeData];
+    
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -50,16 +76,45 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return self.dataArray.count;
+    return self.titleArray.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    if (section==0) return self.citysArray.count;
+    else if (section==1) return self.foodsArray.count;
+    else if (section==1) return self.scenicsArray.count;
+    else if (section==1) return self.shopsArray.count;
+    else  return self.hotelsArray.count;
+   
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 40;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 10;
+    
+    if (section ==0) {
+        return 1;
+    }
+    if (section ==1) {
+        if (_foodsIsMore ==NO) {
+            return 1;
+        }
+    }
+    if (section ==2) {
+        if (_scenicsIsMore ==NO) {
+            return 1;
+        }
+    }
+    if (section ==3) {
+        if (_shopsArray ==NO) {
+            return 1;
+        }
+    }
+    if (section ==4) {
+        if (_hotelsIsMore ==NO) {
+            return 1;
+        }
+    }
+    return 50;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -68,12 +123,44 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     SearchResultHeader *header =[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"SearchResultHeader"];
-    header.titleLab.text = self.dataArray[section];
+    header.titleLab.text = self.titleArray[section];
     return header;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    return nil;
+    if (section ==0) {
+        return nil;
+    }
+    if (section ==1) {
+        if (_foodsIsMore ==NO) {
+            return nil;
+        }
+    }
+    if (section ==2) {
+        if (_scenicsIsMore ==NO) {
+            return nil;
+        }
+    }
+    if (section ==3) {
+        if (_shopsArray ==NO) {
+            return nil;
+        }
+    }
+    if (section ==4) {
+        if (_hotelsIsMore ==NO) {
+            return nil;
+        }
+    }
+    
+    SearchResultFooter *footer =[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"SearchResultFooter"];
+    footer.addMoreBut.tag =1000+section;
+    [footer.addMoreBut addTarget:self action:@selector(addMore:) forControlEvents:UIControlEventTouchUpInside];
+        
+
+    
+    
+    return footer;
+    
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -109,6 +196,77 @@
 }
 
 
+- (void)makeData{
+    
+    NSString *url = [NSString stringWithFormat:@"%@app_list.php",BaseURL];
+    DLog(@"url==%@",url);
+    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+    [param setObject:@"list_search" forKey:@"app"];
+    [param setObject:self.searchKey forKey:@"keyword"];
+    
+    WS(blockSelf);
+    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+        if ([responseObject[@"code"] integerValue] ==1) {
+            
+          
+            [blockSelf.myTable reloadData];
+        }else{
+            
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
+        }
+        
+        
+    } failure:^(NSError *error) {
+  
+    } isShowHUD:NO];
+    
+}
+
+- (void)addMore:(UIButton *)but{
+    
+    NSString *url = [NSString stringWithFormat:@"%@app_list.php",BaseURL];
+    DLog(@"url==%@",url);
+    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+    [param setObject:@"list_search_more" forKey:@"app"];
+    [param setObject:self.searchKey forKey:@"keyword"];
+    [param setObject:[NSString stringWithFormat:@"%ld",but.tag-1000] forKey:@"type"];
+    switch (but.tag-1000) {
+        case 1:
+            [param setObject:[NSString stringWithFormat:@"%ld",self.foodsArray.count] forKey:@"pageno"];
+
+            break;
+        case 2:
+            [param setObject:[NSString stringWithFormat:@"%ld",self.scenicsArray.count] forKey:@"pageno"];
+
+            break;
+        case 3:
+            [param setObject:[NSString stringWithFormat:@"%ld",self.shopsArray.count] forKey:@"pageno"];
+            break;
+        case 4:
+            [param setObject:[NSString stringWithFormat:@"%ld",self.hotelsArray.count] forKey:@"pageno"];
+
+            break;
+        default:
+            break;
+    }
+
+    WS(blockSelf);
+    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+        if ([responseObject[@"code"] integerValue] ==1) {
+            
+            
+            [blockSelf.myTable reloadData];
+        }else{
+            
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
+        }
+        
+        
+    } failure:^(NSError *error) {
+        
+    } isShowHUD:NO];
+ 
+}
 
 #pragma mark --自定义导航栏
 - (void)ziDingYiDaoHangLan{

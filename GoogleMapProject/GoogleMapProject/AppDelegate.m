@@ -67,6 +67,7 @@
     CLLocationCoordinate2D curCoordinate2D = curLocation.coordinate;
     [CustomAccount sharedCustomAccount].curCoordinate2D =[KNLocationConverter transformFromWGSToGCJ:curCoordinate2D];
     
+//     curCoordinate2D = CLLocationCoordinate2DMake(48.8600000000, 2.3411111000);
 
     CLGeocoder  *coder = [[CLGeocoder alloc]init];
 

@@ -9,9 +9,10 @@
 #import "SearchKeyViewController.h"
 #import "SearchResultViewController.h"
 #import "SearchKeyNavVar.h"
-@interface SearchKeyViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface SearchKeyViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property (nonatomic,strong)NSMutableArray *dataArray;
 @property (nonatomic,strong)UITableView *myTable;
+@property (nonatomic,copy)NSString *searchKey;
 @end
 
 @implementation SearchKeyViewController
@@ -26,7 +27,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.dataArray =[[NSMutableArray alloc]initWithObjects:@"1",@"1",@"1",@"1",@"1",@"1", nil];
+    self.searchKey = @"";
+    self.dataArray =[[NSMutableArray alloc]init];
     [self creatNav];
     [self.view addSubview:self.myTable];
     
@@ -43,11 +45,17 @@
 - (void)creatNav{
     SearchKeyNavVar *navView = [[SearchKeyNavVar alloc]initWithFrame:CGRectMake(0, 0, screenWigth, MaxY)];
     navView.vc =self;
+    navView.searchBar.delegate =self;
     [navView.backBut addTarget:self action:@selector(showLeftVC) forControlEvents:UIControlEventTouchUpInside];
     [navView.searchBar becomeFirstResponder];
+    [navView.searchBar addTarget:self action:@selector(textChange:) forControlEvents:UIControlEventEditingChanged];
     [self.view addSubview:navView];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+//    if (self.dataArray.count ==0) {
+//        return 0;
+//    }
+//    return self.dataArray.count+1;
     return self.dataArray.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -57,7 +65,7 @@
     return 0.1;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 50;
+    return 55;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     return nil;
@@ -73,22 +81,27 @@
     }
     cell.detailTextLabel.textColor =[UIColor blackColor];
    
-    if (indexPath.row==0) {
-        cell.imageView.image =[UIImage imageNamed:@"首页-搜索s_03_03"];
-        cell.detailTextLabel.text =@"【北京】";
-        cell.textLabel.text =@"附近";
-    }else{
+//    if (indexPath.row==0) {
+//        cell.imageView.image =[UIImage imageNamed:@"首页-搜索s_03_03"];
+//        cell.detailTextLabel.text =[NSString stringWithFormat:@"【%@】",[CustomAccount sharedCustomAccount].cityName];
+//        cell.textLabel.text =@"附近";
+//    }else{
         cell.imageView.image =[UIImage imageNamed:@"详情_11"];
+        NSDictionary *dic =self.dataArray[indexPath.row];
         cell.detailTextLabel.text =@"";
-         cell.textLabel.text = @"巴黎Paris";
-    }
+         cell.textLabel.text = dic[@"res"];
+        cell.textLabel.numberOfLines =2;
+        cell.textLabel.font =FontSize(15);
+        cell.textLabel.adjustsFontSizeToFitWidth = YES;
+//    }
     
     return cell;
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSDictionary *dic =self.dataArray[indexPath.row];
     SearchResultViewController *vc = [[SearchResultViewController alloc]init];
-    vc.searchKey =@"";
+    vc.searchKey =dic[@"res"];
     [self.navigationController pushViewController:vc animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -107,6 +120,63 @@
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
 }
+
+//发送搜索请求
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    if ([string isEqualToString:@"\n"] &&textField.returnKeyType ==UIReturnKeySearch){
+        DLog(@"搜索");
+        [self makeData];
+        [self.view endEditing:YES];
+        //判断输入的字是否是回车，即按下return
+        //在这里做你响应return键的代码
+        return NO; //这里返回NO，就代表return键值失效，即页面上按下return，不会出现换行，如果为yes，则输入页面会换行
+    }
+    return YES;
+    
+}
+
+- (void)textChange:(UITextField *)textF{
+    self.searchKey = textF.text;
+}
+
+
+- (void)makeData{
+    
+    NSString *url = [NSString stringWithFormat:@"%@app_list.php",BaseURL];
+    DLog(@"url==%@",url);
+    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+    [param setObject:@"list_rel_search" forKey:@"app"];
+    [param setObject:self.searchKey forKey:@"keyword"];
+  
+    WS(blockSelf);
+    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+        if ([responseObject[@"code"] integerValue] ==1) {
+            [blockSelf.dataArray removeAllObjects];
+           
+            for (NSDictionary *dic in responseObject[@"data"]) {
+                [blockSelf.dataArray addObject:dic];
+            }
+            [blockSelf.myTable reloadData];
+        }else{
+         
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
+        }
+        
+        
+    } failure:^(NSError *error) {
+    } isShowHUD:NO];
+
+    
+    
+    
+    
+    
+}
+
+
+
 #pragma mark --出现左菜单
 - (void)showLeftVC{
     [self.navigationController popViewControllerAnimated:NO];

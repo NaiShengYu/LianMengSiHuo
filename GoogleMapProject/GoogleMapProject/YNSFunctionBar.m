@@ -64,12 +64,12 @@
     }];
     _lastbut.selected =NO;
     _lastbut =but;
-    if (self.selectBlock) {
-        self.selectBlock(but.tag-900);
-    }
+   
     NSArray *arr = @[@"list_map_scenic",@"list_map_food",@"list_map_shop",@"list_map_hotel"];
     [CustomAccount sharedCustomAccount].className =arr[but.tag-900];
 
-    
+    if (self.selectBlock) {
+        self.selectBlock(but.tag-900);
+    }
 }
 @end

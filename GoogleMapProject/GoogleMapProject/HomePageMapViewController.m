@@ -24,8 +24,6 @@
 }
 @property (nonatomic,strong)GMSMapView *mapV ;
 
-@property (nonatomic,strong)NSMutableArray *markersArray;
-
 @property (nonatomic,strong)BottomView *bottomV;
 
 @property (nonatomic,strong)NSMutableArray *filterArray;
@@ -198,7 +196,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.dataArray = [[NSMutableArray alloc]init];
-    self.markersArray =[[NSMutableArray alloc]init];
     GMSCameraPosition *position = [GMSCameraPosition cameraWithLatitude:-33.86 longitude:151.20 zoom:14];
     _mapV =[GMSMapView mapWithFrame:self.view.bounds camera:position];
 //    _mapV.myLocationEnabled = YES;
@@ -280,7 +277,8 @@
         position2D = curCoordinate2D;//可以吧这个存起来
         BIGposition2D = curCoordinate2D;//可以吧这个存起来
         [self creatBottomView];
-    
+        [self makeData];
+
         self.mapV.camera = camera;//这句话很重要很重要，将我们获取到的经纬度转成影像并赋值给地图的camera属性
 }
 
@@ -347,9 +345,6 @@
         marker.iconView =view;
         
         marker.map =self.mapV;
-        
-        [self.markersArray addObject:marker];
-        
     }
     
     
@@ -362,7 +357,9 @@
         return YES;
     }
     WS(blockSelf)
+    CustomMarker *maker1 =(CustomMarker *)marker;
     self.bottomV.coor = marker.position;
+    self.bottomV.model = maker1.bottomModel;
     [UIView animateWithDuration:0.3 animations:^{
         blockSelf.bottomV.frame =CGRectMake(10, screenHeight -153-TabbarHeight, screenWigth-20, 153);
     }];

@@ -128,9 +128,8 @@
         [self addSubview:_speciesLab];
         [_speciesLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(blockSelf.imageV.mas_right).offset =10;
-            make.bottom.offset =-24;
             make.right.lessThanOrEqualTo(blockSelf).offset = -10;
-            make.top.equalTo(blockSelf.juliLab.mas_bottom).offset = 5;
+            make.top.equalTo(blockSelf.juliLab.mas_bottom).offset = 8;
 
         }];
         
@@ -160,7 +159,7 @@
         [_topickNumLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.greaterThanOrEqualTo(V1.mas_top).offset =-8;
             make.left.equalTo(blockSelf.imageV.mas_right).offset =10;
-            make.centerY.equalTo(blockSelf.juliLab.mas_centerY).offset = 0;
+            make.top.equalTo(img1.mas_bottom).offset =5;
             make.right.equalTo(blockSelf.juliLab.mas_left).offset = -8;
         }];
         _topickNumLab.adjustsFontSizeToFitWidth = YES;

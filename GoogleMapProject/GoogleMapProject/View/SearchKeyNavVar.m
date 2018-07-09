@@ -82,16 +82,7 @@
     }
     return self;
 }
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    if ([textField hasText]) {
-        [textField resignFirstResponder];
-        SearchResultViewController *resultVC =[[SearchResultViewController alloc]init];
-        resultVC.searchKey = textField.text;
-        [self.vc.navigationController pushViewController:resultVC animated:YES];
-    }
-    
-    return YES;
-}
+
 
 - (void)cancel{
     
