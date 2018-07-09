@@ -77,8 +77,9 @@
         [img1 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(blockSelf.titleLab.mas_bottom).offset =5;
             make.left.equalTo(blockSelf.imageV.mas_right).offset =10;
-            make.size.mas_equalTo(CGSizeMake(21, 21));
+            make.size.mas_equalTo(CGSizeMake(16.1, 16.1));
         }];
+        img1.tag =1001;
         
         UIImageView *img2 = [UIImageView new];
         img2.image =[UIImage imageNamed:@"32"];
@@ -86,8 +87,9 @@
         [img2 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(blockSelf.titleLab.mas_bottom).offset =5;
             make.left.equalTo(img1.mas_right).offset =1;
-            make.size.mas_equalTo(CGSizeMake(21, 21));
+            make.size.mas_equalTo(CGSizeMake(16.1, 16.1));
         }];
+         img2.tag =1002;
         
         UIImageView *img3 = [UIImageView new];
         img3.image =[UIImage imageNamed:@"32"];
@@ -95,46 +97,52 @@
         [img3 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(blockSelf.titleLab.mas_bottom).offset =5;
             make.left.equalTo(img2.mas_right).offset =1;
-            make.size.mas_equalTo(CGSizeMake(21, 21));
+            make.size.mas_equalTo(CGSizeMake(16.1, 16.1));
         }];
+         img3.tag =1003;
+        
         UIImageView *img4 = [UIImageView new];
         img4.image =[UIImage imageNamed:@"32"];
         [self addSubview:img4];
         [img4 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(blockSelf.titleLab.mas_bottom).offset =5;
             make.left.equalTo(img3.mas_right).offset =1;
-            make.size.mas_equalTo(CGSizeMake(21, 21));
+            make.size.mas_equalTo(CGSizeMake(16.1, 16.1));
         }];
+         img4.tag =1004;
+        
         UIImageView *img5 = [UIImageView new];
         img5.image =[UIImage imageNamed:@"34"];
         [self addSubview:img5];
         [img5 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(blockSelf.titleLab.mas_bottom).offset =5;
             make.left.equalTo(img4.mas_right).offset =1;
-            make.size.mas_equalTo(CGSizeMake(21, 21));
+            make.size.mas_equalTo(CGSizeMake(16.1, 16.1));
         }];
-        
+         img5.tag =1005;
         
         UIView *V1 =[UIView new];
         [self addSubview:V1];
         
-        UILabel *lab1 =[UILabel new];
-        [self addSubview:lab1];
-        [lab1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        _speciesLab =[UILabel new];
+        [self addSubview:_speciesLab];
+        [_speciesLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(blockSelf.imageV.mas_right).offset =10;
             make.bottom.offset =-24;
-            make.height.equalTo(lab1.mas_height).offset =5;
-            make.width.equalTo(lab1.mas_width).offset =10;
+            make.right.lessThanOrEqualTo(blockSelf).offset = -10;
+            make.top.equalTo(blockSelf.juliLab.mas_bottom).offset = 5;
+
         }];
         
-        lab1.font =FontSize(12);
-        lab1.text =@"当地热门菜品";
+        _speciesLab.font =FontSize(12);
+        _speciesLab.text =@"当地热门菜品";
+        _speciesLab.numberOfLines = 2;
         
         [V1 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(lab1).offset =-5;
-            make.top.equalTo(lab1).offset =-3;
-            make.right.equalTo(lab1).offset =5;
-            make.bottom.equalTo(lab1).offset =3;
+            make.left.equalTo(blockSelf.speciesLab).offset =-5;
+            make.top.equalTo(blockSelf.speciesLab).offset =-3;
+            make.right.equalTo(blockSelf.speciesLab).offset =5;
+            make.bottom.equalTo(blockSelf.speciesLab).offset =3;
         }];
         V1.backgroundColor =RGBA(245, 245, 245, 1);
         V1.layer.cornerRadius =3;
@@ -144,42 +152,22 @@
        
         UIView *V2 =[UIView new];
         [self addSubview:V2];
-        
-        UILabel *lab2 =[UILabel new];
-        [self addSubview:lab2];
-        [lab2 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(lab1.mas_right).offset =10;
-            make.bottom.offset =-24;
-            make.height.equalTo(lab2.mas_height).offset =5;
-            make.width.equalTo(lab2.mas_width).offset =10;
-        }];
-        
-        lab2.font =FontSize(12);
-        lab2.text =@"法餐";
-        
-        [V2 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(lab2).offset =-5;
-            make.top.equalTo(lab2).offset =-3;
-            make.right.equalTo(lab2).offset =5;
-            make.bottom.equalTo(lab2).offset =3;
-        }];
-        V2.backgroundColor =RGBA(245, 245, 245, 1);
-        V2.layer.cornerRadius =3;
-        V2.layer.borderColor =RGBA(231, 231, 231, 1).CGColor;
-        V2.layer.borderWidth =1;
-        V2.layer.masksToBounds =YES;
-        
+    
         
         _topickNumLab =[UILabel new];
         [self addSubview:_topickNumLab];
         _topickNumLab.text =@"12432条评论";
         [_topickNumLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(V1.mas_top).offset =-8;
+            make.bottom.greaterThanOrEqualTo(V1.mas_top).offset =-8;
             make.left.equalTo(blockSelf.imageV.mas_right).offset =10;
-
+            make.centerY.equalTo(blockSelf.juliLab.mas_centerY).offset = 0;
+            make.right.equalTo(blockSelf.juliLab.mas_left).offset = -8;
         }];
-        _topickNumLab.font =FontSize(15);
+        _topickNumLab.adjustsFontSizeToFitWidth = YES;
+        _topickNumLab.minimumFontSize = 10;
+        _topickNumLab.font =FontSize(12);
         _topickNumLab.textColor =RGBA(204, 204, 204, 1);
+        _topickNumLab.numberOfLines = 2;
         
         
         UITapGestureRecognizer *tap =[[UITapGestureRecognizer alloc]init];
@@ -246,6 +234,40 @@
     
     ShopInfoViewController *vc = [[ShopInfoViewController alloc]init];
     [self.vc.navigationController pushViewController:vc animated:YES];
+}
+
+
+- (void)setModel:(MapBottomModel *)model{
+    _model = model;
+    
+    [_imageV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",allImageURL,model.img]]];
+    
+    _titleLab.text =[NSString stringWithFormat:@"%@",model.name];
+    
+    CGFloat jl = [model.distance floatValue];
+    if (jl <10) {
+        _juliLab.text = [NSString stringWithFormat:@"%.fm",jl];
+        
+    }else{
+        _juliLab.text = [NSString stringWithFormat:@"%.fkm",jl];
+    }
+    //类型是餐厅和购物的时候显示人均
+    if ([model.type integerValue] ==1 ||[model.type integerValue] ==3 ) {
+        _topickNumLab.text =[NSString stringWithFormat:@"%@  %@",model.red,model.num];
+    }else {
+        _topickNumLab.text =[NSString stringWithFormat:@"%@",model.num];
+    }
+    _speciesLab.text = [NSString stringWithFormat:@"%@",model.blue];
+    
+    for(int i =0; i <5;i ++){
+        UIImageView *img = [self viewWithTag:1001+i];
+        img.image = [UIImage imageNamed:@"34"];
+    }
+    
+    for(int i =0; i <[model.star integerValue];i ++){
+        UIImageView *img = [self viewWithTag:1001+i];
+        img.image = [UIImage imageNamed:@"32"];
+    }
 }
 
 @end

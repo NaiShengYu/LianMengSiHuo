@@ -15,6 +15,9 @@
 
 #import "FilterItem.h"
 #import "FilterHeaderModel.h"
+#import "MapBottomModel.h"
+
+#import "CustomMarker.h"
 @interface ViewController ()<GMSMapViewDelegate>
 {
     
@@ -32,6 +35,8 @@
 @property (nonatomic,strong)NSMutableArray *filterArray;
 
 @property (nonatomic,strong)FilterView *filterV;
+
+@property (nonatomic,strong)NSMutableArray *dataArray;
 @end
 
 @implementation ViewController
@@ -195,6 +200,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.dataArray = [[NSMutableArray alloc]init];
     self.markersArray =[[NSMutableArray alloc]init];
     GMSCameraPosition *position = [GMSCameraPosition cameraWithLatitude:-33.86 longitude:151.20 zoom:14];
     _mapV =[GMSMapView mapWithFrame:self.view.bounds camera:position];
@@ -266,59 +272,23 @@
     if (position2D.latitude !=0 && position2D.longitude !=0) {
         GMSCameraPosition *position1 = [GMSCameraPosition cameraWithTarget:position2D zoom:14];
         [self.mapV animateToCameraPosition:position1];
+        BIGposition2D = position2D;
 
     }
 }
 static int a =0 ;
 
 - (void)currentLocation{
-    [self makeData];
-
+    
     // 通过location  或得到当前位置的经纬度
     CLLocationCoordinate2D curCoordinate2D = [CustomAccount sharedCustomAccount].curCoordinate2D;
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:curCoordinate2D.latitude longitude:curCoordinate2D.longitude zoom:14];
-     position2D = curCoordinate2D;//可以吧这个存起来
+    position2D = curCoordinate2D;//可以吧这个存起来
     BIGposition2D = curCoordinate2D;//可以吧这个存起来
-    
-    if (a ==0) {
-        a +=1;
-        _marker =[[GMSMarker alloc]init];
-        _marker.position =CLLocationCoordinate2DMake(curCoordinate2D.latitude, curCoordinate2D.longitude);
-        _marker.icon =[UIImage imageNamed:@"25"];
-        _marker.draggable =YES;
-        _marker.map = self.mapV;
-        
-        for (int i =0 ; i <15; i ++) {
-            GMSMarker *marker =[[GMSMarker alloc]init];
-            double c = arc4random()%2;
-            double d = pow(-1, c);
-            CGFloat a = d *(arc4random() % 999)/100000.0;
-            CGFloat b = d * (arc4random() % 999)/100000.0;
-            
-            marker.position =CLLocationCoordinate2DMake(curCoordinate2D.latitude +a, curCoordinate2D.longitude+b);
-            marker.title =[NSString stringWithFormat:@"第%d个",i+1];
-            //        marker.icon = [UIImage imageNamed:@"25"];\
-            
-            UILabel *view =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
-            view.backgroundColor =[UIColor colorWithRed:156/255.0 green:37/255.0 blue:29/255.0 alpha:1];
-            view.layer.cornerRadius =12.5;
-            view.text =[NSString stringWithFormat:@"%d",i +1];
-            view.textColor =[UIColor whiteColor];
-            view.adjustsFontSizeToFitWidth =YES;
-            view.layer.masksToBounds =YES;
-            view.textAlignment =NSTextAlignmentCenter;
-            marker.iconView =view;
-            marker.map =self.mapV;
-            [self.markersArray addObject:marker];
-            
-        }
-    }
-  
+    [self makeData];
+
     self.mapV.camera = camera;//这句话很重要很重要，将我们获取到的经纬度转成影像并赋值给地图的camera属性
 }
-
-
-
 
 - (void)mapView:(GMSMapView *)mapView didEndDraggingMarker:(GMSMarker *)marker{
     
@@ -330,22 +300,24 @@ static int a =0 ;
 
 #pragma mark --检索周围店铺
 - (void)saoMiao{
-    [self.mapV clear];
+   
+    [self makeData];
+}
+
+- (void)saoMiaoJieGuo{
     
+    [self.mapV clear];
     _marker =[[GMSMarker alloc]init];
     _marker.position =CLLocationCoordinate2DMake(BIGposition2D.latitude, BIGposition2D.longitude);
     _marker.icon =[UIImage imageNamed:@"25"];
     _marker.draggable =YES;
     _marker.map = self.mapV;
     
-    for (int i =0 ; i <15; i ++) {
-        GMSMarker *marker =[[GMSMarker alloc]init];
-        double c = arc4random()%2;
-        double d = pow(-1, c);
-        CGFloat a = d *(arc4random() % 999)/100000.0;
-        CGFloat b = d * (arc4random() % 999)/100000.0;
-        
-        marker.position =CLLocationCoordinate2DMake(BIGposition2D.latitude +a, BIGposition2D.longitude+b);
+    for (int i =0 ; i <self.dataArray.count; i ++) {
+        MapBottomModel *model = self.dataArray[i];
+        CustomMarker *marker =[[CustomMarker alloc]init];
+        marker.bottomModel = model;
+        marker.position =CLLocationCoordinate2DMake([model.lat floatValue], [model.lng floatValue]);
         marker.title =[NSString stringWithFormat:@"第%d个",i+1];
         //        marker.icon = [UIImage imageNamed:@"25"];\
         
@@ -368,7 +340,6 @@ static int a =0 ;
     
 }
 
-
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker{
     
     if (marker ==_marker) {
@@ -376,7 +347,10 @@ static int a =0 ;
         return YES;
     }
     WS(blockSelf)
+    CustomMarker *maker1 =(CustomMarker *)marker;
     self.bottomV.coor = marker.position;
+    self.bottomV.model = maker1.bottomModel;
+    
     [UIView animateWithDuration:0.3 animations:^{
         blockSelf.bottomV.frame =CGRectMake(10, screenHeight -153, screenWigth-20, 153);
     }];
@@ -386,23 +360,10 @@ static int a =0 ;
 
 
 - (void)mapView:(GMSMapView *)mapView didTapAtCoordinate:(CLLocationCoordinate2D)coordinate{
-    
-//    if (self.bottomV.frame.origin.y <screenHeight) {
-//        [self viewDismiss];
-//        return;
-//    }
-    
     _marker.position =coordinate;
     BIGposition2D =coordinate;
 
 }
-//- (void)mapView:(GMSMapView *)mapView didCloseInfoWindowOfMarker:(GMSMarker *)marker{
-//
-//
-//
-//}
-
-
 - (void)viewDismiss{
     WS(blockSelf);
     [UIView animateWithDuration:0.3 animations:^{
@@ -439,14 +400,30 @@ static int a =0 ;
     CustomAccount *acc = [CustomAccount sharedCustomAccount];
     NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
     [param setObject:acc.className forKey:@"app"];
-    [param setObject:[NSString stringWithFormat:@"%f",BIGposition2D.longitude] forKey:@"lng"];
-    [param setObject:[NSString stringWithFormat:@"%f",BIGposition2D.latitude] forKey:@"lat"];
+//    [param setObject:[NSString stringWithFormat:@"%f",BIGposition2D.longitude] forKey:@"lng"];
+//    [param setObject:[NSString stringWithFormat:@"%f",BIGposition2D.latitude] forKey:@"lat"];
+//
+    [param setObject:@"2.3411111" forKey:@"lng"];
+    [param setObject:@"48.8600" forKey:@"lat"];
+    
+    
     [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
         if ([responseObject[@"code"] integerValue] ==1) {
-            
-            if (blockSelf.bottomV ==nil) {
-                [blockSelf.view addSubview:blockSelf.bottomV];
+            [blockSelf.dataArray removeAllObjects];
+            for (NSDictionary *dataDic in responseObject[@"data"]) {
+                MapBottomModel *model = [[MapBottomModel alloc]initWithDic:dataDic];
+                [blockSelf.dataArray addObject:model];
             }
+            
+            
+                [blockSelf.view addSubview:blockSelf.bottomV];
+                if (blockSelf.dataArray.count >0) {
+                    blockSelf.bottomV.model = blockSelf.dataArray[0];
+                    
+                    GMSCameraPosition *position1 = [GMSCameraPosition cameraWithLatitude:[blockSelf.bottomV.model.lat floatValue] longitude:[blockSelf.bottomV.model.lng floatValue] zoom:14];
+                    [blockSelf.mapV animateToCameraPosition:position1];
+            }
+            [blockSelf saoMiaoJieGuo];
         }else{
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
         }

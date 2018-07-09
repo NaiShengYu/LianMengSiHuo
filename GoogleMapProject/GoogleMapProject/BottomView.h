@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MapBottomModel.h"
 @interface BottomView : UIView
 
 @property (nonatomic,strong)UIImageView *imageV;
@@ -17,8 +17,12 @@
 @property (nonatomic,strong)UILabel *topickNumLab;
 
 @property (nonatomic,strong)UILabel *juliLab;
+@property (nonatomic,strong)UILabel * speciesLab;
 
 @property (nonatomic,weak)UIViewController *vc;
 
 @property (nonatomic,assign)CLLocationCoordinate2D coor;
+
+@property (nonatomic,strong)MapBottomModel *model;
+
 @end
