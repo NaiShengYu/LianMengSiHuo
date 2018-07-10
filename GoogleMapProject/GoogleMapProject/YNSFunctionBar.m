@@ -66,7 +66,10 @@
     _lastbut =but;
    
     NSArray *arr = @[@"list_map_scenic",@"list_map_food",@"list_map_shop",@"list_map_hotel"];
+    NSArray *arr1 =@[@"2",@"1",@"3",@"4"];
+
     [CustomAccount sharedCustomAccount].className =arr[but.tag-900];
+    [CustomAccount sharedCustomAccount].classtype =arr1[but.tag-900];
 
     if (self.selectBlock) {
         self.selectBlock(but.tag-900);

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+#import "SearchResultModel.h"
 @interface SearchResultSectionOneCell : UITableViewCell
 @property (nonatomic,strong)UIImageView *imageV;
 
@@ -15,4 +16,5 @@
 
 @property (nonatomic,strong)UILabel *speciesLab;
 
+@property (nonatomic,strong)SearchResultModel *model;
 @end

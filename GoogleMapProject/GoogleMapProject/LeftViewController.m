@@ -111,6 +111,30 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
   
+    if (indexPath.row <4) {
+        WS(blockSelf);
+        NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+        if ([user objectForKey:USERID] ==nil) {
+            
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您还没有登录！" preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
+                
+            }]];
+            
+            [alert addAction:[UIAlertAction actionWithTitle:@"去登陆" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                [blockSelf.homePageVC.navigationController pushViewController:[LoginViewController new] animated:NO];
+                [blockSelf.drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {
+                }];
+            }]];
+            
+            
+            [self presentViewController:alert animated:YES completion:nil];
+            
+            return;
+        }
+    }
+    
+    
     switch (indexPath.row) {
         case 0:
             [self.homePageVC.navigationController pushViewController:[CollectionShopViewController new] animated:NO];

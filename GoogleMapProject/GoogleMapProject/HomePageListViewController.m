@@ -16,6 +16,7 @@
 
 #import "FilterItem.h"
 #import "FilterHeaderModel.h"
+
 @interface HomePageListViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *myTable;
 @property (nonatomic,strong)NSMutableArray *dataArray;
@@ -25,6 +26,12 @@
 
 @property (nonatomic,strong)FilterView *filterV;
 
+//距离
+@property (nonatomic,copy)NSString *raidus;
+//分类
+@property (nonatomic,copy)NSString *list_condition;
+//评分
+@property (nonatomic,copy)NSString *star;
 
 @end
 
@@ -199,7 +206,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.dataArray =[[NSMutableArray alloc]initWithObjects:@"1",@"1",@"1",@"1",@"1",@"1", nil];
+    self.star =@"";
+    self.raidus = @"";
+    self.list_condition = @"";
+    self.dataArray =[[NSMutableArray alloc]init];
  
     self.view.backgroundColor =[UIColor whiteColor];
     [self.view addSubview:self.myTable];
@@ -211,6 +221,8 @@
     [topV.chooseBut addTarget:self action:@selector(chooseBut:) forControlEvents:UIControlEventTouchUpInside];
     topV.vc =self;
     [self.view addSubview:topV];
+    
+    [self makeData];
     
 }
 - (void)viewWillAppear:(BOOL)animated{
@@ -282,6 +294,38 @@
 }
 
 
+- (void)makeData{
+    NSString *url = [NSString stringWithFormat:@"%@app_list.php",BaseURL];
+    DLog(@"url==%@",url);
+    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+    CustomAccount *acc = [CustomAccount sharedCustomAccount];
+    [param setObject:@"list_show" forKey:@"app"];
+    [param setObject:acc.classtype forKey:@"type"];
+    [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.longitude] forKey:@"lng"];
+    [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.latitude] forKey:@"lat"];
+    //距离
+    [param setObject:self.raidus forKey:@"raidus"];
+    //分类
+    [param setObject:self.list_condition forKey:@"list_condition"];
+    //评分
+    [param setObject:self.star forKey:@"star"];
+    
+    //请求起始个数
+    [param setObject:[NSString stringWithFormat:@"%lu",(unsigned long)self.dataArray.count] forKey:@"pageno"];
+
+    
+    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+        if ([responseObject[@"code"] integerValue] ==1) {
+           
+            
+        }else{
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"网络错误"];
+    } isShowHUD:NO];
+    
+}
 
 - (void)goBack{
     [self.navigationController popViewControllerAnimated:YES];

@@ -12,11 +12,12 @@
 #import "ShopCommentSectionZeroCell.h"
 #import "ShopCommentSectionOneCell.h"
 #import "ShopCommentSectionThreeCell.h"
-@interface ShopCommentViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ShopCommentViewController ()<UITableViewDelegate,UITableViewDataSource,CWStarRateViewDelegate>
 @property (nonatomic,strong)UITableView *myTable;
 @property (nonatomic,strong)NSMutableArray *imagesArray;
 @property (nonatomic,strong)NSMutableArray *assetsArray;
 @property (nonatomic,copy)NSString *content;
+@property (nonatomic,assign)NSInteger star;
 @end
 
 @implementation ShopCommentViewController
@@ -38,13 +39,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.myTable];
-    
+    self.star = 0;
     ShopCommentNavBar *navbar =[[ShopCommentNavBar alloc]initWithFrame:CGRectMake(0, 0, screenWigth, MaxY)];
     [self.view addSubview:navbar];
     navbar.centerLab.text = @"评论";
     [navbar.backBaut addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [navbar.rightBut addTarget:self action:@selector(Publish) forControlEvents:UIControlEventTouchUpInside];
     
+}
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = YES;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -88,12 +93,14 @@
     WS(blockSelf);
     if (indexPath.section ==0) {
         ShopCommentSectionZeroCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ShopCommentSectionZeroCell" forIndexPath:indexPath];
+        cell.starRateView.delegate = self;
         return cell;
     }
     
     if (indexPath.section ==1) {
         ShopCommentSectionOneCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ShopCommentSectionOneCell" forIndexPath:indexPath];
         cell.descriptionstr =@"还满意吗？想说的话写下了~~~";
+        cell.textV.text = self.content;
         cell.textChangeBlock =^(NSString *pinglun){
             blockSelf.content =pinglun;
         };
@@ -111,6 +118,12 @@
     };
     
     return cell;
+}
+
+- (void)starRateView:(CWStarRateView *)starRateView scroePercentDidChange:(CGFloat)newScorePercent{
+    
+    self.star = newScorePercent*10/2;
+    DLog(@"%ld",(long)self.star);
 }
 
 - (void)click{
@@ -133,6 +146,64 @@
 
 
 - (void)Publish{
+    
+    WS(blockSelf);
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSString *url = [NSString stringWithFormat:@"%@app_user.php",BaseURL];
+    DLog(@"url==%@",url);
+    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+    [param setObject:@"user_add_comment" forKey:@"app"];
+    [param setObject:[user objectForKey:USERID] forKey:@"userid"];
+    [param setObject:self.type forKey:@"type"];
+    [param setObject:self.Id forKey:@"Id"];
+    [param setObject:[NSString stringWithFormat:@"%ld",(long)self.star] forKey:@"star"];
+    [param setObject:self.content forKey:@"comment"];
+    [param setObject:@"img" forKey:@"comment_img"];
+    
+    NSMutableArray *shopDataArray =[[NSMutableArray alloc]init];
+    for (UIImage *img in self.imagesArray) {
+        NSData *data =UIImageJPEGRepresentation(img, 0.5);
+        [shopDataArray addObject:data];
+    }
+
+            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+            manager.responseSerializer =[AFHTTPResponseSerializer serializer];
+            manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"text/plain", nil];            [SVProgressHUD show];
+            [manager POST:url parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+                
+                [shopDataArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    NSString *filename =[NSString stringWithFormat:@"%lu.jpeg",(unsigned long)idx];
+                    [formData appendPartWithFileData:obj name:@"comment_img[]" fileName:filename mimeType:@"image/jpeg"];
+                }];
+                
+                for (int i =0; i <blockSelf.imagesArray.count; i ++) {
+                    NSString *filename =[NSString stringWithFormat:@"%d.jpeg",i];
+                    [formData appendPartWithFileData:shopDataArray[i] name:@"ad_image[]" fileName:filename mimeType:@"image/jpeg"];
+                }
+                
+              
+                
+            } progress:^(NSProgress * _Nonnull uploadProgress) {
+                
+            } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                [SVProgressHUD dismiss];
+                
+                NSString *str =[[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+                DLog(@"str=%@",str);
+                NSData *resData = [[NSData alloc] initWithData:[str dataUsingEncoding:NSUTF8StringEncoding]];
+                //系统自带JSON解析
+                NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:resData options:NSJSONReadingAllowFragments error:nil];
+                if ([resultDic[@"code"]integerValue] ==1) {
+       
+                    
+                }else{
+                    [SVProgressHUD showErrorWithStatus:resultDic[@"message"]];
+                }
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                DLog(@"error==%@",error);
+                [SVProgressHUD dismiss];
+                
+            }];
     
     
 }

@@ -28,7 +28,6 @@
 }
 @property (nonatomic,strong)GMSMapView *mapV ;
 
-@property (nonatomic,strong)NSMutableArray *markersArray;
 
 @property (nonatomic,strong)BottomView *bottomV;
 
@@ -201,7 +200,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.dataArray = [[NSMutableArray alloc]init];
-    self.markersArray =[[NSMutableArray alloc]init];
     GMSCameraPosition *position = [GMSCameraPosition cameraWithLatitude:-33.86 longitude:151.20 zoom:14];
     _mapV =[GMSMapView mapWithFrame:self.view.bounds camera:position];
     _mapV.myLocationEnabled = YES;
@@ -300,7 +298,6 @@ static int a =0 ;
 
 #pragma mark --检索周围店铺
 - (void)saoMiao{
-   
     [self makeData];
 }
 
@@ -317,10 +314,10 @@ static int a =0 ;
         MapBottomModel *model = self.dataArray[i];
         CustomMarker *marker =[[CustomMarker alloc]init];
         marker.bottomModel = model;
-        marker.position =CLLocationCoordinate2DMake([model.lat floatValue], [model.lng floatValue]);
+        marker.position =CLLocationCoordinate2DMake([model.lat doubleValue], [model.lng doubleValue]);
         marker.title =[NSString stringWithFormat:@"第%d个",i+1];
         //        marker.icon = [UIImage imageNamed:@"25"];\
-        
+
         UILabel *view =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
         view.backgroundColor =[UIColor colorWithRed:156/255.0 green:37/255.0 blue:29/255.0 alpha:1];
         view.layer.cornerRadius =12.5;
@@ -330,10 +327,8 @@ static int a =0 ;
         view.layer.masksToBounds =YES;
         view.textAlignment =NSTextAlignmentCenter;
         marker.iconView =view;
-        
         marker.map =self.mapV;
         
-        [self.markersArray addObject:marker];
         
     }
     
@@ -350,7 +345,7 @@ static int a =0 ;
     CustomMarker *maker1 =(CustomMarker *)marker;
     self.bottomV.coor = marker.position;
     self.bottomV.model = maker1.bottomModel;
-    
+
     [UIView animateWithDuration:0.3 animations:^{
         blockSelf.bottomV.frame =CGRectMake(10, screenHeight -153, screenWigth-20, 153);
     }];

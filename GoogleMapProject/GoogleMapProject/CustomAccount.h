@@ -17,6 +17,9 @@
 //选择的是哪一类（酒店，景点，餐厅，购物）
 @property (nonatomic,copy)NSString *className;
 
+@property (nonatomic,copy)NSString *classtype;
+
+
 
 @property (nonatomic,assign)CLLocationCoordinate2D curCoordinate2D;
 

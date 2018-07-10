@@ -132,6 +132,16 @@
 
     if (indexPath.section >0) {
         ShopInfoViewController *vc = [[ShopInfoViewController alloc]init];
+        if (indexPath.section==1) {
+            HomePageSectionOneModel *model =self.topArray[indexPath.row];
+            vc.type = model.type;
+            vc.Id = model.Id;
+        }
+        if (indexPath.section ==2) {
+            HomePageSectionTowModel *model = self.aroundCityArray[indexPath.row];
+//            vc.type = model.type;
+            vc.Id = model.Id;
+        }
         [self.navigationController pushViewController:vc animated:YES];
 
     }

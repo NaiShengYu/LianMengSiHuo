@@ -120,8 +120,10 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSArray *arr = @[@"list_map_scenic",@"list_map_food",@"list_map_shop",@"list_map_hotel"];
+    NSArray *arr1 =@[@"2",@"1",@"3",@"4"];
     [self.VC.navigationController pushViewController:[HomePageListViewController new] animated:YES];
     [CustomAccount sharedCustomAccount].className =arr[indexPath.row];
+    [CustomAccount sharedCustomAccount].classtype =arr1[indexPath.row];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 #pragma mark --让cell的横线到最左边

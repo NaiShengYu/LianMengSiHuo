@@ -31,12 +31,12 @@
         _titleLab =[UILabel new];
         [self addSubview:_titleLab];
         [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.offset =20;
+            make.top.offset =23;
             make.left.equalTo(blockSelf.imageV.mas_right).offset =10;
             make.right.offset =-10;
             make.height.mas_lessThanOrEqualTo(@50);
         }];
-        _titleLab.numberOfLines =2;
+        _titleLab.numberOfLines =3;
         _titleLab.minimumFontSize =12;
         _titleLab.text =@"Le cafe to you";
         
@@ -46,7 +46,14 @@
     }
     
     return self;
+}
+
+- (void)setModel:(SearchResultModel *)model{
+    _model = model;
     
+    [_imageV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",allImageURL,model.img]]];
+    _titleLab.text =[NSString stringWithFormat:@"%@",model.name];
+        
 }
 
 @end

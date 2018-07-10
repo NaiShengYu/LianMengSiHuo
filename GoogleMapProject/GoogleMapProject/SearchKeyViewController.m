@@ -52,11 +52,8 @@
     [self.view addSubview:navView];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    if (self.dataArray.count ==0) {
-//        return 0;
-//    }
-//    return self.dataArray.count+1;
-    return self.dataArray.count;
+   
+    return self.dataArray.count+1;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 0.1;
@@ -81,29 +78,56 @@
     }
     cell.detailTextLabel.textColor =[UIColor blackColor];
    
-//    if (indexPath.row==0) {
-//        cell.imageView.image =[UIImage imageNamed:@"首页-搜索s_03_03"];
-//        cell.detailTextLabel.text =[NSString stringWithFormat:@"【%@】",[CustomAccount sharedCustomAccount].cityName];
-//        cell.textLabel.text =@"附近";
-//    }else{
-        cell.imageView.image =[UIImage imageNamed:@"详情_11"];
-        NSDictionary *dic =self.dataArray[indexPath.row];
+    if (indexPath.row==0) {
+        cell.imageView.image =[UIImage imageNamed:@"首页-搜索s_03_03"];
+        cell.detailTextLabel.text =[NSString stringWithFormat:@"【%@】",[CustomAccount sharedCustomAccount].cityName];
+        cell.textLabel.text =@"附近";
+    }else{
+        NSDictionary *dic =self.dataArray[indexPath.row-1];
         cell.detailTextLabel.text =@"";
          cell.textLabel.text = dic[@"res"];
         cell.textLabel.numberOfLines =2;
         cell.textLabel.font =FontSize(15);
         cell.textLabel.adjustsFontSizeToFitWidth = YES;
-//    }
+        switch ([dic[@"type"] integerValue]) {
+            case 1:
+                cell.imageView.image =[UIImage imageNamed:@"首页_06"];
+                break;
+            case 2:
+                cell.imageView.image =[UIImage imageNamed:@"首页_03"];
+
+                break;
+            case 3:
+                cell.imageView.image =[UIImage imageNamed:@"首页_09"];
+
+                break;
+            case 4:
+                cell.imageView.image =[UIImage imageNamed:@"首页_13"];
+
+                break;
+            case 5:
+                cell.imageView.image =[UIImage imageNamed:@"详情_11"];
+
+                break;
+           
+            default:
+                break;
+        }
+        
+        
+        
+        
+    }
     
     return cell;
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary *dic =self.dataArray[indexPath.row];
-    SearchResultViewController *vc = [[SearchResultViewController alloc]init];
-    vc.searchKey =dic[@"res"];
-    [self.navigationController pushViewController:vc animated:YES];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    NSDictionary *dic =self.dataArray[indexPath.row];
+//    SearchResultViewController *vc = [[SearchResultViewController alloc]init];
+//    vc.searchKey =dic[@"res"];
+//    [self.navigationController pushViewController:vc animated:YES];
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 #pragma mark --让cell的横线到最左边
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -127,8 +151,12 @@
     
     if ([string isEqualToString:@"\n"] &&textField.returnKeyType ==UIReturnKeySearch){
         DLog(@"搜索");
-        [self makeData];
+        
+        SearchResultViewController *vc = [[SearchResultViewController alloc]init];
+        vc.searchKey =self.searchKey;
+        [self.navigationController pushViewController:vc animated:YES];
         [self.view endEditing:YES];
+        
         //判断输入的字是否是回车，即按下return
         //在这里做你响应return键的代码
         return NO; //这里返回NO，就代表return键值失效，即页面上按下return，不会出现换行，如果为yes，则输入页面会换行
@@ -139,6 +167,9 @@
 
 - (void)textChange:(UITextField *)textF{
     self.searchKey = textF.text;
+    if (self.searchKey.length >2 && self.searchKey !=nil) {
+        [self makeData];
+    }
 }
 
 
