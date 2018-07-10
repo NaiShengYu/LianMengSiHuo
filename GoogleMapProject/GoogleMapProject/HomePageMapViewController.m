@@ -325,19 +325,30 @@
     _marker.icon =[UIImage imageNamed:@"25"];
     _marker.draggable =YES;
     _marker.map = self.mapV;
+
+ 
     
     for (int i =0 ; i <self.dataArray.count; i ++) {
         MapBottomModel *model = self.dataArray[i];
         GMSMarker *marker =[[GMSMarker alloc]init];
 //        marker.bottomModel = model;
+       
+        
+        double c = arc4random()%2;
+        double d = pow(-1, c);
+        CGFloat a = d *(arc4random() % 999)/100000.0;
+        CGFloat b = d * (arc4random() % 999)/100000.0;
+
+        marker.position =CLLocationCoordinate2DMake(BIGposition2D.latitude +a, BIGposition2D.longitude+b);
+        
+        double lat = [model.lat doubleValue];
+        double lng = [model.lng doubleValue];
+        
+//        marker.position =CLLocationCoordinate2DMake(lat+a,lng+b);
         
     
         
-        
-        marker.position =CLLocationCoordinate2DMake([model.lat floatValue], [model.lng floatValue]);
-        
-        
-        DLog(@"i===%d___ lat===%@----lng===%@",i,model.lat,model.lng)
+        DLog(@"i===%d___ lat===%f----lng===%f",i,lat,lng)
         ;
         marker.title =[NSString stringWithFormat:@"第%d个",i+1];
         //        marker.icon = [UIImage imageNamed:@"25"];\
@@ -364,13 +375,13 @@
         
         return YES;
     }
-    WS(blockSelf)
-    CustomMarker *maker1 =(CustomMarker *)marker;
-    self.bottomV.coor = marker.position;
-    self.bottomV.model = maker1.bottomModel;
-    [UIView animateWithDuration:0.3 animations:^{
-        blockSelf.bottomV.frame =CGRectMake(10, screenHeight -153-TabbarHeight, screenWigth-20, 153);
-    }];
+//    WS(blockSelf)
+//    CustomMarker *maker1 =(CustomMarker *)marker;
+//    self.bottomV.coor = marker.position;
+//    self.bottomV.model = maker1.bottomModel;
+//    [UIView animateWithDuration:0.3 animations:^{
+//        blockSelf.bottomV.frame =CGRectMake(10, screenHeight -153-TabbarHeight, screenWigth-20, 153);
+//    }];
     
     return NO;
 }
@@ -434,7 +445,6 @@
     //
     [param setObject:@"2.3411111" forKey:@"lng"];
     [param setObject:@"48.8600" forKey:@"lat"];
-    
     
     [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
         if ([responseObject[@"code"] integerValue] ==1) {

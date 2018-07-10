@@ -46,22 +46,17 @@
 }
 
 //post 图片
-+ (void)HttpPostImageCallBack:(NSString *)Url Parameters:(NSDictionary *)dict success:(httpSuccess)success failure:(httpFailure)failure{
++ (void)HttpPostImageCallBack:(NSString *)Url Parameters:(NSDictionary *)dict ImageArrays:(NSMutableArray *)imagesArray success:(httpSuccess)success failure:(httpFailure)failure{
 
-    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
-    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        if (status ==AFNetworkReachabilityStatusNotReachable) {
-            [SVProgressHUD showErrorWithStatus:@"网络无连接!"];
-            DLog(@"网络连接不上");
-        }else{
+   
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             manager.requestSerializer = [AFHTTPRequestSerializer serializer];
             manager.responseSerializer = [AFHTTPResponseSerializer serializer];
             manager.responseSerializer.acceptableContentTypes =  [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"charset=utf-8",@"text/css",@"text/fild", nil];
             [SVProgressHUD show];
             
-            [manager POST:Url parameters:dict progress:^(NSProgress * _Nonnull uploadProgress) {
+            [manager POST:Url parameters:dict
+                 progress:^(NSProgress * _Nonnull uploadProgress) {
                 
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 [SVProgressHUD dismiss];
@@ -85,8 +80,7 @@
                 
             }];
             
-        }
-    }];
+      
 }
 // get  请求
 + (void)HttpGetCallBack:(NSString*)Url  Parameters:(NSDictionary*)dict success:(httpSuccess)success failure:(httpFailure)failure isShowHUD:(BOOL)animation

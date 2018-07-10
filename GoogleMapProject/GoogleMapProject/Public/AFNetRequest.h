@@ -21,7 +21,7 @@ typedef void (^httpFailure)(NSError *error);
 
 
 
-+ (void)HttpPostImageCallBack:(NSString*)Url  Parameters:(NSDictionary*)dict success:(httpSuccess)success failure:(httpFailure)failure;
++ (void)HttpPostImageCallBack:(NSString*)Url  Parameters:(NSDictionary*)dict ImageArrays:(NSMutableArray *)imagesArray success:(httpSuccess)success failure:(httpFailure)failure;
 
 + (void)httpGetAsystemWithUrl:(NSString *)url success:(httpSuccess)success failure:(httpFailure)failure isShowHUD:(BOOL)animation;
 @end

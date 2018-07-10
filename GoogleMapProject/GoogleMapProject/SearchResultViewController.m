@@ -200,7 +200,26 @@
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    SearchResultModel *model;
+    switch (indexPath.section) {
+        case 1:
+            model = self.foodsArray[indexPath.row];
+            break;
+        case 2:
+            model = self.scenicsArray[indexPath.row];
+            break;
+        case 3:
+            model = self.shopsArray[indexPath.row];
+            break;
+        case 4:
+            model = self.hotelsArray[indexPath.row];
+            break;
+        default:
+            break;
+    }
     ShopInfoViewController *vc = [[ShopInfoViewController alloc]init];
+    vc.type = model.type;
+    vc.Id = model.Id;
     [self.navigationController pushViewController:vc animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

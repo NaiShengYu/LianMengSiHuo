@@ -182,6 +182,10 @@
         return;
     }
     ShopInfoViewController *vc = [[ShopInfoViewController alloc]init];
+    CollectionShopModel *model =self.dataArray[indexPath.row];
+    vc.type = model.type;
+    vc.Id = model.Id;
+    
     [self.navigationController pushViewController:vc animated:YES];
 
  

@@ -13,6 +13,8 @@
 #import "ShopInfoTableViewCell.h"
 #import "ShopInfoFooter.h"
 #import "ShopInfoNavBar.h"
+
+#import "LoginViewController.h"
 @interface ShopInfoViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong)UITableView *myTable;
@@ -143,7 +145,29 @@
 }
 
 - (void)commentBut{
+    WS(blockSelf);
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    if ([user objectForKey:USERID] ==nil) {
+        
+       UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您还没有登录！" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }]];
+        
+        [alert addAction:[UIAlertAction actionWithTitle:@"去登陆" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            [self.navigationController pushViewController:[LoginViewController new] animated:NO];
+        }]];
+        
+        
+        [self presentViewController:alert animated:YES completion:nil];
+ 
+        return;
+  
+    }
+    
     ShopCommentViewController *commentVC =[[ShopCommentViewController alloc]init];
+    commentVC.type = self.type;
+    commentVC.Id = self.Id;
     [self.navigationController pushViewController:commentVC animated:YES];
     
 }
