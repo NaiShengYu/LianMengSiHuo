@@ -175,7 +175,7 @@
     NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
     [param setObject:@"user_forget_pwd" forKey:@"app"];
     [param setObject:self.phoneNum forKey:@"phone"];
-    [param setObject:_secondPasswordTF forKey:@"new_pwd"];
+    [param setObject:_secondPasswordTF.text forKey:@"new_pwd"];
 
     [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
         if ([responseObject[@"code"] integerValue] ==1) {
