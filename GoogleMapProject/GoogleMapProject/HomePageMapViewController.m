@@ -328,12 +328,20 @@
     
     for (int i =0 ; i <self.dataArray.count; i ++) {
         MapBottomModel *model = self.dataArray[i];
-        CustomMarker *marker =[[CustomMarker alloc]init];
-        marker.bottomModel = model;
+        GMSMarker *marker =[[GMSMarker alloc]init];
+//        marker.bottomModel = model;
+        
+    
+        
+        
         marker.position =CLLocationCoordinate2DMake([model.lat floatValue], [model.lng floatValue]);
+        
+        
+        DLog(@"i===%d___ lat===%@----lng===%@",i,model.lat,model.lng)
+        ;
         marker.title =[NSString stringWithFormat:@"第%d个",i+1];
         //        marker.icon = [UIImage imageNamed:@"25"];\
-        
+
         UILabel *view =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
         view.backgroundColor =[UIColor colorWithRed:156/255.0 green:37/255.0 blue:29/255.0 alpha:1];
         view.layer.cornerRadius =12.5;
@@ -436,11 +444,9 @@
                 [blockSelf.dataArray addObject:model];
             }
             
-            
             [blockSelf.view addSubview:blockSelf.bottomV];
             if (blockSelf.dataArray.count >0) {
                 blockSelf.bottomV.model = blockSelf.dataArray[0];
-                
                 GMSCameraPosition *position1 = [GMSCameraPosition cameraWithLatitude:[blockSelf.bottomV.model.lat floatValue] longitude:[blockSelf.bottomV.model.lng floatValue] zoom:14];
                 [blockSelf.mapV animateToCameraPosition:position1];
             }

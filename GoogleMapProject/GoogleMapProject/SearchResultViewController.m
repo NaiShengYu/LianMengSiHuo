@@ -12,6 +12,7 @@
 #import "SearchResultSectionOneCell.h"
 #import "SearchResultFooter.h"
 #import "ShopInfoViewController.h"
+#import "SearchResultModel.h"
 @interface SearchResultViewController()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *myTable;
 @property (nonatomic,strong)NSMutableArray *citysArray;
@@ -26,7 +27,10 @@
 @property (nonatomic,assign)BOOL shopsIsMore;
 @property (nonatomic,assign)BOOL hotelsIsMore;
 
-
+@property (nonatomic,assign)NSInteger foodsNum;
+@property (nonatomic,assign)NSInteger scenicsNum;
+@property (nonatomic,assign)NSInteger shopsNum;
+@property (nonatomic,assign)NSInteger hotelsNum;
 
 @end
 
@@ -50,7 +54,10 @@
     self.shopsIsMore = YES;
     self.hotelsIsMore = YES;
     self.scenicsIsMore = YES;
-    
+    self.foodsNum = 0;
+    self.shopsNum = 0;
+    self.scenicsNum = 0;
+    self.hotelsNum = 0;
     
     [self ziDingYiDaoHangLan];
     self.citysArray =[[NSMutableArray alloc]init];
@@ -81,8 +88,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section==0) return self.citysArray.count;
     else if (section==1) return self.foodsArray.count;
-    else if (section==1) return self.scenicsArray.count;
-    else if (section==1) return self.shopsArray.count;
+    else if (section==2) return self.scenicsArray.count;
+    else if (section==3) return self.shopsArray.count;
     else  return self.hotelsArray.count;
    
 }
@@ -166,11 +173,29 @@
     
     if (indexPath.section ==0) {
         SearchResultSectionZeroCell *cell =[tableView dequeueReusableCellWithIdentifier:@"SearchResultSectionZeroCell" forIndexPath:indexPath];
-        cell.textLabel.numberOfLines =0;
+        cell.model = self.citysArray[indexPath.row];
         return cell;
     }
     
     SearchResultSectionOneCell *cell =[tableView dequeueReusableCellWithIdentifier:@"SearchResultSectionOneCell" forIndexPath:indexPath];
+    
+    switch (indexPath.section) {
+        case 1:
+            cell.model = self.foodsArray[indexPath.row];
+            break;
+        case 2:
+            cell.model = self.scenicsArray[indexPath.row];
+            break;
+        case 3:
+            cell.model = self.shopsArray[indexPath.row];
+            break;
+        case 4:
+            cell.model = self.hotelsArray[indexPath.row];
+            break;
+        default:
+            break;
+    }
+    
 
     return cell;
 }
@@ -207,8 +232,48 @@
     WS(blockSelf);
     [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
         if ([responseObject[@"code"] integerValue] ==1) {
+            NSDictionary *dataDic = responseObject[@"data"][0];
+            NSDictionary *cityDic = dataDic[@"city"][0];
+            NSDictionary *foodDic = dataDic[@"food"][0];
+            NSDictionary *scenicDic = dataDic[@"scenic"][0];
+            NSDictionary *shopDic = dataDic[@"shop"][0];
+            NSDictionary *hotelDic = dataDic[@"hotel"][0];
+            for (NSDictionary *cityInfoDic in cityDic[@"city_res"]) {
+                SearchResultModel *model = [[SearchResultModel alloc]initWithDic:cityInfoDic];
+                [blockSelf.citysArray addObject:model];
+            }
+//            if (blockSelf.citysArray.count >=[cityDic[@"city_num"] integerValue]) {
+//                blockSelf.foodsIsMore = NO;
+//            }
             
+            for (NSDictionary *foodInfoDic in foodDic[@"food_res"]) {
+                SearchResultModel *model = [[SearchResultModel alloc]initWithDic:foodInfoDic];
+                [blockSelf.foodsArray addObject:model];
+            }
+            blockSelf.foodsNum =[foodDic[@"food_num"] integerValue];
+           
+            
+            for (NSDictionary *cityInfoDic in scenicDic[@"scenic_res"]) {
+                SearchResultModel *model = [[SearchResultModel alloc]initWithDic:cityInfoDic];
+                [blockSelf.scenicsArray addObject:model];
+            }
+            blockSelf.scenicsNum =[scenicDic[@"scenic_num"] integerValue];
+           
+            
+            for (NSDictionary *cityInfoDic in shopDic[@"shop_res"]) {
+                SearchResultModel *model = [[SearchResultModel alloc]initWithDic:cityInfoDic];
+                [blockSelf.shopsArray addObject:model];
+            }
+            blockSelf.shopsNum =[shopDic[@"shop_num"] integerValue];
           
+            
+            for (NSDictionary *cityInfoDic in hotelDic[@"hotel_res"]) {
+                SearchResultModel *model = [[SearchResultModel alloc]initWithDic:cityInfoDic];
+                [blockSelf.hotelsArray addObject:model];
+            }
+            blockSelf.hotelsNum =[hotelDic[@"hotel_num"] integerValue];
+          
+            [blockSelf hasMore];
             [blockSelf.myTable reloadData];
         }else{
             
@@ -233,7 +298,6 @@
     switch (but.tag-1000) {
         case 1:
             [param setObject:[NSString stringWithFormat:@"%ld",self.foodsArray.count] forKey:@"pageno"];
-
             break;
         case 2:
             [param setObject:[NSString stringWithFormat:@"%ld",self.scenicsArray.count] forKey:@"pageno"];
@@ -253,7 +317,30 @@
     WS(blockSelf);
     [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
         if ([responseObject[@"code"] integerValue] ==1) {
+            for (NSDictionary *dic in responseObject[@"data"]) {
+                SearchResultModel *model = [[SearchResultModel alloc]initWithDic:dic];
+
+                switch (but.tag-1000) {
+                    case 1:
+                        [blockSelf.foodsArray addObject:model];
+
+                        break;
+                    case 2:
+                        [blockSelf.scenicsArray addObject:model];
+                        break;
+                    case 3:
+                        [blockSelf.shopsArray addObject:model];
+                        break;
+                    case 4:
+                        [blockSelf.hotelsArray addObject:model];
+                        
+                        break;
+                    default:
+                        break;
+                }
+            }
             
+            [blockSelf hasMore];
             
             [blockSelf.myTable reloadData];
         }else{
@@ -265,7 +352,25 @@
     } failure:^(NSError *error) {
         
     } isShowHUD:NO];
- 
+}
+
+- (void)hasMore{
+    
+    if (self.hotelsArray.count >=self.hotelsNum) {
+        self.hotelsIsMore = NO;
+    }
+    
+    if (self.shopsArray.count >=self.shopsNum) {
+        self.shopsIsMore = NO;
+    }
+    if (self.scenicsArray.count >=self.scenicsNum) {
+        self.scenicsIsMore = NO;
+    }
+    
+    if (self.foodsArray.count >=self.foodsNum) {
+        self.foodsIsMore = NO;
+    }
+    
 }
 
 #pragma mark --自定义导航栏

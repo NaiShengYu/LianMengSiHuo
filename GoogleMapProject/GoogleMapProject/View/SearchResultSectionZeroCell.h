@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SearchResultModel.h"
 
 @interface SearchResultSectionZeroCell : UITableViewCell
 
 @property (nonatomic,strong)UIImageView *imageV;
 
 @property (nonatomic,strong)UILabel *titleLab;
+@property (nonatomic,strong)SearchResultModel *model;
 
 
 @end

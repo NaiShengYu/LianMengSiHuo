@@ -48,7 +48,7 @@
             make.left.equalTo(blockSelf.imageV.mas_right).offset =10;
             make.size.mas_equalTo(CGSizeMake(16.1, 16.1));
         }];
-        
+        img1.tag =1001;
         UIImageView *img2 = [UIImageView new];
         img2.image =[UIImage imageNamed:@"32"];
         [self addSubview:img2];
@@ -57,7 +57,7 @@
             make.left.equalTo(img1.mas_right).offset =1;
             make.size.mas_equalTo(CGSizeMake(16.1, 16.1));
         }];
-        
+        img2.tag =1002;
         UIImageView *img3 = [UIImageView new];
         img3.image =[UIImage imageNamed:@"32"];
         [self addSubview:img3];
@@ -66,6 +66,7 @@
             make.left.equalTo(img2.mas_right).offset =1;
             make.size.mas_equalTo(CGSizeMake(16.1, 16.1));
         }];
+        img3.tag =1003;
         UIImageView *img4 = [UIImageView new];
         img4.image =[UIImage imageNamed:@"32"];
         [self addSubview:img4];
@@ -74,6 +75,7 @@
             make.left.equalTo(img3.mas_right).offset =1;
             make.size.mas_equalTo(CGSizeMake(16.1, 16.1));
         }];
+        img4.tag =1004;
         UIImageView *img5 = [UIImageView new];
         img5.image =[UIImage imageNamed:@"34"];
         [self addSubview:img5];
@@ -82,7 +84,7 @@
             make.left.equalTo(img4.mas_right).offset =1;
             make.size.mas_equalTo(CGSizeMake(16.1, 16.1));
         }];
-        
+        img5.tag =1005;
         
         _speciesLab =[UILabel new];
         [self.contentView addSubview:_speciesLab];
@@ -90,6 +92,7 @@
             make.top.equalTo(img5.mas_bottom).offset =3;
             make.left.equalTo(blockSelf.imageV.mas_right).offset =10;
             make.right.offset =-10;
+            make.bottom.equalTo(blockSelf.imageV).offset =-2;
         }];
         _speciesLab.numberOfLines =2;
         _speciesLab.font =FontSize(11);
@@ -106,5 +109,29 @@
     
     
 }
+
+- (void)setModel:(SearchResultModel *)model{
+    _model = model;
+    
+    [_imageV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",allImageURL,model.img]]];
+    _titleLab.text =[NSString stringWithFormat:@"%@",model.name];
+    
+   
+    //类型是餐厅和购物的时候显示人均
+    _speciesLab.text = [NSString stringWithFormat:@"%@",model.blue];
+    
+    for(int i =0; i <5;i ++){
+        UIImageView *img = [self.contentView viewWithTag:1001+i];
+        img.image = [UIImage imageNamed:@"34"];
+    }
+    
+    for(int i =0; i <[model.star integerValue];i ++){
+        UIImageView *img = [self.contentView viewWithTag:1001+i];
+        img.image = [UIImage imageNamed:@"32"];
+    }
+    
+    
+}
+
 
 @end

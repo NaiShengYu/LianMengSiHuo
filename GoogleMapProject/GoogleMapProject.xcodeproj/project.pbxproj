@@ -49,6 +49,7 @@
 		26A608C620E1251300B677FF /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A608C520E1251300B677FF /* ChangePasswordViewController.m */; };
 		C908C6E120F3443E0090E2B1 /* MapBottomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C908C6E020F3443E0090E2B1 /* MapBottomModel.m */; };
 		C908C6E420F355B20090E2B1 /* CustomMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = C908C6E320F355B20090E2B1 /* CustomMarker.m */; };
+		C908C6E720F483280090E2B1 /* SearchResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C908C6E620F483280090E2B1 /* SearchResultModel.m */; };
 		C938504720EC9F85007AF5A7 /* YFScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = C938504320EC9F85007AF5A7 /* YFScrollView.m */; };
 		C938504820EC9F85007AF5A7 /* YFScaleScrollViewView.m in Sources */ = {isa = PBXBuildFile; fileRef = C938504620EC9F85007AF5A7 /* YFScaleScrollViewView.m */; };
 		C938504B20ECAD10007AF5A7 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C938504A20ECAD10007AF5A7 /* TestViewController.m */; };
@@ -181,6 +182,8 @@
 		C908C6E020F3443E0090E2B1 /* MapBottomModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapBottomModel.m; sourceTree = "<group>"; };
 		C908C6E220F355B20090E2B1 /* CustomMarker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomMarker.h; sourceTree = "<group>"; };
 		C908C6E320F355B20090E2B1 /* CustomMarker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomMarker.m; sourceTree = "<group>"; };
+		C908C6E520F483280090E2B1 /* SearchResultModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultModel.h; sourceTree = "<group>"; };
+		C908C6E620F483280090E2B1 /* SearchResultModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultModel.m; sourceTree = "<group>"; };
 		C938504320EC9F85007AF5A7 /* YFScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YFScrollView.m; sourceTree = "<group>"; };
 		C938504420EC9F85007AF5A7 /* YFScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YFScrollView.h; sourceTree = "<group>"; };
 		C938504520EC9F85007AF5A7 /* YFScaleScrollViewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YFScaleScrollViewView.h; sourceTree = "<group>"; };
@@ -525,6 +528,8 @@
 				C908C6E020F3443E0090E2B1 /* MapBottomModel.m */,
 				C908C6E220F355B20090E2B1 /* CustomMarker.h */,
 				C908C6E320F355B20090E2B1 /* CustomMarker.m */,
+				C908C6E520F483280090E2B1 /* SearchResultModel.h */,
+				C908C6E620F483280090E2B1 /* SearchResultModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -701,6 +706,7 @@
 				C977133D20E32326007AE5F0 /* ShopCommentNavBar.m in Sources */,
 				267BBF4320D913760005AE5A /* LoginViewController.m in Sources */,
 				C908C6E420F355B20090E2B1 /* CustomMarker.m in Sources */,
+				C908C6E720F483280090E2B1 /* SearchResultModel.m in Sources */,
 				265F8D1D20EE5C9B00620F3E /* RegistSecondViewController.m in Sources */,
 				265F8D2020EE69BE00620F3E /* CommentModel.m in Sources */,
 				267BBF4920D92B450005AE5A /* FogotViewController.m in Sources */,
