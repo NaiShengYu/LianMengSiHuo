@@ -12,10 +12,6 @@
 
 @interface FiterOtherCell()
 
-{
-    NSInteger count;
-    
-}
 
 @property (nonatomic,strong)NSMutableArray *butsArray;
 
@@ -38,7 +34,7 @@
         return _butsArray;
     }
     _butsArray = [[NSMutableArray alloc]init];
-    for (int i =0; i <30; i ++) {
+    for (int i =0; i <35; i ++) {
         UIButton *but =[[UIButton alloc]init];
         but.tag =800+i;
         but.backgroundColor =[UIColor whiteColor];
@@ -49,7 +45,7 @@
         [but setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         [but setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
         [but setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        but.titleLabel.font =[UIFont systemFontOfSize:15];
+        but.titleLabel.font =[UIFont systemFontOfSize:13];
         [_butsArray addObject:but];
     }
     return _butsArray;
@@ -62,18 +58,16 @@
     }
     _AllTabPagArray =AllTabPagArray;
     
-    if (count >0) {
-        for (int i =0; i <count; i ++) {
-            UIButton *but =self.butsArray[i];
-            [but removeFromSuperview];
-        }
-    }
+    
     CGFloat Y =0.0;
     CGFloat X = 0.0 ;
     for (int i=0; i <AllTabPagArray.count; i ++) {
+        if (i>=self.butsArray.count) {
+            return;
+        }
         FilterItem *item =self.AllTabPagArray[i];
-        NSString *title =item.title;
-        NSAttributedString *butedStr =[[NSAttributedString alloc]initWithString:title attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]}];
+        NSString *title =item.titleAndNum;
+        NSAttributedString *butedStr =[[NSAttributedString alloc]initWithString:title attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]}];
         CGRect rect =[butedStr boundingRectWithSize:CGSizeMake(screenWigth-20, 30) options:NSStringDrawingUsesFontLeading context:nil];
         UIButton *but =self.butsArray[i];
         CGFloat W =rect.size.width ;

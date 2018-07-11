@@ -83,7 +83,8 @@
 
         if (placemark!=nil) {
             [CustomAccount sharedCustomAccount].cityName = placemark.addressDictionary[@"City"];
-            
+            [CustomAccount sharedCustomAccount].currentCityName = placemark.addressDictionary[@"City"];
+
             [[NSNotificationCenter defaultCenter]postNotificationName:@"getCityName" object:nil];
         }
         

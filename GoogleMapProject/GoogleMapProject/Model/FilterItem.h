@@ -16,4 +16,12 @@
 
 @property (nonatomic,copy)NSString *type;
 
+@property (nonatomic,copy)NSString *num;
+
+@property (nonatomic,copy)NSString *Id;
+
+@property (nonatomic,copy)NSString *titleAndNum;
+
+- (instancetype)initWithDic:(NSDictionary *)dic;
+
 @end

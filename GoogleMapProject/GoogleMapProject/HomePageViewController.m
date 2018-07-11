@@ -11,6 +11,7 @@
 
 #import "HomePageNavView.h"
 #import "HomePageSectionZeroCell.h"
+#import "HomePageSectionZeroTypeTowCell.h"
 #import "HomePageSectionOneCell.h"
 #import "HomePageSecitonThreeCell.h"
 #import "HomePageSectionOneheader.h"
@@ -40,6 +41,7 @@
         [_collectionV registerClass:[HomePageSectionOneheader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomePageSectionOneheader"];
         [_collectionV registerClass:[HomePageSectionTowheader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomePageSectionTowheader"];
         [_collectionV registerClass:[HomePageSectionZeroCell class] forCellWithReuseIdentifier:@"HomePageSectionZeroCell"];
+        [_collectionV registerClass:[HomePageSectionZeroTypeTowCell class] forCellWithReuseIdentifier:@"HomePageSectionZeroTypeTowCell"];
         [_collectionV registerClass:[HomePageSectionOneCell class] forCellWithReuseIdentifier:@"HomePageSectionOneCell"];
         [_collectionV registerClass:[HomePageSecitonThreeCell class] forCellWithReuseIdentifier:@"HomePageSecitonThreeCell"];
 
@@ -51,18 +53,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor whiteColor];
-    
     self.topArray =[[NSMutableArray alloc]init];
     self.aroundCityArray =[[NSMutableArray alloc]init];
-
     [self creatNav];
-    
     if ([CustomAccount sharedCustomAccount].cityName ==nil ||[CustomAccount sharedCustomAccount].cityName.length ==0) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCityName) name:@"getCityName" object:nil];
     }else{
         [self makeData];
     }
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(makeData) name:@"selectCity" object:nil];
     
 }
 - (void)viewWillAppear:(BOOL)animated{
@@ -81,6 +80,7 @@
 - (void)creatNav{
     HomePageNavView *navView = [[HomePageNavView alloc]initWithFrame:CGRectMake(0, 0, screenWigth, MaxY)];
     navView.vc =self;
+    [navView.rightBut addTarget:self action:@selector(changeLocation) forControlEvents:UIControlEventTouchUpInside];
     [navView.backBut addTarget:self action:@selector(showLeftVC) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:navView];
 }
@@ -111,6 +111,11 @@
 }
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section ==0) {
+        if ([[CustomAccount sharedCustomAccount].city_id isEqual:[NSNull null]]) {
+            HomePageSectionZeroTypeTowCell *cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"HomePageSectionZeroTypeTowCell" forIndexPath:indexPath];
+            return cell;
+        }
+        
         HomePageSectionZeroCell *cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"HomePageSectionZeroCell" forIndexPath:indexPath];
         cell.VC =self;
         return cell;
@@ -149,7 +154,14 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section ==0)return CGSizeMake(screenWigth, 300);
+    if (indexPath.section ==0){
+        if ([[CustomAccount sharedCustomAccount].city_id isEqual:[NSNull null]]) {
+            return CGSizeMake(screenWigth, screenWigth*480/1080);
+        }
+        return CGSizeMake(screenWigth, 300);
+
+    }
+        
     else if (indexPath.section ==1)return CGSizeMake(screenWigth-30, 190);
     else return CGSizeMake((screenWigth-40)/3, (screenWigth-40)/3/8*5+50);
 }
@@ -161,7 +173,6 @@
 }
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     if (section ==0) {
-        
         return UIEdgeInsetsMake(0, 0, 10, 0);
     }else return UIEdgeInsetsMake(10, 10, 10, 10);
 }
@@ -188,11 +199,17 @@
     [param setObject:acc.cityName forKey:@"city_cn"];
     [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.longitude] forKey:@"lng"];
     [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.latitude] forKey:@"lat"];
-    [param setObject:@"" forKey:@"city_en"];
+    if (acc.cityEnName ==nil) {
+        acc.cityEnName =@"";
+    }
+    [param setObject:acc.cityEnName forKey:@"city_en"];
 
     [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
         if ([responseObject[@"code"] integerValue] ==1) {
+            [blockSelf.topArray removeAllObjects];
+            [blockSelf.aroundCityArray removeAllObjects];
             NSDictionary *dataDic =responseObject[@"data"][0];
+            acc.city_id = dataDic[@"city_id"];
             for (NSDictionary *topDic in dataDic[@"top"]) {
                 HomePageSectionOneModel *model = [[HomePageSectionOneModel alloc]initWithDic:topDic];
                 [blockSelf.topArray addObject:model];
@@ -201,10 +218,10 @@
                 HomePageSectionTowModel *model = [[HomePageSectionTowModel alloc]initWithDic:cityDic];
                 [blockSelf.aroundCityArray addObject:model];
             }
-
+            [blockSelf.collectionV removeFromSuperview];
+            blockSelf.collectionV =nil;
             [blockSelf.view addSubview:blockSelf.collectionV];
           
-            
         }else{
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
         }
@@ -221,5 +238,11 @@
 - (void)getCityName{
     [self makeData];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"getCityName" object:nil];
+}
+
+- (void)changeLocation{
+    [CustomAccount sharedCustomAccount].cityName = [CustomAccount sharedCustomAccount].currentCityName;
+    [CustomAccount sharedCustomAccount].cityEnName = @"";
+    [self makeData];
 }
 @end

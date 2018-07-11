@@ -79,8 +79,8 @@
         CGFloat X = 0.0 ;
         for (int i=0; i <model.itemsArray.count; i ++) {
             FilterItem *item =model.itemsArray[i];
-            NSString *title =item.title;
-            NSAttributedString *butedStr =[[NSAttributedString alloc]initWithString:title attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]}];
+            NSString *title =item.titleAndNum;
+            NSAttributedString *butedStr =[[NSAttributedString alloc]initWithString:title attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]}];
             
             CGSize size =[butedStr boundingRectWithSize:CGSizeMake(screenWigth-20, 30) options:NSStringDrawingUsesFontLeading context:nil].size;
             CGFloat W =size.width ;

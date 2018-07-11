@@ -10,4 +10,19 @@
 
 @implementation FilterItem
 
+- (instancetype)initWithDic:(NSDictionary *)dic{
+    
+    self = [super init];
+    if (self) {
+        _isSelect = NO;
+        _title = dic[@"name"];
+        _num = dic[@"num"];
+        _Id = dic[@"Id"];
+        _type = dic[@"type"];
+        _titleAndNum = [NSString stringWithFormat:@"%@ %@",_title,_num];
+    }
+    
+    return self;
+    
+}
 @end

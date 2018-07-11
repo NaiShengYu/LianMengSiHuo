@@ -47,9 +47,9 @@
             make.height.offset =60;
         }];
         [_titleBut addTarget:self action:@selector(goMap) forControlEvents:UIControlEventTouchUpInside];
-//        _titleBut.titleLabel.numberOfLines =2;
+        _titleBut.titleLabel.numberOfLines =2;
+
 //        NSMutableAttributedString *att = [[NSMutableAttributedString alloc]initWithString:@"巴黎\nParis"];
-//        _titleBut.titleLabel.font =FontSize(15);
 //        [att addAttribute:NSFontAttributeName value:FontSize(18) range:NSMakeRange(0, 2)];
 //        [_titleBut setAttributedTitle:att forState:UIControlStateNormal];
         _titleBut.titleLabel.font =FontSize(18);
@@ -159,7 +159,16 @@
     if ([shi isEqualToString:@"市"]) {
         string =[string substringToIndex:string.length-1];
     }
-    [_titleBut setTitle:string forState:UIControlStateNormal];
+    if ([CustomAccount sharedCustomAccount].cityEnName !=nil ||[CustomAccount sharedCustomAccount].cityEnName.length !=0) {
+        string = [NSString stringWithFormat:@"%@\n%@",string,[CustomAccount sharedCustomAccount].cityEnName];
+    }
+    NSMutableAttributedString *att = [[NSMutableAttributedString alloc]initWithString:string];
+    [att addAttribute:NSFontAttributeName value:FontSize(18) range:NSMakeRange(0, [CustomAccount sharedCustomAccount].cityName.length)];
+    _titleBut.titleLabel.font =FontSize(15);
+    [_titleBut setAttributedTitle:att forState:UIControlStateNormal];
+    
+    
+    
     
     GMSCameraPosition *position1 = [GMSCameraPosition cameraWithTarget:[CustomAccount sharedCustomAccount].curCoordinate2D zoom:14];
     [self.mapV animateToCameraPosition:position1];

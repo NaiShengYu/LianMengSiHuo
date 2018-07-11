@@ -12,10 +12,18 @@
 
 @property (nonatomic,assign)NSInteger loginType;
 
+//选择的城市
 @property (nonatomic,copy)NSString *cityName;
+@property (nonatomic,copy)NSString *cityEnName;
+
+//当前位置城市
+@property (nonatomic,copy)NSString *currentCityName;
 
 //选择的是哪一类（酒店，景点，餐厅，购物）
 @property (nonatomic,copy)NSString *className;
+
+@property (nonatomic,copy)NSString *city_id;
+
 
 @property (nonatomic,copy)NSString *classtype;
 

@@ -16,6 +16,7 @@
 		26196CC320C55C6F0097D72D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26196CC220C55C6F0097D72D /* Assets.xcassets */; };
 		26196CC620C55C6F0097D72D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26196CC420C55C6F0097D72D /* LaunchScreen.storyboard */; };
 		26196CC920C55C6F0097D72D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 26196CC820C55C6F0097D72D /* main.m */; };
+		2636ACA220F635BE00FBDDC5 /* HomePageSectionZeroTypeTowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2636ACA120F635BE00FBDDC5 /* HomePageSectionZeroTypeTowCell.m */; };
 		265F8D1420EBA9FF00620F3E /* KNLocationConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 265F8D1320EBA9FF00620F3E /* KNLocationConverter.m */; };
 		265F8D1720EBC29600620F3E /* SearchKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265F8D1620EBC29600620F3E /* SearchKeyViewController.m */; };
 		265F8D1A20EBC8BA00620F3E /* SearchKeyNavVar.m in Sources */ = {isa = PBXBuildFile; fileRef = 265F8D1920EBC8BA00620F3E /* SearchKeyNavVar.m */; };
@@ -113,6 +114,8 @@
 		26196CC520C55C6F0097D72D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		26196CC720C55C6F0097D72D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26196CC820C55C6F0097D72D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2636ACA020F635BE00FBDDC5 /* HomePageSectionZeroTypeTowCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageSectionZeroTypeTowCell.h; sourceTree = "<group>"; };
+		2636ACA120F635BE00FBDDC5 /* HomePageSectionZeroTypeTowCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageSectionZeroTypeTowCell.m; sourceTree = "<group>"; };
 		265F8D1220EBA9FF00620F3E /* KNLocationConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KNLocationConverter.h; sourceTree = "<group>"; };
 		265F8D1320EBA9FF00620F3E /* KNLocationConverter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KNLocationConverter.m; sourceTree = "<group>"; };
 		265F8D1520EBC29600620F3E /* SearchKeyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchKeyViewController.h; sourceTree = "<group>"; };
@@ -388,6 +391,8 @@
 				267BBF5820DA89A10005AE5A /* HomePageNavView.h */,
 				267BBF5920DA89A10005AE5A /* HomePageNavView.m */,
 				267BBF5B20DA912E0005AE5A /* HomePageSectionZeroCell.h */,
+				2636ACA020F635BE00FBDDC5 /* HomePageSectionZeroTypeTowCell.h */,
+				2636ACA120F635BE00FBDDC5 /* HomePageSectionZeroTypeTowCell.m */,
 				267BBF5C20DA912E0005AE5A /* HomePageSectionZeroCell.m */,
 				267BBF5E20DA99460005AE5A /* HomePageSectionOneCell.h */,
 				267BBF5F20DA99460005AE5A /* HomePageSectionOneCell.m */,
@@ -690,6 +695,7 @@
 				26196CBB20C55C6E0097D72D /* ViewController.m in Sources */,
 				267BBF7820DBDFA50005AE5A /* NavHeader.m in Sources */,
 				26196CC920C55C6F0097D72D /* main.m in Sources */,
+				2636ACA220F635BE00FBDDC5 /* HomePageSectionZeroTypeTowCell.m in Sources */,
 				267BBF5A20DA89A10005AE5A /* HomePageNavView.m in Sources */,
 				2682073B20F3A5F100DE7FE0 /* SearchResultFooter.m in Sources */,
 				267BBF5720DA840A0005AE5A /* HomePageViewController.m in Sources */,

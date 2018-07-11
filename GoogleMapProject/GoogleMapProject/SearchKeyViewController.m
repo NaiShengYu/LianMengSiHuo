@@ -80,7 +80,7 @@
    
     if (indexPath.row==0) {
         cell.imageView.image =[UIImage imageNamed:@"首页-搜索s_03_03"];
-        cell.detailTextLabel.text =[NSString stringWithFormat:@"【%@】",[CustomAccount sharedCustomAccount].cityName];
+        cell.detailTextLabel.text =[NSString stringWithFormat:@"【%@】",[CustomAccount sharedCustomAccount].currentCityName];
         cell.textLabel.text =@"附近";
     }else{
         NSDictionary *dic =self.dataArray[indexPath.row-1];
@@ -123,11 +123,45 @@
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    NSDictionary *dic =self.dataArray[indexPath.row];
-//    SearchResultViewController *vc = [[SearchResultViewController alloc]init];
-//    vc.searchKey =dic[@"res"];
-//    [self.navigationController pushViewController:vc animated:YES];
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row ==0) {
+        
+        
+        return;
+    }
+    
+    
+    
+    NSDictionary *dic =self.dataArray[indexPath.row-1];
+    NSInteger type = [dic[@"type"] integerValue];
+    if (type ==5) {
+        
+       CustomAccount *acc = [CustomAccount sharedCustomAccount];
+        acc.city_id = dic[@"Id"];
+        NSString *cityName = dic[@"res"];
+        NSArray *arr = [cityName componentsSeparatedByString:@" "];
+        @try {
+            acc.cityName =arr[0];
+            acc.cityEnName =arr[1];
+        } @catch (NSException *exception) {
+            
+        } @finally {
+            
+        }
+                
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"selectCity" object:nil];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        
+    }else{
+        
+        SearchResultViewController *vc = [[SearchResultViewController alloc]init];
+        vc.searchKey =dic[@"res"];
+        [self.navigationController pushViewController:vc animated:YES];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
+    
+    
+    
+  
 }
 #pragma mark --让cell的横线到最左边
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{

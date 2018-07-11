@@ -271,7 +271,6 @@
         GMSCameraPosition *position1 = [GMSCameraPosition cameraWithTarget:position2D zoom:14];
         [self.mapV animateToCameraPosition:position1];
         BIGposition2D = position2D;
-
     }
 }
 static int a =0 ;
