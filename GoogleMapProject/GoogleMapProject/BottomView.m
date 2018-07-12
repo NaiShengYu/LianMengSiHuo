@@ -232,7 +232,7 @@
 - (void)goInfo{
     
     ShopInfoViewController *vc = [[ShopInfoViewController alloc]init];
-    vc.type = _model.type;
+    [CustomAccount sharedCustomAccount].classtype = _model.type;
     vc.Id = _model.Id;
     
     [self.vc.navigationController pushViewController:vc animated:YES];

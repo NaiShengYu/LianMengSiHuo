@@ -17,6 +17,9 @@
 		26196CC620C55C6F0097D72D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26196CC420C55C6F0097D72D /* LaunchScreen.storyboard */; };
 		26196CC920C55C6F0097D72D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 26196CC820C55C6F0097D72D /* main.m */; };
 		2636ACA220F635BE00FBDDC5 /* HomePageSectionZeroTypeTowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2636ACA120F635BE00FBDDC5 /* HomePageSectionZeroTypeTowCell.m */; };
+		2636ACA520F77C6F00FBDDC5 /* HomePageListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2636ACA420F77C6F00FBDDC5 /* HomePageListModel.m */; };
+		2636ACA820F78C7700FBDDC5 /* ShopInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2636ACA720F78C7700FBDDC5 /* ShopInfoModel.m */; };
+		2636ACAB20F79C1A00FBDDC5 /* ShopInfoCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2636ACAA20F79C1A00FBDDC5 /* ShopInfoCommentModel.m */; };
 		265F8D1420EBA9FF00620F3E /* KNLocationConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 265F8D1320EBA9FF00620F3E /* KNLocationConverter.m */; };
 		265F8D1720EBC29600620F3E /* SearchKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265F8D1620EBC29600620F3E /* SearchKeyViewController.m */; };
 		265F8D1A20EBC8BA00620F3E /* SearchKeyNavVar.m in Sources */ = {isa = PBXBuildFile; fileRef = 265F8D1920EBC8BA00620F3E /* SearchKeyNavVar.m */; };
@@ -116,6 +119,12 @@
 		26196CC820C55C6F0097D72D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2636ACA020F635BE00FBDDC5 /* HomePageSectionZeroTypeTowCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageSectionZeroTypeTowCell.h; sourceTree = "<group>"; };
 		2636ACA120F635BE00FBDDC5 /* HomePageSectionZeroTypeTowCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageSectionZeroTypeTowCell.m; sourceTree = "<group>"; };
+		2636ACA320F77C6F00FBDDC5 /* HomePageListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageListModel.h; sourceTree = "<group>"; };
+		2636ACA420F77C6F00FBDDC5 /* HomePageListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageListModel.m; sourceTree = "<group>"; };
+		2636ACA620F78C7700FBDDC5 /* ShopInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopInfoModel.h; sourceTree = "<group>"; };
+		2636ACA720F78C7700FBDDC5 /* ShopInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopInfoModel.m; sourceTree = "<group>"; };
+		2636ACA920F79C1A00FBDDC5 /* ShopInfoCommentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopInfoCommentModel.h; sourceTree = "<group>"; };
+		2636ACAA20F79C1A00FBDDC5 /* ShopInfoCommentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopInfoCommentModel.m; sourceTree = "<group>"; };
 		265F8D1220EBA9FF00620F3E /* KNLocationConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KNLocationConverter.h; sourceTree = "<group>"; };
 		265F8D1320EBA9FF00620F3E /* KNLocationConverter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KNLocationConverter.m; sourceTree = "<group>"; };
 		265F8D1520EBC29600620F3E /* SearchKeyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchKeyViewController.h; sourceTree = "<group>"; };
@@ -529,12 +538,18 @@
 				2682073420F2613A00DE7FE0 /* HomePageSectionOneModel.m */,
 				2682073620F261EA00DE7FE0 /* HomePageSectionTowModel.h */,
 				2682073720F261EA00DE7FE0 /* HomePageSectionTowModel.m */,
+				2636ACA320F77C6F00FBDDC5 /* HomePageListModel.h */,
+				2636ACA420F77C6F00FBDDC5 /* HomePageListModel.m */,
 				C908C6DF20F3443E0090E2B1 /* MapBottomModel.h */,
 				C908C6E020F3443E0090E2B1 /* MapBottomModel.m */,
 				C908C6E220F355B20090E2B1 /* CustomMarker.h */,
 				C908C6E320F355B20090E2B1 /* CustomMarker.m */,
 				C908C6E520F483280090E2B1 /* SearchResultModel.h */,
 				C908C6E620F483280090E2B1 /* SearchResultModel.m */,
+				2636ACA620F78C7700FBDDC5 /* ShopInfoModel.h */,
+				2636ACA720F78C7700FBDDC5 /* ShopInfoModel.m */,
+				2636ACA920F79C1A00FBDDC5 /* ShopInfoCommentModel.h */,
+				2636ACAA20F79C1A00FBDDC5 /* ShopInfoCommentModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -679,6 +694,7 @@
 				C97712E120DB4F2D007AE5F0 /* CommentViewController.m in Sources */,
 				C977134320E33129007AE5F0 /* ShopCommentSectionZeroCell.m in Sources */,
 				260C46D220CD6736008952B4 /* TopView.m in Sources */,
+				2636ACAB20F79C1A00FBDDC5 /* ShopInfoCommentModel.m in Sources */,
 				C977130020E09F73007AE5F0 /* PersonImageCell.m in Sources */,
 				C977138B20E4B854007AE5F0 /* SearchResultViewController.m in Sources */,
 				C977132520E212FB007AE5F0 /* ShopInfoViewController.m in Sources */,
@@ -732,6 +748,7 @@
 				2682073520F2613A00DE7FE0 /* HomePageSectionOneModel.m in Sources */,
 				C977131220E1DFD9007AE5F0 /* FilterHeader.m in Sources */,
 				C938505120EDA741007AF5A7 /* AFNetRequest.m in Sources */,
+				2636ACA520F77C6F00FBDDC5 /* HomePageListModel.m in Sources */,
 				267BBF4620D92B330005AE5A /* RegistViewController.m in Sources */,
 				C977137F20E37913007AE5F0 /* FiterOtherCell.m in Sources */,
 				265F8D1A20EBC8BA00620F3E /* SearchKeyNavVar.m in Sources */,
@@ -741,6 +758,7 @@
 				26196CB820C55C6E0097D72D /* AppDelegate.m in Sources */,
 				267BBF7E20DBF4930005AE5A /* CollectionShopEditCell.m in Sources */,
 				26A608C620E1251300B677FF /* ChangePasswordViewController.m in Sources */,
+				2636ACA820F78C7700FBDDC5 /* ShopInfoModel.m in Sources */,
 				C977139420E4C1B1007AE5F0 /* SearchResultSectionOneCell.m in Sources */,
 				265F8D1420EBA9FF00620F3E /* KNLocationConverter.m in Sources */,
 				C977131920E1EF42007AE5F0 /* FilterItem.m in Sources */,

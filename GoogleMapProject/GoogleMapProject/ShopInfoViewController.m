@@ -13,13 +13,15 @@
 #import "ShopInfoTableViewCell.h"
 #import "ShopInfoFooter.h"
 #import "ShopInfoNavBar.h"
-
+#import "ShopInfoModel.h"
+#import "ShopInfoCommentModel.h"
 #import "LoginViewController.h"
 @interface ShopInfoViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong)UITableView *myTable;
 @property (nonatomic,strong)NSMutableArray *dataArray;
 
+@property (nonatomic,strong)ShopInfoModel *infoModel;
 
 @end
 
@@ -35,14 +37,17 @@
         [_myTable registerClass:[ShopInfoCommentTableViewCell class] forCellReuseIdentifier:@"ShopInfoCommentTableViewCell"];
         
         [_myTable registerClass:[ShopInfoFooter class] forHeaderFooterViewReuseIdentifier:@"ShopInfoFooter"];
+        WS(blockSelf);
+      
+        
     }
     return _myTable;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.dataArray =[[NSMutableArray alloc]initWithObjects:@"1",@"1",@"1",@"1",@"1",@"1", nil];
-    [self.view addSubview:self.myTable];
+    self.view.backgroundColor =[UIColor whiteColor];
+    self.dataArray =[[NSMutableArray alloc]init];
     self.automaticallyAdjustsScrollViewInsets =NO;
     
     ShopInfoNavBar *navbar =[[ShopInfoNavBar alloc]initWithFrame:CGRectMake(0, 0, screenWigth, MaxY)];
@@ -62,6 +67,9 @@
     UIView *lineV =[[UIView alloc]initWithFrame:CGRectMake(0, 0, screenWigth, 1)];
     lineV.backgroundColor =[UIColor groupTableViewBackgroundColor];
     [bottomBut addSubview:lineV];
+    
+    [self makeData];
+    [self getCommentDataIsRefresh:YES];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -87,7 +95,20 @@
     if (section ==0) {
         return 0;
     }
-    CGFloat W = (screenWigth-65-30-20)/4;
+    
+    ShopInfoCommentModel *model = self.dataArray[section-1];
+    if (model.comment_img.count ==0) {
+        return 20;
+    }
+    NSInteger a = model.comment_img.count/4 ;
+    NSInteger b = model.comment_img.count%4 ;
+    CGFloat W =0;
+    if (b==0) {
+         W= (screenWigth-65-30-20)/4 *a;
+    }else{
+        W= (screenWigth-65-30-20)/4 *(a+1);
+
+    }
 
     return W +20;
 }
@@ -104,7 +125,8 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     if (section >0) {
         ShopInfoFooter *footer =[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"ShopInfoFooter"];
-        footer.imgsArray =@[@"3",@"3",@"3",@"3"];
+        ShopInfoCommentModel *model = self.dataArray[section-1];
+        footer.imgsArray =model.comment_img;
         return footer;
     }
     return nil;
@@ -114,14 +136,12 @@
     if (indexPath.section ==0) {
         ShopInfoTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"ShopInfoTableViewCell" forIndexPath:indexPath];
         cell.VC = self;
-        cell.infoLab.text =@"一举手，前後左右要有定向.起动举动未能由己，要悉心体认，随人所动，随曲就伸，不丢不顶. 勿自伸缩.彼有力，我亦有力，我力在先.彼无力，我亦无力，我意仍在先.要刻刻留心.挨何处，心要用在何处，须向不丢不顶中讨消息.切记一静无有不静，静须静如山岳.所谓他强由他强，清风拂山冈.一动无有不动，动当动若江河，所谓他横任他横，明月照大江.从此做去，一年半载，便能施於身.此全是用意不是用劲.久之，则人为我制，我不为人制矣.";
-        cell.textLabel.numberOfLines =0;
+        cell.model= self.infoModel;
         return cell;
     }
     
     ShopInfoCommentTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"ShopInfoCommentTableViewCell" forIndexPath:indexPath];
-    cell.contentLab.text =@"一举手，前後左右要有定向.起动举动未能由己，要悉心体认，随人所动，随曲就伸，不丢不顶. 勿自伸缩.彼有力，我亦有力，我力在先.彼无力，我亦无力，我意仍在先.要刻刻留心.挨何处，心要用在何处，须向不丢不顶中讨消息.切记一静无有不静，静须静如山岳.所谓他强由他强，清风拂山冈.一动无有不动，动当动若江河，所谓他横任他横，明月照大江.从此做去，一年半载，便能施於身.此全是用意不是用劲.久之，则人为我制，我不为人制矣.";
-    cell.textLabel.numberOfLines =0;
+    cell.model = self.dataArray[indexPath.section-1];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -166,7 +186,6 @@
     }
     
     ShopCommentViewController *commentVC =[[ShopCommentViewController alloc]init];
-    commentVC.type = self.type;
     commentVC.Id = self.Id;
     [self.navigationController pushViewController:commentVC animated:YES];
     
@@ -180,6 +199,97 @@
 
 
 
+}
+
+
+- (void)makeData{
+    
+    NSString *url = [NSString stringWithFormat:@"%@app_list.php",BaseURL];
+    DLog(@"url==%@",url);
+    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+    CustomAccount *acc = [CustomAccount sharedCustomAccount];
+    [param setObject:@"list_details" forKey:@"app"];
+    [param setObject:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:USERID]] forKey:@"userid"];
+    [param setObject:acc.classtype forKey:@"type"];
+    [param setObject:self.Id forKey:@"Id"];
+    [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.longitude] forKey:@"lng"];
+    [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.latitude] forKey:@"lat"];
+
+    WS(blockSelf);
+    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+        if ([responseObject[@"code"] integerValue] ==1) {
+            @try {
+                [responseObject[@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    blockSelf.infoModel = [[ShopInfoModel alloc]initWithDic:obj];
+                }];
+                [blockSelf.myTable removeFromSuperview];
+                blockSelf.myTable =nil;
+                [blockSelf.view addSubview:blockSelf.myTable];
+            } @catch (NSException *exception) {
+            } @finally {
+            }
+        }else{
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"网络错误"];
+    } isShowHUD:YES];
+    
+    
+}
+
+- (void)getCommentDataIsRefresh:(BOOL)isRefresh{
+    NSString *url = [NSString stringWithFormat:@"%@app_list.php",BaseURL];
+    DLog(@"url==%@",url);
+    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+    CustomAccount *acc = [CustomAccount sharedCustomAccount];
+    [param setObject:@"list_details_comment" forKey:@"app"];
+    [param setObject:acc.classtype forKey:@"type"];
+    [param setObject:self.Id forKey:@"Id"];
+    if (isRefresh==YES) {
+        [param setObject:@"0" forKey:@"pageno"];
+    }else{
+        [param setObject:[NSString stringWithFormat:@"%lu",(unsigned long)self.dataArray.count] forKey:@"pageno"];
+    }
+    WS(blockSelf);
+    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+        if ([responseObject[@"code"] integerValue] ==1) {
+            @try {
+                if (isRefresh==YES) {
+                    [blockSelf.dataArray removeAllObjects];
+                    MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+                        [blockSelf getCommentDataIsRefresh:NO];
+                    }];
+                    blockSelf.myTable.mj_footer = footer;
+                }
+                NSDictionary *dataDic = responseObject[@"data"][0];
+                NSArray *arr = dataDic[@"comment_list"];
+                [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    ShopInfoCommentModel *model =[[ShopInfoCommentModel alloc]initWithDic:obj];
+                    [blockSelf.dataArray addObject:model];
+                }];
+                if (blockSelf.dataArray.count >=[dataDic[@"comment_num"] integerValue]) {
+                    [blockSelf.myTable.mj_footer endRefreshingWithNoMoreData];
+                }else{
+                    [blockSelf.myTable.mj_footer endRefreshing];
+                }
+                [blockSelf.myTable reloadData];
+            } @catch (NSException *exception) {
+                [blockSelf.myTable.mj_footer endRefreshing];
+            } @finally {
+            }
+        }else{
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
+            [blockSelf.myTable.mj_footer endRefreshing];
+
+        }
+    } failure:^(NSError *error) {
+        [blockSelf.myTable.mj_footer endRefreshing];
+
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"网络错误"];
+    } isShowHUD:NO];
+ 
+    
 }
 
 - (void)goBack{

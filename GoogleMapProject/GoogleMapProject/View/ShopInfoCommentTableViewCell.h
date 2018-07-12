@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ShopInfoCommentModel.h"
 @interface ShopInfoCommentTableViewCell : UITableViewCell
 
 @property (nonatomic,strong)UIImageView *headerImg;
@@ -15,5 +15,7 @@
 @property (nonatomic,strong)UILabel *nameLab;
 
 @property (nonatomic,strong)UILabel *contentLab;
+
+@property (nonatomic,strong)ShopInfoCommentModel *model;
 
 @end

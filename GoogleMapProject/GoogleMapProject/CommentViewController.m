@@ -132,7 +132,6 @@
             [blockSelf.myTable.mj_footer endRefreshing];
             
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
-            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
         }
     } failure:^(NSError *error) {
         [blockSelf.myTable.mj_header endRefreshing];

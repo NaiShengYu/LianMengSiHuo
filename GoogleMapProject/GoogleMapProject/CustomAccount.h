@@ -31,5 +31,7 @@
 
 @property (nonatomic,assign)CLLocationCoordinate2D curCoordinate2D;
 
+@property (nonatomic,assign)CLLocationCoordinate2D cityLocation;
+
 + (CustomAccount *)sharedCustomAccount;
 @end

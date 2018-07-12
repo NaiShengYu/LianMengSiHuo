@@ -218,7 +218,7 @@
             break;
     }
     ShopInfoViewController *vc = [[ShopInfoViewController alloc]init];
-    vc.type = model.type;
+    [CustomAccount sharedCustomAccount].classtype = model.type;
     vc.Id = model.Id;
     [self.navigationController pushViewController:vc animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

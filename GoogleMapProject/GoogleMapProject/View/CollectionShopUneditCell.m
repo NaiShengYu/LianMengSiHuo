@@ -148,11 +148,12 @@
         [self.contentView addSubview:_topickNumLab];
         _topickNumLab.text =@"12432条评论";
         [_topickNumLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(img5.mas_bottom).offset =3;
+            make.top.equalTo(img5.mas_bottom).offset =5;
             make.left.equalTo(blockSelf.imageV.mas_right).offset =10;
-            
+            make.right.offset =-10;
         }];
         _topickNumLab.font =FontSize(11);
+        _topickNumLab.numberOfLines =2;
         _topickNumLab.textColor =RGBA(204, 204, 204, 1);
         
         _speciesLab =[UILabel new];
@@ -212,4 +213,35 @@
     
 }
 
+- (void)setHomePageModel:(HomePageListModel *)homePageModel{
+    _homePageModel = homePageModel;
+    
+    [_imageV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",allImageURL,homePageModel.img]]];
+    _titleLab.text =[NSString stringWithFormat:@"%@",homePageModel.name];
+    _numLab.text =[NSString stringWithFormat:@"Top\n%@",homePageModel.No];
+    CGFloat jl = [homePageModel.distance floatValue];
+    if (jl <10) {
+        _juliLab.text = [NSString stringWithFormat:@"%.fm",jl*1000];
+        
+    }else{
+        _juliLab.text = [NSString stringWithFormat:@"%.fkm",jl];
+    }
+    //类型是餐厅和购物的时候显示人均
+    if ([homePageModel.type integerValue] ==1 ||[homePageModel.type integerValue] ==3 ) {
+        _topickNumLab.text =[NSString stringWithFormat:@"%@  %@",homePageModel.red,homePageModel.num];
+    }else {
+        _topickNumLab.text =[NSString stringWithFormat:@"%@",homePageModel.num];
+    }
+    _speciesLab.text = [NSString stringWithFormat:@"%@",homePageModel.blue];
+    
+    for(int i =0; i <5;i ++){
+        UIImageView *img = [self.contentView viewWithTag:1001+i];
+        img.image = [UIImage imageNamed:@"34"];
+    }
+    for(int i =0; i <[homePageModel.star integerValue];i ++){
+        UIImageView *img = [self.contentView viewWithTag:1001+i];
+        img.image = [UIImage imageNamed:@"32"];
+    }
+
+}
 @end

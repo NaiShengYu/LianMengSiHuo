@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "CollectionShopModel.h"
+
+#import "HomePageListModel.h"
 @interface CollectionShopUneditCell : UITableViewCell
 
 
@@ -25,5 +27,7 @@
 @property (nonatomic,strong)UIImageView *imgV;
 
 @property (nonatomic,strong)CollectionShopModel *collecitonModel;
+
+@property (nonatomic,strong)HomePageListModel *homePageModel;
 
 @end

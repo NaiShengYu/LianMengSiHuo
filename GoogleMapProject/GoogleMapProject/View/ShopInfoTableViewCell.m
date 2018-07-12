@@ -92,7 +92,7 @@
             make.left.equalTo(blockSelf.imageV.mas_right).offset =10;
             make.size.mas_equalTo(CGSizeMake(16.1, 16.1));
         }];
-        
+        img1.tag = 1001;
         UIImageView *img2 = [UIImageView new];
         img2.image =[UIImage imageNamed:@"32"];
         [backView addSubview:img2];
@@ -101,7 +101,8 @@
             make.left.equalTo(img1.mas_right).offset =1;
             make.size.mas_equalTo(CGSizeMake(16.1, 16.1));
         }];
-        
+        img2.tag = 1002;
+
         UIImageView *img3 = [UIImageView new];
         img3.image =[UIImage imageNamed:@"32"];
         [backView addSubview:img3];
@@ -110,6 +111,8 @@
             make.left.equalTo(img2.mas_right).offset =1;
             make.size.mas_equalTo(CGSizeMake(16.1, 16.1));
         }];
+        img3.tag = 1003;
+
         UIImageView *img4 = [UIImageView new];
         img4.image =[UIImage imageNamed:@"32"];
         [backView addSubview:img4];
@@ -118,6 +121,8 @@
             make.left.equalTo(img3.mas_right).offset =1;
             make.size.mas_equalTo(CGSizeMake(16.1, 16.1));
         }];
+        img4.tag = 1004;
+
         UIImageView *img5 = [UIImageView new];
         img5.image =[UIImage imageNamed:@"34"];
         [backView addSubview:img5];
@@ -126,7 +131,8 @@
             make.left.equalTo(img4.mas_right).offset =1;
             make.size.mas_equalTo(CGSizeMake(16.1, 16.1));
         }];
-        
+        img5.tag = 1005;
+
         _juliLab =[UILabel new];
         [self addSubview:_juliLab];
         _juliLab.backgroundColor =RGBA(245, 245, 245, 1);
@@ -166,7 +172,7 @@
         [_topickNumLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(img5.mas_bottom).offset =3;
             make.left.equalTo(blockSelf.imageV.mas_right).offset =10;
-            
+            make.right.offset = -10;
         }];
         _topickNumLab.font =FontSize(11);
         _topickNumLab.textColor =RGBA(204, 204, 204, 1);
@@ -303,7 +309,7 @@
             make.right.offset =-15;
         }];
         _num.text =@"12894个人评论";
-        
+        _dataArray =[[NSMutableArray alloc]init];
         
     }
     return self;
@@ -312,25 +318,73 @@
 
 - (void)BrowsePicture{
     
-    self.dataArray =[[NSMutableArray alloc]init];
-    
-    [self.dataArray addObject:[MWPhoto photoWithURL:[NSURL URLWithString:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530697623164&di=1a7b2682266602bffd5116a3d1a92147&imgtype=0&src=http%3A%2F%2Fa.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2Fa50f4bfbfbedab64ab4731d9f436afc379311ef5.jpg"]]];
-    [self.dataArray addObject:[MWPhoto photoWithURL:[NSURL URLWithString:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530697654623&di=528845b343ff26e0a4ca77c059a2d147&imgtype=0&src=http%3A%2F%2Fhiphotos.baidu.com%2Fimage%2F%2577%3D%2536%2534%2530%3B%2563%2572%256F%2570%3D%2530%2C%2530%2C%2536%2534%2530%2C%2533%2535%2535%2Fsign%3Dfd6a9b4d8bcb39dbc1c06452e02d6a56%2Fa50f4bfbfbedab6423e1b267fd36afc378311e81.jpg"]]];
-    [self.dataArray addObject:[MWPhoto photoWithURL:[NSURL URLWithString:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530697654623&di=1347387a25000d08be543f59f5728c25&imgtype=0&src=http%3A%2F%2Fe.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2Ffaedab64034f78f0b3361e9378310a55b3191c94.jpg"]]];
-    [self.dataArray addObject:[MWPhoto photoWithURL:[NSURL URLWithString:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530697654623&di=fb0ba544d50b5449f47eca94ddd10eba&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fbaike%2Fpic%2Fitem%2Fbbe0d3114f133356b8127b7b.jpg"]]];
-    
     MWPhotoBrowser *browser=[[MWPhotoBrowser alloc]initWithDelegate:self];
     browser.displayActionButton =NO;
     [self.VC.navigationController pushViewController:browser animated:NO];
 }
 
 - (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser{
-    
     return self.dataArray.count;
 }
 
 - (id<MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index{
     return self.dataArray[index];
+}
+
+- (void)setModel:(ShopInfoModel *)model{
+    _model = model;
+    WS(blockSelf);
+    [_dataArray removeAllObjects];
+    [model.img_arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        MWPhoto *p = [[MWPhoto alloc]initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",allImageURL,obj]]];
+        [blockSelf.dataArray addObject:p];
+    }];
+    
+    [_imageV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",allImageURL,model.img]]];
+    _titleLab.text =[NSString stringWithFormat:@"%@",model.name];
+    CGFloat jl = [model.distance floatValue];
+    if (jl <10) {
+        _juliLab.text = [NSString stringWithFormat:@"%.fm",jl*1000];
+        
+    }else{
+        _juliLab.text = [NSString stringWithFormat:@"%.fkm",jl];
+    }
+    //类型是餐厅和购物的时候显示人均
+    if ([model.type integerValue] ==1 ||[model.type integerValue] ==3 ) {
+        _topickNumLab.text =[NSString stringWithFormat:@"%@  %@",model.red,model.num];
+    }else {
+        _topickNumLab.text =[NSString stringWithFormat:@"%@",model.num];
+    }
+    _speciesLab.text = [NSString stringWithFormat:@"%@",model.blue];
+    
+    for(int i =0; i <5;i ++){
+        UIImageView *img = [self.contentView viewWithTag:1001+i];
+        img.image = [UIImage imageNamed:@"34"];
+    }
+    for(int i =0; i <[model.star integerValue];i ++){
+        UIImageView *img = [self.contentView viewWithTag:1001+i];
+        img.image = [UIImage imageNamed:@"32"];
+    }
+    
+    _AddressLab.text = [NSString stringWithFormat:@"%@",model.address];
+    
+    NSString *info = model.info;
+    info = [info stringByReplacingOccurrencesOfString:instailString withString:@"\n"];
+    _infoLab.text = [NSString stringWithFormat:@"%@",info];
+    
+    _pictureNumLab.text = [NSString stringWithFormat:@"%@张图片",model.img_num];
+    
+    [_mapV clear];
+    GMSMarker* marker =[[GMSMarker alloc]init];
+    marker.position =CLLocationCoordinate2DMake([model.details_lat doubleValue], [model.details_lng doubleValue]);
+    marker.icon =[UIImage imageNamed:@"详情_11"];
+    marker.draggable =NO;
+    marker.map = _mapV;
+    GMSCameraPosition *position = [GMSCameraPosition cameraWithLatitude:[model.details_lat doubleValue] longitude:[model.details_lng doubleValue] zoom:14];
+    [_mapV animateToCameraPosition:position];
+    
+    _telNum.text = [NSString stringWithFormat:@"%@",model.tel];
+    _num.text = [NSString stringWithFormat:@"%@",model.num];
 }
 
 @end

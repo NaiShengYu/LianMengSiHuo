@@ -442,12 +442,10 @@
     CustomAccount *acc = [CustomAccount sharedCustomAccount];
     NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
     [param setObject:acc.className forKey:@"app"];
-    //    [param setObject:[NSString stringWithFormat:@"%f",BIGposition2D.longitude] forKey:@"lng"];
-    //    [param setObject:[NSString stringWithFormat:@"%f",BIGposition2D.latitude] forKey:@"lat"];
-    //
-    [param setObject:@"2.3411111" forKey:@"lng"];
-    [param setObject:@"48.8600" forKey:@"lat"];
+        [param setObject:[NSString stringWithFormat:@"%f",BIGposition2D.longitude] forKey:@"lng"];
+        [param setObject:[NSString stringWithFormat:@"%f",BIGposition2D.latitude] forKey:@"lat"];
     
+  
     [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
         if ([responseObject[@"code"] integerValue] ==1) {
             [blockSelf.dataArray removeAllObjects];

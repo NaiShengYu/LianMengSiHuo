@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ShopInfoModel.h"
 @import GoogleMaps;
 
 @interface ShopInfoTableViewCell : UITableViewCell
@@ -41,5 +42,6 @@
 
 @property (nonatomic,strong)NSMutableArray *dataArray;
 
+@property (nonatomic,strong)ShopInfoModel *model;
 
 @end

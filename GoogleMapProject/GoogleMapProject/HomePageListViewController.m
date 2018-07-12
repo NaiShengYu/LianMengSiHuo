@@ -16,7 +16,7 @@
 
 #import "FilterItem.h"
 #import "FilterHeaderModel.h"
-
+#import "HomePageListModel.h"
 @interface HomePageListViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *myTable;
 @property (nonatomic,strong)NSMutableArray *dataArray;
@@ -33,6 +33,7 @@
 //评分
 @property (nonatomic,copy)NSString *star;
 
+
 @end
 
 @implementation HomePageListViewController
@@ -45,7 +46,7 @@
         headerModel.title =@"评分";
         FilterItem *item1 =[[FilterItem alloc]init];
         item1.title = @"全部";
-        item1.Id = @"0";
+        item1.Id = @"";
         item1.isSelect =YES;
         [headerModel.itemsArray addObject:item1];
         
@@ -88,7 +89,7 @@
         headerModel1.title =@"距离";
         FilterItem *item11 =[[FilterItem alloc]init];
         item11.title = @"500M";
-        item11.isSelect =YES;
+        item11.isSelect =NO;
         item11.Id = @"0.5";
         [headerModel1.itemsArray addObject:item11];
         
@@ -108,7 +109,7 @@
         
         FilterItem *item44 =[[FilterItem alloc]init];
         item44.title = @"5km";
-        item44.isSelect =NO;
+        item44.isSelect =YES;
         item44.Id = @"5";
 
         [headerModel1.itemsArray addObject:item44];
@@ -208,13 +209,14 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
         CollectionShopUneditCell *cell =[tableView dequeueReusableCellWithIdentifier:@"CollectionShopUneditCell" forIndexPath:indexPath];
-    cell.topickNumLab.text = @"200 ￥ 12432条评论";
-    cell.numLab.text =[NSString stringWithFormat:@"Top\n%ld",indexPath.row+1];
+    cell.homePageModel = self.dataArray[indexPath.row];
         return cell;
    
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    HomePageListModel *model = self.dataArray[indexPath.row];
     ShopInfoViewController *vc = [[ShopInfoViewController alloc]init];
+    vc.Id = model.Id;
     [self.navigationController pushViewController:vc animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -282,8 +284,11 @@
     CustomAccount *acc = [CustomAccount sharedCustomAccount];
     [param setObject:@"list_show" forKey:@"app"];
     [param setObject:acc.classtype forKey:@"type"];
-    [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.longitude] forKey:@"lng"];
-    [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.latitude] forKey:@"lat"];
+//    [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.longitude] forKey:@"lng"];
+//    [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.latitude] forKey:@"lat"];
+    [param setObject:@"2.3411111" forKey:@"lng"];
+    [param setObject:@"48.8600" forKey:@"lat"];
+    
     //距离
     [param setObject:self.raidus forKey:@"raidus"];
     //分类
@@ -300,9 +305,17 @@
     
     [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
         if ([responseObject[@"code"] integerValue] ==1) {
-            if (isRefresh==YES) {
-                [blockSelf.dataArray removeAllObjects];
-                if (blockSelf.dataArray.count >=[@"10" integerValue]) {
+            @try {
+                if (isRefresh==YES) {
+                    [blockSelf.dataArray removeAllObjects];
+                }
+                NSDictionary *dataDic = responseObject[@"data"][0];
+                NSArray *arr = dataDic[@"list_show"];
+                [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    HomePageListModel *model = [[HomePageListModel alloc]initWithDic:obj];
+                    [blockSelf.dataArray addObject:model];
+                }];
+                if (blockSelf.dataArray.count >=[dataDic[@"list_num"] integerValue]) {
                     [blockSelf.myTable.mj_footer endRefreshingWithNoMoreData];
                 }else{
                     [blockSelf.myTable.mj_footer endRefreshing];
@@ -310,14 +323,20 @@
                 [blockSelf.myTable.mj_header endRefreshing];
                 [blockSelf.myTable reloadData];
                 
+            } @catch (NSException *exception) {
+                
+            } @finally {
+                
+            }
+          
             }else{
                 [blockSelf.myTable.mj_header endRefreshing];
                 [blockSelf.myTable.mj_footer endRefreshing];
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
-            }}
+            }
     } failure:^(NSError *error) {
         [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"网络错误"];
-    } isShowHUD:NO];
+    } isShowHUD:isRefresh];
     
 }
 

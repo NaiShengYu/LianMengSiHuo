@@ -10,6 +10,5 @@
 
 @interface ShopInfoViewController : UIViewController
 
-@property (nonatomic,copy)NSString *type;
 @property (nonatomic,copy)NSString *Id;
 @end

@@ -139,7 +139,7 @@
         ShopInfoViewController *vc = [[ShopInfoViewController alloc]init];
         if (indexPath.section==1) {
             HomePageSectionOneModel *model =self.topArray[indexPath.row];
-            vc.type = model.type;
+            [CustomAccount sharedCustomAccount].classtype = model.type;
             vc.Id = model.Id;
         }
         if (indexPath.section ==2) {
@@ -210,6 +210,11 @@
             [blockSelf.aroundCityArray removeAllObjects];
             NSDictionary *dataDic =responseObject[@"data"][0];
             acc.city_id = dataDic[@"city_id"];
+            @try {
+                acc.cityLocation = CLLocationCoordinate2DMake([dataDic[@"city_lat"] doubleValue], [dataDic[@"city_lng"] doubleValue]);
+            } @catch (NSException *exception) {
+            } @finally {
+            }
             for (NSDictionary *topDic in dataDic[@"top"]) {
                 HomePageSectionOneModel *model = [[HomePageSectionOneModel alloc]initWithDic:topDic];
                 [blockSelf.topArray addObject:model];

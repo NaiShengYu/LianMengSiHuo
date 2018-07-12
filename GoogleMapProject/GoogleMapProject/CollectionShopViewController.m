@@ -183,7 +183,7 @@
     }
     ShopInfoViewController *vc = [[ShopInfoViewController alloc]init];
     CollectionShopModel *model =self.dataArray[indexPath.row];
-    vc.type = model.type;
+    [CustomAccount sharedCustomAccount].classtype = model.type;
     vc.Id = model.Id;
     
     [self.navigationController pushViewController:vc animated:YES];

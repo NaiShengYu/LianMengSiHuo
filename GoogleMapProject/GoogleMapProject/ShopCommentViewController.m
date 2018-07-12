@@ -154,7 +154,7 @@
     NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
     [param setObject:@"user_add_comment" forKey:@"app"];
     [param setObject:[user objectForKey:USERID] forKey:@"userid"];
-    [param setObject:self.type forKey:@"type"];
+    [param setObject:[CustomAccount sharedCustomAccount].classtype forKey:@"type"];
     [param setObject:self.Id forKey:@"Id"];
     [param setObject:[NSString stringWithFormat:@"%ld",(long)self.star] forKey:@"star"];
     [param setObject:self.content forKey:@"comment"];
