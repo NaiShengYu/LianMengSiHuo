@@ -168,7 +168,9 @@
 
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             manager.responseSerializer =[AFHTTPResponseSerializer serializer];
-            manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"text/plain", nil];            [SVProgressHUD show];
+            manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"text/plain", nil];
+            [PubulicObj ShowSVWithoutImage];
+            [SVProgressHUD showInfoWithStatus:@""];
             [manager POST:url parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
                 
                 [shopDataArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -194,9 +196,12 @@
                 //系统自带JSON解析
                 NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:resData options:NSJSONReadingAllowFragments error:nil];
                 if ([resultDic[@"code"]integerValue] ==1) {
-       
-                    
+                    [PubulicObj ShowSVWhitMessage];
+                    [SVProgressHUD showErrorWithStatus:@"评论成功"];
+                    [blockSelf.navigationController popViewControllerAnimated:YES];
+                    [[NSNotificationCenter defaultCenter]postNotificationName:@"addCommentSuccess" object:nil];
                 }else{
+                    [PubulicObj ShowSVWhitMessage];
                     [SVProgressHUD showErrorWithStatus:resultDic[@"message"]];
                 }
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

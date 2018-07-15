@@ -149,18 +149,24 @@
     return mediaName;
 }
 
++ (void)ShowSVWhitMessage{
+    [SVProgressHUD setImageViewSize:CGSizeMake(0, 0)];
+    [SVProgressHUD setBackgroundColor:HEXCOLOR(0x303132)];
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
+    [SVProgressHUD setFont:FontSize(19)];
+    [SVProgressHUD setMinimumSize:CGSizeMake(260, 44)];
+    [SVProgressHUD setCornerRadius:5];
+    [SVProgressHUD setMinimumDismissTimeInterval:1];
+
+}
+
 + (void)ShowSVWithoutImage{
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    [SVProgressHUD setImageViewSize:CGSizeMake(60, 90)];
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
+    [SVProgressHUD setBackgroundColor:[UIColor clearColor]];
+    [SVProgressHUD setMinimumSize:CGSizeMake(260, 44)];
+    [SVProgressHUD setMinimumDismissTimeInterval:60];
+    [SVProgressHUD setInfoImage:[UIImage imageWithGIFNamed:@"loading"]];
     
 }
 @end

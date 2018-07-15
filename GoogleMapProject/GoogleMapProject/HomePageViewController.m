@@ -19,6 +19,8 @@
 
 #import "HomePageSectionOneModel.h"
 #import "HomePageSectionTowModel.h"
+
+#import "UIImage+GIFImage.h"
 @interface HomePageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic,strong)UICollectionView *collectionV;
@@ -52,6 +54,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+  
+    
     self.view.backgroundColor =[UIColor whiteColor];
     self.topArray =[[NSMutableArray alloc]init];
     self.aroundCityArray =[[NSMutableArray alloc]init];
@@ -62,7 +66,7 @@
         [self makeData];
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(makeData) name:@"selectCity" object:nil];
-    
+//
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -111,7 +115,7 @@
 }
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section ==0) {
-        if ([[CustomAccount sharedCustomAccount].city_id isEqual:[NSNull null]]) {
+        if ([[CustomAccount sharedCustomAccount].city_id isEqual:[NSNull null]] ||[CustomAccount sharedCustomAccount].city_id ==nil ||[CustomAccount sharedCustomAccount].city_id.length ==0) {
             HomePageSectionZeroTypeTowCell *cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"HomePageSectionZeroTypeTowCell" forIndexPath:indexPath];
             return cell;
         }
@@ -155,7 +159,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section ==0){
-        if ([[CustomAccount sharedCustomAccount].city_id isEqual:[NSNull null]]) {
+        if ([[CustomAccount sharedCustomAccount].city_id isEqual:[NSNull null]] ||[CustomAccount sharedCustomAccount].city_id ==nil ||[CustomAccount sharedCustomAccount].city_id.length ==0) {
             return CGSizeMake(screenWigth, screenWigth*480/1080);
         }
         return CGSizeMake(screenWigth, 300);
@@ -215,25 +219,37 @@
             } @catch (NSException *exception) {
             } @finally {
             }
-            for (NSDictionary *topDic in dataDic[@"top"]) {
-                HomePageSectionOneModel *model = [[HomePageSectionOneModel alloc]initWithDic:topDic];
-                [blockSelf.topArray addObject:model];
+            @try {
+                for (NSDictionary *topDic in dataDic[@"top"]) {
+                    HomePageSectionOneModel *model = [[HomePageSectionOneModel alloc]initWithDic:topDic];
+                    [blockSelf.topArray addObject:model];
+                }
+              } @catch (NSException *exception) {
+            } @finally {
             }
-            for (NSDictionary *cityDic in dataDic[@"around_city"]) {
-                HomePageSectionTowModel *model = [[HomePageSectionTowModel alloc]initWithDic:cityDic];
-                [blockSelf.aroundCityArray addObject:model];
+            
+            @try {
+                for (NSDictionary *cityDic in dataDic[@"around_city"]) {
+                    HomePageSectionTowModel *model = [[HomePageSectionTowModel alloc]initWithDic:cityDic];
+                    [blockSelf.aroundCityArray addObject:model];
+                }
+            } @catch (NSException *exception) {
+            } @finally {
             }
+           
             [blockSelf.collectionV removeFromSuperview];
             blockSelf.collectionV =nil;
             [blockSelf.view addSubview:blockSelf.collectionV];
           
         }else{
+            [PubulicObj ShowSVWhitMessage];
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
         }
     } failure:^(NSError *error) {
+        [PubulicObj ShowSVWhitMessage];
         [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"网络错误"];
 
-    } isShowHUD:NO];
+    } isShowHUD:YES];
     
 }
 

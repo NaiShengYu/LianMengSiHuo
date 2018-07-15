@@ -159,6 +159,7 @@
 - (void)upData{
     
     WS(blockSelf);
+    [PubulicObj ShowSVWhitMessage];
     if (_PasswordTF.text.length ==0 ||_PasswordTF.text ==nil) {
         [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"请输入新密码"];
         return;
@@ -179,11 +180,12 @@
 
     [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
         if ([responseObject[@"code"] integerValue] ==1) {
-        
-            [SVProgressHUD showSuccessWithStatus:@"修改密码成功"];
+            [PubulicObj ShowSVWhitMessage];
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"修改密码成功"];
             [blockSelf.navigationController popToRootViewControllerAnimated:YES];
             
         }else{
+            [PubulicObj ShowSVWhitMessage];
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
         }
     } failure:^(NSError *error) {

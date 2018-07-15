@@ -272,6 +272,7 @@
             manager.requestSerializer = [AFHTTPRequestSerializer serializer];
             manager.responseSerializer = [AFHTTPResponseSerializer serializer];
             manager.responseSerializer.acceptableContentTypes =  [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"charset=utf-8",@"text/css",@"text/fild", nil];
+            [PubulicObj ShowSVWithoutImage];
             [SVProgressHUD show];
             [manager POST:urlStr parameters:parameter constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
                 if (image){
@@ -286,8 +287,10 @@
                 NSDictionary *dic =[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
                 DLog(@"responseObject===%@",dic);
                 if ([dic[@"code"] integerValue] ==0) {
+                    [PubulicObj ShowSVWhitMessage];
                     [SVProgressHUD showErrorWithStatus:@"修改失败"];
                 }else{
+                    [PubulicObj ShowSVWhitMessage];
                     [SVProgressHUD showSuccessWithStatus:@"修改成功"];
                         [user setObject:dic[@"data"] forKey:USERHEADPIC];
                         [user synchronize];
@@ -295,7 +298,7 @@
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 [SVProgressHUD dismiss];
                 DLog(@"%@",error);
-                
+                [PubulicObj ShowSVWhitMessage];
                 [SVProgressHUD showErrorWithStatus:@"网络错误"];
             }
              ];

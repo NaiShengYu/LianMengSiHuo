@@ -12,7 +12,8 @@
 + (void)HttpPostCallBack:(NSString*)Url  Parameters:(NSDictionary*)dict success:(httpSuccess)success failure:(httpFailure)failure isShowHUD:(BOOL)animation
 {
     if (animation==YES) {
-        [SVProgressHUD show];
+        [PubulicObj ShowSVWithoutImage];
+        [SVProgressHUD showInfoWithStatus:@""];
     }
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             manager.requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -126,6 +127,7 @@
                 if (animation) {
                     [SVProgressHUD dismiss];
                 }
+                [PubulicObj ShowSVWhitMessage];
                 [SVProgressHUD showErrorWithStatus:@"网络错误"];
                 if (failure) {
                     failure(error);

@@ -130,7 +130,8 @@
         }else{
             [blockSelf.myTable.mj_header endRefreshing];
             [blockSelf.myTable.mj_footer endRefreshing];
-            
+            [PubulicObj ShowSVWhitMessage];
+
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
         }
     } failure:^(NSError *error) {

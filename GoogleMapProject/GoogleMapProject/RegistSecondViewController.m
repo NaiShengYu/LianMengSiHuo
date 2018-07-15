@@ -204,7 +204,7 @@
 }
 
 - (void)update{
-    
+    [PubulicObj ShowSVWhitMessage];
     if (_oldPasswordTF.text.length==0 ||_oldPasswordTF.text ==nil) {
         [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"请填写用户名！"];
         return;
@@ -251,6 +251,7 @@
             [self.navigationController popToRootViewControllerAnimated:YES];
             
         }else{
+            [PubulicObj ShowSVWhitMessage];
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
         }
     } failure:^(NSError *error) {

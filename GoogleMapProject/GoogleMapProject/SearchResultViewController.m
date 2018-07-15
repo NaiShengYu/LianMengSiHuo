@@ -77,6 +77,7 @@
     [self makeData];
     
 }
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden =NO;
@@ -200,28 +201,53 @@
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    
     SearchResultModel *model;
+
+    if (indexPath.section ==0) {
+        model = self.citysArray[indexPath.row];
+        CustomAccount *acc = [CustomAccount sharedCustomAccount];
+        acc.city_id = model.Id;
+            acc.cityName =model.name;
+            acc.cityEnName =model.name_e;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"selectCity" object:nil];
+        [self.navigationController popToRootViewControllerAnimated:YES];        
+    }else{
+
     switch (indexPath.section) {
-        case 1:
+        case 1:{
             model = self.foodsArray[indexPath.row];
+        }
             break;
-        case 2:
+        case 2:{
             model = self.scenicsArray[indexPath.row];
+        }
             break;
-        case 3:
+        case 3:{
             model = self.shopsArray[indexPath.row];
+        }
             break;
-        case 4:
+        case 4:{
             model = self.hotelsArray[indexPath.row];
+        }
             break;
         default:
             break;
     }
+    [self goShopInfoWhitModel:model];
+    }
+}
+
+- (void)goShopInfoWhitModel:(SearchResultModel *)model{
+    
     ShopInfoViewController *vc = [[ShopInfoViewController alloc]init];
-    [CustomAccount sharedCustomAccount].classtype = model.type;
-    vc.Id = model.Id;
+        [CustomAccount sharedCustomAccount].classtype = model.type;
+        vc.Id = model.Id;
     [self.navigationController pushViewController:vc animated:YES];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    
 }
 #pragma mark --让cell的横线到最左边
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -295,7 +321,8 @@
             [blockSelf hasMore];
             [blockSelf.myTable reloadData];
         }else{
-            
+            [PubulicObj ShowSVWhitMessage];
+
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
         }
         
@@ -363,7 +390,8 @@
             
             [blockSelf.myTable reloadData];
         }else{
-            
+            [PubulicObj ShowSVWhitMessage];
+
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
         }
         

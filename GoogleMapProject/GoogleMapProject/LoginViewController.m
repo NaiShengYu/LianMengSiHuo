@@ -242,7 +242,6 @@
         make.height.offset =60;
     }];
     QQ.imageView.contentMode = UIViewContentModeScaleAspectFill;
-
     [QQ setImage:[UIImage imageNamed:@"登录_39"] forState:UIControlStateNormal];
    
     _moreBut =[UIButton new];
@@ -332,7 +331,7 @@
 //    UIWindow *window =[[UIApplication sharedApplication].delegate window];
 //    window.rootViewController =[[HomePageViewController alloc]init];
 //
-    
+    [PubulicObj ShowSVWhitMessage];
     if (_nameTF.text.length ==0 ||_nameTF.text ==nil) {
         [SVProgressHUD showErrorWithStatus:@"请输入用户名"];
         return;
@@ -366,7 +365,7 @@
             [self.navigationController popViewControllerAnimated:YES];
             
         }else{
-            
+            [PubulicObj ShowSVWhitMessage];
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
         }
         

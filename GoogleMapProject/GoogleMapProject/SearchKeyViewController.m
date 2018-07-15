@@ -9,6 +9,7 @@
 #import "SearchKeyViewController.h"
 #import "SearchResultViewController.h"
 #import "SearchKeyNavVar.h"
+#import "ShopInfoViewController.h"
 @interface SearchKeyViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property (nonatomic,strong)NSMutableArray *dataArray;
 @property (nonatomic,strong)UITableView *myTable;
@@ -153,10 +154,11 @@
         
     }else{
         
-        SearchResultViewController *vc = [[SearchResultViewController alloc]init];
-        vc.searchKey =dic[@"res"];
+        ShopInfoViewController *vc = [[ShopInfoViewController alloc]init];
+            [CustomAccount sharedCustomAccount].classtype = [NSString stringWithFormat:@"%@",dic[@"type"]];
+            vc.Id =  [NSString stringWithFormat:@"%@",dic[@"Id"]];
         [self.navigationController pushViewController:vc animated:YES];
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
     }
     
     
@@ -225,7 +227,7 @@
             }
             [blockSelf.myTable reloadData];
         }else{
-         
+            [PubulicObj ShowSVWhitMessage];
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
         }
         

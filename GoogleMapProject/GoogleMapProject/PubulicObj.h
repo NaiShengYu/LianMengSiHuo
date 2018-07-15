@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Photos/Photos.h>
-
+#import "UIImage+GIFImage.h"
 @interface PubulicObj : NSObject
 /**
  *判断手机号码是否正确
@@ -48,4 +48,6 @@
 
 
 + (void)ShowSVWithoutImage;
+
++ (void)ShowSVWhitMessage;
 @end

@@ -462,9 +462,11 @@
             }
             [blockSelf saoMiaoJieGuo];
         }else{
+            [PubulicObj ShowSVWhitMessage];
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
         }
     } failure:^(NSError *error) {
+        [PubulicObj ShowSVWhitMessage];
         [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"网络错误"];
         
     } isShowHUD:YES];

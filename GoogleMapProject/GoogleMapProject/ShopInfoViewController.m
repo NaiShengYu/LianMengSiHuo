@@ -56,7 +56,6 @@
     [navbar.shareBut addTarget:self action:@selector(shareBut) forControlEvents:UIControlEventTouchUpInside];
     [navbar.collectionBut addTarget:self action:@selector(collectionBut) forControlEvents:UIControlEventTouchUpInside];
     
-    
     UIButton *bottomBut =[[UIButton alloc]initWithFrame:CGRectMake(0, screenHeight-TabbarHeight, screenWigth, TabbarHeight)];
     [bottomBut setImage:[UIImage imageNamed:@"详情_22"] forState:UIControlStateNormal];
     [bottomBut setTitle:@"  评论" forState:UIControlStateNormal];
@@ -70,15 +69,18 @@
     
     [self makeData];
     [self getCommentDataIsRefresh:YES];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addCommentSuccess) name:@"addCommentSuccess" object:nil];
+    [self ziDingYiDaoHangLan];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden =YES;
 }
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    self.navigationController.navigationBar.hidden =NO;
-}
+//- (void)viewWillDisappear:(BOOL)animated{
+//    [super viewWillDisappear:animated];
+//    self.navigationController.navigationBar.hidden =NO;
+//}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return self.dataArray.count+1;
@@ -190,11 +192,57 @@
     [self.navigationController pushViewController:commentVC animated:YES];
     
 }
-
+#pragma mark --添加收藏
 - (void)collectionBut{
 
+    WS(blockSelf);
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    if ([user objectForKey:USERID] ==nil) {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您还没有登录！" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }]];
+        
+        [alert addAction:[UIAlertAction actionWithTitle:@"去登陆" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            [self.navigationController pushViewController:[LoginViewController new] animated:NO];
+        }]];
+        
+        
+        [self presentViewController:alert animated:YES completion:nil];
+        
+        return;
+        
+    }
+    
+    
+    NSString *url = [NSString stringWithFormat:@"%@app_user.php",BaseURL];
+    DLog(@"url==%@",url);
+    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+    CustomAccount *acc = [CustomAccount sharedCustomAccount];
+    [param setObject:@"user_add_collection" forKey:@"app"];
+    [param setObject:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:USERID]] forKey:@"userid"];
+    [param setObject:acc.classtype forKey:@"type"];
+    [param setObject:self.Id forKey:@"Id"];
+    
+    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+        if ([responseObject[@"code"] integerValue] ==1) {
+           
+            
+        }else{
+            [PubulicObj ShowSVWhitMessage];
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [PubulicObj ShowSVWhitMessage];
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"网络错误"];
+    } isShowHUD:YES];
+    
+    
+    
+    
 }
-
+#pragma mark 分享
 - (void)shareBut{
 
 
@@ -229,15 +277,22 @@
             } @finally {
             }
         }else{
+             [PubulicObj ShowSVWhitMessage];
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
         }
     } failure:^(NSError *error) {
+         [PubulicObj ShowSVWhitMessage];
         [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"网络错误"];
     } isShowHUD:YES];
     
     
 }
 
+- (void)addCommentSuccess{
+    
+    [self getCommentDataIsRefresh:YES];
+    
+}
 - (void)getCommentDataIsRefresh:(BOOL)isRefresh{
     NSString *url = [NSString stringWithFormat:@"%@app_list.php",BaseURL];
     DLog(@"url==%@",url);
@@ -279,19 +334,38 @@
             } @finally {
             }
         }else{
+             [PubulicObj ShowSVWhitMessage];
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
             [blockSelf.myTable.mj_footer endRefreshing];
 
         }
     } failure:^(NSError *error) {
         [blockSelf.myTable.mj_footer endRefreshing];
-
+        [PubulicObj ShowSVWhitMessage];
         [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"网络错误"];
     } isShowHUD:NO];
  
     
 }
 
+
+#pragma mark --自定义导航栏
+- (void)ziDingYiDaoHangLan{
+    self.navigationController.navigationBar.translucent =NO;
+    self.navigationController.navigationBar.barTintColor =zhuse;
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor],
+                                                                      NSFontAttributeName : [UIFont fontWithName:@"Helvetica-Bold" size:17]}];
+    self.view.backgroundColor =[UIColor groupTableViewBackgroundColor];
+    UIButton *img =[[UIButton alloc]init];
+    [img sizeToFit];
+    [img addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [img setImage:[UIImage imageNamed:@"turn_back"]
+         forState:UIControlStateNormal];
+    [img setImageEdgeInsets:UIEdgeInsetsMake(0, -8, 0, 8)];
+    UIBarButtonItem *left =[[UIBarButtonItem alloc]initWithCustomView:img];
+    left.tintColor =[UIColor lightGrayColor];
+    self.navigationItem.leftBarButtonItem =left;
+}
 - (void)goBack{
     [self.navigationController popViewControllerAnimated:YES];
 }

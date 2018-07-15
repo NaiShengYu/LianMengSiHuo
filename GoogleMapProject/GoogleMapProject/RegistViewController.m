@@ -263,6 +263,7 @@
 }
 - (void)update{
     WS(blockSelf)
+    [PubulicObj ShowSVWhitMessage];
     if (_phoneTF.text.length ==0 ||_phoneTF.text ==nil) {
         if ([_phoneLab.text  isEqual: @"手机号"]) {
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"请输入电话号码"];
@@ -296,6 +297,7 @@
 #pragma  mark --获取验证码
 - (void)getCode{
     WS(blockSelf);
+    [PubulicObj ShowSVWhitMessage];
     if (_phoneTF.text.length ==0 ||_phoneTF.text ==nil) {
         if ([_phoneLab.text  isEqual: @"手机号"]) {
             [SVProgressHUD showErrorWithStatus:@"请输入电话号码"];

@@ -20,11 +20,15 @@
 		2636ACA520F77C6F00FBDDC5 /* HomePageListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2636ACA420F77C6F00FBDDC5 /* HomePageListModel.m */; };
 		2636ACA820F78C7700FBDDC5 /* ShopInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2636ACA720F78C7700FBDDC5 /* ShopInfoModel.m */; };
 		2636ACAB20F79C1A00FBDDC5 /* ShopInfoCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2636ACAA20F79C1A00FBDDC5 /* ShopInfoCommentModel.m */; };
+		264DEF8620FA43E900A0238F /* CustomNetAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 264DEF8520FA43E900A0238F /* CustomNetAlertView.m */; };
+		264DEF8920FA4F4300A0238F /* CustomNoFoodAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 264DEF8820FA4F4300A0238F /* CustomNoFoodAlert.m */; };
 		265F8D1420EBA9FF00620F3E /* KNLocationConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 265F8D1320EBA9FF00620F3E /* KNLocationConverter.m */; };
 		265F8D1720EBC29600620F3E /* SearchKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265F8D1620EBC29600620F3E /* SearchKeyViewController.m */; };
 		265F8D1A20EBC8BA00620F3E /* SearchKeyNavVar.m in Sources */ = {isa = PBXBuildFile; fileRef = 265F8D1920EBC8BA00620F3E /* SearchKeyNavVar.m */; };
 		265F8D1D20EE5C9B00620F3E /* RegistSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265F8D1C20EE5C9B00620F3E /* RegistSecondViewController.m */; };
 		265F8D2020EE69BE00620F3E /* CommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 265F8D1F20EE69BE00620F3E /* CommentModel.m */; };
+		2670EF8020FB774800A54DAD /* UIImage+GIFImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2670EF7E20FB774800A54DAD /* UIImage+GIFImage.m */; };
+		2670EF8220FB7B7300A54DAD /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2670EF8120FB7B7200A54DAD /* loading.gif */; };
 		267BBF4320D913760005AE5A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 267BBF4220D913760005AE5A /* LoginViewController.m */; };
 		267BBF4620D92B330005AE5A /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 267BBF4520D92B330005AE5A /* RegistViewController.m */; };
 		267BBF4920D92B450005AE5A /* FogotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 267BBF4820D92B450005AE5A /* FogotViewController.m */; };
@@ -125,6 +129,10 @@
 		2636ACA720F78C7700FBDDC5 /* ShopInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopInfoModel.m; sourceTree = "<group>"; };
 		2636ACA920F79C1A00FBDDC5 /* ShopInfoCommentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopInfoCommentModel.h; sourceTree = "<group>"; };
 		2636ACAA20F79C1A00FBDDC5 /* ShopInfoCommentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopInfoCommentModel.m; sourceTree = "<group>"; };
+		264DEF8420FA43E900A0238F /* CustomNetAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomNetAlertView.h; sourceTree = "<group>"; };
+		264DEF8520FA43E900A0238F /* CustomNetAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomNetAlertView.m; sourceTree = "<group>"; };
+		264DEF8720FA4F4300A0238F /* CustomNoFoodAlert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomNoFoodAlert.h; sourceTree = "<group>"; };
+		264DEF8820FA4F4300A0238F /* CustomNoFoodAlert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomNoFoodAlert.m; sourceTree = "<group>"; };
 		265F8D1220EBA9FF00620F3E /* KNLocationConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KNLocationConverter.h; sourceTree = "<group>"; };
 		265F8D1320EBA9FF00620F3E /* KNLocationConverter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KNLocationConverter.m; sourceTree = "<group>"; };
 		265F8D1520EBC29600620F3E /* SearchKeyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchKeyViewController.h; sourceTree = "<group>"; };
@@ -135,6 +143,9 @@
 		265F8D1C20EE5C9B00620F3E /* RegistSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistSecondViewController.m; sourceTree = "<group>"; };
 		265F8D1E20EE69BE00620F3E /* CommentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentModel.h; sourceTree = "<group>"; };
 		265F8D1F20EE69BE00620F3E /* CommentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentModel.m; sourceTree = "<group>"; };
+		2670EF7E20FB774800A54DAD /* UIImage+GIFImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GIFImage.m"; sourceTree = "<group>"; };
+		2670EF7F20FB774800A54DAD /* UIImage+GIFImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GIFImage.h"; sourceTree = "<group>"; };
+		2670EF8120FB7B7200A54DAD /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		267BBF4120D913760005AE5A /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		267BBF4220D913760005AE5A /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		267BBF4420D92B330005AE5A /* RegistViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
@@ -341,6 +352,7 @@
 				260C46D120CD6736008952B4 /* TopView.m */,
 				C977137A20E358AD007AE5F0 /* CustomAccount.h */,
 				C977137B20E358AD007AE5F0 /* CustomAccount.m */,
+				2670EF8120FB7B7200A54DAD /* loading.gif */,
 				26196CBC20C55C6E0097D72D /* Main.storyboard */,
 				26196CC220C55C6F0097D72D /* Assets.xcassets */,
 				267BBF4A20D93D4D0005AE5A /* PubulicObj.h */,
@@ -476,12 +488,18 @@
 		C938504220EC9F61007AF5A7 /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				2670EF7F20FB774800A54DAD /* UIImage+GIFImage.h */,
+				2670EF7E20FB774800A54DAD /* UIImage+GIFImage.m */,
 				C938504F20EDA741007AF5A7 /* AFNetRequest.h */,
 				C938505020EDA741007AF5A7 /* AFNetRequest.m */,
 				C938504520EC9F85007AF5A7 /* YFScaleScrollViewView.h */,
 				C938504620EC9F85007AF5A7 /* YFScaleScrollViewView.m */,
 				C938504420EC9F85007AF5A7 /* YFScrollView.h */,
 				C938504320EC9F85007AF5A7 /* YFScrollView.m */,
+				264DEF8420FA43E900A0238F /* CustomNetAlertView.h */,
+				264DEF8520FA43E900A0238F /* CustomNetAlertView.m */,
+				264DEF8720FA4F4300A0238F /* CustomNoFoodAlert.h */,
+				264DEF8820FA4F4300A0238F /* CustomNoFoodAlert.m */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -623,6 +641,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				26196CC620C55C6F0097D72D /* LaunchScreen.storyboard in Resources */,
+				2670EF8220FB7B7300A54DAD /* loading.gif in Resources */,
 				26196CC320C55C6F0097D72D /* Assets.xcassets in Resources */,
 				26196CBE20C55C6E0097D72D /* Main.storyboard in Resources */,
 			);
@@ -690,6 +709,7 @@
 				C97712ED20DB5085007AE5F0 /* VersionInformationViewController.m in Sources */,
 				C938504B20ECAD10007AF5A7 /* TestViewController.m in Sources */,
 				267BBF6920DAA1F50005AE5A /* HomePageSectionTowheader.m in Sources */,
+				2670EF8020FB774800A54DAD /* UIImage+GIFImage.m in Sources */,
 				C977139120E4BFF0007AE5F0 /* SearchResultSectionZeroCell.m in Sources */,
 				C97712E120DB4F2D007AE5F0 /* CommentViewController.m in Sources */,
 				C977134320E33129007AE5F0 /* ShopCommentSectionZeroCell.m in Sources */,
@@ -731,9 +751,11 @@
 				C908C6E720F483280090E2B1 /* SearchResultModel.m in Sources */,
 				265F8D1D20EE5C9B00620F3E /* RegistSecondViewController.m in Sources */,
 				265F8D2020EE69BE00620F3E /* CommentModel.m in Sources */,
+				264DEF8920FA4F4300A0238F /* CustomNoFoodAlert.m in Sources */,
 				267BBF4920D92B450005AE5A /* FogotViewController.m in Sources */,
 				267BBF4C20D93D4D0005AE5A /* PubulicObj.m in Sources */,
 				C977137C20E358AD007AE5F0 /* CustomAccount.m in Sources */,
+				264DEF8620FA43E900A0238F /* CustomNetAlertView.m in Sources */,
 				C977132820E214F7007AE5F0 /* ShopInfoTableViewCell.m in Sources */,
 				260C46CF20CD5841008952B4 /* BottomView.m in Sources */,
 				267BBF6320DA9FC20005AE5A /* HomePageSecitonThreeCell.m in Sources */,

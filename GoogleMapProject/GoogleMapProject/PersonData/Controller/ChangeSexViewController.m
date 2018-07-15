@@ -57,6 +57,7 @@
 }
 
 - (void)update{
+
     [SVProgressHUD showSuccessWithStatus:@"修改昵称成功"];
     
     if (self.changeSexBlock) {

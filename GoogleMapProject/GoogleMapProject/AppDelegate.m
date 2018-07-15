@@ -11,7 +11,8 @@
 #import "KNLocationConverter.h"
 #import "FirstViewController.h"
 #import "CustormAlertView.h"
-
+#import "CustomNetAlertView.h"
+#import "CustomNoFoodAlert.h"
 #import "TestViewController.h"
 
 @import GoogleMaps;
@@ -43,21 +44,25 @@
 //    _window.rootViewController =[[UINavigationController alloc]initWithRootViewController:[[TestViewController alloc]init]];
 
     [SVProgressHUD setDefaultStyle:(SVProgressHUDStyleCustom)];
-    [SVProgressHUD setBackgroundColor:HEXCOLOR(0x303132)];
-    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
-    [SVProgressHUD setFont:FontSize(19)];
-    [SVProgressHUD setMinimumSize:CGSizeMake(260, 44)];
-    [SVProgressHUD setCornerRadius:5];
     [SVProgressHUD setDefaultMaskType:(SVProgressHUDMaskTypeClear)];
-    [SVProgressHUD setMaximumDismissTimeInterval:2];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(HUDDismiss) name:SVProgressHUDDidReceiveTouchEventNotification object:nil];
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardDidShow) name:UIKeyboardDidShowNotification object:nil];
-    
-//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyBoardHiden) name:UIKeyboardDidHideNotification object:nil];
-    
+
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyBoardHiden) name:UIKeyboardDidHideNotification object:nil];
+
+    CustomNoFoodAlert *alert =[[CustomNoFoodAlert alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    [self.window addSubview:alert];
+
     [self showUpdata];
+    NSUserDefaults *user =[NSUserDefaults standardUserDefaults];
+    NSString *state =[user objectForKey:@"qiDongState"];
+
+    if ([state integerValue] ==1) {
+        [self getNetState];
+        [self getLocationState];
+    }
     return YES;
 }
 
@@ -95,10 +100,44 @@
     
 }
 
+- (void)getNetState{
+    
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        if (status ==AFNetworkReachabilityStatusNotReachable) {
+            NSLog(@"网络不能连接");
+            [self showAlertWithMessage:@"未连接网络\n请检查WIFI或数据是否开启" setButtonTitle:@"设置网络"];
+
+        }
+    }];
+    
+    
+}
+
+- (void)getLocationState{
+    
+    if ([CLLocationManager locationServicesEnabled]==NO) {
+        NSLog(@"无法定位：locationServicesEnabled");
+       
+        [self showAlertWithMessage:@"定位信号较弱，\n点击开启GPS提高定位准确性" setButtonTitle:@"开启GPS"];
+    }else{
+        if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorizedAlways) {
+            NSLog(@"无法定位：关闭了定位服务");
+            [self showAlertWithMessage:@"定位信号较弱，\n点击开启GPS提高定位准确性" setButtonTitle:@"开启GPS"];
+        };
+    }
+}
+
+- (void)showAlertWithMessage:(NSString *)message setButtonTitle:(NSString *)title{
+    CustomNetAlertView *alert =[[CustomNetAlertView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    alert.messageLab.text = message;
+    [alert.setBut setTitle:title forState:UIControlStateNormal];
+    [self.window addSubview:alert];
+}
+
 
 
 - (void)showUpdata{
-    
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSString *url = [NSString stringWithFormat:@"%@app_user.php",BaseURL];
     DLog(@"url==%@",url);
@@ -144,6 +183,12 @@
 //
 //}
 
+- (void)keyBoardHiden{
+    DLog(@"键盘出现了");
+
+    [SVProgressHUD setOffsetFromCenter:UIOffsetMake(0,100)];
+
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

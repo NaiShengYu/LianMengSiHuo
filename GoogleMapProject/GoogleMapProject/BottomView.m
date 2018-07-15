@@ -194,6 +194,7 @@
         
         NSLog(@"%@",aaa?@"Yes":@"NO");
     }else{
+        [PubulicObj ShowSVWhitMessage];
         [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"您手机没有谷歌地图"];
     }
     

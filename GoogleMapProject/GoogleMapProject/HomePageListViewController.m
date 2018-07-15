@@ -330,11 +330,13 @@
             }
           
             }else{
+                [PubulicObj ShowSVWhitMessage];
                 [blockSelf.myTable.mj_header endRefreshing];
                 [blockSelf.myTable.mj_footer endRefreshing];
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
             }
     } failure:^(NSError *error) {
+        [PubulicObj ShowSVWhitMessage];
         [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"网络错误"];
     } isShowHUD:isRefresh];
     
@@ -380,9 +382,13 @@
             } @finally {
             }
         }else{
+            [PubulicObj ShowSVWhitMessage];
+
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
         }
     } failure:^(NSError *error) {
+        [PubulicObj ShowSVWhitMessage];
+
         [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"网络错误"];
     } isShowHUD:NO];
  

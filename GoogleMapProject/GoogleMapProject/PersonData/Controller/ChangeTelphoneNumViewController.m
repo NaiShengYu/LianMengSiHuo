@@ -170,6 +170,7 @@
 - (void)update{
     
     WS(blockSelf);
+    [PubulicObj ShowSVWhitMessage];
     if (_phoneTF.text.length ==0 ||_phoneTF.text ==nil) {
         [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"请输入电话号码"];
         return;
@@ -199,10 +200,12 @@
         if ([responseObject[@"code"] integerValue] ==1) {
             [user setObject:blockSelf.phoneTF.text forKey:PHONE];
             [user synchronize];
+            [PubulicObj ShowSVWhitMessage];
             [SVProgressHUD showSuccessWithStatus:@"修改手机号成功"];
             [self.navigationController popViewControllerAnimated:YES];
             
         }else{
+            [PubulicObj ShowSVWhitMessage];
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
         }
     } failure:^(NSError *error) {
@@ -213,6 +216,7 @@
 #pragma  mark --获取验证码
 - (void)getCode{
     WS(blockSelf);
+    [PubulicObj ShowSVWhitMessage];
     if (_phoneTF.text.length ==0 ||_phoneTF.text ==nil) {
             [SVProgressHUD showErrorWithStatus:@"请输入电话号码"];
         return;
@@ -234,7 +238,8 @@
     [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
         if ([responseObject[@"code"] integerValue] ==1) {
             self.code = [NSString stringWithFormat:@"%@",responseObject[@"data"]];
-            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"发送成功"];
+            [PubulicObj ShowSVWhitMessage];
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"已发送验证码至手机"];
         }else{
             [blockSelf startGetCode];
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];

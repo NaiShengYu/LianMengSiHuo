@@ -112,10 +112,12 @@
         if ([responseObject[@"code"] integerValue] ==1) {
             [user setObject:blockSelf.phoneTF.text forKey:NICKNAME];
             [user synchronize];
+            [PubulicObj ShowSVWhitMessage];
             [SVProgressHUD showSuccessWithStatus:@"修改昵称成功"];
             [self.navigationController popViewControllerAnimated:YES];
 
         }else{
+            [PubulicObj ShowSVWhitMessage];
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
         }
     } failure:^(NSError *error) {

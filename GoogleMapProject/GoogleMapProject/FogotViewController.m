@@ -170,6 +170,7 @@
 - (void)update{
     
     WS(blockSelf);
+    [PubulicObj ShowSVWhitMessage];
     if (_phoneTF.text.length ==0 ||_phoneTF.text ==nil) {
         [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"请输入电话号码"];
         return;
@@ -194,6 +195,7 @@
 #pragma  mark --获取验证码
 - (void)getCode{
     WS(blockSelf);
+    [PubulicObj ShowSVWhitMessage];
     if (_phoneTF.text.length ==0 ||_phoneTF.text ==nil) {
         [SVProgressHUD showErrorWithStatus:@"请输入电话号码"];
         return;
@@ -215,9 +217,11 @@
     [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
         if ([responseObject[@"code"] integerValue] ==1) {
             self.code = [NSString stringWithFormat:@"%@",responseObject[@"data"]];
+            [PubulicObj ShowSVWhitMessage];
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"验证码已发送至手机！"];
         }else{
             [blockSelf startGetCode];
+            [PubulicObj ShowSVWhitMessage];
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
         }
     } failure:^(NSError *error) {
