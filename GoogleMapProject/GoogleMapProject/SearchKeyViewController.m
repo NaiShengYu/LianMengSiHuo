@@ -50,6 +50,10 @@
     [navView.backBut addTarget:self action:@selector(showLeftVC) forControlEvents:UIControlEventTouchUpInside];
     [navView.searchBar becomeFirstResponder];
     [navView.searchBar addTarget:self action:@selector(textChange:) forControlEvents:UIControlEventEditingChanged];
+    [navView.rightBut setTitle:@"取消" forState:UIControlStateNormal];
+    [navView.rightBut setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    [navView.rightBut addTarget:self action:@selector(showLeftVC) forControlEvents:UIControlEventTouchUpInside];
+
     [self.view addSubview:navView];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

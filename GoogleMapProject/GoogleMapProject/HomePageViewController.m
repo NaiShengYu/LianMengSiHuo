@@ -84,6 +84,7 @@
 - (void)creatNav{
     HomePageNavView *navView = [[HomePageNavView alloc]initWithFrame:CGRectMake(0, 0, screenWigth, MaxY)];
     navView.vc =self;
+    navView.cancelBut.enabled =NO;
     [navView.rightBut addTarget:self action:@selector(changeLocation) forControlEvents:UIControlEventTouchUpInside];
     [navView.backBut addTarget:self action:@selector(showLeftVC) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:navView];
@@ -264,6 +265,8 @@
 - (void)changeLocation{
     [CustomAccount sharedCustomAccount].cityName = [CustomAccount sharedCustomAccount].currentCityName;
     [CustomAccount sharedCustomAccount].cityEnName = @"";
+    [CustomAccount sharedCustomAccount].cityLocation = [CustomAccount sharedCustomAccount].curCoordinate2D;
+
     [self makeData];
 }
 @end

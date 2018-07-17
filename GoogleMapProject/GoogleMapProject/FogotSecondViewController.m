@@ -7,7 +7,7 @@
 //
 
 #import "FogotSecondViewController.h"
-
+#import "LoginViewController.h"
 @interface FogotSecondViewController ()
 @property (nonatomic,strong)UITextField *PasswordTF;
 @property (nonatomic,strong)UITextField *secondPasswordTF;
@@ -135,6 +135,7 @@
 
     alertLab.numberOfLines =2;
     alertLab.adjustsFontSizeToFitWidth =YES;
+    alertLab.textColor = zhuse;
     alertLab.text =@"提示：密码长度在8位以上，包含数字、大小写字母、特殊字符中的两种或两种以上";
     alertLab.font =FontSize(15);
 
@@ -174,15 +175,27 @@
     NSString *url = [NSString stringWithFormat:@"%@app_user.php",BaseURL];
     DLog(@"url==%@",url);
     NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
-    [param setObject:@"user_forget_pwd" forKey:@"app"];
-    [param setObject:self.phoneNum forKey:@"phone"];
     [param setObject:_secondPasswordTF.text forKey:@"new_pwd"];
-
+    if (self.type ==1) {
+        [param setObject:@"user_forget_pwd" forKey:@"app"];
+        [param setObject:self.phone forKey:@"phone"];
+    }else{
+        [param setObject:@"user_forget_email_pwd" forKey:@"app"];
+        [param setObject:self.phone forKey:@"email"];
+    }
+    
     [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
         if ([responseObject[@"code"] integerValue] ==1) {
             [PubulicObj ShowSVWhitMessage];
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"修改密码成功"];
-            [blockSelf.navigationController popToRootViewControllerAnimated:YES];
+            
+            NSArray *arr = blockSelf.navigationController.viewControllers;
+            if ([arr[1] isKindOfClass:[LoginViewController class]]) {
+                [blockSelf.navigationController popToViewController:arr[1] animated:YES];
+            }else{
+                [blockSelf.navigationController popToRootViewControllerAnimated:YES];
+            }
+            
             
         }else{
             [PubulicObj ShowSVWhitMessage];

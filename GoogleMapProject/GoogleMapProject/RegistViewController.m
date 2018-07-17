@@ -38,7 +38,7 @@
     [super viewDidLoad];
     _time =60;
     _code = @"";
-    self.title =@"忘记密码";
+    self.title =@"注册";
     [self ziDingYiDaoHangLan];
     [self functionBar];
     [self creatView];
@@ -327,6 +327,7 @@
         [param setObject:_phoneTF.text forKey:@"email"];
     }
     [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+        [PubulicObj ShowSVWhitMessage];
         if ([responseObject[@"code"] integerValue] ==1) {
             self.code = [NSString stringWithFormat:@"%@",responseObject[@"data"]];
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"验证码已发送"];

@@ -42,8 +42,6 @@
         [self.myTable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.insets = UIEdgeInsetsMake(0, 0, 0, 0);
         }];
-        
-        
     }
     
     return self;
@@ -52,11 +50,11 @@
 
 - (void)setDataArray:(NSMutableArray *)dataArray{
     _dataArray =dataArray;
-    [_myTable reloadData];
-
+    [self.myTable reloadData];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
     return self.dataArray.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

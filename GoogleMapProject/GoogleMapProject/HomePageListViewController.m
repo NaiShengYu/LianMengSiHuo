@@ -169,7 +169,10 @@
     self.view.backgroundColor =[UIColor whiteColor];
     [self.view addSubview:self.myTable];
     [self.view addSubview:self.filterV];
-    
+    WS(blockSelf);
+    self.filterV.selectChangeBLock = ^(FilterItem *selectItem) {
+        [blockSelf makeDataIsRefresh:YES];
+    };
    TopView *topV=[[TopView alloc]initWithFrame:CGRectMake(0, 0,screenWigth , MaxY)];
     [topV.rightBut setImage:[UIImage imageNamed:@"列表_03"] forState:UIControlStateNormal];
     [topV.backBut addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];

@@ -53,9 +53,11 @@
 
 - (void)setAllTabPagArray:(NSMutableArray *)AllTabPagArray{
     
-    if (_AllTabPagArray.count >0) {
-        return;
-    }
+    [_butsArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        UIButton *but = (UIButton *)obj;
+        [but removeFromSuperview];
+    }];
+    
     _AllTabPagArray =AllTabPagArray;
     
     

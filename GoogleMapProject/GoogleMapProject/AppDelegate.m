@@ -71,7 +71,8 @@
     // 通过location  或得到当前位置的经纬度
     CLLocationCoordinate2D curCoordinate2D = curLocation.coordinate;
     [CustomAccount sharedCustomAccount].curCoordinate2D =[KNLocationConverter transformFromWGSToGCJ:curCoordinate2D];
-    
+    [CustomAccount sharedCustomAccount].cityLocation =[KNLocationConverter transformFromWGSToGCJ:curCoordinate2D];
+
 //     curCoordinate2D = CLLocationCoordinate2DMake(48.8600000000, 2.3411111000);
 
     CLGeocoder  *coder = [[CLGeocoder alloc]init];
@@ -121,7 +122,7 @@
        
         [self showAlertWithMessage:@"定位信号较弱，\n点击开启GPS提高定位准确性" setButtonTitle:@"开启GPS"];
     }else{
-        if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorizedAlways) {
+        if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
             NSLog(@"无法定位：关闭了定位服务");
             [self showAlertWithMessage:@"定位信号较弱，\n点击开启GPS提高定位准确性" setButtonTitle:@"开启GPS"];
         };
@@ -158,6 +159,7 @@
                 NSString *str = dic[@"content"];
                 str =[str stringByReplacingOccurrencesOfString:instailString withString:@"\r"];
                 alert.textV.text = str;
+                [alert.upBut setTitle:[NSString stringWithFormat:@"更新到v%@",dic[@"versionName"]] forState:UIControlStateNormal];
                 [blockSelf.window addSubview:alert];
             }
         }else{
@@ -184,9 +186,9 @@
 //}
 
 - (void)keyBoardHiden{
-    DLog(@"键盘出现了");
+    DLog(@"键盘消失了");
 
-    [SVProgressHUD setOffsetFromCenter:UIOffsetMake(0,100)];
+    [SVProgressHUD setOffsetFromCenter:UIOffsetMake(0,0)];
 
 }
 

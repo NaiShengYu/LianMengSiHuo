@@ -43,7 +43,7 @@
     return 1;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 0.1;
+    return 180;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 10;
@@ -54,7 +54,20 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    return nil;
+
+    UITableViewHeaderFooterView *header =[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"header"];
+    if (!header) {
+        header = [[UITableViewHeaderFooterView alloc]initWithReuseIdentifier:@"header"];
+        UIImageView *imgV =[UIImageView new];
+        [header.contentView addSubview:imgV];
+        [imgV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.mas_equalTo(CGPointMake(0, 0));
+            make.size.mas_equalTo(CGSizeMake(90, 90));
+        }];
+        imgV.image = [UIImage imageNamed:@"个人中心_07"];
+        header.contentView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    }
+    return header;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{

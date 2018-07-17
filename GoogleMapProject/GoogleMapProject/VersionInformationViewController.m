@@ -24,8 +24,8 @@
     self.title =@"版本信息";
     self.view.backgroundColor =RGBA(244, 245, 246, 1);
     [self ziDingYiDaoHangLan];
-    [self creatView];
-   
+    
+    [self showUpdata];
 }
 
 - (void)creatView{
@@ -111,12 +111,43 @@
     _textV.editable =NO;
     _textV.textColor =[UIColor grayColor];
     _textV.font =FontSize(17);
-    _textV.text =@"先帝创业未半而中道崩殂，今天下三分，益州疲弊，此诚危急存亡之秋也。然侍卫之臣不懈于内，忠志之士忘身于外者，盖追先帝之殊遇，欲报之于陛下也。诚宜开张圣听，以光先帝遗德，恢弘志士之气，不宜妄自菲薄，引喻失义，以塞忠谏之路也。\n宫中府中，俱为一体，陟罚臧否，不宜异同。若有作奸犯科及为忠善者，宜付有司论其刑赏，以昭陛下平明之理，不宜偏私，使内外异法也。\n侍中、侍郎郭攸之、费祎、董允等，此皆良实，志虑忠纯，是以先帝简拔以遗陛下。愚以为宫中之事，事无大小，悉以咨之，然后施行，必能裨补阙漏，有所广益。";
     _textV.layer.cornerRadius =10;
     _textV.layer.masksToBounds =YES;
     _textV.layer.borderWidth =1;
     _textV.layer.borderColor =[UIColor grayColor].CGColor;
     
+}
+
+- (void)showUpdata{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSString *url = [NSString stringWithFormat:@"%@app_user.php",BaseURL];
+    DLog(@"url==%@",url);
+    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+    [param setObject:@"get_app_version" forKey:@"app"];
+    [param setObject:@"1" forKey:@"os"];
+    
+    WS(blockSelf);
+    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+        if ([responseObject[@"code"] integerValue] ==1) {
+            NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+            NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+            NSDictionary *dic =responseObject[@"data"][0];
+            [blockSelf creatView];
+            if ([app_Version isEqualToString:dic[@"versionCode"]]) {
+                blockSelf.versonLab.text  =[NSString stringWithFormat:@"当前版本：%@\n(最新版本)",app_Version];
+                blockSelf.upBut.hidden =YES;
+                blockSelf.textV.hidden =YES;
+            }else{
+                [blockSelf.upBut setTitle:[NSString stringWithFormat:@"更新到v%@",dic[@"versionName"]] forState:UIControlStateNormal];
+                NSString *content = [NSString stringWithFormat:@"%@",dic[@"content"]];
+                content = [content stringByReplacingOccurrencesOfString:instailString withString:@"\n"];
+                blockSelf.textV.text = content;
+            }
+        }else{
+        }
+    } failure:^(NSError *error) {
+        
+    } isShowHUD:NO];
 }
 
 
@@ -127,9 +158,7 @@
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/cn/app/id1144816653?mt=8"] options:@{} completionHandler:^(BOOL success) {
                 NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
                 NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
-                self.versonLab.text  =[NSString stringWithFormat:@"当前版本：%@\n(最新版本)",app_Version];
-                self.upBut.hidden =YES;
-                self.textV.hidden =YES;
+            
         }];
         
     }
@@ -151,9 +180,7 @@
     UIBarButtonItem *left =[[UIBarButtonItem alloc]initWithCustomView:img];
     left.tintColor =[UIColor lightGrayColor];
     self.navigationItem.leftBarButtonItem =left;
-    
-    
-    
+
 }
 - (void)goBack{
     

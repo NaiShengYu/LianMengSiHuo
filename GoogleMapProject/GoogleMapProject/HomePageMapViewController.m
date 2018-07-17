@@ -32,6 +32,8 @@
 
 @property (nonatomic,strong)NSMutableArray *dataArray;
 
+@property (nonatomic,strong)YNSFunctionBar * functionBar;
+
 @end
 
 @implementation HomePageMapViewController
@@ -41,150 +43,97 @@
         _filterV =[[FilterView alloc]initWithFrame:CGRectMake(0, 0, screenWigth, 0)];
         FilterHeaderModel *headerModel = [[FilterHeaderModel alloc]init];
         headerModel.isSelect = YES;
-        headerModel.title =@"类别";
+        headerModel.title =@"评分";
         FilterItem *item1 =[[FilterItem alloc]init];
         item1.title = @"全部";
+        item1.Id = @"";
         item1.isSelect =YES;
         [headerModel.itemsArray addObject:item1];
         
         FilterItem *item2 =[[FilterItem alloc]init];
-        item2.title = @"餐厅";
+        item2.title = @"五星";
         item2.isSelect =NO;
+        item2.Id = @"5";
         [headerModel.itemsArray addObject:item2];
         
         FilterItem *item3 =[[FilterItem alloc]init];
-        item3.title = @"景点";
+        item3.title = @"四星";
         item3.isSelect =NO;
+        item3.Id = @"4";
         [headerModel.itemsArray addObject:item3];
         
         FilterItem *item4 =[[FilterItem alloc]init];
-        item4.title = @"购物";
+        item4.title = @"三星";
         item4.isSelect =NO;
+        item4.Id = @"3";
+        
         [headerModel.itemsArray addObject:item4];
         
         FilterItem *item5 =[[FilterItem alloc]init];
-        item5.title = @"酒店";
+        item5.title = @"二星";
         item5.isSelect =NO;
+        item5.Id = @"2";
+        
         [headerModel.itemsArray addObject:item5];
         
+        FilterItem *item6 =[[FilterItem alloc]init];
+        item6.title = @"一星";
+        item6.isSelect =NO;
+        item6.Id = @"1";
+        
+        [headerModel.itemsArray addObject:item6];
         
         FilterHeaderModel *headerModel1 = [[FilterHeaderModel alloc]init];
         headerModel1.isSelect = NO;
         headerModel1.title =@"距离";
         FilterItem *item11 =[[FilterItem alloc]init];
         item11.title = @"500M";
-        item11.isSelect =YES;
+        item11.isSelect =NO;
+        item11.Id = @"0.5";
         [headerModel1.itemsArray addObject:item11];
         
         FilterItem *item22 =[[FilterItem alloc]init];
         item22.title = @"1km";
         item22.isSelect =NO;
+        item22.Id = @"1";
+        
         [headerModel1.itemsArray addObject:item22];
         
         FilterItem *item33 =[[FilterItem alloc]init];
         item33.title = @"2km";
         item33.isSelect =NO;
+        item33.Id = @"2";
+        
         [headerModel1.itemsArray addObject:item33];
         
         FilterItem *item44 =[[FilterItem alloc]init];
         item44.title = @"5km";
-        item44.isSelect =NO;
+        item44.isSelect =YES;
+        item44.Id = @"5";
+        
         [headerModel1.itemsArray addObject:item44];
         
         FilterItem *item55 =[[FilterItem alloc]init];
         item55.title = @"8km";
         item55.isSelect =NO;
+        item55.Id = @"8";
+        
         [headerModel1.itemsArray addObject:item55];
         
         FilterItem *item66 =[[FilterItem alloc]init];
         item66.title = @"10km";
         item66.isSelect =NO;
+        item66.Id = @"10";
+        
         [headerModel1.itemsArray addObject:item66];
         
         FilterItem *item77 =[[FilterItem alloc]init];
         item77.title = @"20km";
         item77.isSelect =NO;
+        item77.Id = @"20";
         [headerModel1.itemsArray addObject:item77];
-        
-        FilterHeaderModel *headerModel2 = [[FilterHeaderModel alloc]init];
-        headerModel2.isSelect = NO;
-        headerModel2.title =@"菜系";
-        FilterItem *item111 =[[FilterItem alloc]init];
-        item111.title = @"当地热门 1120";
-        item111.isSelect =YES;
-        [headerModel2.itemsArray addObject:item111];
-        
-        FilterItem *item222 =[[FilterItem alloc]init];
-        item222.title = @"米其林 9";
-        item222.isSelect =NO;
-        [headerModel2.itemsArray addObject:item222];
-        
-        FilterItem *item333 =[[FilterItem alloc]init];
-        item333.title = @"法餐 134";
-        item333.isSelect =NO;
-        [headerModel2.itemsArray addObject:item333];
-        
-        FilterItem *item444 =[[FilterItem alloc]init];
-        item444.title = @"意大利菜 32";
-        item444.isSelect =NO;
-        [headerModel2.itemsArray addObject:item444];
-        
-        FilterItem *item555 =[[FilterItem alloc]init];
-        item555.title = @"中餐 22";
-        item555.isSelect =NO;
-        [headerModel2.itemsArray addObject:item555];
-        
-        FilterItem *item666 =[[FilterItem alloc]init];
-        item666.title = @"亚洲餐厅 999";
-        item666.isSelect =NO;
-        [headerModel2.itemsArray addObject:item666];
-        
-        FilterItem *item888 =[[FilterItem alloc]init];
-        item888.title = @"日餐 10";
-        item888.isSelect =NO;
-        [headerModel2.itemsArray addObject:item888];
-        
-        FilterItem *item999 =[[FilterItem alloc]init];
-        item999.title = @"印度菜 87";
-        item999.isSelect =NO;
-        [headerModel2.itemsArray addObject:item999];
-        
-        FilterItem *item1000 =[[FilterItem alloc]init];
-        item1000.title = @"酒吧 79";
-        item1000.isSelect =NO;
-        [headerModel2.itemsArray addObject:item1000];
-        
-        FilterItem *item1001 =[[FilterItem alloc]init];
-        item1001.title = @"墨西哥 1232";
-        item1001.isSelect =NO;
-        [headerModel2.itemsArray addObject:item1001];
-        
-        FilterItem *item1002 =[[FilterItem alloc]init];
-        item1002.title = @"西班牙菜 879";
-        item1002.isSelect =NO;
-        [headerModel2.itemsArray addObject:item1002];
-        
-        FilterItem *item1003 =[[FilterItem alloc]init];
-        item1003.title = @"甜点 89";
-        item1003.isSelect =NO;
-        [headerModel2.itemsArray addObject:item1003];
-        
-        FilterItem *item1004 =[[FilterItem alloc]init];
-        item1004.title = @"韩餐 56";
-        item1004.isSelect =NO;
-        [headerModel2.itemsArray addObject:item1004];
-        
-        FilterItem *item1005 =[[FilterItem alloc]init];
-        item1005.title = @"咖啡厅 90";
-        item1005.isSelect =NO;
-        [headerModel2.itemsArray addObject:item1005];
-        
-        FilterItem *item1006 =[[FilterItem alloc]init];
-        item1006.title = @"西餐 999";
-        item1006.isSelect =NO;
-        [headerModel2.itemsArray addObject:item1006];
-        
-        _filterArray =[[NSMutableArray alloc]initWithObjects:headerModel, headerModel1,headerModel2,nil];
+
+        _filterArray =[[NSMutableArray alloc]initWithObjects:headerModel, headerModel1,nil];
         _filterV.dataArray =_filterArray;
         
         
@@ -196,7 +145,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.dataArray = [[NSMutableArray alloc]init];
-    GMSCameraPosition *position = [GMSCameraPosition cameraWithLatitude:-33.86 longitude:151.20 zoom:14];
+    GMSCameraPosition *position = [GMSCameraPosition cameraWithLatitude:-33.86 longitude:151.20 zoom:18];
     _mapV =[GMSMapView mapWithFrame:self.view.bounds camera:position];
 //    _mapV.myLocationEnabled = YES;
     _mapV.delegate =self;
@@ -232,6 +181,10 @@
     [bacv addSubview:but1];
     
     [self.view addSubview:self.filterV];
+    WS(blockSelf);
+    self.filterV.selectChangeBLock = ^(FilterItem *selectItem) {
+        [blockSelf makeData];
+    };
     self.view.backgroundColor =[UIColor whiteColor];
     TopView*topV=[[TopView alloc]initWithFrame:CGRectMake(0, 0,screenWigth , MaxY)];
     [self.view addSubview:topV];
@@ -239,11 +192,11 @@
     [topV.backBut addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [topV.chooseBut addTarget:self action:@selector(chooseBut:) forControlEvents:UIControlEventTouchUpInside];
     
-    if ([CustomAccount sharedCustomAccount].curCoordinate2D.latitude==0 && [CustomAccount sharedCustomAccount].curCoordinate2D.longitude==0) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLocation) name:@"getCityName" object:nil];
-    }else{
+//    if ([CustomAccount sharedCustomAccount].curCoordinate2D.latitude==0 && [CustomAccount sharedCustomAccount].curCoordinate2D.longitude==0) {
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLocation) name:@"getCityName" object:nil];
+//    }else{
         [self currentLocation];
-    }
+//    }
     
 }
 
@@ -260,24 +213,24 @@
 - (void)currentCenter{
   
         if (position2D.latitude !=0 && position2D.longitude !=0) {
-            GMSCameraPosition *position1 = [GMSCameraPosition cameraWithTarget:position2D zoom:14];
+            GMSCameraPosition *position1 = [GMSCameraPosition cameraWithTarget:position2D zoom:18];
             [self.mapV animateToCameraPosition:position1];
             _marker.position =position2D;
             BIGposition2D = position2D;
-
         }
-    }
+}
 
 
 - (void)currentLocation{
 
         // 通过location  或得到当前位置的经纬度
-        CLLocationCoordinate2D curCoordinate2D = [CustomAccount sharedCustomAccount].curCoordinate2D;
-        GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:curCoordinate2D.latitude longitude:curCoordinate2D.longitude zoom:14];
+        CLLocationCoordinate2D curCoordinate2D = [CustomAccount sharedCustomAccount].cityLocation;
+        GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:curCoordinate2D.latitude longitude:curCoordinate2D.longitude zoom:18];
         position2D = curCoordinate2D;//可以吧这个存起来
         BIGposition2D = curCoordinate2D;//可以吧这个存起来
         [self creatBottomView];
         [self makeData];
+        [self getCollection];
 
         self.mapV.camera = camera;//这句话很重要很重要，将我们获取到的经纬度转成影像并赋值给地图的camera属性
 }
@@ -290,15 +243,16 @@
 }
 - (void)creatBottomView{
     WS(blockSelf);
-    YNSFunctionBar * backView =[[YNSFunctionBar alloc]init];
-    backView.frame =CGRectMake(0, screenHeight-TabbarHeight, screenWigth, TabbarHeight);
-    backView.backgroundColor =[UIColor whiteColor];
-    [self.view addSubview:backView];
+    _functionBar =[[YNSFunctionBar alloc]init];
+    _functionBar.frame =CGRectMake(0, screenHeight-TabbarHeight, screenWigth, TabbarHeight);
+    _functionBar.backgroundColor =[UIColor whiteColor];
+    [self.view addSubview:_functionBar];
     [CustomAccount sharedCustomAccount].className =@"list_map_scenic";
     [CustomAccount sharedCustomAccount].classtype =@"2";
 
-    backView.selectBlock = ^(NSInteger index) {
+    _functionBar.selectBlock = ^(NSInteger index) {
         [blockSelf makeData];
+        [blockSelf getCollection];
     };
 }
 
@@ -415,15 +369,20 @@
 }
 
 - (void)chooseBut:(UIButton *)but{
-    
+    WS(blockSelf)
     but.selected = !but.selected;
     if (but.selected ==YES) {
         [UIView animateWithDuration:0.4 animations:^{
-            self.filterV.frame =CGRectMake(0, MaxY, screenWigth, screenHeight-MaxY);
+            blockSelf.filterV.frame =CGRectMake(0, MaxY, screenWigth, screenHeight-MaxY);
+            blockSelf.bottomV.frame =CGRectMake(10, screenHeight +10, screenWigth-20, 153);
+            blockSelf.functionBar.frame =CGRectMake(10, screenHeight +10+153, screenWigth-20, 153);
         }];
     }else{
         [UIView animateWithDuration:0.4 animations:^{
             self.filterV.frame =CGRectMake(0, 0, screenWigth, 0);
+            blockSelf.bottomV.frame =CGRectMake(10, screenHeight -153-TabbarHeight, screenWigth-20, 153);
+            blockSelf.functionBar.frame =CGRectMake(10, screenHeight-TabbarHeight , screenWigth-20, 153);
+
         }];
     }
     
@@ -444,7 +403,6 @@
     [param setObject:acc.className forKey:@"app"];
         [param setObject:[NSString stringWithFormat:@"%f",BIGposition2D.longitude] forKey:@"lng"];
         [param setObject:[NSString stringWithFormat:@"%f",BIGposition2D.latitude] forKey:@"lat"];
-    
   
     [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
         if ([responseObject[@"code"] integerValue] ==1) {
@@ -457,7 +415,7 @@
             [blockSelf.view addSubview:blockSelf.bottomV];
             if (blockSelf.dataArray.count >0) {
                 blockSelf.bottomV.model = blockSelf.dataArray[0];
-                GMSCameraPosition *position1 = [GMSCameraPosition cameraWithLatitude:[blockSelf.bottomV.model.lat floatValue] longitude:[blockSelf.bottomV.model.lng floatValue] zoom:14];
+                GMSCameraPosition *position1 = [GMSCameraPosition cameraWithLatitude:[blockSelf.bottomV.model.lat floatValue] longitude:[blockSelf.bottomV.model.lng floatValue] zoom:18];
                 [blockSelf.mapV animateToCameraPosition:position1];
             }
             [blockSelf saoMiaoJieGuo];
@@ -472,5 +430,64 @@
     } isShowHUD:YES];
     
 }
+
+
+- (void)getCollection{
+    
+    NSString *url = [NSString stringWithFormat:@"%@app_list.php",BaseURL];
+    DLog(@"url==%@",url);
+    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+    CustomAccount *acc = [CustomAccount sharedCustomAccount];
+    [param setObject:@"list_condition" forKey:@"app"];
+    [param setObject:acc.city_id forKey:@"city_id"];
+    [param setObject:acc.classtype forKey:@"type"];
+    
+    WS(blockSelf);
+    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+        if ([responseObject[@"code"] integerValue] ==1) {
+            @try {
+                [blockSelf.filterArray removeObjectAtIndex:2];
+            } @catch (NSException *exception) {
+            } @finally {
+            }
+            @try {
+                FilterHeaderModel *headerModel2 = [[FilterHeaderModel alloc]init];
+                headerModel2.isSelect = NO;
+                NSArray *arr =responseObject[@"data"];
+                [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    FilterItem *item =[[FilterItem alloc]initWithDic:obj];
+                    if (idx ==0) {
+                        if ([item.type integerValue] ==1) {
+                            headerModel2.title =@"菜系";
+                        }
+                        if ([item.type integerValue] ==3) {
+                            headerModel2.title =@"菜系";
+                        }
+                        if ([item.type integerValue] ==4) {
+                            headerModel2.title =@"菜系";
+                        }
+                    }
+                    [headerModel2.itemsArray addObject:item];
+                }];
+                [blockSelf.filterArray addObject:headerModel2];
+                blockSelf.filterV.dataArray = blockSelf.filterArray;
+                
+            } @catch (NSException *exception) {
+            } @finally {
+            }
+        }else{
+            [PubulicObj ShowSVWhitMessage];
+            
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [PubulicObj ShowSVWhitMessage];
+        
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"网络错误"];
+    } isShowHUD:NO];
+    
+}
+
+
 
 @end
