@@ -26,7 +26,7 @@
         /**
          * 电信号段正则表达式
          */
-        NSString *CT_NUM = @"^((133)|(153)|(177)|(18[0,1,9]))\\d{8}$";
+        NSString *CT_NUM = @"^((133)|(173)|(153)|(177)|(18[0,1,9]))\\d{8}$";
         NSPredicate *pred1 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM_NUM];
         BOOL isMatch1 = [pred1 evaluateWithObject:mobile];
         NSPredicate *pred2 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU_NUM];
@@ -168,5 +168,47 @@
     [SVProgressHUD setMinimumDismissTimeInterval:60];
     [SVProgressHUD setInfoImage:[UIImage imageWithGIFNamed:@"loading"]];
     
+}
+
++ (BOOL)IsPassWordWithString:(NSString *)str{
+    if (str ==nil || str.length ==0) {
+        return NO;
+    }
+    if (str.length <8) {
+        return NO;
+    }
+    
+    //是否有数字
+    BOOL haveNum = NO;
+    BOOL haveABC = NO;
+    BOOL haveSpecial = NO;
+    NSString *num = @"[0-9]";
+    NSString *abc = @"[a-zA-Z]";
+    NSString *special = @"[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
+    NSRange range1 = [str rangeOfString:num options:NSRegularExpressionSearch];
+    NSRange range2 = [str rangeOfString:abc options:NSRegularExpressionSearch];
+    NSRange range3 = [str rangeOfString:special options:NSRegularExpressionSearch];
+    int a = 0;
+    if (range1.location != NSNotFound) {
+        haveNum =YES;
+        a +=1;
+    }else{
+        NSLog(@"没有找到数字");
+    }
+    if (range2.location != NSNotFound) {
+        haveABC =YES;
+        a +=1;
+    }else{
+        NSLog(@"没有找到字母");
+    }
+    if (range3.location != NSNotFound) {
+        haveSpecial =YES;
+        a +=1;
+    }else{
+        NSLog(@"没有找到特殊符号");
+    }
+    if(a>=2)return YES;
+    else return NO;
+ 
 }
 @end

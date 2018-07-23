@@ -75,7 +75,32 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.textLabel.text = self.content;
+    @try {
+        NSMutableAttributedString *att = [[NSMutableAttributedString alloc]initWithString:self.content];
+        NSRange range1 = [self.content rangeOfString:@"品牌定位"];
+        if (range1.location !=NSNotFound) {
+            [att addAttribute:NSFontAttributeName value:FontSize(19) range:NSMakeRange(range1.location, 4)];
+            [att addAttribute:NSForegroundColorAttributeName value:zhuse range:NSMakeRange(range1.location, 4)];
+        }
+        NSRange range2 = [self.content rangeOfString:@"连盟旅游信息网组成"];
+        if (range2.location !=NSNotFound) {
+            [att addAttribute:NSFontAttributeName value:FontSize(19) range:NSMakeRange(range2.location, 9)];
+            [att addAttribute:NSForegroundColorAttributeName value:zhuse range:NSMakeRange(range2.location, 9)];
+        }
+        NSRange range3 = [self.content rangeOfString:@"连接梦想"];
+        if (range3.location !=NSNotFound) {
+            [att addAttribute:NSFontAttributeName value:FontSize(19) range:NSMakeRange(range3.location, 4)];
+            [att addAttribute:NSForegroundColorAttributeName value:zhuse range:NSMakeRange(range3.location, 4)];
+        }
+        cell.textLabel.attributedText = att;
+        NSLog(@"%@",self.content);
+        
+    } @catch (NSException *exception) {
+        
+    } @finally {
+        
+    }
+
     cell.textLabel.numberOfLines =0;
     return cell;
 }

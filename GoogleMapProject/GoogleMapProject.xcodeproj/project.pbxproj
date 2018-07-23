@@ -52,6 +52,8 @@
 		2682073520F2613A00DE7FE0 /* HomePageSectionOneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2682073420F2613A00DE7FE0 /* HomePageSectionOneModel.m */; };
 		2682073820F261EA00DE7FE0 /* HomePageSectionTowModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2682073720F261EA00DE7FE0 /* HomePageSectionTowModel.m */; };
 		2682073B20F3A5F100DE7FE0 /* SearchResultFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2682073A20F3A5F100DE7FE0 /* SearchResultFooter.m */; };
+		268B22692106083300F6A24D /* SearchNoResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 268B22682106083300F6A24D /* SearchNoResultViewController.m */; };
+		268B226C2106132200F6A24D /* SearchNoResultHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 268B226B2106132200F6A24D /* SearchNoResultHeader.m */; };
 		26904EB520E78A2200084B5F /* HomePageMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26904EB420E78A2200084B5F /* HomePageMapViewController.m */; };
 		26904EB820E78CD000084B5F /* YNSFunctionBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 26904EB720E78CD000084B5F /* YNSFunctionBar.m */; };
 		26A608C620E1251300B677FF /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A608C520E1251300B677FF /* ChangePasswordViewController.m */; };
@@ -192,6 +194,10 @@
 		2682073720F261EA00DE7FE0 /* HomePageSectionTowModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageSectionTowModel.m; sourceTree = "<group>"; };
 		2682073920F3A5F100DE7FE0 /* SearchResultFooter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultFooter.h; sourceTree = "<group>"; };
 		2682073A20F3A5F100DE7FE0 /* SearchResultFooter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultFooter.m; sourceTree = "<group>"; };
+		268B22672106083300F6A24D /* SearchNoResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchNoResultViewController.h; sourceTree = "<group>"; };
+		268B22682106083300F6A24D /* SearchNoResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchNoResultViewController.m; sourceTree = "<group>"; };
+		268B226A2106132200F6A24D /* SearchNoResultHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchNoResultHeader.h; sourceTree = "<group>"; };
+		268B226B2106132200F6A24D /* SearchNoResultHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchNoResultHeader.m; sourceTree = "<group>"; };
 		26904EB320E78A2200084B5F /* HomePageMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageMapViewController.h; sourceTree = "<group>"; };
 		26904EB420E78A2200084B5F /* HomePageMapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageMapViewController.m; sourceTree = "<group>"; };
 		26904EB620E78CD000084B5F /* YNSFunctionBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YNSFunctionBar.h; sourceTree = "<group>"; };
@@ -400,6 +406,8 @@
 				265F8D1620EBC29600620F3E /* SearchKeyViewController.m */,
 				C977138920E4B854007AE5F0 /* SearchResultViewController.h */,
 				C977138A20E4B854007AE5F0 /* SearchResultViewController.m */,
+				268B22672106083300F6A24D /* SearchNoResultViewController.h */,
+				268B22682106083300F6A24D /* SearchNoResultViewController.m */,
 			);
 			path = GoogleMapProject;
 			sourceTree = "<group>";
@@ -473,6 +481,8 @@
 				C977139320E4C1B1007AE5F0 /* SearchResultSectionOneCell.m */,
 				2682073920F3A5F100DE7FE0 /* SearchResultFooter.h */,
 				2682073A20F3A5F100DE7FE0 /* SearchResultFooter.m */,
+				268B226A2106132200F6A24D /* SearchNoResultHeader.h */,
+				268B226B2106132200F6A24D /* SearchNoResultHeader.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -735,6 +745,7 @@
 				267BBF5A20DA89A10005AE5A /* HomePageNavView.m in Sources */,
 				2682073B20F3A5F100DE7FE0 /* SearchResultFooter.m in Sources */,
 				267BBF5720DA840A0005AE5A /* HomePageViewController.m in Sources */,
+				268B22692106083300F6A24D /* SearchNoResultViewController.m in Sources */,
 				C97712EA20DB5062007AE5F0 /* AboutUsViewController.m in Sources */,
 				C908C6E120F3443E0090E2B1 /* MapBottomModel.m in Sources */,
 				C977130620E0DF69007AE5F0 /* ChangePersonNameViewController.m in Sources */,
@@ -784,6 +795,7 @@
 				C977139420E4C1B1007AE5F0 /* SearchResultSectionOneCell.m in Sources */,
 				265F8D1420EBA9FF00620F3E /* KNLocationConverter.m in Sources */,
 				C977131920E1EF42007AE5F0 /* FilterItem.m in Sources */,
+				268B226C2106132200F6A24D /* SearchNoResultHeader.m in Sources */,
 				C938504820EC9F85007AF5A7 /* YFScaleScrollViewView.m in Sources */,
 				C938504720EC9F85007AF5A7 /* YFScrollView.m in Sources */,
 				C977131620E1EECC007AE5F0 /* FilterHeaderModel.m in Sources */,

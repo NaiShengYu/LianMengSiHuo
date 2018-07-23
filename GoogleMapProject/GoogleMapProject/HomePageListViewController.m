@@ -19,7 +19,6 @@
 #import "HomePageListModel.h"
 @interface HomePageListViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *myTable;
-@property (nonatomic,strong)NSMutableArray *dataArray;
 @property (nonatomic,strong)UIButton *deleteBut;
 
 @property (nonatomic,strong)NSMutableArray *filterArray;
@@ -164,7 +163,6 @@
     self.star =@"";
     self.raidus = @"";
     self.list_condition = @"";
-    self.dataArray =[[NSMutableArray alloc]init];
  
     self.view.backgroundColor =[UIColor whiteColor];
     [self.view addSubview:self.myTable];
@@ -179,11 +177,7 @@
     [topV.chooseBut addTarget:self action:@selector(chooseBut:) forControlEvents:UIControlEventTouchUpInside];
     topV.vc =self;
     [self.view addSubview:topV];
-    
     [self getCollection];
-    [self makeDataIsRefresh:YES];
-    
-    
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -287,10 +281,10 @@
     CustomAccount *acc = [CustomAccount sharedCustomAccount];
     [param setObject:@"list_show" forKey:@"app"];
     [param setObject:acc.classtype forKey:@"type"];
-//    [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.longitude] forKey:@"lng"];
-//    [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.latitude] forKey:@"lat"];
-    [param setObject:@"2.3411111" forKey:@"lng"];
-    [param setObject:@"48.8600" forKey:@"lat"];
+    [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.longitude] forKey:@"lng"];
+    [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.latitude] forKey:@"lat"];
+//    [param setObject:@"2.3411111" forKey:@"lng"];
+//    [param setObject:@"48.8600" forKey:@"lat"];
     
     //距离
     [param setObject:self.raidus forKey:@"raidus"];

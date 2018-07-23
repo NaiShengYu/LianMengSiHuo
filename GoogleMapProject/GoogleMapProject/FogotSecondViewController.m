@@ -170,6 +170,10 @@
         [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"两次密码不一致"];
         return;
     }
+    if ([PubulicObj IsPassWordWithString:_PasswordTF.text] ==NO) {
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"密码格式不正确"];
+        return;
+    }
     
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSString *url = [NSString stringWithFormat:@"%@app_user.php",BaseURL];
@@ -187,16 +191,8 @@
     [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
         if ([responseObject[@"code"] integerValue] ==1) {
             [PubulicObj ShowSVWhitMessage];
-            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"修改密码成功"];
-            
-            NSArray *arr = blockSelf.navigationController.viewControllers;
-            if ([arr[1] isKindOfClass:[LoginViewController class]]) {
-                [blockSelf.navigationController popToViewController:arr[1] animated:YES];
-            }else{
-                [blockSelf.navigationController popToRootViewControllerAnimated:YES];
-            }
-            
-            
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"密码设置成功"];
+            [blockSelf performSelector:@selector(back) withObject:nil afterDelay:1.0];
         }else{
             [PubulicObj ShowSVWhitMessage];
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
@@ -210,6 +206,15 @@
     
     
     
+}
+- (void)back{
+    
+    NSArray *arr = self.navigationController.viewControllers;
+    if ([arr[1] isKindOfClass:[LoginViewController class]]) {
+        [self.navigationController popToViewController:arr[1] animated:YES];
+    }else{
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 

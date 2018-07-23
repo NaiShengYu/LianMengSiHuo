@@ -50,4 +50,9 @@
 + (void)ShowSVWithoutImage;
 
 + (void)ShowSVWhitMessage;
+
+/**
+ *  判断密码是否正确
+ */
++ (BOOL)IsPassWordWithString:(NSString *)str;
 @end

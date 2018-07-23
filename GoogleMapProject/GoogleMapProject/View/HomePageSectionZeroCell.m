@@ -9,7 +9,8 @@
 #import "HomePageSectionZeroCell.h"
 #import "HomePageListViewController.h"
 #import "HomePageMapViewController.h"
-
+#import "HomePageListModel.h"
+#import "CustomNoFoodAlert.h"
 @interface HomePageSectionZeroCell()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong)NSMutableArray *titlesArray;
@@ -70,12 +71,7 @@
         _tab.bounces =NO;
         _tab.layer.cornerRadius =5;
         _tab.layer.masksToBounds =YES;
-        
-        if ([CustomAccount sharedCustomAccount].cityName ==nil ||[CustomAccount sharedCustomAccount].cityName.length ==0) {
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCityName) name:@"getCityName" object:nil];
-        }else{
-            [self getCityName];
-        }
+        [self getCityName];
     }
     return self;
  
@@ -121,11 +117,92 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSArray *arr = @[@"list_map_scenic",@"list_map_food",@"list_map_shop",@"list_map_hotel"];
     NSArray *arr1 =@[@"2",@"1",@"3",@"4"];
-    [self.VC.navigationController pushViewController:[HomePageListViewController new] animated:YES];
     [CustomAccount sharedCustomAccount].className =arr[indexPath.row];
     [CustomAccount sharedCustomAccount].classtype =arr1[indexPath.row];
+    
+    [self makeData];
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
+- (void)makeData{
+    WS(blockSelf);
+  
+    NSString *url = [NSString stringWithFormat:@"%@app_list.php",BaseURL];
+    DLog(@"url==%@",url);
+    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+    CustomAccount *acc = [CustomAccount sharedCustomAccount];
+    [param setObject:@"list_show" forKey:@"app"];
+    [param setObject:acc.classtype forKey:@"type"];
+    [param setObject:[NSString stringWithFormat:@"%f",acc.cityLocation.longitude] forKey:@"lng"];
+    [param setObject:[NSString stringWithFormat:@"%f",acc.cityLocation.latitude] forKey:@"lat"];
+    //    [param setObject:@"2.3411111" forKey:@"lng"];
+    //    [param setObject:@"48.8600" forKey:@"lat"];
+    
+    //距离
+    [param setObject:@"5" forKey:@"raidus"];
+    //分类
+    [param setObject:@"" forKey:@"list_condition"];
+    //评分
+    [param setObject:@"" forKey:@"star"];
+    
+    //请求起始个数
+        [param setObject:@"0" forKey:@"pageno"];
+   
+    
+    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+        if ([responseObject[@"code"] integerValue] ==1) {
+            @try {
+                NSMutableArray *dataArray = [[NSMutableArray alloc]init];
+                NSDictionary *dataDic = responseObject[@"data"][0];
+                NSArray *arr = dataDic[@"list_show"];
+                [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    HomePageListModel *model = [[HomePageListModel alloc]initWithDic:obj];
+                    [dataArray addObject:model];
+                }];
+                if (dataArray.count >0) {
+                    HomePageListViewController * homeListVC =[[HomePageListViewController alloc]init];
+                    homeListVC.dataArray =dataArray;
+                    [self.VC.navigationController pushViewController:homeListVC animated:YES];
+                }else{
+                    CustomNoFoodAlert *alert =[[CustomNoFoodAlert alloc]initWithFrame:[UIScreen mainScreen].bounds];
+                    UIWindow *window = [[UIApplication sharedApplication].delegate window];
+                    if ([acc.classtype isEqualToString:@"1"]) {
+                        alert.messageLab.text = @"附近暂时没有餐厅\n换个地方试试";
+                    }
+                    if ([acc.classtype isEqualToString:@"2"]) {
+                        alert.messageLab.text = @"附近暂时没有景点\n换个地方试试";
+                    }
+                    if ([acc.classtype isEqualToString:@"3"]) {
+                        alert.messageLab.text = @"附近暂时没有商场\n换个地方试试";
+                    }
+                    if ([acc.classtype isEqualToString:@"4"]) {
+                        alert.messageLab.text = @"附近暂时没有酒店\n换个地方试试";
+                    }
+                    [window addSubview:alert];
+                }
+                
+              
+            } @catch (NSException *exception) {
+                
+            } @finally {
+                
+            }
+            
+        }else{
+          
+        }
+    } failure:^(NSError *error) {
+        [PubulicObj ShowSVWhitMessage];
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"网络错误"];
+    } isShowHUD:YES];
+    
+}
+
+
+
+
+
 #pragma mark --让cell的横线到最左边
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -155,24 +232,23 @@
 - (void)getCityName{
 
     NSString *string =[CustomAccount sharedCustomAccount].cityName;
+    NSString *CName =[CustomAccount sharedCustomAccount].cityName;
+
     NSString *shi =[string substringFromIndex:string.length-1];
     if ([shi isEqualToString:@"市"]) {
         string =[string substringToIndex:string.length-1];
+        CName =[CName substringToIndex:string.length-1];
     }
-    if ([CustomAccount sharedCustomAccount].cityEnName !=nil ||[CustomAccount sharedCustomAccount].cityEnName.length !=0) {
+    if ([CustomAccount sharedCustomAccount].cityEnName !=nil &&[CustomAccount sharedCustomAccount].cityEnName.length !=0) {
         string = [NSString stringWithFormat:@"%@\n%@",string,[CustomAccount sharedCustomAccount].cityEnName];
     }
     NSMutableAttributedString *att = [[NSMutableAttributedString alloc]initWithString:string];
-    [att addAttribute:NSFontAttributeName value:FontSize(18) range:NSMakeRange(0, [CustomAccount sharedCustomAccount].cityName.length)];
+    [att addAttribute:NSFontAttributeName value:FontSize(18) range:NSMakeRange(0, CName.length)];
     _titleBut.titleLabel.font =FontSize(15);
     [_titleBut setAttributedTitle:att forState:UIControlStateNormal];
-    
-    
-    
-    
+ 
     GMSCameraPosition *position1 = [GMSCameraPosition cameraWithTarget:[CustomAccount sharedCustomAccount].curCoordinate2D zoom:14];
     [self.mapV animateToCameraPosition:position1];
     
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"getCityName" object:nil];
 }
 @end

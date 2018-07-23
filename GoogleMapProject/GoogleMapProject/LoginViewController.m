@@ -347,7 +347,7 @@
     [param setObject:@"login" forKey:@"app"];
     [param setObject:_nameTF.text forKey:@"username"];
     [param setObject:_passTF.text forKey:@"password"];
-
+    WS(blockSelf);
     [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
         if ([responseObject[@"code"] integerValue] ==1) {
             NSDictionary *dic = responseObject[@"data"][0];
@@ -361,12 +361,16 @@
             [user setObject:dic[@"sex"] forKey:SEX];
             [user setObject:dic[@"email"] forKey:EMAIL];
             [user synchronize];
+            
+            [PubulicObj ShowSVWhitMessage];
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"登陆成功"];
             [CustomAccount sharedCustomAccount].loginType =1;
-            [self.navigationController popViewControllerAnimated:YES];
+            
+            [blockSelf performSelector:@selector(gohomePage) withObject:nil afterDelay:1.0];
             
         }else{
             [PubulicObj ShowSVWhitMessage];
-            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"用户名密码不正确，请重新输入！"];
         }
         
         

@@ -80,6 +80,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section ==0) {
         ShopCommentSectionZeroHeader *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"ShopCommentSectionZeroHeader"];
+        header.centerLab.text = [NSString stringWithFormat:@"%@",self.shopTitle];
         return header;
     }
     
@@ -146,6 +147,12 @@
 
 
 - (void)Publish{
+    
+    [PubulicObj ShowSVWhitMessage];
+    if (self.content.length ==0 ||self.content ==nil) {
+        [SVProgressHUD showErrorWithStatus:@"请输入评论内容"];
+        return;
+    }
     
     WS(blockSelf);
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];

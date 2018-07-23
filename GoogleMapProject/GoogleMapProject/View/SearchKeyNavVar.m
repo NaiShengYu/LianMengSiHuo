@@ -52,6 +52,7 @@
         _searchBar.delegate =self;
         _searchBar.backgroundColor=[UIColor clearColor];
         _searchBar.font =FontSize(14);
+        _searchBar.textColor = [UIColor whiteColor];
         NSMutableAttributedString *att =[[NSMutableAttributedString alloc]initWithString:@"你想去的地方"];
         [att addAttribute:NSForegroundColorAttributeName value:RGBA(179, 97, 95, 1) range:NSMakeRange(0, 6)];
         _searchBar.attributedPlaceholder =att;

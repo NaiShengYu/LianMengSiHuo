@@ -246,7 +246,7 @@
         }
     } failure:^(NSError *error) {
         [blockSelf startGetCode];
-    } isShowHUD:YES];
+    } isShowHUD:NO];
     
     
 }

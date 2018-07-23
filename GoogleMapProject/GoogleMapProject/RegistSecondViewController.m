@@ -217,6 +217,10 @@
         [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"两次密码不一致！"];
         return;
     }
+    if ([PubulicObj IsPassWordWithString:_PasswordTF.text] ==NO) {
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"密码格式不正确"];
+        return;
+    }
     
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSString *url = [NSString stringWithFormat:@"%@app_user.php",BaseURL];

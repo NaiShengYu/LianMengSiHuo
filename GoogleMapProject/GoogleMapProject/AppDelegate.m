@@ -52,10 +52,10 @@
 
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyBoardHiden) name:UIKeyboardDidHideNotification object:nil];
 
-    CustomNoFoodAlert *alert =[[CustomNoFoodAlert alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    [self.window addSubview:alert];
 
-    [self showUpdata];
+
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showUpdata) name:@"UPDATA" object:nil];
+    
     NSUserDefaults *user =[NSUserDefaults standardUserDefaults];
     NSString *state =[user objectForKey:@"qiDongState"];
 
@@ -63,6 +63,16 @@
         [self getNetState];
         [self getLocationState];
     }
+    
+    //1.设置状态栏隐藏(YES)或显示(NO)
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    
+    //2.设置状态栏字体颜色
+    //UIStatusBarStyleDefault,黑色(默认)
+    //UIStatusBarStyleLightContent,白色
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    
+ 
     return YES;
 }
 

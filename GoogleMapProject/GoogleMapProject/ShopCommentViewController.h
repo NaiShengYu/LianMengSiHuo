@@ -11,5 +11,6 @@
 @interface ShopCommentViewController : UIViewController
 
 @property (nonatomic,copy)NSString *Id;
+@property (nonatomic,copy)NSString *shopTitle;
 
 @end

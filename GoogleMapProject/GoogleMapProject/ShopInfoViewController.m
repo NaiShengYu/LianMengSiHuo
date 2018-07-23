@@ -189,6 +189,7 @@
     
     ShopCommentViewController *commentVC =[[ShopCommentViewController alloc]init];
     commentVC.Id = self.Id;
+    commentVC.shopTitle = self.infoModel.name;
     [self.navigationController pushViewController:commentVC animated:YES];
     
 }

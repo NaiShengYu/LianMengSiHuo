@@ -49,28 +49,37 @@
     [self.view addSubview:backView];
     backView.backgroundColor =[UIColor lightGrayColor];
     
+    UILabel *lab1 = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, screenWigth/2, 50)];
+    [backView addSubview:lab1];
+    lab1.textAlignment =NSTextAlignmentCenter;
+    lab1.font = FontSize(13);
+    lab1.textColor = [UIColor grayColor];
+    NSMutableAttributedString *mut1 = [[NSMutableAttributedString alloc]initWithString:@"手机号注册\nCell-phone number"];
+    [mut1 addAttribute:NSFontAttributeName value:FontSize(19) range:NSMakeRange(0, 5)];
+    lab1.attributedText = mut1;
+    lab1.numberOfLines =2;
+    lab1.backgroundColor =[UIColor whiteColor];
+
     _telBut =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, screenWigth/2, 50)];
     [backView addSubview:_telBut];
     [_telBut addTarget:self action:@selector(selectChange:) forControlEvents:UIControlEventTouchUpInside];
-    _telBut.titleLabel.numberOfLines =2;
-    [_telBut setTitle:@"手机号注册\nCell-phone number" forState:UIControlStateNormal];
-    _telBut.titleLabel.adjustsFontSizeToFitWidth =YES;
-    _telBut.titleLabel.font =FontSize(15);
-    _telBut.backgroundColor =[UIColor whiteColor];
-    [_telBut setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    _telBut.contentHorizontalAlignment =UIControlContentHorizontalAlignmentCenter;
+    _telBut.backgroundColor =[UIColor clearColor];
     _lastBut =_telBut;
    
+    UILabel *lab2 = [[UILabel alloc]initWithFrame:CGRectMake(screenWigth/2, 0, screenWigth/2, 50)];
+    [backView addSubview:lab2];
+    lab2.textAlignment =NSTextAlignmentCenter;
+    lab2.font = FontSize(13);
+    lab2.textColor = [UIColor grayColor];
+    NSMutableAttributedString *mut2 = [[NSMutableAttributedString alloc]initWithString:@"邮箱注册\nE-mail register"];
+    [mut2 addAttribute:NSFontAttributeName value:FontSize(19) range:NSMakeRange(0, 4)];
+    lab2.attributedText = mut2;
+    lab2.numberOfLines =2;
+    lab2.backgroundColor =[UIColor whiteColor];
+    
     _mailBut =[[UIButton alloc]initWithFrame:CGRectMake(screenWigth/2, 0, screenWigth/2, 50)];
     [backView addSubview:_mailBut];
     [_mailBut addTarget:self action:@selector(selectChange:) forControlEvents:UIControlEventTouchUpInside];
-    _mailBut.titleLabel.numberOfLines =2;
-    [_mailBut setTitle:@"邮箱注册\nE-mail register" forState:UIControlStateNormal];
-    _mailBut.titleLabel.adjustsFontSizeToFitWidth =YES;
-    _mailBut.titleLabel.font =FontSize(15);
-    _mailBut.backgroundColor =[UIColor whiteColor];
-    _mailBut.contentHorizontalAlignment =UIControlContentHorizontalAlignmentCenter;
-    [_mailBut setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     
     _lineView =[[UIView alloc]initWithFrame:CGRectMake(0, 50, screenWigth/2, 5)];
     _lineView.backgroundColor = zhuse;
@@ -280,6 +289,7 @@
     }
     if (![self.code isEqualToString:_codeTF.text]) {
          [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"验证码不正确"];
+        return;
     }
     
     RegistSecondViewController *secondVC =[[RegistSecondViewController alloc]init];
@@ -337,7 +347,7 @@
         }
     } failure:^(NSError *error) {
         [blockSelf startGetCode];
-    } isShowHUD:YES];
+    } isShowHUD:NO];
     
     
 }

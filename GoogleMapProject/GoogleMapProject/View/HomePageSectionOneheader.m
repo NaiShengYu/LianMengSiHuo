@@ -11,9 +11,7 @@
 @implementation HomePageSectionOneheader
 - (instancetype)initWithFrame:(CGRect)frame{
     self =[super initWithFrame:frame];
-    if (self) {
-        
-    
+    if (self) {    
         UIImageView *titleImg =[UIImageView new];
         [self addSubview:titleImg];
         [titleImg mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -24,8 +22,6 @@
         }];
         titleImg.image = [UIImage imageNamed:@"首页-搜索_03"];
         
-        
-     
     }
     return self;
     

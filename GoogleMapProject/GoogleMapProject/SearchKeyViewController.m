@@ -10,6 +10,8 @@
 #import "SearchResultViewController.h"
 #import "SearchKeyNavVar.h"
 #import "ShopInfoViewController.h"
+#import "SearchResultModel.h"
+#import "SearchNoResultViewController.h"
 @interface SearchKeyViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property (nonatomic,strong)NSMutableArray *dataArray;
 @property (nonatomic,strong)UITableView *myTable;
@@ -22,6 +24,7 @@
         _myTable =[[UITableView alloc]initWithFrame:CGRectMake(0, MaxY, screenWigth, screenHeight-MaxY) style:UITableViewStyleGrouped];
         _myTable.delegate =self;
         _myTable.dataSource =self;
+        
     }
     return _myTable;
 }
@@ -32,6 +35,7 @@
     self.dataArray =[[NSMutableArray alloc]init];
     [self creatNav];
     [self.view addSubview:self.myTable];
+    self.myTable.contentInsetAdjustmentBehavior =UIScrollViewContentInsetAdjustmentNever;
     
 }
 - (void)viewWillAppear:(BOOL)animated{
@@ -90,7 +94,16 @@
     }else{
         NSDictionary *dic =self.dataArray[indexPath.row-1];
         cell.detailTextLabel.text =@"";
-         cell.textLabel.text = dic[@"res"];
+        NSString *res = dic[@"res"];
+        NSRange range = [res rangeOfString:_searchKey];
+        if (range.location !=NSNotFound) {
+            NSMutableAttributedString *mut = [[NSMutableAttributedString alloc]initWithString:res];
+            [mut addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(range.location, _searchKey.length)];
+            
+            cell.textLabel.attributedText = mut;
+        }else{
+            cell.textLabel.text = dic[@"res"];
+        }
         cell.textLabel.numberOfLines =2;
         cell.textLabel.font =FontSize(15);
         cell.textLabel.adjustsFontSizeToFitWidth = YES;
@@ -129,7 +142,19 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row ==0) {
+        CustomAccount *acc = [CustomAccount sharedCustomAccount];
+        acc.city_id = @"";
         
+        @try {
+            acc.cityName =acc.currentCityName;
+            acc.cityEnName =@"";
+        } @catch (NSException *exception) {
+            
+        } @finally {
+            
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"selectCity" object:nil];
+        [self.navigationController popToRootViewControllerAnimated:YES];
         
         return;
     }
@@ -191,12 +216,10 @@
     
     if ([string isEqualToString:@"\n"] &&textField.returnKeyType ==UIReturnKeySearch){
         DLog(@"搜索");
-        
-        SearchResultViewController *vc = [[SearchResultViewController alloc]init];
-        vc.searchKey =self.searchKey;
-        [self.navigationController pushViewController:vc animated:YES];
-        [self.view endEditing:YES];
-        
+        if (textField.text.length ==0 ||textField.text ==nil) {
+            return NO;
+        }
+        [self HaveSearchResult];
         //判断输入的字是否是回车，即按下return
         //在这里做你响应return键的代码
         return NO; //这里返回NO，就代表return键值失效，即页面上按下return，不会出现换行，如果为yes，则输入页面会换行
@@ -207,7 +230,7 @@
 
 - (void)textChange:(UITextField *)textF{
     self.searchKey = textF.text;
-    if (self.searchKey.length >2 && self.searchKey !=nil) {
+    if (self.searchKey.length >1 && self.searchKey !=nil) {
         [self makeData];
     }
 }
@@ -239,13 +262,82 @@
     } failure:^(NSError *error) {
     } isShowHUD:NO];
 
-    
-    
-    
-    
-    
 }
 
+- (void)HaveSearchResult{
+    
+    NSString *url = [NSString stringWithFormat:@"%@app_list.php",BaseURL];
+    DLog(@"url==%@",url);
+    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+    [param setObject:@"list_search" forKey:@"app"];
+    [param setObject:self.searchKey forKey:@"keyword"];
+    
+    WS(blockSelf);
+    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+        if ([responseObject[@"code"] integerValue] ==1) {
+            NSDictionary *dataDic = responseObject[@"data"][0];
+            NSDictionary *cityDic = dataDic[@"city"][0];
+            NSDictionary *foodDic = dataDic[@"food"][0];
+            NSDictionary *scenicDic = dataDic[@"scenic"][0];
+            NSDictionary *shopDic = dataDic[@"shop"][0];
+            NSDictionary *hotelDic = dataDic[@"hotel"][0];
+            NSMutableArray *citysArray =[[NSMutableArray alloc]init];
+            NSMutableArray *foodsArray =[[NSMutableArray alloc]init];
+            NSMutableArray *scenicsArray =[[NSMutableArray alloc]init];
+            NSMutableArray *shopsArray =[[NSMutableArray alloc]init];
+            NSMutableArray *hotelsArray =[[NSMutableArray alloc]init];
+            for (NSDictionary *cityInfoDic in cityDic[@"city_res"]) {
+                SearchResultModel *model = [[SearchResultModel alloc]initWithDic:cityInfoDic];
+                [citysArray addObject:model];
+            }
+         
+            
+            for (NSDictionary *foodInfoDic in foodDic[@"food_res"]) {
+                SearchResultModel *model = [[SearchResultModel alloc]initWithDic:foodInfoDic];
+                [foodsArray addObject:model];
+            }
+            
+            
+            for (NSDictionary *cityInfoDic in scenicDic[@"scenic_res"]) {
+                SearchResultModel *model = [[SearchResultModel alloc]initWithDic:cityInfoDic];
+                [scenicsArray addObject:model];
+            }
+            
+            
+            for (NSDictionary *cityInfoDic in shopDic[@"shop_res"]) {
+                SearchResultModel *model = [[SearchResultModel alloc]initWithDic:cityInfoDic];
+                [shopsArray addObject:model];
+            }
+            
+            
+            for (NSDictionary *cityInfoDic in hotelDic[@"hotel_res"]) {
+                SearchResultModel *model = [[SearchResultModel alloc]initWithDic:cityInfoDic];
+                [hotelsArray addObject:model];
+            }
+            
+            if (citysArray.count ==0 &&foodsArray.count ==0 &&scenicsArray.count ==0 &&shopsArray.count ==0 &&hotelsArray.count ==0  ) {
+                SearchNoResultViewController *noResultVC = [SearchNoResultViewController new];
+                noResultVC.searchKey = blockSelf.searchKey;
+                [blockSelf.navigationController pushViewController:noResultVC animated:YES];
+            }else{
+                SearchResultViewController *vc = [[SearchResultViewController alloc]init];
+                vc.searchKey =self.searchKey;
+                [blockSelf.navigationController pushViewController:vc animated:YES];
+            }
+        }else{
+            [PubulicObj ShowSVWhitMessage];
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
+        }
+        
+        
+       
+        
+        
+    } failure:^(NSError *error) {
+        
+    } isShowHUD:NO];
+    
+}
 
 
 #pragma mark --出现左菜单

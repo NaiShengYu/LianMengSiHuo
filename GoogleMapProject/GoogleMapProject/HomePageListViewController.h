@@ -10,4 +10,6 @@
 
 @interface HomePageListViewController : UIViewController
 
+@property (nonatomic,strong)NSMutableArray *dataArray;
+
 @end

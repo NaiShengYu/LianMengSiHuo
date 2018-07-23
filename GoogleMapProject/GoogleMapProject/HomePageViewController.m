@@ -46,8 +46,10 @@
         [_collectionV registerClass:[HomePageSectionZeroTypeTowCell class] forCellWithReuseIdentifier:@"HomePageSectionZeroTypeTowCell"];
         [_collectionV registerClass:[HomePageSectionOneCell class] forCellWithReuseIdentifier:@"HomePageSectionOneCell"];
         [_collectionV registerClass:[HomePageSecitonThreeCell class] forCellWithReuseIdentifier:@"HomePageSecitonThreeCell"];
-
-        
+        WS(blockSelf);
+        _collectionV.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [blockSelf makeData];
+        }];
     }
     return _collectionV;
 }
@@ -66,6 +68,16 @@
         [self makeData];
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(makeData) name:@"selectCity" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"UPDATA" object:nil];
+    
+    //1.设置状态栏隐藏(YES)或显示(NO)
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    
+    //2.设置状态栏字体颜色
+    //UIStatusBarStyleDefault,黑色(默认)
+    //UIStatusBarStyleLightContent,白色
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    
 //
 }
 - (void)viewWillAppear:(BOOL)animated{
@@ -116,7 +128,7 @@
 }
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section ==0) {
-        if ([[CustomAccount sharedCustomAccount].city_id isEqual:[NSNull null]] ||[CustomAccount sharedCustomAccount].city_id ==nil ||[CustomAccount sharedCustomAccount].city_id.length ==0) {
+        if ([[CustomAccount sharedCustomAccount].cityName isEqual:[NSNull null]] ||[CustomAccount sharedCustomAccount].cityName ==nil ||[CustomAccount sharedCustomAccount].cityName.length ==0) {
             HomePageSectionZeroTypeTowCell *cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"HomePageSectionZeroTypeTowCell" forIndexPath:indexPath];
             return cell;
         }
@@ -160,7 +172,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section ==0){
-        if ([[CustomAccount sharedCustomAccount].city_id isEqual:[NSNull null]] ||[CustomAccount sharedCustomAccount].city_id ==nil ||[CustomAccount sharedCustomAccount].city_id.length ==0) {
+        if ([[CustomAccount sharedCustomAccount].cityName isEqual:[NSNull null]] ||[CustomAccount sharedCustomAccount].cityName ==nil ||[CustomAccount sharedCustomAccount].cityName.length ==0) {
             return CGSizeMake(screenWigth, screenWigth*480/1080);
         }
         return CGSizeMake(screenWigth, 300);
@@ -201,7 +213,13 @@
     NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
     CustomAccount *acc = [CustomAccount sharedCustomAccount];
     [param setObject:@"list_index" forKey:@"app"];
-    [param setObject:acc.cityName forKey:@"city_cn"];
+    @try {
+        [param setObject:acc.cityName forKey:@"city_cn"];
+
+    } @catch (NSException *exception) {
+        [param setObject:@"" forKey:@"city_cn"];
+    } @finally {
+    }
     [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.longitude] forKey:@"lng"];
     [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.latitude] forKey:@"lat"];
     if (acc.cityEnName ==nil) {
@@ -216,7 +234,10 @@
             NSDictionary *dataDic =responseObject[@"data"][0];
             acc.city_id = dataDic[@"city_id"];
             @try {
-                acc.cityLocation = CLLocationCoordinate2DMake([dataDic[@"city_lat"] doubleValue], [dataDic[@"city_lng"] doubleValue]);
+                if ([acc.city_id isEqual:[NSNull null]] ||acc.city_id ==nil ||acc.city_id.length ==0) {
+                }else{
+                    acc.cityLocation = CLLocationCoordinate2DMake([dataDic[@"city_lat"] doubleValue], [dataDic[@"city_lng"] doubleValue]);
+                }
             } @catch (NSException *exception) {
             } @finally {
             }
@@ -243,10 +264,12 @@
             [blockSelf.view addSubview:blockSelf.collectionV];
           
         }else{
+            [blockSelf.collectionV.mj_header endRefreshing];
             [PubulicObj ShowSVWhitMessage];
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
         }
     } failure:^(NSError *error) {
+        [blockSelf.collectionV.mj_header endRefreshing];
         [PubulicObj ShowSVWhitMessage];
         [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"网络错误"];
 
