@@ -230,7 +230,7 @@
 
 - (void)textChange:(UITextField *)textF{
     self.searchKey = textF.text;
-    if (self.searchKey.length >1 && self.searchKey !=nil) {
+    if (self.searchKey.length >0 && self.searchKey !=nil) {
         [self makeData];
     }
 }

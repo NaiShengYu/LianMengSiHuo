@@ -157,11 +157,10 @@
     [SVProgressHUD setMinimumSize:CGSizeMake(260, 44)];
     [SVProgressHUD setCornerRadius:5];
     [SVProgressHUD setMinimumDismissTimeInterval:1];
-
 }
 
 + (void)ShowSVWithoutImage{
-    [SVProgressHUD setImageViewSize:CGSizeMake(60, 90)];
+    [SVProgressHUD setImageViewSize:CGSizeMake(90, 135)];
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     [SVProgressHUD setBackgroundColor:[UIColor clearColor]];
     [SVProgressHUD setMinimumSize:CGSizeMake(260, 44)];

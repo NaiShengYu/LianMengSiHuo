@@ -151,8 +151,10 @@
                 if (self.telNum.length >8) {
                     NSString * phone=[self.telNum substringWithRange:NSMakeRange(3, 4)];
                     phone = [self.telNum stringByReplacingOccurrencesOfString:phone withString:@"****"];
+                    cell.otherLab.text =phone;
+                }else{
+                    cell.otherLab.text =self.telNum;
                 }
-                cell.otherLab.text =self.telNum;
             }
             if (indexPath.row ==1) {
                 cell.otherLab.text =self.email;

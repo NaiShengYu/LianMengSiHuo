@@ -174,12 +174,13 @@
     
     if (indexPath.section ==0) {
         SearchResultSectionZeroCell *cell =[tableView dequeueReusableCellWithIdentifier:@"SearchResultSectionZeroCell" forIndexPath:indexPath];
+        cell.searchKey = self.searchKey;
         cell.model = self.citysArray[indexPath.row];
         return cell;
     }
     
     SearchResultSectionOneCell *cell =[tableView dequeueReusableCellWithIdentifier:@"SearchResultSectionOneCell" forIndexPath:indexPath];
-    
+    cell.searchKey = self.searchKey;
     switch (indexPath.section) {
         case 1:
             cell.model = self.foodsArray[indexPath.row];

@@ -14,6 +14,8 @@
 @property (nonatomic,strong)UIImageView *imageV;
 
 @property (nonatomic,strong)UILabel *titleLab;
+@property (nonatomic,copy)NSString *searchKey;
+
 @property (nonatomic,strong)SearchResultModel *model;
 
 

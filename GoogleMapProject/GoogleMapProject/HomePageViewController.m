@@ -72,11 +72,10 @@
     
     //1.设置状态栏隐藏(YES)或显示(NO)
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    
     //2.设置状态栏字体颜色
     //UIStatusBarStyleDefault,黑色(默认)
     //UIStatusBarStyleLightContent,白色
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
 //
 }
@@ -128,7 +127,7 @@
 }
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section ==0) {
-        if ([[CustomAccount sharedCustomAccount].cityName isEqual:[NSNull null]] ||[CustomAccount sharedCustomAccount].cityName ==nil ||[CustomAccount sharedCustomAccount].cityName.length ==0) {
+        if ([[CustomAccount sharedCustomAccount].city_id isEqual:[NSNull null]] ||[CustomAccount sharedCustomAccount].city_id ==nil ||[CustomAccount sharedCustomAccount].city_id.length ==0) {
             HomePageSectionZeroTypeTowCell *cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"HomePageSectionZeroTypeTowCell" forIndexPath:indexPath];
             return cell;
         }
@@ -172,11 +171,10 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section ==0){
-        if ([[CustomAccount sharedCustomAccount].cityName isEqual:[NSNull null]] ||[CustomAccount sharedCustomAccount].cityName ==nil ||[CustomAccount sharedCustomAccount].cityName.length ==0) {
+        if ([[CustomAccount sharedCustomAccount].city_id isEqual:[NSNull null]] ||[CustomAccount sharedCustomAccount].city_id ==nil ||[CustomAccount sharedCustomAccount].city_id.length ==0) {
             return CGSizeMake(screenWigth, screenWigth*480/1080);
         }
         return CGSizeMake(screenWigth, 300);
-
     }
         
     else if (indexPath.section ==1)return CGSizeMake(screenWigth-30, 190);
@@ -208,6 +206,7 @@
 
 - (void)makeData{
     WS(blockSelf);
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"getCityName" object:nil];
     NSString *url = [NSString stringWithFormat:@"%@app_list.php",BaseURL];
     DLog(@"url==%@",url);
     NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
@@ -282,7 +281,7 @@
 //通知获取当前位置
 - (void)getCityName{
     [self makeData];
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"getCityName" object:nil];
+    
 }
 
 - (void)changeLocation{

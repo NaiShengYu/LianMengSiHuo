@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "716758E6070B0515AAD54A23BE132445"
-               BlueprintName = "Pods-GoogleMapProject"
+               BlueprintIdentifier = "A283253CBF1F5E54BFB9C74A910CFF53"
+               BlueprintName = "MWPhotoBrowser"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libPods-GoogleMapProject.a">
+               BuildableName = "libMWPhotoBrowser.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

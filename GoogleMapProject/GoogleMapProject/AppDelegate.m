@@ -70,7 +70,7 @@
     //2.设置状态栏字体颜色
     //UIStatusBarStyleDefault,黑色(默认)
     //UIStatusBarStyleLightContent,白色
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
  
     return YES;

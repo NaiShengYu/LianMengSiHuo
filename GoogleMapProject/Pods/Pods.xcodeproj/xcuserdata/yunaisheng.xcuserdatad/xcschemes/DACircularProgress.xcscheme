@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "716758E6070B0515AAD54A23BE132445"
-               BlueprintName = "Pods-GoogleMapProject"
+               BlueprintIdentifier = "3934ED90FA0D4100B5105847012AE08B"
+               BlueprintName = "DACircularProgress"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libPods-GoogleMapProject.a">
+               BuildableName = "libDACircularProgress.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "716758E6070B0515AAD54A23BE132445"
-               BlueprintName = "Pods-GoogleMapProject"
+               BlueprintIdentifier = "E2D091420B71DCD0816A21E3734788F2"
+               BlueprintName = "SDWebImage"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libPods-GoogleMapProject.a">
+               BuildableName = "libSDWebImage.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

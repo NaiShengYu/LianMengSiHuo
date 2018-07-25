@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "716758E6070B0515AAD54A23BE132445"
-               BlueprintName = "Pods-GoogleMapProject"
+               BlueprintIdentifier = "488D77882F65BA00D291462E43C45C54"
+               BlueprintName = "MJRefresh"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libPods-GoogleMapProject.a">
+               BuildableName = "libMJRefresh.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

@@ -67,6 +67,7 @@
         imgV.image = [UIImage imageNamed:@"个人中心_07"];
         header.contentView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     }
+    header.contentView.backgroundColor = RGBA(244, 245, 247, 1);
     return header;
 }
 
@@ -92,6 +93,19 @@
             [att addAttribute:NSFontAttributeName value:FontSize(19) range:NSMakeRange(range3.location, 4)];
             [att addAttribute:NSForegroundColorAttributeName value:zhuse range:NSMakeRange(range3.location, 4)];
         }
+        cell.textLabel.textColor = [UIColor grayColor];
+        cell.textLabel.font =FontSize(16);
+        
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
+        
+        [paragraphStyle setLineSpacing:6];
+        
+        [att addAttribute:NSParagraphStyleAttributeName
+         
+                              value:paragraphStyle
+         
+                              range:NSMakeRange(0, [self.content length])];
+        
         cell.textLabel.attributedText = att;
         NSLog(@"%@",self.content);
         

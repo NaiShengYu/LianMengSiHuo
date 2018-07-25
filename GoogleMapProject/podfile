@@ -7,4 +7,11 @@ pod 'MMDrawerController'
 pod 'TZImagePickerController', '~> 1.9.8'
 pod "MWPhotoBrowser"
 pod 'MJRefresh'
+
+pod 'ShareSDK3'
+pod 'MOBFoundation'
+pod 'ShareSDK3/ShareSDKPlatforms/QQ'
+pod 'ShareSDK3/ShareSDKUI'
+pod 'ShareSDK3/ShareSDKPlatforms/WeChat'
+
 end

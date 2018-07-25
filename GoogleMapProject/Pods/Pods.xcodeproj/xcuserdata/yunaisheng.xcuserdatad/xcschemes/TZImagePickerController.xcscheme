@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "716758E6070B0515AAD54A23BE132445"
-               BlueprintName = "Pods-GoogleMapProject"
+               BlueprintIdentifier = "70FF15F19DE741BAD2F6CA7BF30651A0"
+               BlueprintName = "TZImagePickerController"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libPods-GoogleMapProject.a">
+               BuildableName = "libTZImagePickerController.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

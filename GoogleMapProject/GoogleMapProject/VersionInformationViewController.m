@@ -110,11 +110,11 @@
     _textV.textContainerInset =UIEdgeInsetsMake(20, 10, 20, 10);
     _textV.editable =NO;
     _textV.textColor =[UIColor grayColor];
-    _textV.font =FontSize(17);
+    _textV.font =FontSize(15);
     _textV.layer.cornerRadius =10;
     _textV.layer.masksToBounds =YES;
     _textV.layer.borderWidth =1;
-    _textV.layer.borderColor =[UIColor grayColor].CGColor;
+    _textV.layer.borderColor =RGBA(235, 235, 235, 1).CGColor;
     
 }
 
