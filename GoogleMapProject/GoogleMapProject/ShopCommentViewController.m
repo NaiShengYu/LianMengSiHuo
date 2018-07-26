@@ -190,8 +190,6 @@
                     [formData appendPartWithFileData:shopDataArray[i] name:@"ad_image[]" fileName:filename mimeType:@"image/jpeg"];
                 }
                 
-              
-                
             } progress:^(NSProgress * _Nonnull uploadProgress) {
                 
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

@@ -35,6 +35,30 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.6.0):
     - MMDrawerController/Core
+  - mob_sharesdk (4.0.7):
+    - mob_sharesdk/ShareSDK (= 4.0.7)
+    - MOBFoundation
+  - mob_sharesdk/ShareSDK (4.0.7):
+    - MOBFoundation
+  - mob_sharesdk/ShareSDKConfigFile (4.0.7):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation
+  - mob_sharesdk/ShareSDKExtension (4.0.7):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation
+  - mob_sharesdk/ShareSDKPlatforms/QQ (4.0.7):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation
+  - mob_sharesdk/ShareSDKPlatforms/SinaWeibo (4.0.7):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation
+  - mob_sharesdk/ShareSDKPlatforms/WeChat (4.0.7):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation
+  - mob_sharesdk/ShareSDKUI (4.0.7):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation
+  - MOBFoundation (3.0.9)
   - MWPhotoBrowser (2.1.2):
     - DACircularProgress (~> 2.3)
     - MBProgressHUD (~> 0.9)
@@ -51,6 +75,13 @@ DEPENDENCIES:
   - Masonry (~> 0.6.4)
   - MJRefresh
   - MMDrawerController
+  - mob_sharesdk
+  - mob_sharesdk/ShareSDKConfigFile
+  - mob_sharesdk/ShareSDKExtension
+  - mob_sharesdk/ShareSDKPlatforms/QQ
+  - mob_sharesdk/ShareSDKPlatforms/SinaWeibo
+  - mob_sharesdk/ShareSDKPlatforms/WeChat
+  - mob_sharesdk/ShareSDKUI
   - MWPhotoBrowser
   - SVProgressHUD
   - TZImagePickerController (~> 1.9.8)
@@ -64,6 +95,8 @@ SPEC REPOS:
     - MBProgressHUD
     - MJRefresh
     - MMDrawerController
+    - mob_sharesdk
+    - MOBFoundation
     - MWPhotoBrowser
     - SDWebImage
     - SVProgressHUD
@@ -77,11 +110,13 @@ SPEC CHECKSUMS:
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MJRefresh: 5f8552bc25ca8751c010f621c1098dbdaacbccd6
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
+  mob_sharesdk: 91a81feb5a5552947b809ccae1e4806655cc842c
+  MOBFoundation: 82b27b95c37d5a6d874d58efa6365b465c8afcbf
   MWPhotoBrowser: 5836d7aa041dc05a13de380c246826578adc5ea5
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
   TZImagePickerController: 3b9413ae5d049b1fdc5b0c720ad283f35b679a50
 
-PODFILE CHECKSUM: a2bf5fa3f678f7c6107351090cd93ddd261995db
+PODFILE CHECKSUM: 52908bb85b2aca3d3e81c3bcd552ba4f933253d0
 
 COCOAPODS: 1.5.2
