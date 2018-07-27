@@ -41,7 +41,7 @@
         }
         make.size.mas_equalTo(CGSizeMake(70, 70));
     }];
-    img.image =[UIImage imageNamed:@"个人中心_07"];
+    img.image =[UIImage imageNamed:@"logo2"];
     
     _versonLab =[UILabel new];
     [self.view addSubview:_versonLab];
@@ -114,7 +114,7 @@
     _textV.layer.cornerRadius =10;
     _textV.layer.masksToBounds =YES;
     _textV.layer.borderWidth =1;
-    _textV.layer.borderColor =[UIColor grayColor].CGColor;
+    _textV.layer.borderColor =[UIColor groupTableViewBackgroundColor].CGColor;
     
 }
 

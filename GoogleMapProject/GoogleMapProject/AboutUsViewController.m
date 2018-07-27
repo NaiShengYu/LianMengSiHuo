@@ -64,7 +64,7 @@
             make.center.mas_equalTo(CGPointMake(0, 0));
             make.size.mas_equalTo(CGSizeMake(90, 90));
         }];
-        imgV.image = [UIImage imageNamed:@"个人中心_07"];
+        imgV.image = [UIImage imageNamed:@"logo2"];
         header.contentView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     }
     return header;
