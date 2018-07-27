@@ -237,7 +237,7 @@
     NSString *shi =[string substringFromIndex:string.length-1];
     if ([shi isEqualToString:@"市"]) {
         string =[string substringToIndex:string.length-1];
-        CName =[CName substringToIndex:string.length-1];
+        CName =string;
     }
     if ([CustomAccount sharedCustomAccount].cityEnName !=nil &&[CustomAccount sharedCustomAccount].cityEnName.length !=0) {
         string = [NSString stringWithFormat:@"%@\n%@",string,[CustomAccount sharedCustomAccount].cityEnName];

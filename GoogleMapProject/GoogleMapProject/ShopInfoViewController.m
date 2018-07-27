@@ -106,10 +106,11 @@
     NSInteger b = model.comment_img.count%4 ;
     CGFloat W =0;
     if (b==0) {
-        W= ((screenWigth-65-30-20)/4/3*2 +10) *a;
+
+         W= ((screenWigth-65-30-20)/4/3*2 +10) *a;
     }else{
         W= ((screenWigth-65-30-20)/4/3*2 +10) *(a+1);
-        
+
     }
 
     return W +20;

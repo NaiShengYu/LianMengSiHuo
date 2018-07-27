@@ -16,5 +16,7 @@
 
 @property (nonatomic,strong)UILabel *speciesLab;
 
+@property (nonatomic,copy)NSString *searchKey;
+
 @property (nonatomic,strong)SearchResultModel *model;
 @end

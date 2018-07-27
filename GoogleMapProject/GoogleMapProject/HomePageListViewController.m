@@ -178,6 +178,8 @@
     topV.vc =self;
     [self.view addSubview:topV];
     [self getCollection];
+    
+
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

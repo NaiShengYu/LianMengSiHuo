@@ -52,8 +52,17 @@
     _model = model;
     
     [_imageV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",allImageURL,model.img]]];
-    _titleLab.text =[NSString stringWithFormat:@"%@",model.name];
+    NSString *res = model.name;
+    NSRange range = [res rangeOfString:_searchKey];
+    if (range.location !=NSNotFound) {
+        NSMutableAttributedString *mut = [[NSMutableAttributedString alloc]initWithString:res];
+        [mut addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(range.location, _searchKey.length)];
         
+        _titleLab.attributedText = mut;
+    }else{
+        _titleLab.text =[NSString stringWithFormat:@"%@",model.name];
+    }
+    
 }
 
 @end

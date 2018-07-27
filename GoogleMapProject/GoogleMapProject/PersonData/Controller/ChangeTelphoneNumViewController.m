@@ -7,6 +7,7 @@
 //
 
 #import "ChangeTelphoneNumViewController.h"
+#import "ChangeTelNumSecondViewController.h"
 @interface ChangeTelphoneNumViewController ()
 {
     NSInteger time;
@@ -160,7 +161,7 @@
         make.width.offset =200;
     }];
     updataBut.backgroundColor =zhuse;
-    [updataBut setTitle:@"提交" forState:UIControlStateNormal];
+    [updataBut setTitle:@"验证" forState:UIControlStateNormal];
     updataBut.layer.cornerRadius =5;
     updataBut.layer.masksToBounds =YES;
     [updataBut addTarget:self action:@selector(update) forControlEvents:UIControlEventTouchUpInside];
@@ -187,31 +188,9 @@
         [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"验证码不正确"];
         return;
     }
-    
-    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    NSString *url = [NSString stringWithFormat:@"%@app_user.php",BaseURL];
-    DLog(@"url==%@",url);
-    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
-    [param setObject:@"user_change_phone" forKey:@"app"];
-    [param setObject:[user objectForKey:USERID] forKey:@"userid"];
-    [param setObject:_phoneTF.text forKey:@"phone"];
-    
-    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
-        if ([responseObject[@"code"] integerValue] ==1) {
-            [user setObject:blockSelf.phoneTF.text forKey:PHONE];
-            [user synchronize];
-            [PubulicObj ShowSVWhitMessage];
-            [SVProgressHUD showSuccessWithStatus:@"修改手机号成功"];
-            [self.navigationController popViewControllerAnimated:YES];
-            
-        }else{
-            [PubulicObj ShowSVWhitMessage];
-            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
-        }
-    } failure:^(NSError *error) {
-        
-    } isShowHUD:YES];
-    
+    ChangeTelNumSecondViewController *secondVC = [ChangeTelNumSecondViewController new];
+    secondVC.phone = _phoneTF.text;
+    [self.navigationController pushViewController:secondVC animated:YES];
 }
 #pragma  mark --获取验证码
 - (void)getCode{

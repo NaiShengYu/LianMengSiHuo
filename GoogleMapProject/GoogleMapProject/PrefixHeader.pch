@@ -26,8 +26,8 @@
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
 //腾讯开放平台（对应QQ和QQ空间）SDK头文件
-#import <TencentOpenAPI/TencentOAuth.h>
-#import <TencentOpenAPI/QQApiInterface.h>
+//#import <TencentOpenAPI/TencentOAuth.h>
+//#import <TencentOpenAPI/QQApiInterface.h>
 //微信SDK头文件
 #import <WXApi.h>
 #import <ShareSDKUI/ShareSDK+SSUI.h>
@@ -64,7 +64,7 @@
 #define huiSe RGBA(179, 179, 179, 1)
 #define imgHeght(H) H *screenWigth /320.0//图片按比例放大
 //APP主色
-#define zhuse RGBA(164,38, 30, 1)
+#define zhuse RGBA(167,38, 30, 1)
 #define navRigntImgWight 25 //导航栏右按钮图片大小
 //默认地址
 #define addressDefault @"address_default"

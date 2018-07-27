@@ -73,7 +73,6 @@
     LeftViewController *leftVC =[[LeftViewController alloc]init];
     HomePageViewController *homePageVC =[[HomePageViewController alloc]init];
     UINavigationController *nav =[[UINavigationController alloc]initWithRootViewController:homePageVC];
-    
     self.drawerController =[[MMDrawerController alloc]initWithCenterViewController:nav leftDrawerViewController:leftVC];
     //4、设置打开/关闭抽屉的手势
     self.drawerController.openDrawerGestureModeMask =MMOpenDrawerGestureModeAll;
