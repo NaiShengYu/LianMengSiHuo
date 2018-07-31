@@ -85,9 +85,15 @@
     
     if ([CustomAccount sharedCustomAccount].loginType ==1) {
         NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-        [header.headerImgV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",allImageURL,[user objectForKey:USERHEADPIC]]] placeholderImage:[UIImage imageNamed:@"个人中心_07"]];
-        [header.titleBut setTitle:[user objectForKey:USERNAME] forState:UIControlStateNormal];
-        
+        NSString *imgURL =[NSString stringWithFormat:@"%@",[user objectForKey:USERHEADPIC]];
+        if([imgURL rangeOfString:@"http"].location == NSNotFound){
+            [header.headerImgV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",allImageURL,imgURL]] placeholderImage:[UIImage imageNamed:@"个人中心_07"]];
+        }else{
+            [header.headerImgV sd_setImageWithURL:[NSURL URLWithString:imgURL] placeholderImage:[UIImage imageNamed:@"个人中心_07"]];
+        }
+        [header.titleBut setTitle:[user objectForKey:NICKNAME] forState:UIControlStateNormal];
+//        [header.titleBut setTitle:[user objectForKey:USERNAME] forState:UIControlStateNormal];
+
     }else{
         [header.titleBut setTitle:@"未登录" forState:UIControlStateNormal];
         header.headerImgV.image =[UIImage imageNamed:@"个人中心_07"];

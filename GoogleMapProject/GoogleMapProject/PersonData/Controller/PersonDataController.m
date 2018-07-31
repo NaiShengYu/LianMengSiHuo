@@ -125,7 +125,14 @@
     if (indexPath.section ==0 &&indexPath.row ==0) {
         PersonImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PersonImageCell" forIndexPath:indexPath];
         if (self.headerImg ==nil) {
-            [cell.imageV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",allImageURL,self.imgURL]] placeholderImage:[UIImage imageNamed:@"个人中心_07"]];
+            if([self.imgURL rangeOfString:@"http"].location == NSNotFound){
+                [cell.imageV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",allImageURL,self.imgURL]] placeholderImage:[UIImage imageNamed:@"个人中心_07"]];
+            }else{
+                [cell.imageV sd_setImageWithURL:[NSURL URLWithString:self.imgURL] placeholderImage:[UIImage imageNamed:@"个人中心_07"]];
+
+            }
+            
+            
         }else{
             cell.imageV.image = self.headerImg;
         }
