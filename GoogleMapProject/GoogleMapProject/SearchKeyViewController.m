@@ -91,8 +91,26 @@
         cell.imageView.image =[UIImage imageNamed:@"首页-搜索s_03_03"];
         cell.detailTextLabel.text =[NSString stringWithFormat:@"【%@】",[CustomAccount sharedCustomAccount].currentCityName];
         cell.textLabel.text =@"附近";
+        cell.textLabel.font =FontSize(15);
+        cell.detailTextLabel.font =FontSize(15);
     }else{
         NSDictionary *dic =self.dataArray[indexPath.row-1];
+
+        if ([dic[@"type"] integerValue] ==5) {
+            NSString *str = [NSString stringWithFormat:@"%@ %@",dic[@"city_cn"],dic[@"city_en"]];
+            NSRange range = [str rangeOfString:_searchKey];
+
+            if (range.location !=NSNotFound) {
+                NSMutableAttributedString *mut = [[NSMutableAttributedString alloc]initWithString:str];
+                [mut addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(range.location, _searchKey.length)];
+                
+                cell.textLabel.attributedText = mut;
+            }else{
+                cell.textLabel.text = str;
+            }
+            
+        }
+        else{
         cell.detailTextLabel.text =@"";
         NSString *res = dic[@"res"];
         NSRange range = [res rangeOfString:_searchKey];
@@ -103,6 +121,7 @@
             cell.textLabel.attributedText = mut;
         }else{
             cell.textLabel.text = dic[@"res"];
+        }
         }
         cell.textLabel.numberOfLines =2;
         cell.textLabel.font =FontSize(15);
@@ -167,15 +186,11 @@
         
        CustomAccount *acc = [CustomAccount sharedCustomAccount];
         acc.city_id = dic[@"Id"];
-        NSString *cityName = dic[@"res"];
-        NSArray *arr = [cityName componentsSeparatedByString:@" "];
         @try {
-            acc.cityName =arr[0];
-            acc.cityEnName =arr[1];
+            acc.cityName =dic[@"city_cn"];
+            acc.cityEnName =dic[@"city_en"];
         } @catch (NSException *exception) {
-            
         } @finally {
-            
         }
                 
         [[NSNotificationCenter defaultCenter] postNotificationName:@"selectCity" object:nil];

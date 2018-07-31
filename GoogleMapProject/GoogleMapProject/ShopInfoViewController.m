@@ -23,6 +23,7 @@
 
 @property (nonatomic,strong)ShopInfoModel *infoModel;
 
+@property (nonatomic,strong)ShopInfoNavBar *navbar;
 @end
 
 @implementation ShopInfoViewController
@@ -50,11 +51,11 @@
     self.dataArray =[[NSMutableArray alloc]init];
     self.automaticallyAdjustsScrollViewInsets =NO;
     
-    ShopInfoNavBar *navbar =[[ShopInfoNavBar alloc]initWithFrame:CGRectMake(0, 0, screenWigth, MaxY)];
-    [self.view addSubview:navbar];
-    [navbar.backBaut addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-    [navbar.shareBut addTarget:self action:@selector(shareBut) forControlEvents:UIControlEventTouchUpInside];
-    [navbar.collectionBut addTarget:self action:@selector(collectionBut) forControlEvents:UIControlEventTouchUpInside];
+    _navbar =[[ShopInfoNavBar alloc]initWithFrame:CGRectMake(0, 0, screenWigth, MaxY)];
+    [self.view addSubview:_navbar];
+    [_navbar.backBaut addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [_navbar.shareBut addTarget:self action:@selector(shareBut) forControlEvents:UIControlEventTouchUpInside];
+    [_navbar.collectionBut addTarget:self action:@selector(collectionBut) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *bottomBut =[[UIButton alloc]initWithFrame:CGRectMake(0, screenHeight-TabbarHeight, screenWigth, TabbarHeight)];
     [bottomBut setImage:[UIImage imageNamed:@"详情_22"] forState:UIControlStateNormal];
@@ -77,10 +78,10 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden =YES;
 }
-//- (void)viewWillDisappear:(BOOL)animated{
-//    [super viewWillDisappear:animated];
-//    self.navigationController.navigationBar.hidden =NO;
-//}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBar.hidden =NO;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return self.dataArray.count+1;
@@ -205,18 +206,16 @@
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
             
         }]];
-        
+
         [alert addAction:[UIAlertAction actionWithTitle:@"去登陆" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             [self.navigationController pushViewController:[LoginViewController new] animated:NO];
         }]];
-        
-        
         [self presentViewController:alert animated:YES completion:nil];
-        
         return;
-        
     }
-    
+    if ([blockSelf.infoModel.is_collection integerValue]==1) {
+        return;
+    }
     
     NSString *url = [NSString stringWithFormat:@"%@app_user.php",BaseURL];
     DLog(@"url==%@",url);
@@ -229,7 +228,7 @@
     
     [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
         if ([responseObject[@"code"] integerValue] ==1) {
-           
+            [blockSelf.navbar.collectionBut setImage:[UIImage imageNamed:@"ico_like2"] forState:UIControlStateNormal];
             
         }else{
             [PubulicObj ShowSVWhitMessage];
@@ -317,6 +316,11 @@
                 [responseObject[@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     blockSelf.infoModel = [[ShopInfoModel alloc]initWithDic:obj];
                 }];
+                if ([blockSelf.infoModel.is_collection integerValue]==1) {
+                    [blockSelf.navbar.collectionBut setImage:[UIImage imageNamed:@"ico_like2"] forState:UIControlStateNormal];
+                }else{
+                    [blockSelf.navbar.collectionBut setImage:[UIImage imageNamed:@"详情_06"] forState:UIControlStateNormal];
+                }
                 [blockSelf.myTable removeFromSuperview];
                 blockSelf.myTable =nil;
                 [blockSelf.view addSubview:blockSelf.myTable];

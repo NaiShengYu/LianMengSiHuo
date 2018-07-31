@@ -197,7 +197,6 @@
             make.left.right.offset =0;
             make.height.offset =80;
         }];
-        
         UIView *mapBackV =[UIView new];
         [_mapV addSubview:mapBackV];
         [mapBackV mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -320,6 +319,7 @@
     
     MWPhotoBrowser *browser=[[MWPhotoBrowser alloc]initWithDelegate:self];
     browser.displayActionButton =NO;
+    browser.alwaysShowControls = YES;
     [self.VC.navigationController pushViewController:browser animated:NO];
 }
 
@@ -355,7 +355,7 @@
     }else {
         _topickNumLab.text =[NSString stringWithFormat:@"%@",model.num];
     }
-    _speciesLab.text = [NSString stringWithFormat:@"%@",model.blue];
+//    _speciesLab.text = [NSString stringWithFormat:@"%@",model.blue];
     
     for(int i =0; i <5;i ++){
         UIImageView *img = [self.contentView viewWithTag:1001+i];
@@ -375,16 +375,21 @@
     _pictureNumLab.text = [NSString stringWithFormat:@"%@张图片",model.img_num];
     
     [_mapV clear];
+    [self performSelector:@selector(makeMap) withObject:self afterDelay:1];
+    _telNum.text = [NSString stringWithFormat:@"%@",model.tel];
+    _num.text = [NSString stringWithFormat:@"%@",model.num];
+}
+
+- (void)makeMap{
+    GMSCameraPosition *position = [GMSCameraPosition cameraWithLatitude:[_model.details_lat doubleValue] longitude:[_model.details_lng doubleValue] zoom:18];
+    [_mapV animateToCameraPosition:position];
+    
     GMSMarker* marker =[[GMSMarker alloc]init];
-    marker.position =CLLocationCoordinate2DMake([model.details_lat doubleValue], [model.details_lng doubleValue]);
+    marker.position =CLLocationCoordinate2DMake([_model.details_lat doubleValue], [_model.details_lng doubleValue]);
     marker.icon =[UIImage imageNamed:@"详情_11"];
     marker.draggable =NO;
     marker.map = _mapV;
-    GMSCameraPosition *position = [GMSCameraPosition cameraWithLatitude:[model.details_lat doubleValue] longitude:[model.details_lng doubleValue] zoom:14];
-    [_mapV animateToCameraPosition:position];
     
-    _telNum.text = [NSString stringWithFormat:@"%@",model.tel];
-    _num.text = [NSString stringWithFormat:@"%@",model.num];
 }
 
 @end

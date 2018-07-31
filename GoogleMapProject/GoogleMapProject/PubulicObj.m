@@ -160,13 +160,12 @@
 }
 
 + (void)ShowSVWithoutImage{
-    [SVProgressHUD setImageViewSize:CGSizeMake(90, 135)];
+    [SVProgressHUD setImageViewSize:CGSizeMake(60, 60*655/273)];
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     [SVProgressHUD setBackgroundColor:[UIColor clearColor]];
     [SVProgressHUD setMinimumSize:CGSizeMake(260, 44)];
     [SVProgressHUD setMinimumDismissTimeInterval:60];
     [SVProgressHUD setInfoImage:[UIImage imageWithGIFNamed:@"loading"]];
-    
 }
 
 + (BOOL)IsPassWordWithString:(NSString *)str{

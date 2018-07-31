@@ -36,6 +36,14 @@
 @property (nonatomic,strong)FilterView *filterV;
 
 @property (nonatomic,strong)NSMutableArray *dataArray;
+
+//距离
+@property (nonatomic,copy)NSString *raidus;
+//分类
+@property (nonatomic,copy)NSString *list_condition;
+//评分
+@property (nonatomic,copy)NSString *star;
+
 @end
 
 @implementation ViewController
@@ -145,6 +153,11 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.star =@"";
+    self.raidus = @"";
+    self.list_condition = @"";
+    
     self.dataArray = [[NSMutableArray alloc]init];
     GMSCameraPosition *position = [GMSCameraPosition cameraWithLatitude:-33.86 longitude:151.20 zoom:14];
     _mapV =[GMSMapView mapWithFrame:self.view.bounds camera:position];
@@ -223,7 +236,6 @@
         BIGposition2D = position2D;
     }
 }
-static int a =0 ;
 
 - (void)currentLocation{
     
@@ -339,6 +351,83 @@ static int a =0 ;
 
 
 - (void)makeData{
+    WS(blockSelf);
+    [self.filterArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        FilterHeaderModel *headerModel =obj;
+        [headerModel.itemsArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            FilterItem *item = obj;
+            if (item.isSelect ==YES) {
+                if ([headerModel.title isEqualToString:@"评分"]) {
+                    blockSelf.star =item.Id;
+                }
+                if ([headerModel.title isEqualToString:@"距离"]) {
+                    blockSelf.raidus =item.Id;
+                }
+                if ([headerModel.title isEqualToString:@"菜系"]) {
+                    if (blockSelf.list_condition.length ==0) {
+                        blockSelf.list_condition = [NSString stringWithFormat:@"%@",item.Id];
+                    }else{
+                        blockSelf.list_condition = [NSString stringWithFormat:@"%@,%@",blockSelf.list_condition,item.Id];
+                    }
+                }
+                
+            }
+        }];
+    }];
+    
+    NSString *url = [NSString stringWithFormat:@"%@app_list.php",BaseURL];
+    DLog(@"url==%@",url);
+    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+    CustomAccount *acc = [CustomAccount sharedCustomAccount];
+    [param setObject:@"list_show" forKey:@"app"];
+    [param setObject:acc.classtype forKey:@"type"];
+    [param setObject:[NSString stringWithFormat:@"%f",acc.cityLocation.longitude] forKey:@"lng"];
+    [param setObject:[NSString stringWithFormat:@"%f",acc.cityLocation.latitude] forKey:@"lat"];
+    
+    //    [param setObject:@"2.3411111" forKey:@"lng"];
+    //    [param setObject:@"48.8600" forKey:@"lat"];
+    
+    //距离
+    [param setObject:self.raidus forKey:@"raidus"];
+    //分类
+    [param setObject:self.list_condition forKey:@"list_condition"];
+    //评分
+    [param setObject:self.star forKey:@"star"];
+    
+    //请求起始个数
+    [param setObject:@"0" forKey:@"pageno"];
+    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+        if ([responseObject[@"code"] integerValue] ==1) {
+            [blockSelf.dataArray removeAllObjects];
+            for (NSDictionary *dataDic in responseObject[@"data"]) {
+                for (NSDictionary *list_showDic in dataDic[@"list_show"]) {
+                    MapBottomModel *model = [[MapBottomModel alloc]initWithDic:list_showDic];
+                    [blockSelf.dataArray addObject:model];
+                }
+            }
+            
+            [blockSelf.view addSubview:blockSelf.bottomV];
+            if (blockSelf.dataArray.count >0) {
+                blockSelf.bottomV.model = blockSelf.dataArray[0];
+                GMSCameraPosition *position1 = [GMSCameraPosition cameraWithLatitude:[blockSelf.bottomV.model.lat floatValue] longitude:[blockSelf.bottomV.model.lng floatValue] zoom:18];
+                [blockSelf.mapV animateToCameraPosition:position1];
+                [blockSelf saoMiaoJieGuo];
+                blockSelf.bottomV.hidden = NO;
+            }else{
+                blockSelf.bottomV.hidden =YES;
+            }
+        }else{
+            [PubulicObj ShowSVWhitMessage];
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [PubulicObj ShowSVWhitMessage];
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"网络错误"];
+    } isShowHUD:YES];
+    
+}
+
+- (void)makeData1{
     WS(blockSelf);
     NSString *url = [NSString stringWithFormat:@"%@app_list.php",BaseURL];
     DLog(@"url==%@",url);

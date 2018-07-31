@@ -20,7 +20,8 @@
         for (int i =0; i <9; i ++) {
             int a = i/4;
             int b = i%4;
-            UIButton *but =[[UIButton alloc]initWithFrame:CGRectMake(65 +b*(10+W), 10 +a*(10+W/3*2), W, W/3*2)];
+            UIButton *but = [[UIButton alloc]initWithFrame:CGRectMake(65 +b*(10+W),  10 +a*(10+W/3*2), W, W/3*2)];
+//            UIButton *but =[[UIButton alloc]initWithFrame:CGRectMake(65 +b*(10+W), 10 +a*(10+W/3*2), W, W/3*2)];
             [but setImage:[UIImage imageNamed:@"timg-2"] forState:UIControlStateNormal];
             but.tag =800+i;
             [_butsArray addObject:but];

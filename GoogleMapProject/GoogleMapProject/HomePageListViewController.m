@@ -179,6 +179,10 @@
     [self.view addSubview:topV];
     [self getCollection];
     
+    if (self.dataArray ==nil) {
+        self.dataArray =[[NSMutableArray alloc]init];
+        [self makeDataIsRefresh:YES];
+    }
 
 }
 - (void)viewWillAppear:(BOOL)animated{
@@ -283,8 +287,9 @@
     CustomAccount *acc = [CustomAccount sharedCustomAccount];
     [param setObject:@"list_show" forKey:@"app"];
     [param setObject:acc.classtype forKey:@"type"];
-    [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.longitude] forKey:@"lng"];
-    [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.latitude] forKey:@"lat"];
+    [param setObject:[NSString stringWithFormat:@"%f",acc.cityLocation.longitude] forKey:@"lng"];
+    [param setObject:[NSString stringWithFormat:@"%f",acc.cityLocation.latitude] forKey:@"lat"];
+    
 //    [param setObject:@"2.3411111" forKey:@"lng"];
 //    [param setObject:@"48.8600" forKey:@"lat"];
     
