@@ -71,7 +71,7 @@
  *
  *  @param fbmApiClass Facebook Messenger SDK中的类型，应先导入FBSDKMessengerShareKit.framework，再将[FBSDKMessengerSharer class]传入到参数中。
  */
-+ (void)connectFacebookMessenger:(Class)fbmApiClass __deprecated_msg("discard form v4.1.2");
++ (void)connectFacebookMessenger:(Class)fbmApiClass;
 
 /**
  *  链接钉钉以供ShareSDK可以正常使用钉钉进行分享
@@ -83,7 +83,7 @@
 /**
  *  链接Line以供ShareSDK可以正常使用Line进行分享
  *
- *  @param lineSDKClass Line SDK中的类型，应先导入LineSDK.framework，再将[LineSDKLogin class]传入到此参数。
+ *  @param lineSDKClass Line SDK中的类型，应先导入LineAdapter.framework，再将[LineSDK class]传入到此参数。
  */
 + (void)connectLine:(Class)lineSDKClass;
 
@@ -93,12 +93,5 @@
  *  @param MPShareSDKClass MeiPai SDK中的类型，应先导入MPShareSDK.framework，再将[MPShareSDK class]传入到此参数。
  */
 + (void)connectMeiPai:(Class)MPShareSDKClass;
-
-/**
- *  链接CMCC以供ShareSDK可以正常使用CMCC进行授权
- *
- *  @param TYRZUILoginClass CMCC SDK中的类型，应先导入TYRZSDK.framework，再将[TYRZUILoginClass class]传入到此参数。
- */
-+ (void)connectCMCC:(Class)TYRZUILoginClass;
 
 @end

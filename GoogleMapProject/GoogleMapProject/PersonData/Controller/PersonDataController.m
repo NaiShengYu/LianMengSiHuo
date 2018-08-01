@@ -149,7 +149,20 @@
                 cell.nameLab.text =self.nickName;
             }
             if (indexPath.row ==2) {
-                cell.otherLab.text =self.sex;
+                switch ([self.sex integerValue]) {
+                    case 0:
+                        cell.otherLab.text =@"无";
+                        break;
+                    case 1:
+                        cell.otherLab.text =@"男";
+                        break;
+                    case 2:
+                        cell.otherLab.text =@"女";
+                        break;
+                    default:
+                        break;
+                }
+                
             }
         }
         
@@ -183,10 +196,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    WS(blockSelf)
+
     if (indexPath.section ==0) {
         if (indexPath.row ==0) {
-            WS(blockSelf)
             UIImagePickerController* picker = [[UIImagePickerController alloc]init];
             picker.delegate = self;
             picker.allowsEditing =YES;
@@ -219,7 +232,7 @@
             ChangeSexViewController *sexVC =[[ChangeSexViewController alloc]init];
             sexVC.sex =self.sex;
             sexVC.changeSexBlock = ^(NSString *sex) {
-                self.sex = sex;
+                blockSelf.sex = sex;
                 [tableView reloadData];
             };
             [self.navigationController pushViewController:sexVC animated:YES];
@@ -233,7 +246,7 @@
             ChangeTelphoneNumViewController *numVC =[[ChangeTelphoneNumViewController alloc]init];
             numVC.telNum =self.telNum;
             numVC.changetelNumBlock = ^(NSString *telNum) {
-                self.telNum = telNum;
+                blockSelf.telNum = telNum;
                 [tableView reloadData];
             };
             [self.navigationController pushViewController:numVC animated:YES];

@@ -232,6 +232,8 @@
     }];
     [weiXin setImage:[UIImage imageNamed:@"登录_42"] forState:UIControlStateNormal];
     weiXin.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [weiXin addTarget:self action:@selector(weiXinLogin) forControlEvents:UIControlEventTouchUpInside];
+
     
     UIButton *QQ =[UIButton new];
     [containerView addSubview:QQ];
@@ -379,6 +381,75 @@
     } failure:^(NSError *error) {
         
     } isShowHUD:YES];
+    
+}
+
+#pragma mark -- 微信登录
+- (void)weiXinLogin{
+    
+    //例如QQ的登录
+    [ShareSDK getUserInfo:SSDKPlatformTypeWechat
+           onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error)
+     {
+         if (state == SSDKResponseStateSuccess)
+         {
+             
+             NSLog(@"uid=%@",user.uid);
+             NSLog(@"%@",user.credential);
+             NSLog(@"token=%@",user.credential.token);
+             NSLog(@"nickname=%@",user.nickname);
+             NSLog(@"原始数据：%@",user.rawData);
+             NSString *url = [NSString stringWithFormat:@"%@app_user.php",BaseURL];
+             DLog(@"url==%@",url);
+             NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+             [param setObject:@"user_wechat" forKey:@"app"];
+             [param setObject:user.nickname forKey:@"nickname"];
+             [param setObject:user.icon forKey:@"headpic"];
+             [param setObject:user.rawData[@"sex"] forKey:@"sex"];
+             [param setObject:user.rawData[@"country"] forKey:@"country"];
+             [param setObject:user.rawData[@"province"] forKey:@"province"];
+             [param setObject:user.rawData[@"city"] forKey:@"city"];
+             [param setObject:user.uid forKey:@"wx_openid"];
+             WS(blockSelf);
+             [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+                 if ([responseObject[@"code"] integerValue] ==1) {
+                     NSDictionary *dic = responseObject[@"data"][0];
+                     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+                     [user setObject:dic[@"userid"] forKey:USERID];
+                     [user setObject:dic[@"username"] forKey:USERNAME];
+                     [user setObject:dic[@"nickname"] forKey:NICKNAME];
+                     [user setObject:dic[@"user_state"] forKey:USERSTATE];
+                     [user setObject:dic[@"headpic"] forKey:USERHEADPIC];
+                     [user setObject:dic[@"phone"] forKey:PHONE];
+                     [user setObject:dic[@"sex"] forKey:SEX];
+                     [user setObject:dic[@"email"] forKey:EMAIL];
+                     [user synchronize];
+
+                     [PubulicObj ShowSVWhitMessage];
+                     [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"登陆成功"];
+                     [CustomAccount sharedCustomAccount].loginType =1;
+
+                     [blockSelf performSelector:@selector(gohomePage) withObject:nil afterDelay:1.0];
+
+                 }else{
+                     [PubulicObj ShowSVWhitMessage];
+                     [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"登录失败"];
+                 }
+
+
+             } failure:^(NSError *error) {
+
+             } isShowHUD:YES];
+             
+         }
+         
+         else
+         {
+             NSLog(@"%@",error);
+         }
+         
+     }];
+    
     
 }
 

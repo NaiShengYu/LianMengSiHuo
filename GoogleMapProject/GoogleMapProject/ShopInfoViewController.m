@@ -229,7 +229,8 @@
     [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
         if ([responseObject[@"code"] integerValue] ==1) {
             [blockSelf.navbar.collectionBut setImage:[UIImage imageNamed:@"ico_like2"] forState:UIControlStateNormal];
-            
+            [PubulicObj ShowSVWhitMessage];
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"收藏成功"];
         }else{
             [PubulicObj ShowSVWhitMessage];
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
@@ -250,7 +251,6 @@
     NSArray* imageArray = @[@"http://mob.com/Assets/images/logo.png?v=20150320"];
    // （注意：图片必须要在Xcode左边目录里面，名称必须要传正确，如果要分享网络图片，可以这样传iamge参数 images:@[@"http://mob.com/Assets/images/logo.png?v=20150320"]）
     if (imageArray) {
-        
         NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
         [shareParams SSDKSetupShareParamsByText:[NSString stringWithFormat:@"%@",self.infoModel.info]
                                          images:[NSString stringWithFormat:@"%@%@",allImageURL,self.infoModel.img]
@@ -259,7 +259,7 @@
                                            type:SSDKContentTypeAuto];
         //2、分享（可以弹出我们的分享菜单和编辑界面）
         [ShareSDK showShareActionSheet:nil //要显示菜单的视图, iPad版中此参数作为弹出菜单的参照视图，只有传这个才可以弹出我们的分享菜单，可以传分享的按钮对象或者自己创建小的view 对象，iPhone可以传nil不会影响
-                                 items:@[@(SSDKPlatformSubTypeQQFriend)]
+                                 items:@[@(SSDKPlatformSubTypeQQFriend),@(SSDKPlatformTypeWechat)]
                            shareParams:shareParams
                    onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
                        

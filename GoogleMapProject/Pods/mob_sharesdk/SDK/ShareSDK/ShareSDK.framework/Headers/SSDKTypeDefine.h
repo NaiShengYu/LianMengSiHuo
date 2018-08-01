@@ -58,22 +58,6 @@ extern NSString *const SSDKHttpMethodHead;
 extern NSString *const SSDKAuthSettingKeyScopes;
 
 /**
- *  授权设置键名， 其对应键值为SSDKAuthSettingQQAuthType，如:@{SSDKAuthSettingKeyQQAuthType : @(SSDKAuthSettingQQAuthTypeQR)}
- */
-extern NSString *const SSDKAuthSettingKeyQQAuthType;
-
-typedef NS_ENUM(NSUInteger, SSDKAuthSettingQQAuthType) {
-    /**
-     *  默认授权方式
-     */
-    SSDKAuthSettingQQAuthTypeNormal    = 0,
-    /**
-     *  二维码授权方式
-     */
-    SSDKAuthSettingQQAuthTypeQR        = 1,
-};
-
-/**
  *  平台类型
  */
 typedef NS_ENUM(NSUInteger, SSDKPlatformType){
@@ -232,11 +216,11 @@ typedef NS_ENUM(NSUInteger, SSDKPlatformType){
     /**
      *  支付宝好友
      */
-    SSDKPlatformTypeAliSocial           = 50,
+    SSDKPlatformTypeAliSocial        = 50,
     /**
      *  支付宝朋友圈
      */
-    SSDKPlatformTypeAliSocialTimeline   = 51,
+    SSDKPlatformTypeAliSocialTimeline= 51,
     /**
      *  钉钉
      */
@@ -249,10 +233,6 @@ typedef NS_ENUM(NSUInteger, SSDKPlatformType){
      *  美拍
      */
     SSDKPlatformTypeMeiPai              = 54,
-    /**
-     *  中国移动
-     */
-    SSDKPlatformTypeCMCC                = 55,
     /**
      *  易信
      */
@@ -385,22 +365,6 @@ typedef NS_ENUM(NSUInteger, SSDKContentType){
     SSDKContentTypeMiniProgram  = 10
 };
 
-/**
- 分享行为事件统计
-
- - SSDKShareEventTypeOpenMenu: 打开分享菜单
- - SSDKShareEventTypeCloseMenu: 关闭分享菜单
- - SSDKShareEventTypeOpenEditor: 打开内容编辑视图
- - SSDKShareEventTypeFailed: 分享失败
- - SSDKShareEventTypeCancel: 分享取消
- */
-typedef NS_ENUM(NSUInteger, SSDKShareEventType) {
-    SSDKShareEventTypeOpenMenu,
-    SSDKShareEventTypeCloseMenu,
-    SSDKShareEventTypeOpenEditor,
-    SSDKShareEventTypeFailed,
-    SSDKShareEventTypeCancel
-};
 
 /**
  YouTube 视频的隐私状态
@@ -420,7 +384,8 @@ typedef NS_ENUM(NSUInteger, SSDKPrivacyStatus){
      *  不公开（知道链接的人可以观看）
      */
     SSDKPrivacyStatusUnlisted = 2
-
+    
+    
 };
 
 /**

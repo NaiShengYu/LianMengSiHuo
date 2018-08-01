@@ -199,7 +199,6 @@
     }
     
     
-    
     return;
     UIAlertController *alertV =[UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     

@@ -152,11 +152,10 @@
 "ShareSDKConnector_Error_QQ_Share" = "分享平台［QQ］分享失败";
 "ShareSDKConnector_Error_QQ_Version" = "当前QQ版本太低，需要更新至新版本才可以支持";
 "ShareSDKConnector_Error_QQ_QZone" = "分享平台［QQ］调用分享失败!当前QQSDK不支持QZONE文字分享";
-"ShareSDKConnector_Error_QQ_ShareScene" = "分享平台［QQ] API调用出错";
+"ShareSDKConnector_Error_QQ_ShareScene" = "无法识别的分享场景";
 "ShareSDKConnector_Error_QQ_Auth" = "分享平台［QQ］授权调用失败";
 "ShareSDKConnector_Error_QQ_ShareType" = "不支持此分享类型";
 
 "ShareSDKConnector_Error_Weibo_NOLibShare" = "分享平台［微博］尚未导入libWeiboSDK.a库! 无法进行相关操作";
 "ShareSDKConnector_Error_Weibo_Auth" = "分享平台［微博］授权调用失败";
-"ShareSDKConnector_Error_CMCC_NOLibShare" = "分享平台［CMCC］尚未导入TYRZSDK.framework! 无法进行相关操作";
 

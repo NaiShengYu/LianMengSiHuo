@@ -48,8 +48,20 @@
             make.height.offset =60;
         }];
         [_titleBut addTarget:self action:@selector(goMap) forControlEvents:UIControlEventTouchUpInside];
-        _titleBut.titleLabel.numberOfLines =2;
 
+        _titleLab =[UILabel new];
+        [self.titleBut addSubview:_titleLab];
+        [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.offset =10;
+            make.right.offset =-10;
+            make.height.offset =60;
+            make.centerY.offset = 0;
+        }];
+        _titleLab.numberOfLines = 2;
+        _titleLab.textAlignment = NSTextAlignmentCenter;
+        
+        
+        
 //        NSMutableAttributedString *att = [[NSMutableAttributedString alloc]initWithString:@"巴黎\nParis"];
 //        [att addAttribute:NSFontAttributeName value:FontSize(18) range:NSMakeRange(0, 2)];
 //        [_titleBut setAttributedTitle:att forState:UIControlStateNormal];
@@ -244,9 +256,9 @@
     }
     NSMutableAttributedString *att = [[NSMutableAttributedString alloc]initWithString:string];
     [att addAttribute:NSFontAttributeName value:FontSize(18) range:NSMakeRange(0, CName.length)];
-    _titleBut.titleLabel.font =FontSize(15);
-    [_titleBut setAttributedTitle:att forState:UIControlStateNormal];
- 
+    _titleLab.font =FontSize(15);
+    _titleLab.attributedText = att;
+    
     GMSCameraPosition *position1 = [GMSCameraPosition cameraWithTarget:[CustomAccount sharedCustomAccount].curCoordinate2D zoom:14];
     [self.mapV animateToCameraPosition:position1];
     

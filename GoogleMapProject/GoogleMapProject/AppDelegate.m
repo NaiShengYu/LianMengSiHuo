@@ -78,7 +78,7 @@
     
     [ShareSDK registerActivePlatforms:@[
 //                                        @(SSDKPlatformTypeSinaWeibo),
-//                                        @(SSDKPlatformTypeWechat),
+                                        @(SSDKPlatformTypeWechat),
                                         @(SSDKPlatformTypeQQ),
                                         ]
                              onImport:^(SSDKPlatformType platformType)
@@ -107,10 +107,10 @@
 //                                         redirectUri:@”http://www.sharesdk.cn“
 //                                            authType:SSDKAuthTypeBoth];
 //                 break;
-//             case SSDKPlatformTypeWechat:
-//                 [appInfo SSDKSetupWeChatByAppId:@""
-//                                       appSecret:@""];
-//                 break;
+             case SSDKPlatformTypeWechat:
+                 [appInfo SSDKSetupWeChatByAppId:@"wx8ce488a250463c8a"
+                                       appSecret:@"fd80f93e1449a3ce3d33a7568eb73fba"];
+                 break;
              case SSDKPlatformTypeQQ:
                  [appInfo SSDKSetupQQByAppId:@"1107155261"
                                       appKey:@"yba6EoskjUnsatbj"
@@ -152,10 +152,9 @@
             [CustomAccount sharedCustomAccount].currentCityName = placemark.addressDictionary[@"City"];
 
             [[NSNotificationCenter defaultCenter]postNotificationName:@"getCityName" object:nil];
+            [manager stopUpdatingLocation];
         }
-        
-        
-        
+    
     }];
     
     

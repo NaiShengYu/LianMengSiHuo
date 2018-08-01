@@ -157,13 +157,24 @@
             HomePageSectionOneModel *model =self.topArray[indexPath.row];
             [CustomAccount sharedCustomAccount].classtype = model.type;
             vc.Id = model.Id;
+            [self.navigationController pushViewController:vc animated:YES];
+
         }
         if (indexPath.section ==2) {
             HomePageSectionTowModel *model = self.aroundCityArray[indexPath.row];
-//            vc.type = model.type;
-            vc.Id = model.Id;
+
+            
+            CustomAccount *acc = [CustomAccount sharedCustomAccount];
+            acc.city_id = model.Id;
+            @try {
+                acc.cityName =model.name;
+                acc.cityEnName =model.name_e;
+            } @catch (NSException *exception) {
+            } @finally {
+            }
+            [self makeData];
+            
         }
-        [self.navigationController pushViewController:vc animated:YES];
 
     }
  

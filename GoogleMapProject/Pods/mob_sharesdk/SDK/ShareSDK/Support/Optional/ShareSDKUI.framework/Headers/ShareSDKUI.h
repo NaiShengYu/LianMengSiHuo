@@ -2,16 +2,40 @@
 //  ShareSDKUI.h
 //  ShareSDKUI
 //
-//  Created by Max on 2018/4/3.
-//  Copyright © 2018年 Max. All rights reserved.
+//  Created by fenghj on 15/6/18.
+//  Copyright (c) 2015年 mob. All rights reserved.
 //
 
-#ifndef ShareSDKUI_h
-#define ShareSDKUI_h
+#import <Foundation/Foundation.h>
+#import "ShareSDK+SSUI.h"
+#import "SSUIShareActionSheetController.h"
+#import "SSUIShareContentEditorViewController.h"
 
-#import <ShareSDKUI/ShareSDK+SSUI.h>
-#import <ShareSDKUI/SSUIEditorConfiguration.h>
-#import <ShareSDKUI/SSUIShareSheetConfiguration.h>
-#import <ShareSDKUI/SSUIPlatformItem.h>
+@interface ShareSDKUI : NSObject
 
-#endif /* ShareSDKUI_h */
+/**
+ *  创建分享菜单
+ *
+ *  @param items 分享菜单项
+ *
+ *  @return 分享菜单控制器
+ */
++ (SSUIShareActionSheetController *)shareActionSheetWithItems:(NSArray *)items;
+
+/**
+ *  创建内容编辑视图
+ *
+ *  @param content          内容
+ *  @param image            图片
+ *  @param platformTypes    分享平台列表
+ *
+ *  @return 内容编辑视图控制器
+ */
++ (SSUIShareContentEditorViewController *)contentEditorViewWithContent:(NSString *)content
+                                                                 image:(SSDKImage *)image
+                                                         platformTypes:(NSArray *)platformTypes;
+
++ (ShareSDKUI *)shareInstance;
+
+@property (nonatomic,strong)NSString *weiboURL;
+@end

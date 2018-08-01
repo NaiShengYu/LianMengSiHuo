@@ -13,6 +13,7 @@
 @property (nonatomic,strong)GMSMapView *mapV ;
 
 @property (nonatomic,strong)UIButton *titleBut;
+@property (nonatomic,strong)UILabel *titleLab;
 
 @property (nonatomic,strong)UITableView *tab;
 
