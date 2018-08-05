@@ -212,7 +212,14 @@
         [UIView animateWithDuration:0.4 animations:^{
             self.filterV.frame =CGRectMake(0, MaxY, screenWigth, screenHeight-MaxY);
         }];
+        but.backgroundColor = zhuse;
+        but.layer.borderColor = [UIColor whiteColor].CGColor;
+        but.layer.borderWidth =1;
+        
+        
     }else{
+        but.layer.borderWidth =0;
+        but.backgroundColor =RGBA(133, 31, 24, 1);
         [UIView animateWithDuration:0.4 animations:^{
             self.filterV.frame =CGRectMake(0, 0, screenWigth, 0);
         }];
@@ -227,12 +234,22 @@
     if (_isEdit==YES) {
         self.myTable.mj_footer = nil;
         self.myTable.mj_header =nil;
-
         self.deleteBut.hidden =NO;
         [UIView animateWithDuration:0.4 animations:^{
             blockSelf.myTable.frame =CGRectMake(0, MaxY, screenWigth, screenHeight-TabbarHeight-MaxY);
         }];
+        
+        
+        but.backgroundColor = zhuse;
+        but.layer.borderColor = [UIColor whiteColor].CGColor;
+        but.layer.borderWidth =1;
+        
+        
     }else{
+        but.layer.borderWidth =0;
+        but.backgroundColor =RGBA(133, 31, 24, 1);
+
+        
         MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
             [blockSelf makeDataIsRefresh:NO];
         }];

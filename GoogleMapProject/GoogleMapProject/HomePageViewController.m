@@ -83,7 +83,15 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden =YES;
     self.drawerController.openDrawerGestureModeMask =MMOpenDrawerGestureModeAll;
-
+    
+    HomePageNavView *navView = [self.view viewWithTag:10010];
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSString *imgURL =[NSString stringWithFormat:@"%@",[user objectForKey:USERHEADPIC]];
+    if([imgURL rangeOfString:@"http"].location == NSNotFound){
+        [navView.backBut sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",allImageURL,imgURL]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"个人中心_07"]];
+    }else{
+        [navView.backBut sd_setImageWithURL:[NSURL URLWithString:imgURL] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"个人中心_07"]];
+    }
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -94,6 +102,8 @@
 
 - (void)creatNav{
     HomePageNavView *navView = [[HomePageNavView alloc]initWithFrame:CGRectMake(0, 0, screenWigth, MaxY)];
+    navView.tag = 10010;
+  
     navView.vc =self;
     navView.cancelBut.enabled =NO;
     [navView.rightBut addTarget:self action:@selector(changeLocation) forControlEvents:UIControlEventTouchUpInside];

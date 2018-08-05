@@ -43,6 +43,15 @@
     return nil;
 }
 
++ (BOOL)valiEmail:(NSString *)email{
+    
+    NSString *CM_NUM = @"^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$";
+    NSPredicate *pred1 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM_NUM];
+    BOOL isMatch1 = [pred1 evaluateWithObject:email];
+    
+    return isMatch1;
+}
+
 #pragma mark -- 系统缓存大小
 + (float)getFileSize
 {

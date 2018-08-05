@@ -56,8 +56,19 @@
     [super viewWillAppear:animated];
     [self.myTable reloadData];
     self.navigationController.navigationBar.hidden =YES;
-//    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.myTable.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    @try {
+        if (@available(iOS 11.0, *)) {
+            self.myTable.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        } else {
+            // Fallback on earlier versions
+        }
+
+    } @catch (NSException *exception) {
+        
+    } @finally {
+        
+    }
 
 }
 - (void)viewWillDisappear:(BOOL)animated{

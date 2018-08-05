@@ -110,6 +110,8 @@
         make.centerY.equalTo(phoneLab.mas_centerY).offset =0;
     }];
     _phoneTF.placeholder =@"请输入手机号";
+   
+    _phoneTF.text =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:PHONE]];
     
     UIView *backV2 =[UIView new];
     [backView addSubview:backV2];

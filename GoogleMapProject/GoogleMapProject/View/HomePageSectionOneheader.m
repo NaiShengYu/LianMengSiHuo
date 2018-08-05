@@ -16,7 +16,7 @@
         [self addSubview:titleImg];
         [titleImg mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.offset =0;
-            make.width.offset =screenWigth/3*2;
+            make.width.offset =30*1010/80;
             make.top.offset =0;
             make.bottom.offset =-5;
         }];

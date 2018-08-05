@@ -389,7 +389,14 @@
             blockSelf.bottomV.frame =CGRectMake(10, screenHeight +10, screenWigth-20, 153);
             blockSelf.functionBar.frame =CGRectMake(10, screenHeight +10+153, screenWigth-20, 153);
         }];
+        but.backgroundColor = zhuse;
+        but.layer.borderColor = [UIColor whiteColor].CGColor;
+        but.layer.borderWidth =1;
+        
+        
     }else{
+        but.layer.borderWidth =0;
+        but.backgroundColor =RGBA(133, 31, 24, 1);
         [UIView animateWithDuration:0.4 animations:^{
             self.filterV.frame =CGRectMake(0, 0, screenWigth, 0);
             blockSelf.bottomV.frame =CGRectMake(10, screenHeight -153-TabbarHeight, screenWigth-20, 153);

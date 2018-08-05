@@ -259,7 +259,7 @@
     _titleLab.font =FontSize(15);
     _titleLab.attributedText = att;
     
-    GMSCameraPosition *position1 = [GMSCameraPosition cameraWithTarget:[CustomAccount sharedCustomAccount].curCoordinate2D zoom:14];
+    GMSCameraPosition *position1 = [GMSCameraPosition cameraWithTarget:[CustomAccount sharedCustomAccount].cityLocation zoom:14];
     [self.mapV animateToCameraPosition:position1];
     
 }

@@ -336,7 +336,14 @@
         [UIView animateWithDuration:0.4 animations:^{
             self.filterV.frame =CGRectMake(0, MaxY, screenWigth, screenHeight-MaxY);
         }];
+        but.backgroundColor = zhuse;
+        but.layer.borderColor = [UIColor whiteColor].CGColor;
+        but.layer.borderWidth =1;
+        
+        
     }else{
+        but.layer.borderWidth =0;
+        but.backgroundColor =RGBA(133, 31, 24, 1);
         [UIView animateWithDuration:0.4 animations:^{
             self.filterV.frame =CGRectMake(0, 0, screenWigth, 0);
         }];

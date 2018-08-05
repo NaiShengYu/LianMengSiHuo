@@ -35,8 +35,14 @@
     self.dataArray =[[NSMutableArray alloc]init];
     [self creatNav];
     [self.view addSubview:self.myTable];
-    self.myTable.contentInsetAdjustmentBehavior =UIScrollViewContentInsetAdjustmentNever;
-    
+    @try {
+        self.myTable.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        
+    } @catch (NSException *exception) {
+        
+    } @finally {
+        
+    }
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

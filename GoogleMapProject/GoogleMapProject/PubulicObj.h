@@ -15,6 +15,18 @@
  *
  */
 + (NSString *)valiMobile:(NSString *)mobile;
+
+
+/**
+ *判断手机号码是否正确
+ *
+ */
++ (BOOL)valiEmail:(NSString *)email;
+
+
+
+
+
 /**
  *  是否登录了
  */

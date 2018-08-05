@@ -100,6 +100,11 @@
 }
 
 - (void)selectChange:(UIButton *)but{
+    
+    if(_time!=60){
+        return;
+    }
+    
     if (_lastBut ==but) {
         return;
     }
@@ -295,6 +300,14 @@
             return;
         }
     }
+    else{
+        if ([PubulicObj valiEmail:_phoneTF.text] ==NO) {
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"请填写正确邮箱！"];
+            return;
+        }
+        
+        
+    }
     if (![self.code isEqualToString:_codeTF.text]) {
         [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"验证码不正确"];
         return;
@@ -326,9 +339,17 @@
     }
     if ([_phoneLab.text  isEqual: @"手机号"]) {
         if (![[PubulicObj valiMobile:_phoneTF.text] isEqualToString:@"是"]) {
-            [SVProgressHUD showErrorWithStatus:@"请正确手机号"];
+            [SVProgressHUD showErrorWithStatus:@"请填写正确手机号！"];
             return;
         }
+    }
+    else{
+        if ([PubulicObj valiEmail:_phoneTF.text] ==NO) {
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"请填写正确邮箱！"];
+            return;
+        }
+        
+        
     }
     _timerBut.enabled =NO;
     _timer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(changeTime) userInfo:nil repeats:YES];
