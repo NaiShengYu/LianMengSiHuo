@@ -311,7 +311,7 @@
     }else{
         secondVC.type =2;
     }
-    
+    secondVC.userType = 0;
     [self.navigationController pushViewController:secondVC animated:YES];
    
     

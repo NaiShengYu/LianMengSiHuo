@@ -234,7 +234,18 @@
     CustomAccount *acc = [CustomAccount sharedCustomAccount];
     [param setObject:@"list_index" forKey:@"app"];
     @try {
-        [param setObject:acc.cityName forKey:@"city_cn"];
+        
+        NSString *string =[CustomAccount sharedCustomAccount].cityName;
+        NSString *CName =[CustomAccount sharedCustomAccount].cityName;
+        
+        NSString *shi =[string substringFromIndex:string.length-1];
+        if ([shi isEqualToString:@"市"]) {
+            string =[string substringToIndex:string.length-1];
+            CName =string;
+        }
+        
+        
+        [param setObject:CName forKey:@"city_cn"];
 
     } @catch (NSException *exception) {
         [param setObject:@"" forKey:@"city_cn"];

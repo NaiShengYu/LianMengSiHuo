@@ -11,6 +11,7 @@
 #import "RegistViewController.h"
 #import "ThirdPartyLandedView.h"
 #import "HomePageViewController.h"
+#import "RegistSecondViewController.h"
 @interface LoginViewController ()
 @property (nonatomic,strong)ThirdPartyLandedView *thirdLandedView;
 @property (nonatomic,strong)UIButton *thirdLandedBackBut;
@@ -489,12 +490,20 @@
                      [user setObject:dic[@"sex"] forKey:SEX];
                      [user setObject:dic[@"email"] forKey:EMAIL];
                      [user synchronize];
-                     
-                     [PubulicObj ShowSVWhitMessage];
-                     [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"登陆成功"];
-                     [CustomAccount sharedCustomAccount].loginType =1;
-                     
-                     [blockSelf performSelector:@selector(gohomePage) withObject:nil afterDelay:1.0];
+                     NSInteger isFirst = [dic[@"first"] integerValue];
+//                     isFirst = 1;
+                     if (isFirst ==1) {
+                         RegistSecondViewController *secondVC =[[RegistSecondViewController alloc]init];
+                         secondVC.userType = 2;
+                         [self.navigationController pushViewController:secondVC animated:YES];
+                         
+                     }else{
+                         [PubulicObj ShowSVWhitMessage];
+                         [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"登陆成功"];
+                         [CustomAccount sharedCustomAccount].loginType =1;
+                         [blockSelf performSelector:@selector(gohomePage) withObject:nil afterDelay:1.0];
+                     }
+                   
                      
                  }else{
                      [PubulicObj ShowSVWhitMessage];

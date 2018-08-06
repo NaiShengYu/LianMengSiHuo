@@ -306,8 +306,8 @@
     [param setObject:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:USERID]] forKey:@"userid"];
     [param setObject:acc.classtype forKey:@"type"];
     [param setObject:self.Id forKey:@"Id"];
-    [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.longitude] forKey:@"lng"];
-    [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.latitude] forKey:@"lat"];
+    [param setObject:[NSString stringWithFormat:@"%f",acc.cityLocation.longitude] forKey:@"lng"];
+    [param setObject:[NSString stringWithFormat:@"%f",acc.cityLocation.latitude] forKey:@"lat"];
 
     WS(blockSelf);
     [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {

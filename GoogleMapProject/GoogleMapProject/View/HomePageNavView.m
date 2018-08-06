@@ -23,6 +23,9 @@
         _backBut =[[UIButton alloc]initWithFrame:CGRectMake(8, MaxY-44+8, 44-16, 44-16)];
         [self addSubview:_backBut];
         [_backBut setImage:[UIImage imageNamed:@"个人中心_07"] forState:UIControlStateNormal];
+        _backBut.layer.cornerRadius = (44-16)/2;
+        _backBut.layer.masksToBounds = YES;
+        
         
         _rightBut =[[UIButton alloc]initWithFrame:CGRectMake(screenWigth-52, MaxY-44, 44, 44)];
         NSLog(@"%f",MaxY);

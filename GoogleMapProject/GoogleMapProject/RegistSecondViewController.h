@@ -14,4 +14,6 @@
 
 @property (nonatomic,assign)NSInteger type;
 
+@property (nonatomic,assign)NSInteger userType;
+
 @end

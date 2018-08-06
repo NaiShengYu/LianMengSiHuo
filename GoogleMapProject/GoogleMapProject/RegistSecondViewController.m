@@ -229,41 +229,69 @@
     [param setObject:_oldPasswordTF.text forKey:@"username"];
     [param setObject:_PasswordTF.text forKey:@"password"];
     
-    if (self.type ==1) {//手机号注册
-        [param setObject:@"reg_phone" forKey:@"app"];
-        [param setObject:self.phone forKey:@"phone"];
-
-    }else{
-        [param setObject:@"reg_email" forKey:@"app"];
-        [param setObject:self.phone forKey:@"email"];
-    }
-    WS(blockSelf);
-    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
-        if ([responseObject[@"code"] integerValue] ==1) {
-            NSDictionary *dic = responseObject[@"data"][0];
-            NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-            [user setObject:dic[@"userid"] forKey:USERID];
-            [user setObject:dic[@"username"] forKey:USERNAME];
-            [user setObject:dic[@"nickname"] forKey:NICKNAME];
-            [user setObject:dic[@"user_state"] forKey:USERSTATE];
-            [user setObject:dic[@"headpic"] forKey:USERHEADPIC];
-            [user setObject:dic[@"phone"] forKey:PHONE];
-            [user setObject:dic[@"sex"] forKey:SEX];
-            [user setObject:dic[@"email"] forKey:EMAIL];
-            [user synchronize];
-            [CustomAccount sharedCustomAccount].loginType =1;
-            [self.navigationController popToRootViewControllerAnimated:YES];
+    //用邮箱手机号注册
+    if (self.userType ==0) {
+        if (self.type ==1) {//手机号注册
+            [param setObject:@"reg_phone" forKey:@"app"];
+            [param setObject:self.phone forKey:@"phone"];
             
         }else{
-            [PubulicObj ShowSVWhitMessage];
-            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
+            [param setObject:@"reg_email" forKey:@"app"];
+            [param setObject:self.phone forKey:@"email"];
         }
-    } failure:^(NSError *error) {
+        WS(blockSelf);
+        [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+            if ([responseObject[@"code"] integerValue] ==1) {
+                NSDictionary *dic = responseObject[@"data"][0];
+                NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+                [user setObject:dic[@"userid"] forKey:USERID];
+                [user setObject:dic[@"username"] forKey:USERNAME];
+                [user setObject:dic[@"nickname"] forKey:NICKNAME];
+                [user setObject:dic[@"user_state"] forKey:USERSTATE];
+                [user setObject:dic[@"headpic"] forKey:USERHEADPIC];
+                [user setObject:dic[@"phone"] forKey:PHONE];
+                [user setObject:dic[@"sex"] forKey:SEX];
+                [user setObject:dic[@"email"] forKey:EMAIL];
+                [user synchronize];
+                [CustomAccount sharedCustomAccount].loginType =1;
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                
+            }else{
+                [PubulicObj ShowSVWhitMessage];
+                [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
+            }
+        } failure:^(NSError *error) {
+            
+        } isShowHUD:YES];
+    }else{
+        WS(blockSelf);
+        [param setObject:@"user_set_username" forKey:@"app"];
+        [param setObject:[user objectForKey:USERID] forKey:@"userid"];
+        [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+            if ([responseObject[@"code"] integerValue] ==1) {
+                NSDictionary *dic = responseObject[@"data"][0];
+                NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+                [user setObject:dic[@"userid"] forKey:USERID];
+                [user setObject:dic[@"username"] forKey:USERNAME];
+                [user setObject:dic[@"nickname"] forKey:NICKNAME];
+                [user setObject:dic[@"user_state"] forKey:USERSTATE];
+                [user setObject:dic[@"headpic"] forKey:USERHEADPIC];
+                [user setObject:dic[@"phone"] forKey:PHONE];
+                [user setObject:dic[@"sex"] forKey:SEX];
+                [user setObject:dic[@"email"] forKey:EMAIL];                [user synchronize];
+                [CustomAccount sharedCustomAccount].loginType =1;
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                
+            }else{
+                [PubulicObj ShowSVWhitMessage];
+                [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
+            }
+        } failure:^(NSError *error) {
+            
+        } isShowHUD:YES];
         
-    } isShowHUD:YES];
-    
-    
-    
+    }
+   
     
 }
 
@@ -285,8 +313,41 @@
     self.navigationItem.leftBarButtonItem =left;
 }
 - (void)goBack{
+    if (self.userType !=0) {
+        NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+        NSString *url = [NSString stringWithFormat:@"%@app_user.php",BaseURL];
+        DLog(@"url==%@",url);
+        NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+        [param setObject:@"user_rand_username" forKey:@"app"];
+        [param setObject:[user objectForKey:USERID] forKey:@"userid"];
+        [param setObject:[NSString stringWithFormat:@"%ld",(long)self.userType] forKey:@"user_type"];
+        [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
+            if ([responseObject[@"code"] integerValue] ==1) {
+                NSDictionary *dic = responseObject[@"data"][0];
+                NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+                [user setObject:dic[@"userid"] forKey:USERID];
+                [user setObject:dic[@"username"] forKey:USERNAME];
+                [user setObject:dic[@"nickname"] forKey:NICKNAME];
+                [user setObject:dic[@"user_state"] forKey:USERSTATE];
+                [user setObject:dic[@"headpic"] forKey:USERHEADPIC];
+                [user setObject:dic[@"phone"] forKey:PHONE];
+                [user setObject:dic[@"sex"] forKey:SEX];
+                [user setObject:dic[@"email"] forKey:EMAIL];
+                [user synchronize];
+                [CustomAccount sharedCustomAccount].loginType =1;
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                
+            }else{
+                [PubulicObj ShowSVWhitMessage];
+                [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
+            }
+        } failure:^(NSError *error) {
+            
+        } isShowHUD:YES];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
     
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

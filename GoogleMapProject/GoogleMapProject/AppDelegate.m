@@ -88,9 +88,9 @@
              case SSDKPlatformTypeWechat:
                  [ShareSDKConnector connectWeChat:[WXApi class]];
                  break;
-//             case SSDKPlatformTypeQQ:
-//                 [ShareSDKConnector connectQQ:[QQApiInterface class] tencentOAuthClass:[TencentOAuth class]];
-//                 break;
+             case SSDKPlatformTypeQQ:
+                 [ShareSDKConnector connectQQ:[QQApiInterface class] tencentOAuthClass:[TencentOAuth class]];
+                 break;
              default:
                  break;
          }
@@ -135,18 +135,24 @@
 
 //     curCoordinate2D = CLLocationCoordinate2DMake(48.8600000000, 2.3411111000);
 
+    CLLocation *loc = [locations lastObject];
+    
+   NSString * longitude = [NSString stringWithFormat:@"%f",loc.coordinate.longitude];
+   NSString * latitude = [NSString stringWithFormat:@"%f",loc.coordinate.latitude];
+    NSLog(@"纬度=%@，经度=%@",latitude,longitude);
+    
     CLGeocoder  *coder = [[CLGeocoder alloc]init];
 
     [coder reverseGeocodeLocation:curLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         CLPlacemark *placemark = [placemarks firstObject];
-        DLog(@"%@",placemark.name);
-        DLog(@"%@",placemark.locality);
-        DLog(@"%@",placemark.country);
-        DLog(@"%@",placemark.postalCode);
-        DLog(@"%@",placemark.postalAddress);
+        DLog(@"name==%@",placemark.name);
+        DLog(@"locality==%@",placemark.locality);
+        DLog(@"country==%@",placemark.country);
+        DLog(@"postalCode==%@",placemark.postalCode);
+        DLog(@"postalAddress==%@",placemark.postalAddress);
         
         DLog(@"%@",placemark.addressDictionary);
-
+        DLog(@"errer==%@",error);
         if (placemark!=nil) {
             [CustomAccount sharedCustomAccount].cityName = placemark.addressDictionary[@"City"];
             [CustomAccount sharedCustomAccount].currentCityName = placemark.addressDictionary[@"City"];
