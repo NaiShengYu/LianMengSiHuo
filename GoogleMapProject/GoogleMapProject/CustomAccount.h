@@ -28,6 +28,9 @@
 @property (nonatomic,copy)NSString *classtype;
 
 
+@property (nonatomic,assign)BOOL isSearch;
+
+
 
 @property (nonatomic,assign)CLLocationCoordinate2D curCoordinate2D;
 

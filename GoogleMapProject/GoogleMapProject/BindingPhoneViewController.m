@@ -304,5 +304,5 @@
 }
 - (void)goBack{
     
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }@end

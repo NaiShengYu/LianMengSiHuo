@@ -65,9 +65,10 @@
     if ([CustomAccount sharedCustomAccount].cityName ==nil ||[CustomAccount sharedCustomAccount].cityName.length ==0) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCityName) name:@"getCityName" object:nil];
     }else{
+        [CustomAccount sharedCustomAccount].isSearch = NO;
         [self makeData];
     }
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(makeData) name:@"selectCity" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchCityResult) name:@"selectCity" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UPDATA" object:nil];
     
     //1.设置状态栏隐藏(YES)或显示(NO)
@@ -103,7 +104,6 @@
 - (void)creatNav{
     HomePageNavView *navView = [[HomePageNavView alloc]initWithFrame:CGRectMake(0, 0, screenWigth, MaxY)];
     navView.tag = 10010;
-  
     navView.vc =self;
     navView.cancelBut.enabled =NO;
     [navView.rightBut addTarget:self action:@selector(changeLocation) forControlEvents:UIControlEventTouchUpInside];
@@ -182,6 +182,7 @@
             } @catch (NSException *exception) {
             } @finally {
             }
+            acc.isSearch = YES;
             [self makeData];
             
         }
@@ -243,16 +244,13 @@
             string =[string substringToIndex:string.length-1];
             CName =string;
         }
-        
-        
         [param setObject:CName forKey:@"city_cn"];
-
     } @catch (NSException *exception) {
         [param setObject:@"" forKey:@"city_cn"];
     } @finally {
     }
-    [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.longitude] forKey:@"lng"];
-    [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.latitude] forKey:@"lat"];
+    [param setObject:[NSString stringWithFormat:@"%f",acc.cityLocation.longitude] forKey:@"lng"];
+    [param setObject:[NSString stringWithFormat:@"%f",acc.cityLocation.latitude] forKey:@"lat"];
     if (acc.cityEnName ==nil) {
         acc.cityEnName =@"";
     }
@@ -267,7 +265,12 @@
             @try {
                 if ([acc.city_id isEqual:[NSNull null]] ||acc.city_id ==nil ||acc.city_id.length ==0) {
                 }else{
-                    acc.cityLocation = CLLocationCoordinate2DMake([dataDic[@"city_lat"] doubleValue], [dataDic[@"city_lng"] doubleValue]);
+                    if (acc.isSearch ==YES) {
+                        acc.cityLocation = CLLocationCoordinate2DMake([dataDic[@"city_lat"] doubleValue], [dataDic[@"city_lng"] doubleValue]);
+                    }else{
+                        acc.cityLocation = acc.curCoordinate2D;
+
+                    }
                 }
             } @catch (NSException *exception) {
             } @finally {
@@ -308,7 +311,10 @@
     
 }
 
-
+- (void)searchCityResult{
+    [CustomAccount sharedCustomAccount].isSearch =YES;
+    [self makeData];
+}
 
 //通知获取当前位置
 - (void)getCityName{
@@ -320,7 +326,7 @@
     [CustomAccount sharedCustomAccount].cityName = [CustomAccount sharedCustomAccount].currentCityName;
     [CustomAccount sharedCustomAccount].cityEnName = @"";
     [CustomAccount sharedCustomAccount].cityLocation = [CustomAccount sharedCustomAccount].curCoordinate2D;
-
+    [CustomAccount sharedCustomAccount].isSearch = NO;
     [self makeData];
 }
 @end

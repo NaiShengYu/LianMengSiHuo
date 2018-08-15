@@ -254,6 +254,13 @@
     if ([CustomAccount sharedCustomAccount].cityEnName !=nil &&[CustomAccount sharedCustomAccount].cityEnName.length !=0) {
         string = [NSString stringWithFormat:@"%@\n%@",string,[CustomAccount sharedCustomAccount].cityEnName];
     }
+    if ([CustomAccount sharedCustomAccount].cityName.length ==0 || string == nil) {
+        string = [NSString stringWithFormat:@"%@",[CustomAccount sharedCustomAccount].cityEnName];
+        CName =[CustomAccount sharedCustomAccount].cityEnName;
+    }
+    
+    
+    
     NSMutableAttributedString *att = [[NSMutableAttributedString alloc]initWithString:string];
     [att addAttribute:NSFontAttributeName value:FontSize(18) range:NSMakeRange(0, CName.length)];
     _titleLab.font =FontSize(15);

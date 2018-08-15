@@ -15,7 +15,7 @@
 #import "AboutUsViewController.h"
 #import "VersionInformationViewController.h"
 #import "PersonDataController.h"
-
+#import "ChangeTelPhoneFirstViewController.h"
 #import "LoginViewController.h"
 @interface LeftViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *myTable;
@@ -162,8 +162,14 @@
         case 2:
             [self.homePageVC.navigationController pushViewController:[FogotViewController new] animated:NO];
             break;
-        case 3:
-            [self.homePageVC.navigationController pushViewController:[BindingPhoneViewController new] animated:NO];
+        case 3:{
+            NSString *tel = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:PHONE]];
+            if(tel.length ==0 || tel ==nil){
+                [self.homePageVC.navigationController pushViewController:[BindingPhoneViewController new] animated:NO];
+            }else{
+                [self.homePageVC.navigationController pushViewController:[ChangeTelPhoneFirstViewController new] animated:NO];
+            }
+        }
             break;
         case 4:
             [self.homePageVC.navigationController pushViewController:[AboutUsViewController new] animated:NO];

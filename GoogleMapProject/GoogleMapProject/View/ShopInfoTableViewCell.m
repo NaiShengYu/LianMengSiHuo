@@ -188,7 +188,7 @@
         _speciesLab.font =FontSize(11);
         _speciesLab.textColor =[UIColor grayColor];
         _speciesLab.minimumFontSize =13;
-        _speciesLab.text =@"当地热门菜品，法餐，意大利菜";
+//        _speciesLab.text =@"当地热门菜品，法餐，意大利菜";
         
         _mapV =[[GMSMapView alloc]init];
         [self.contentView addSubview:_mapV];
@@ -350,12 +350,15 @@
         _juliLab.text = [NSString stringWithFormat:@"%.fkm",jl];
     }
     //类型是餐厅和购物的时候显示人均
-    if ([model.type integerValue] ==1 ||[model.type integerValue] ==3 ) {
-        _topickNumLab.text =[NSString stringWithFormat:@"%@  %@",model.red,model.num];
-    }else {
+//    if ([model.type integerValue] ==1 ||[model.type integerValue] ==3 ) {
+//        _topickNumLab.text =[NSString stringWithFormat:@"%@  %@",model.red,model.num];
+//    }else {
         _topickNumLab.text =[NSString stringWithFormat:@"%@",model.num];
+//    }
+    //不是景点的显示
+    if([model.type integerValue] !=2){
+        _speciesLab.text = [NSString stringWithFormat:@"%@",model.blue];
     }
-//    _speciesLab.text = [NSString stringWithFormat:@"%@",model.blue];
     
     for(int i =0; i <5;i ++){
         UIImageView *img = [self.contentView viewWithTag:1001+i];
@@ -389,7 +392,6 @@
     marker.icon =[UIImage imageNamed:@"详情_11"];
     marker.draggable =NO;
     marker.map = _mapV;
-    
 }
 
 @end

@@ -14,10 +14,15 @@
 #import "CustomNetAlertView.h"
 #import "CustomNoFoodAlert.h"
 #import "TestViewController.h"
+#import <BaiduMapAPI_Search/BMKSearchComponent.h>//引入检索功能所有的头文件
+#import <BaiduMapAPI_Cloud/BMKCloudSearchComponent.h>//引入云检索功能所有的头文件
+#import <BaiduMapAPI_Map/BMKMapComponent.h>//引入地图功能所有的头文件
 
 @import GoogleMaps;
-@interface AppDelegate ()<CLLocationManagerDelegate>
+@interface AppDelegate ()<CLLocationManagerDelegate,BMKGeoCodeSearchDelegate>
 @property (nonatomic,strong)CLLocationManager *locationManager;
+
+@property (nonatomic,strong)BMKGeoCodeSearch *geosearch;
 
 @end
 
@@ -27,6 +32,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     //
+    //百度地图
+    BMKMapManager *mapManager = [[BMKMapManager alloc]init];
+    // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
+    BOOL ret = [mapManager start:@"RmoePCm9k2kxBXBqAuFKeTXfr8QZyNR9"  generalDelegate:nil];
+    if (!ret) {
+        NSLog(@"百度地图启动失败");
+    }
+    
     [GMSServices provideAPIKey:@"AIzaSyBUuB_ESkwf_2qx5SpiE5IWuMbg1wpiMYM"];
 
     if (self.locationManager == nil) {
@@ -37,6 +50,9 @@
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;//最精确的定位
     self.locationManager.distanceFilter = kCLDistanceFilterNone; // 默认是kCLDistanceFilterNone，也可以设置其他值，表示用户移动的距离小于该范围内就不会接收到通知
     [self.locationManager startUpdatingLocation];
+    
+    _geosearch = [[BMKGeoCodeSearch alloc]init];
+    _geosearch.delegate = self;
     
     _window =[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     [_window makeKeyAndVisible];
@@ -141,30 +157,48 @@
    NSString * latitude = [NSString stringWithFormat:@"%f",loc.coordinate.latitude];
     NSLog(@"纬度=%@，经度=%@",latitude,longitude);
     
-    CLGeocoder  *coder = [[CLGeocoder alloc]init];
-
-    [coder reverseGeocodeLocation:curLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-        CLPlacemark *placemark = [placemarks firstObject];
-        DLog(@"name==%@",placemark.name);
-        DLog(@"locality==%@",placemark.locality);
-        DLog(@"country==%@",placemark.country);
-        DLog(@"postalCode==%@",placemark.postalCode);
-        DLog(@"postalAddress==%@",placemark.postalAddress);
+    
+    BMKReverseGeoCodeOption *bmkGeo = [[BMKReverseGeoCodeOption alloc]init];
+    bmkGeo.reverseGeoPoint = loc.coordinate;
+    BOOL success = [_geosearch reverseGeoCode:bmkGeo];
+    if(success ==YES){
         
-        DLog(@"%@",placemark.addressDictionary);
-        DLog(@"errer==%@",error);
-        if (placemark!=nil) {
-            [CustomAccount sharedCustomAccount].cityName = placemark.addressDictionary[@"City"];
-            [CustomAccount sharedCustomAccount].currentCityName = placemark.addressDictionary[@"City"];
-
-            [[NSNotificationCenter defaultCenter]postNotificationName:@"getCityName" object:nil];
-            [manager stopUpdatingLocation];
-        }
-    
-    }];
-    
+    }
     
 }
+-(void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error{
+    BMKAddressComponent *component=[[BMKAddressComponent alloc]init];
+    component=result.addressDetail;
+    NSLog(@"反地理编码结果：%@",result.addressDetail);
+    NSLog(@"编码城市：%@",component.city);
+    if (component.city.length !=0 && component.city != nil) {
+        if([self isChinese:component.city] ==YES){
+            [CustomAccount sharedCustomAccount].cityName = component.city;
+            [CustomAccount sharedCustomAccount].currentCityName = component.city;
+            
+        }else{
+            [CustomAccount sharedCustomAccount].cityEnName = component.city;
+            [CustomAccount sharedCustomAccount].currentCityName = component.city;
+        }
+        NSLog(@"反地理编码结果：%@",result.addressDetail);
+        NSLog(@"编码城市：%@",component.city);
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"getCityName" object:nil];
+        _geosearch.delegate = nil;
+        [self.locationManager stopUpdatingLocation];
+        
+    }
+
+}
+
+
+
+- (BOOL)isChinese:(NSString *)str
+{
+    NSString *match = @"(^[\u4e00-\u9fa5]+$)";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF matches %@", match];
+    return [predicate evaluateWithObject:str];
+}
+
 
 - (void)getNetState{
     

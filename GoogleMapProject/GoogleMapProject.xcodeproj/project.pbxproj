@@ -22,6 +22,7 @@
 		2636ACAB20F79C1A00FBDDC5 /* ShopInfoCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2636ACAA20F79C1A00FBDDC5 /* ShopInfoCommentModel.m */; };
 		264DEF8620FA43E900A0238F /* CustomNetAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 264DEF8520FA43E900A0238F /* CustomNetAlertView.m */; };
 		264DEF8920FA4F4300A0238F /* CustomNoFoodAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 264DEF8820FA4F4300A0238F /* CustomNoFoodAlert.m */; };
+		2659ED3321243ABE007EBDD3 /* ChangeTelPhoneFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2659ED3221243ABE007EBDD3 /* ChangeTelPhoneFirstViewController.m */; };
 		265F8D1420EBA9FF00620F3E /* KNLocationConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 265F8D1320EBA9FF00620F3E /* KNLocationConverter.m */; };
 		265F8D1720EBC29600620F3E /* SearchKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265F8D1620EBC29600620F3E /* SearchKeyViewController.m */; };
 		265F8D1A20EBC8BA00620F3E /* SearchKeyNavVar.m in Sources */ = {isa = PBXBuildFile; fileRef = 265F8D1920EBC8BA00620F3E /* SearchKeyNavVar.m */; };
@@ -136,6 +137,8 @@
 		264DEF8520FA43E900A0238F /* CustomNetAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomNetAlertView.m; sourceTree = "<group>"; };
 		264DEF8720FA4F4300A0238F /* CustomNoFoodAlert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomNoFoodAlert.h; sourceTree = "<group>"; };
 		264DEF8820FA4F4300A0238F /* CustomNoFoodAlert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomNoFoodAlert.m; sourceTree = "<group>"; };
+		2659ED3121243ABE007EBDD3 /* ChangeTelPhoneFirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeTelPhoneFirstViewController.h; sourceTree = "<group>"; };
+		2659ED3221243ABE007EBDD3 /* ChangeTelPhoneFirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeTelPhoneFirstViewController.m; sourceTree = "<group>"; };
 		265F8D1220EBA9FF00620F3E /* KNLocationConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KNLocationConverter.h; sourceTree = "<group>"; };
 		265F8D1320EBA9FF00620F3E /* KNLocationConverter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KNLocationConverter.m; sourceTree = "<group>"; };
 		265F8D1520EBC29600620F3E /* SearchKeyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchKeyViewController.h; sourceTree = "<group>"; };
@@ -546,6 +549,8 @@
 				C977130520E0DF69007AE5F0 /* ChangePersonNameViewController.m */,
 				C977130720E0E93F007AE5F0 /* ChangeSexViewController.h */,
 				C977130820E0E93F007AE5F0 /* ChangeSexViewController.m */,
+				2659ED3121243ABE007EBDD3 /* ChangeTelPhoneFirstViewController.h */,
+				2659ED3221243ABE007EBDD3 /* ChangeTelPhoneFirstViewController.m */,
 				C977130A20E0EFAC007AE5F0 /* ChangeTelphoneNumViewController.h */,
 				C977130B20E0EFAC007AE5F0 /* ChangeTelphoneNumViewController.m */,
 				268B226D21074F6D00F6A24D /* ChangeTelNumSecondViewController.h */,
@@ -690,6 +695,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-GoogleMapProject/Pods-GoogleMapProject-resources.sh",
+				"${PODS_ROOT}/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Map.framework/Resources/mapapi.bundle",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/MWPhotoBrowser/MWPhotoBrowser.bundle",
@@ -701,6 +707,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/mapapi.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MWPhotoBrowser.bundle",
@@ -732,6 +739,7 @@
 				267BBF6920DAA1F50005AE5A /* HomePageSectionTowheader.m in Sources */,
 				2670EF8020FB774800A54DAD /* UIImage+GIFImage.m in Sources */,
 				C977139120E4BFF0007AE5F0 /* SearchResultSectionZeroCell.m in Sources */,
+				2659ED3321243ABE007EBDD3 /* ChangeTelPhoneFirstViewController.m in Sources */,
 				C97712E120DB4F2D007AE5F0 /* CommentViewController.m in Sources */,
 				C977134320E33129007AE5F0 /* ShopCommentSectionZeroCell.m in Sources */,
 				260C46D220CD6736008952B4 /* TopView.m in Sources */,

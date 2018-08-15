@@ -245,6 +245,14 @@
         [self getCollection];
 
         self.mapV.camera = camera;//这句话很重要很重要，将我们获取到的经纬度转成影像并赋值给地图的camera属性
+    
+    _marker =[[GMSMarker alloc]init];
+    _marker.position =CLLocationCoordinate2DMake(BIGposition2D.latitude, BIGposition2D.longitude);
+    _marker.icon =[UIImage imageNamed:@"25"];
+    _marker.draggable =YES;
+    _marker.map = self.mapV;
+    GMSCameraPosition *position1 = [GMSCameraPosition cameraWithLatitude:BIGposition2D.latitude longitude:BIGposition2D.longitude zoom:14];
+    [_mapV animateToCameraPosition:position1];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -293,10 +301,11 @@
     _marker.icon =[UIImage imageNamed:@"25"];
     _marker.draggable =YES;
     _marker.map = self.mapV;
-
- 
+//    GMSCameraPosition *position1 = [GMSCameraPosition cameraWithLatitude:BIGposition2D.latitude longitude:BIGposition2D.longitude zoom:14];
+//    [_mapV animateToCameraPosition:position1];
     
     for (int i =0 ; i <self.dataArray.count; i ++) {
+         if(i >19)return;
         MapBottomModel *model = self.dataArray[i];
         GMSMarker *marker =[[GMSMarker alloc]init];
 //        marker.bottomModel = model;

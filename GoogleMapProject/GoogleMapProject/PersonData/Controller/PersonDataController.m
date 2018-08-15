@@ -14,7 +14,7 @@
 #import "ChangeSexViewController.h"
 #import "ChangeTelphoneNumViewController.h"
 #import "ChangePasswordViewController.h"
-
+#import "ChangeTelPhoneFirstViewController.h"
 @interface PersonDataController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic,strong)NSMutableArray *titlesArray;
 @property (nonatomic,copy)NSString *name;
@@ -250,6 +250,12 @@
                 [tableView reloadData];
             };
             [self.navigationController pushViewController:numVC animated:YES];
+//            if (self.telNum.length ==0 ||self.telNum ==nil) {
+//               
+//            }else{
+//                ChangeTelPhoneFirstViewController *firstVC = [ChangeTelPhoneFirstViewController new];
+//                [self.navigationController pushViewController:firstVC animated:YES];
+//            }
             
         }
         if (indexPath.row ==1) {

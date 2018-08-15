@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>zh_CN</string>
+	<string>en</string>
 	<key>CFBundleDisplayName</key>
 	<string>连盟旅游</string>
 	<key>CFBundleExecutable</key>
@@ -57,6 +57,7 @@
 	<string>1</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>baidumap</string>
 		<string>timapi</string>
 		<string>wtloginmqq2</string>
 		<string>mqqopensdkapiV3</string>

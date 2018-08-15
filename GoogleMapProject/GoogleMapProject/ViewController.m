@@ -248,6 +248,8 @@
     [self getCollection];
 
     self.mapV.camera = camera;//这句话很重要很重要，将我们获取到的经纬度转成影像并赋值给地图的camera属性
+    
+
 }
 
 - (void)mapView:(GMSMapView *)mapView didEndDraggingMarker:(GMSMarker *)marker{
@@ -273,6 +275,7 @@
     _marker.map = self.mapV;
     
     for (int i =0 ; i <self.dataArray.count; i ++) {
+        if(i >19)return;
         MapBottomModel *model = self.dataArray[i];
         CustomMarker *marker =[[CustomMarker alloc]init];
         marker.bottomModel = model;
@@ -348,9 +351,7 @@
             self.filterV.frame =CGRectMake(0, 0, screenWigth, 0);
         }];
     }
-    
 }
-
 
 - (void)goBack{
     [self.navigationController popViewControllerAnimated:YES];
@@ -458,7 +459,7 @@
                 [blockSelf.view addSubview:blockSelf.bottomV];
                 if (blockSelf.dataArray.count >0) {
                     blockSelf.bottomV.model = blockSelf.dataArray[0];
-                    
+
                     GMSCameraPosition *position1 = [GMSCameraPosition cameraWithLatitude:[blockSelf.bottomV.model.lat floatValue] longitude:[blockSelf.bottomV.model.lng floatValue] zoom:14];
                     [blockSelf.mapV animateToCameraPosition:position1];
             }
