@@ -244,17 +244,14 @@
             string =[string substringToIndex:string.length-1];
             CName =string;
         }
-        [param setObject:CName forKey:@"city_cn"];
+        [param setObject:CName forKey:@"city"];
     } @catch (NSException *exception) {
-        [param setObject:@"" forKey:@"city_cn"];
+        [param setObject:@"" forKey:@"city"];
     } @finally {
     }
     [param setObject:[NSString stringWithFormat:@"%f",acc.cityLocation.longitude] forKey:@"lng"];
     [param setObject:[NSString stringWithFormat:@"%f",acc.cityLocation.latitude] forKey:@"lat"];
-    if (acc.cityEnName ==nil) {
-        acc.cityEnName =@"";
-    }
-    [param setObject:acc.cityEnName forKey:@"city_en"];
+
 
     [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
         if ([responseObject[@"code"] integerValue] ==1) {
@@ -269,8 +266,11 @@
                         acc.cityLocation = CLLocationCoordinate2DMake([dataDic[@"city_lat"] doubleValue], [dataDic[@"city_lng"] doubleValue]);
                     }else{
                         acc.cityLocation = acc.curCoordinate2D;
-
                     }
+                    
+                    acc.cityName =dataDic[@"city_cn"];
+                    acc.cityEnName = dataDic[@"city_en"];
+                                    
                 }
             } @catch (NSException *exception) {
             } @finally {

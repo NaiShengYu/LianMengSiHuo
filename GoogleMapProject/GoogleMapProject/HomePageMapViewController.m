@@ -157,7 +157,7 @@
     self.list_condition = @"";
     
     self.dataArray = [[NSMutableArray alloc]init];
-    GMSCameraPosition *position = [GMSCameraPosition cameraWithLatitude:-33.86 longitude:151.20 zoom:18];
+    GMSCameraPosition *position = [GMSCameraPosition cameraWithLatitude:-33.86 longitude:151.20 zoom:13];
     _mapV =[GMSMapView mapWithFrame:self.view.bounds camera:position];
 //    _mapV.myLocationEnabled = YES;
     _mapV.delegate =self;
@@ -225,7 +225,7 @@
 - (void)currentCenter{
   
         if (position2D.latitude !=0 && position2D.longitude !=0) {
-            GMSCameraPosition *position1 = [GMSCameraPosition cameraWithTarget:position2D zoom:18];
+            GMSCameraPosition *position1 = [GMSCameraPosition cameraWithTarget:position2D zoom:13];
             [self.mapV animateToCameraPosition:position1];
             _marker.position =position2D;
             BIGposition2D = position2D;
@@ -237,7 +237,7 @@
 
         // 通过location  或得到当前位置的经纬度
         CLLocationCoordinate2D curCoordinate2D = [CustomAccount sharedCustomAccount].cityLocation;
-        GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:curCoordinate2D.latitude longitude:curCoordinate2D.longitude zoom:18];
+        GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:curCoordinate2D.latitude longitude:curCoordinate2D.longitude zoom:13];
         position2D = curCoordinate2D;//可以吧这个存起来
         BIGposition2D = curCoordinate2D;//可以吧这个存起来
         [self creatBottomView];
@@ -251,7 +251,7 @@
     _marker.icon =[UIImage imageNamed:@"25"];
     _marker.draggable =YES;
     _marker.map = self.mapV;
-    GMSCameraPosition *position1 = [GMSCameraPosition cameraWithLatitude:BIGposition2D.latitude longitude:BIGposition2D.longitude zoom:14];
+    GMSCameraPosition *position1 = [GMSCameraPosition cameraWithLatitude:BIGposition2D.latitude longitude:BIGposition2D.longitude zoom:13];
     [_mapV animateToCameraPosition:position1];
 }
 
@@ -305,7 +305,7 @@
 //    [_mapV animateToCameraPosition:position1];
     
     for (int i =0 ; i <self.dataArray.count; i ++) {
-         if(i >19)return;
+//         if(i >19)return;
         MapBottomModel *model = self.dataArray[i];
         GMSMarker *marker =[[GMSMarker alloc]init];
 //        marker.bottomModel = model;
@@ -453,8 +453,8 @@
     CustomAccount *acc = [CustomAccount sharedCustomAccount];
     [param setObject:@"list_show" forKey:@"app"];
     [param setObject:acc.classtype forKey:@"type"];
-    [param setObject:[NSString stringWithFormat:@"%f",acc.cityLocation.longitude] forKey:@"lng"];
-    [param setObject:[NSString stringWithFormat:@"%f",acc.cityLocation.latitude] forKey:@"lat"];
+    [param setObject:[NSString stringWithFormat:@"%f",BIGposition2D.longitude] forKey:@"lng"];
+    [param setObject:[NSString stringWithFormat:@"%f",BIGposition2D.latitude] forKey:@"lat"];
     
     //    [param setObject:@"2.3411111" forKey:@"lng"];
     //    [param setObject:@"48.8600" forKey:@"lat"];
@@ -481,7 +481,7 @@
             [blockSelf.view addSubview:blockSelf.bottomV];
             if (blockSelf.dataArray.count >0) {
                 blockSelf.bottomV.model = blockSelf.dataArray[0];
-                GMSCameraPosition *position1 = [GMSCameraPosition cameraWithLatitude:[blockSelf.bottomV.model.lat floatValue] longitude:[blockSelf.bottomV.model.lng floatValue] zoom:18];
+                GMSCameraPosition *position1 = [GMSCameraPosition cameraWithLatitude:[blockSelf.bottomV.model.lat floatValue] longitude:[blockSelf.bottomV.model.lng floatValue] zoom:13];
                 [blockSelf.mapV animateToCameraPosition:position1];
                 [blockSelf saoMiaoJieGuo];
                 blockSelf.bottomV.hidden = NO;
@@ -519,7 +519,7 @@
             [blockSelf.view addSubview:blockSelf.bottomV];
             if (blockSelf.dataArray.count >0) {
                 blockSelf.bottomV.model = blockSelf.dataArray[0];
-                GMSCameraPosition *position1 = [GMSCameraPosition cameraWithLatitude:[blockSelf.bottomV.model.lat floatValue] longitude:[blockSelf.bottomV.model.lng floatValue] zoom:18];
+                GMSCameraPosition *position1 = [GMSCameraPosition cameraWithLatitude:[blockSelf.bottomV.model.lat floatValue] longitude:[blockSelf.bottomV.model.lng floatValue] zoom:13];
                 [blockSelf.mapV animateToCameraPosition:position1];
             }
             [blockSelf saoMiaoJieGuo];

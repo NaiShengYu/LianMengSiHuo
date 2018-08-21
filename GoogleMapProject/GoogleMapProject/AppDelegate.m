@@ -172,14 +172,9 @@
     NSLog(@"反地理编码结果：%@",result.addressDetail);
     NSLog(@"编码城市：%@",component.city);
     if (component.city.length !=0 && component.city != nil) {
-        if([self isChinese:component.city] ==YES){
             [CustomAccount sharedCustomAccount].cityName = component.city;
             [CustomAccount sharedCustomAccount].currentCityName = component.city;
             
-        }else{
-            [CustomAccount sharedCustomAccount].cityEnName = component.city;
-            [CustomAccount sharedCustomAccount].currentCityName = component.city;
-        }
         NSLog(@"反地理编码结果：%@",result.addressDetail);
         NSLog(@"编码城市：%@",component.city);
         [[NSNotificationCenter defaultCenter]postNotificationName:@"getCityName" object:nil];

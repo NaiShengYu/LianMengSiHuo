@@ -9,6 +9,8 @@
 #import "ShopInfoTableViewCell.h"
 //#import "YFScrollView.h"
 #import <MWPhotoBrowser.h>
+#import <MapKit/MapKit.h>
+
 @interface ShopInfoTableViewCell()<MWPhotoBrowserDelegate>
 
 @end
@@ -197,13 +199,13 @@
             make.left.right.offset =0;
             make.height.offset =80;
         }];
-        UIView *mapBackV =[UIView new];
-        [_mapV addSubview:mapBackV];
-        [mapBackV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.insets =UIEdgeInsetsMake(10, 20, 10, 20);
-        }];
-        mapBackV.backgroundColor =RGBA(250, 250, 250, 0.4);
-        
+//        UIView *mapBackV =[UIView new];
+//        [_mapV addSubview:mapBackV];
+//        [mapBackV mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.edges.insets =UIEdgeInsetsMake(10, 20, 10, 20);
+//        }];
+//        mapBackV.backgroundColor =RGBA(250, 250, 250, 0.4);
+//
         UIImageView *img =[UIImageView new];
         [self.contentView addSubview:img];
         [img mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -225,6 +227,17 @@
         _AddressLab.numberOfLines =2;
         _AddressLab.font =FontSize(16);
         _AddressLab.text = @"江苏省南通市南通县南通真南通村250号";
+        
+        UIButton *navBut = [UIButton new];
+        [self.contentView addSubview:navBut];
+        [navBut mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(blockSelf.mapV.mas_bottom).offset =15;
+            make.left.offset =20;
+            make.right.offset =-15;
+            make.height.offset =40;
+        }];
+        [navBut addTarget:self action:@selector(nav) forControlEvents:UIControlEventTouchUpInside];
+        
         
         _infoLab =[UILabel new];
         [self.contentView addSubview:_infoLab];
@@ -394,4 +407,48 @@
     marker.map = _mapV;
 }
 
+- (void)nav{
+    if (self.model ==nil) {
+        return;
+    }
+        [self.VC.view endEditing:YES];
+        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"comgooglemaps://"]]) {
+            NSString *urlString = [[NSString stringWithFormat:@"comgooglemaps://?x-source=%@&x-success=%@&saddr=&daddr=%@,%@&directionsmode=driving",@"联盟旅游",@"lianMeng",self.model.details_lat, self.model.details_lng] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            
+            BOOL aaa=  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+            
+            NSLog(@"%@",aaa?@"Yes":@"NO");
+        }else{
+            [PubulicObj ShowSVWhitMessage];
+            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"您手机没有谷歌地图"];
+        }
+        
+        return;
+        UIAlertController *alertV =[UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        [alertV addAction:[UIAlertAction actionWithTitle:@"谷歌地图" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+            
+        }]] ;
+        
+        if ( [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"http://maps.apple.com/"]]){
+            
+            　　UIAlertAction *action = [UIAlertAction actionWithTitle:@"苹果地图" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                　　MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
+                　　MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake([self.model.details_lat doubleValue], [self.model.details_lng doubleValue]) addressDictionary:nil]];
+                　　[MKMapItem openMapsWithItems:@[currentLocation, toLocation] launchOptions:@{MKLaunchOptionsDirectionsModeKey: 　　　　MKLaunchOptionsDirectionsModeDriving,MKLaunchOptionsShowsTrafficKey: [NSNumber numberWithBool:YES]}];
+                
+            }];
+            
+            　　[alertV addAction:action];
+        }
+        
+        [alertV addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }]];
+        [_VC presentViewController:alertV animated:YES completion:nil];
+
+    
+    
+}
 @end
