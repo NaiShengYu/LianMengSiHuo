@@ -14,8 +14,6 @@ pod 'TZImagePickerController', '~> 1.9.8'
 pod "MWPhotoBrowser"
 pod 'MJRefresh'
 
-pod 'BaiduMapKit', '~> 3.4.4'
-
  #主模块(必须)
 pod 'mob_sharesdk'
  

@@ -195,7 +195,7 @@
     [self.view addSubview:self.filterV];
     WS(blockSelf);
     self.filterV.selectChangeBLock = ^(FilterItem *selectItem) {
-        [blockSelf makeData];
+        [blockSelf makeDataWithSaoMiao:NO];
     };
     self.view.backgroundColor =[UIColor whiteColor];
     TopView*topV=[[TopView alloc]initWithFrame:CGRectMake(0, 0,screenWigth , MaxY)];
@@ -238,10 +238,10 @@
         // 通过location  或得到当前位置的经纬度
         CLLocationCoordinate2D curCoordinate2D = [CustomAccount sharedCustomAccount].cityLocation;
         GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:curCoordinate2D.latitude longitude:curCoordinate2D.longitude zoom:13];
-        position2D = curCoordinate2D;//可以吧这个存起来
+        position2D = [CustomAccount sharedCustomAccount].curCoordinate2D;//可以吧这个存起来
         BIGposition2D = curCoordinate2D;//可以吧这个存起来
         [self creatBottomView];
-        [self makeData];
+        [self makeDataWithSaoMiao:NO];
         [self getCollection];
 
         self.mapV.camera = camera;//这句话很重要很重要，将我们获取到的经纬度转成影像并赋值给地图的camera属性
@@ -271,7 +271,7 @@
     [CustomAccount sharedCustomAccount].classtype =@"2";
 
     _functionBar.selectBlock = ^(NSInteger index) {
-        [blockSelf makeData];
+        [blockSelf makeDataWithSaoMiao:NO];
         [blockSelf getCollection];
     };
 }
@@ -290,7 +290,7 @@
 #pragma mark --检索周围店铺
 - (void)saoMiao{
     
-    [self makeData];
+    [self makeDataWithSaoMiao:YES];
 }
 
 - (void)saoMiaoJieGuo{
@@ -307,8 +307,8 @@
     for (int i =0 ; i <self.dataArray.count; i ++) {
 //         if(i >19)return;
         MapBottomModel *model = self.dataArray[i];
-        GMSMarker *marker =[[GMSMarker alloc]init];
-//        marker.bottomModel = model;
+        CustomMarker *marker =[[CustomMarker alloc]init];
+        marker.bottomModel = model;
        
         
 //        double c = arc4random()%2;
@@ -352,13 +352,13 @@
         
         return YES;
     }
-//    WS(blockSelf)
-//    CustomMarker *maker1 =(CustomMarker *)marker;
-//    self.bottomV.coor = marker.position;
-//    self.bottomV.model = maker1.bottomModel;
-//    [UIView animateWithDuration:0.3 animations:^{
-//        blockSelf.bottomV.frame =CGRectMake(10, screenHeight -153-TabbarHeight, screenWigth-20, 153);
-//    }];
+    WS(blockSelf)
+    CustomMarker *maker1 =(CustomMarker *)marker;
+    self.bottomV.coor = marker.position;
+    self.bottomV.model = maker1.bottomModel;
+    [UIView animateWithDuration:0.3 animations:^{
+        blockSelf.bottomV.frame =CGRectMake(10, screenHeight -153-TabbarHeight, screenWigth-20, 153);
+    }];
     
     return NO;
 }
@@ -366,14 +366,15 @@
 
 - (void)mapView:(GMSMapView *)mapView didTapAtCoordinate:(CLLocationCoordinate2D)coordinate{
     
-//    if (self.bottomV.frame.origin.y <screenHeight) {
-//        [self viewDismiss];
-//        return;
-//    }
-    
+    if (self.bottomV.frame.origin.y <screenHeight) {
+        [self viewDismiss];
+        return;
+    }
+    [mapView animateToLocation:coordinate];
     _marker.position =coordinate;
     BIGposition2D =coordinate;
-    
+    [self viewDismiss];
+
 }
 
 - (void)goInfo{
@@ -422,7 +423,7 @@
 }
 
 
-- (void)makeData{
+- (void)makeDataWithSaoMiao:(BOOL)isSiaoMiao{
     WS(blockSelf);
     [self.filterArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         FilterHeaderModel *headerModel =obj;
@@ -481,46 +482,13 @@
             [blockSelf.view addSubview:blockSelf.bottomV];
             if (blockSelf.dataArray.count >0) {
                 blockSelf.bottomV.model = blockSelf.dataArray[0];
-                GMSCameraPosition *position1 = [GMSCameraPosition cameraWithLatitude:[blockSelf.bottomV.model.lat floatValue] longitude:[blockSelf.bottomV.model.lng floatValue] zoom:13];
-                [blockSelf.mapV animateToCameraPosition:position1];
-                [blockSelf saoMiaoJieGuo];
+                    [blockSelf.mapV animateToLocation:self->BIGposition2D];
+              
                 blockSelf.bottomV.hidden = NO;
             }else{
                 blockSelf.bottomV.hidden =YES;
-            }            
-        }else{
-            [PubulicObj ShowSVWhitMessage];
-            [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
-        }
-    } failure:^(NSError *error) {
-        [PubulicObj ShowSVWhitMessage];
-        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"网络错误"];
-    } isShowHUD:YES];
-    
-}
-- (void)makeData1{
-    WS(blockSelf);
-    NSString *url = [NSString stringWithFormat:@"%@app_list.php",BaseURL];
-    DLog(@"url==%@",url);
-    CustomAccount *acc = [CustomAccount sharedCustomAccount];
-    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
-    [param setObject:acc.className forKey:@"app"];
-        [param setObject:[NSString stringWithFormat:@"%f",BIGposition2D.longitude] forKey:@"lng"];
-        [param setObject:[NSString stringWithFormat:@"%f",BIGposition2D.latitude] forKey:@"lat"];
-  
-    [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
-        if ([responseObject[@"code"] integerValue] ==1) {
-            [blockSelf.dataArray removeAllObjects];
-            for (NSDictionary *dataDic in responseObject[@"data"]) {
-                MapBottomModel *model = [[MapBottomModel alloc]initWithDic:dataDic];
-                [blockSelf.dataArray addObject:model];
-            }
-            
-            [blockSelf.view addSubview:blockSelf.bottomV];
-            if (blockSelf.dataArray.count >0) {
-                blockSelf.bottomV.model = blockSelf.dataArray[0];
-                GMSCameraPosition *position1 = [GMSCameraPosition cameraWithLatitude:[blockSelf.bottomV.model.lat floatValue] longitude:[blockSelf.bottomV.model.lng floatValue] zoom:13];
-                [blockSelf.mapV animateToCameraPosition:position1];
+                [PubulicObj ShowSVWhitMessage];
+                [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"未在周围查到相关信息"];
             }
             [blockSelf saoMiaoJieGuo];
         }else{
@@ -530,11 +498,9 @@
     } failure:^(NSError *error) {
         [PubulicObj ShowSVWhitMessage];
         [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"网络错误"];
-        
     } isShowHUD:YES];
     
 }
-
 
 - (void)getCollection{
     

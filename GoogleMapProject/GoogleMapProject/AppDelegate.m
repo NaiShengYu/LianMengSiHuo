@@ -14,15 +14,11 @@
 #import "CustomNetAlertView.h"
 #import "CustomNoFoodAlert.h"
 #import "TestViewController.h"
-#import <BaiduMapAPI_Search/BMKSearchComponent.h>//引入检索功能所有的头文件
-#import <BaiduMapAPI_Cloud/BMKCloudSearchComponent.h>//引入云检索功能所有的头文件
-#import <BaiduMapAPI_Map/BMKMapComponent.h>//引入地图功能所有的头文件
 
 @import GoogleMaps;
-@interface AppDelegate ()<CLLocationManagerDelegate,BMKGeoCodeSearchDelegate>
+@interface AppDelegate ()<CLLocationManagerDelegate>
 @property (nonatomic,strong)CLLocationManager *locationManager;
 
-@property (nonatomic,strong)BMKGeoCodeSearch *geosearch;
 
 @end
 
@@ -32,13 +28,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     //
-    //百度地图
-    BMKMapManager *mapManager = [[BMKMapManager alloc]init];
-    // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
-    BOOL ret = [mapManager start:@"RmoePCm9k2kxBXBqAuFKeTXfr8QZyNR9"  generalDelegate:nil];
-    if (!ret) {
-        NSLog(@"百度地图启动失败");
-    }
+
     
     [GMSServices provideAPIKey:@"AIzaSyBUuB_ESkwf_2qx5SpiE5IWuMbg1wpiMYM"];
 
@@ -51,8 +41,6 @@
     self.locationManager.distanceFilter = kCLDistanceFilterNone; // 默认是kCLDistanceFilterNone，也可以设置其他值，表示用户移动的距离小于该范围内就不会接收到通知
     [self.locationManager startUpdatingLocation];
     
-    _geosearch = [[BMKGeoCodeSearch alloc]init];
-    _geosearch.delegate = self;
     
     _window =[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     [_window makeKeyAndVisible];
@@ -149,7 +137,6 @@
     [CustomAccount sharedCustomAccount].curCoordinate2D =[KNLocationConverter transformFromWGSToGCJ:curCoordinate2D];
     [CustomAccount sharedCustomAccount].cityLocation =[KNLocationConverter transformFromWGSToGCJ:curCoordinate2D];
 
-//     curCoordinate2D = CLLocationCoordinate2DMake(48.8600000000, 2.3411111000);
 
     CLLocation *loc = [locations lastObject];
     
@@ -157,34 +144,30 @@
    NSString * latitude = [NSString stringWithFormat:@"%f",loc.coordinate.latitude];
     NSLog(@"纬度=%@，经度=%@",latitude,longitude);
     
-    
-    BMKReverseGeoCodeOption *bmkGeo = [[BMKReverseGeoCodeOption alloc]init];
-    bmkGeo.reverseGeoPoint = loc.coordinate;
-    BOOL success = [_geosearch reverseGeoCode:bmkGeo];
-    if(success ==YES){
-        
-    }
-    
-}
--(void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error{
-    BMKAddressComponent *component=[[BMKAddressComponent alloc]init];
-    component=result.addressDetail;
-    NSLog(@"反地理编码结果：%@",result.addressDetail);
-    NSLog(@"编码城市：%@",component.city);
-    if (component.city.length !=0 && component.city != nil) {
-            [CustomAccount sharedCustomAccount].cityName = component.city;
-            [CustomAccount sharedCustomAccount].currentCityName = component.city;
+    WS(blockSelf);
+    NSString * url = [NSString stringWithFormat:@"https://apis.map.qq.com/ws/geocoder/v1/?location=%@,%@&key=72NBZ-3YWK2-XV3U7-CM7OL-MKPMK-DRF2B",latitude,longitude];
+    [AFNetRequest HttpGetCallBack:url Parameters:nil success:^(id responseObject) {
+        if ([responseObject[@"status"] integerValue]== 0 ) {
+            NSDictionary *resultDic = responseObject[@"result"];
+            NSDictionary *ad_infoDic = resultDic[@"ad_info"];
+            NSDictionary *address_compDic = resultDic[@"address_component"];
+            if ([ad_infoDic[@"nation_code"] integerValue] ==156) {
+                [CustomAccount sharedCustomAccount].cityName = [NSString stringWithFormat:@"%@",address_compDic[@"city"]];
+                [CustomAccount sharedCustomAccount].currentCityName = [NSString stringWithFormat:@"%@",address_compDic[@"city"]];
+            }else{
+                [CustomAccount sharedCustomAccount].cityName = [NSString stringWithFormat:@"%@",address_compDic[@"locality"]];
+                [CustomAccount sharedCustomAccount].currentCityName = [NSString stringWithFormat:@"%@",address_compDic[@"locality"]];
+            }
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"getCityName" object:nil];
+            [blockSelf.locationManager stopUpdatingLocation];
             
-        NSLog(@"反地理编码结果：%@",result.addressDetail);
-        NSLog(@"编码城市：%@",component.city);
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"getCityName" object:nil];
-        _geosearch.delegate = nil;
-        [self.locationManager stopUpdatingLocation];
+        }
         
-    }
-
+    } failure:^(NSError *error) {
+        
+    } isShowHUD:NO];
+   
 }
-
 
 
 - (BOOL)isChinese:(NSString *)str

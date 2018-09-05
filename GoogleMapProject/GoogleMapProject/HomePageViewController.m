@@ -312,7 +312,18 @@
 }
 
 - (void)searchCityResult{
-    [CustomAccount sharedCustomAccount].isSearch =YES;
+    
+    CustomAccount * acc = [CustomAccount sharedCustomAccount];
+    acc.isSearch = YES;
+    if (acc.cityName == acc.currentCityName
+        ||[acc.cityName rangeOfString:acc.currentCityName].location != NSNotFound
+        || [acc.currentCityName rangeOfString:acc.cityName].location != NSNotFound
+        || acc.cityEnName == acc.currentCityName) {
+        acc.isSearch =NO;
+    }
+    
+    
+    
     [self makeData];
 }
 

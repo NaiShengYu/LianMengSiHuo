@@ -11,4 +11,6 @@
 @interface ShopInfoFooter : UITableViewHeaderFooterView
 
 @property (nonatomic,strong)NSMutableArray *imgsArray;
+
+@property (nonatomic,weak)UIViewController *VC;
 @end

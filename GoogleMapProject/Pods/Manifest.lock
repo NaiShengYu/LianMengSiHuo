@@ -14,7 +14,6 @@ PODS:
   - AFNetworking/Serialization (3.0.4)
   - AFNetworking/UIKit (3.0.4):
     - AFNetworking/NSURLSession
-  - BaiduMapKit (3.4.4)
   - DACircularProgress (2.3.1)
   - GoogleMaps (2.5.0):
     - GoogleMaps/Maps (= 2.5.0)
@@ -69,7 +68,6 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0.4)
-  - BaiduMapKit (~> 3.4.4)
   - GoogleMaps
   - Masonry (~> 0.6.4)
   - MJRefresh
@@ -87,7 +85,6 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
-    - BaiduMapKit
     - DACircularProgress
     - GoogleMaps
     - Masonry
@@ -103,7 +100,6 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
-  BaiduMapKit: 4ac88f5a363500760392825b69709f4a0125f81e
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   GoogleMaps: c087b8e5dfe87ca6ebf59adb9b4894a4146bec4f
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
@@ -117,6 +113,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
   TZImagePickerController: 3b9413ae5d049b1fdc5b0c720ad283f35b679a50
 
-PODFILE CHECKSUM: d3147a993a1b1cbd348050c1effc224f20e22611
+PODFILE CHECKSUM: df0b122566480128cdfdb52e5d659cf5f92499a4
 
 COCOAPODS: 1.5.3

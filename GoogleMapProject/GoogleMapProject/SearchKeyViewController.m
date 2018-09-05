@@ -169,7 +169,7 @@
     if (indexPath.row ==0) {
         CustomAccount *acc = [CustomAccount sharedCustomAccount];
         acc.city_id = @"";
-        
+        acc.isSearch = NO;
         @try {
             acc.cityName =acc.currentCityName;
             acc.cityEnName =@"";

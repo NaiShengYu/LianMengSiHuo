@@ -135,7 +135,5 @@
         img.image = [UIImage imageNamed:@"32"];
     }
 
-    
-    
 }
 @end

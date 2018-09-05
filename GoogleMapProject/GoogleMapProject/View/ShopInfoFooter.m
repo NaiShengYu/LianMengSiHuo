@@ -7,9 +7,13 @@
 //
 
 #import "ShopInfoFooter.h"
-@interface ShopInfoFooter()
+
+#import <MWPhotoBrowser.h>
+@interface ShopInfoFooter()<MWPhotoBrowserDelegate>
 
 @property (nonatomic,strong)NSMutableArray *butsArray;
+
+@property (nonatomic,strong)NSMutableArray *photoArray;
 @end
 @implementation ShopInfoFooter
 
@@ -37,25 +41,44 @@
     self =[super initWithReuseIdentifier:reuseIdentifier];
     if (self) {
         self.contentView.backgroundColor =[UIColor whiteColor];
-        
+        _photoArray = [[NSMutableArray alloc]init];
     }
     return self;
 }
 
 - (void)setImgsArray:(NSMutableArray *)imgsArray{
-    
     _imgsArray =imgsArray;
     for (UIButton *but in self.butsArray) {
         [but removeFromSuperview];
     }
-    
+    [self.photoArray removeAllObjects];
     for (int i =0; i <imgsArray.count; i ++) {
         UIButton *but = self.butsArray[i];
+        [but sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BaseURL,imgsArray[i]]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"timg-2"]];
+        [but addTarget:self action:@selector(BrowsePicture) forControlEvents:UIControlEventTouchUpInside];
+        
+        MWPhoto *p = [[MWPhoto alloc]initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BaseURL,imgsArray[i]]]];
+        [self.photoArray addObject:p];
         [self.contentView addSubview:but];
     }
+ 
+}
+
+
+- (void)BrowsePicture{
     
-    
-    
+    MWPhotoBrowser *browser=[[MWPhotoBrowser alloc]initWithDelegate:self];
+    browser.displayActionButton =NO;
+    browser.alwaysShowControls = YES;
+    [self.VC.navigationController pushViewController:browser animated:NO];
+}
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser{
+    return self.photoArray.count;
+}
+
+- (id<MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index{
+    return self.photoArray[index];
 }
 
 @end

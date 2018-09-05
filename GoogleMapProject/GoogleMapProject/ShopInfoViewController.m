@@ -131,6 +131,7 @@
         ShopInfoFooter *footer =[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"ShopInfoFooter"];
         ShopInfoCommentModel *model = self.dataArray[section-1];
         footer.imgsArray =model.comment_img;
+        footer.VC = self;
         return footer;
     }
     return nil;
