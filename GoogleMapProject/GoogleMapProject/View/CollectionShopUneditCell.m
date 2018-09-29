@@ -159,7 +159,7 @@
         _speciesLab =[UILabel new];
         [self.contentView addSubview:_speciesLab];
         [_speciesLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(blockSelf.topickNumLab.mas_bottom).offset =3;
+            make.top.equalTo(blockSelf.topickNumLab.mas_bottom).offset =6;
             make.left.equalTo(blockSelf.imageV.mas_right).offset =10;
             make.right.offset =-10;
         }];
@@ -193,12 +193,16 @@
         _juliLab.text = [NSString stringWithFormat:@"%.fkm",jl];
     }
     //类型是餐厅和购物的时候显示人均
-    if ([collecitonModel.type integerValue] ==1 ||[collecitonModel.type integerValue] ==3 ) {
+    if ([collecitonModel.type integerValue] ==1 ) {
         _topickNumLab.text =[NSString stringWithFormat:@"%@  %@",collecitonModel.red,collecitonModel.num];
     }else {
         _topickNumLab.text =[NSString stringWithFormat:@"%@",collecitonModel.num];
     }
-    _speciesLab.text = [NSString stringWithFormat:@"%@",collecitonModel.blue];
+    if ([collecitonModel.type integerValue] ==3) {
+        _speciesLab.text = [NSString stringWithFormat:@"%@",collecitonModel.red];
+    }else{
+        _speciesLab.text = [NSString stringWithFormat:@"%@",collecitonModel.blue];
+    }
     
     for(int i =0; i <5;i ++){
         UIImageView *img = [self.contentView viewWithTag:1001+i];
@@ -227,12 +231,16 @@
         _juliLab.text = [NSString stringWithFormat:@"%.fkm",jl];
     }
     //类型是餐厅和购物的时候显示人均
-    if ([homePageModel.type integerValue] ==1 ||[homePageModel.type integerValue] ==3 ) {
+    if ([homePageModel.type integerValue] ==1 ) {
         _topickNumLab.text =[NSString stringWithFormat:@"%@  %@",homePageModel.red,homePageModel.num];
     }else {
         _topickNumLab.text =[NSString stringWithFormat:@"%@",homePageModel.num];
     }
-    _speciesLab.text = [NSString stringWithFormat:@"%@",homePageModel.blue];
+    if ([homePageModel.type integerValue] ==3) {
+        _speciesLab.text = [NSString stringWithFormat:@"%@",homePageModel.red];
+    }else{
+        _speciesLab.text = [NSString stringWithFormat:@"%@",homePageModel.blue];
+    }
     
     for(int i =0; i <5;i ++){
         UIImageView *img = [self.contentView viewWithTag:1001+i];

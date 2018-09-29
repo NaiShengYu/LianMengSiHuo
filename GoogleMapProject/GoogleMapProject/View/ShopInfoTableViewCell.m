@@ -369,7 +369,12 @@
         _topickNumLab.text =[NSString stringWithFormat:@"%@",model.num];
 //    }
     //不是景点的显示
-    if([model.type integerValue] !=2){
+    if([model.type integerValue] ==2){
+        _speciesLab.text = @"";
+    }
+   else if ([model.type integerValue] ==3) {
+        _speciesLab.text = [NSString stringWithFormat:@"%@",model.red];
+    }else{
         _speciesLab.text = [NSString stringWithFormat:@"%@",model.blue];
     }
     

@@ -129,8 +129,7 @@
         [_speciesLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(blockSelf.imageV.mas_right).offset =10;
             make.right.lessThanOrEqualTo(blockSelf).offset = -10;
-            make.top.equalTo(blockSelf.juliLab.mas_bottom).offset = 8;
-
+            make.bottom.offset = -15;
         }];
         
         _speciesLab.font =FontSize(12);
@@ -160,7 +159,7 @@
             make.bottom.greaterThanOrEqualTo(V1.mas_top).offset =-8;
             make.left.equalTo(blockSelf.imageV.mas_right).offset =10;
             make.top.equalTo(img1.mas_bottom).offset =5;
-            make.right.equalTo(blockSelf.juliLab.mas_left).offset = -8;
+            make.right.equalTo(blockSelf.juliLab.mas_left).offset = 0;
         }];
         _topickNumLab.adjustsFontSizeToFitWidth = YES;
         _topickNumLab.minimumFontSize = 10;
@@ -248,18 +247,23 @@
     
     CGFloat jl = [model.distance floatValue];
     if (jl <10) {
-        _juliLab.text = [NSString stringWithFormat:@"%.fm",jl];
+        _juliLab.text = [NSString stringWithFormat:@"%.fm",jl*1000];
         
     }else{
-        _juliLab.text = [NSString stringWithFormat:@"%.fkm",jl];
+        _juliLab.text = [NSString stringWithFormat:@"%.fkm",jl*1000];
     }
     //类型是餐厅和购物的时候显示人均
-    if ([model.type integerValue] ==1 ||[model.type integerValue] ==3 ) {
+    if ([model.type integerValue] ==1 ) {
         _topickNumLab.text =[NSString stringWithFormat:@"%@  %@",model.red,model.num];
     }else {
         _topickNumLab.text =[NSString stringWithFormat:@"%@",model.num];
     }
-    _speciesLab.text = [NSString stringWithFormat:@"%@",model.blue];
+    if ([model.type integerValue] ==3) {
+        _speciesLab.text = [NSString stringWithFormat:@"%@",model.red];
+    }else{
+        _speciesLab.text = [NSString stringWithFormat:@"%@",model.blue];
+    }
+    
     
     for(int i =0; i <5;i ++){
         UIImageView *img = [self viewWithTag:1001+i];

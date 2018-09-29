@@ -101,14 +101,14 @@
         
         FilterItem *item33 =[[FilterItem alloc]init];
         item33.title = @"2km";
-        item33.isSelect =NO;
+        item33.isSelect =YES;
         item33.Id = @"2";
 
         [headerModel1.itemsArray addObject:item33];
         
         FilterItem *item44 =[[FilterItem alloc]init];
         item44.title = @"5km";
-        item44.isSelect =YES;
+        item44.isSelect =NO;
         item44.Id = @"5";
 
         [headerModel1.itemsArray addObject:item44];
@@ -378,10 +378,10 @@
                             headerModel2.title =@"菜系";
                         }
                         if ([item.type integerValue] ==3) {
-                            headerModel2.title =@"菜系";
+                            headerModel2.title =@"购物";
                         }
                         if ([item.type integerValue] ==4) {
-                            headerModel2.title =@"菜系";
+                            headerModel2.title =@"酒店";
                         }
                     }
                     [headerModel2.itemsArray addObject:item];
