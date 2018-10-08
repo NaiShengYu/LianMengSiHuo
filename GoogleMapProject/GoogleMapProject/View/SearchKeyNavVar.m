@@ -86,8 +86,10 @@
 
 
 - (void)cancel{
-    
     _searchBar.text =@"";
+    if (self.clearSearchKeyBlock) {
+        self.clearSearchKeyBlock();
+    }
 }
 
 @end

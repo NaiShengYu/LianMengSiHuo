@@ -32,6 +32,7 @@
 @property (nonatomic,assign)NSInteger shopsNum;
 @property (nonatomic,assign)NSInteger hotelsNum;
 
+
 @end
 
 @implementation SearchResultViewController
@@ -47,6 +48,9 @@
     }
     return _myTable;
 }
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor whiteColor];
@@ -164,9 +168,6 @@
     footer.addMoreBut.tag =1000+section;
     [footer.addMoreBut addTarget:self action:@selector(addMore:) forControlEvents:UIControlEventTouchUpInside];
         
-
-    
-    
     return footer;
     
 }

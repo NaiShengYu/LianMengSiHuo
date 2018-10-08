@@ -19,4 +19,5 @@
 
 @property (nonatomic,weak)UIViewController *vc;
 
+@property (nonatomic,copy) void (^clearSearchKeyBlock) (void);
 @end

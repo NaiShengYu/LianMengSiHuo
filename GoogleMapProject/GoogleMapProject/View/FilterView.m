@@ -28,7 +28,7 @@
         [_myTable registerClass:[FilterHeader class] forHeaderFooterViewReuseIdentifier:@"FilterHeader"];
         [_myTable registerClass:[FilterCell class] forCellReuseIdentifier:@"FilterCell"];
         [_myTable registerClass:[FiterOtherCell class] forCellReuseIdentifier:@"FiterOtherCell"];
-
+        
     }
     return _myTable;
     
@@ -60,19 +60,19 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     FilterHeaderModel *model =self.dataArray[section];
     if (model.isSelect ==YES) {
-        if ([model.title isEqualToString:@"菜系"]) {
+        if ([model.title isEqualToString:@"菜系"] ||[model.title isEqualToString:@"购物"] ||[model.title isEqualToString:@"酒店"]) {
             return 1;
         }
-        return model.itemsArray.count;        
+        return model.itemsArray.count;
     }
     return 0;
-   
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     FilterHeaderModel *model =self.dataArray[indexPath.section];
-    if ([model.title isEqualToString:@"菜系"]) {
+    if ([model.title isEqualToString:@"菜系"] ||[model.title isEqualToString:@"购物"] ||[model.title isEqualToString:@"酒店"]) {
         CGFloat Y =0.0;
         CGFloat X = 0.0 ;
         for (int i=0; i <model.itemsArray.count; i ++) {
@@ -119,13 +119,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     FilterHeaderModel *model =self.dataArray[indexPath.section];
     FilterItem *item =model.itemsArray[indexPath.row];
-    if ([model.title isEqualToString:@"菜系"]) {
+    if ([model.title isEqualToString:@"菜系"] ||[model.title isEqualToString:@"购物"] ||[model.title isEqualToString:@"酒店"]) {
         FiterOtherCell * cell =[tableView dequeueReusableCellWithIdentifier:@"FiterOtherCell" forIndexPath:indexPath];
         cell.AllTabPagArray =model.itemsArray;
         cell.selectBlock = ^{
             [tableView reloadData];
         };
-       
+        
         return cell;
     }
     FilterCell * cell =[tableView dequeueReusableCellWithIdentifier:@"FilterCell" forIndexPath:indexPath];

@@ -12,10 +12,15 @@
 #import "ShopInfoViewController.h"
 #import "SearchResultModel.h"
 #import "SearchNoResultViewController.h"
+#import "SearchHistoryView.h"
+
 @interface SearchKeyViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property (nonatomic,strong)NSMutableArray *dataArray;
 @property (nonatomic,strong)UITableView *myTable;
 @property (nonatomic,copy)NSString *searchKey;
+@property (nonatomic,strong)SearchHistoryView *historyView;
+@property (nonatomic,strong)SearchKeyNavVar *searchKeyNavVar;
+
 @end
 
 @implementation SearchKeyViewController
@@ -29,12 +34,26 @@
     return _myTable;
 }
 
+- (SearchHistoryView *)historyView{
+    if (!_historyView) {
+        _historyView = [[SearchHistoryView alloc]init];
+        WS(blockSelf);
+        _historyView.selectHistoryKeyBlock = ^(NSString *historyKey) {
+            blockSelf.searchKey = historyKey;
+            [blockSelf makeData];
+            blockSelf.searchKeyNavVar.searchBar.text = historyKey;
+        };
+    }
+    return _historyView;
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.searchKey = @"";
     self.dataArray =[[NSMutableArray alloc]init];
     [self creatNav];
     [self.view addSubview:self.myTable];
+    self.myTable.tableFooterView = self.historyView;
     @try {
         self.myTable.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         
@@ -63,7 +82,11 @@
     [navView.rightBut setTitle:@"取消" forState:UIControlStateNormal];
     [navView.rightBut setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
     [navView.rightBut addTarget:self action:@selector(showLeftVC) forControlEvents:UIControlEventTouchUpInside];
-
+    _searchKeyNavVar = navView;
+    WS(blockSelf);
+    navView.clearSearchKeyBlock = ^{
+        [blockSelf textChange:blockSelf.searchKeyNavVar.searchBar];
+    };
     [self.view addSubview:navView];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -114,7 +137,6 @@
             }else{
                 cell.textLabel.text = str;
             }
-            
         }
         else{
         cell.detailTextLabel.text =@"";
@@ -185,8 +207,8 @@
     }
     
     
-    
     NSDictionary *dic =self.dataArray[indexPath.row-1];
+    [self saveSearchKeyHistoryWithDic:dic];
     NSInteger type = [dic[@"type"] integerValue];
     if (type ==5) {
         
@@ -210,10 +232,7 @@
         [self.navigationController pushViewController:vc animated:YES];
 
     }
-    
-    
-    
-  
+
 }
 #pragma mark --让cell的横线到最左边
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -229,6 +248,31 @@
     if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
+}
+
+#pragma mark --存储历史记录
+- (void)saveSearchKeyHistoryWithDic:(NSDictionary *)dic{
+    
+    NSString *historyKey =  @"";
+    if ([dic[@"type"] integerValue] ==5)
+        historyKey = [NSString stringWithFormat:@"%@",dic[@"city_cn"]];
+    else historyKey = [NSString stringWithFormat:@"%@",dic[@"res"]];
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSArray *arr =[user objectForKey:@"SearchHistorys"];
+    NSMutableArray *mutArray = [[NSMutableArray alloc]initWithArray:arr];
+    static BOOL aaaaa = NO;
+    [mutArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj == historyKey) {
+            aaaaa = YES;
+        }
+    }];
+    if (aaaaa == YES) {
+        [mutArray removeObject:historyKey];
+    }
+    [mutArray insertObject:historyKey atIndex:0];
+    if(mutArray.count >10) [mutArray removeObjectAtIndex:10];
+    [user setObject:mutArray forKey:@"SearchHistorys"];
+    [user synchronize];
 }
 
 //发送搜索请求
@@ -251,9 +295,14 @@
 
 - (void)textChange:(UITextField *)textF{
     self.searchKey = textF.text;
-    if (self.searchKey.length >0 && self.searchKey !=nil) {
+    if (self.searchKey.length >0 && self.searchKey !=nil)
         [self makeData];
+    else{
+        self.myTable.tableFooterView = self.historyView;
+        [self.dataArray removeAllObjects];
+        [self.myTable reloadData];
     }
+
 }
 
 
@@ -272,6 +321,11 @@
            
             for (NSDictionary *dic in responseObject[@"data"]) {
                 [blockSelf.dataArray addObject:dic];
+            }
+            if (self.dataArray.count ==0) {
+                blockSelf.myTable.tableFooterView = blockSelf.historyView;
+            }else{
+                blockSelf.myTable.tableFooterView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
             }
             [blockSelf.myTable reloadData];
         }else{
@@ -349,10 +403,6 @@
             [PubulicObj ShowSVWhitMessage];
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
         }
-        
-        
-       
-        
         
     } failure:^(NSError *error) {
         

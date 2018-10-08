@@ -397,7 +397,9 @@
                 if ([headerModel.title isEqualToString:@"距离"]) {
                     blockSelf.raidus =item.Id;
                 }
-                if ([headerModel.title isEqualToString:@"菜系"]) {
+                if ([headerModel.title isEqualToString:@"菜系"]||
+                        [headerModel.title isEqualToString:@"购物"]||
+                        [headerModel.title isEqualToString:@"酒店"]) {
                     if (blockSelf.list_condition.length ==0) {
                         blockSelf.list_condition = [NSString stringWithFormat:@"%@",item.Id];
                     }else{

@@ -154,12 +154,17 @@
     [_headerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",allImageURL,model.img]]];
 
     CGFloat jl = [model.distance floatValue];
+    NSString *jlstr = @"";
     if (jl <10) {
-        _juliLab.text = [NSString stringWithFormat:@"%.fm",jl];
+        jlstr = [NSString stringWithFormat:@"%.fm",jl*1000];
         
     }else{
-        _juliLab.text = [NSString stringWithFormat:@"%.fkm",jl];
+        jlstr = [NSString stringWithFormat:@"%.fkm",jl];
     }
+    _juliLab.text =[CustomAccount sharedCustomAccount].isSearch == YES ?[NSString stringWithFormat:@"距市中心%@",jlstr]:[NSString stringWithFormat:@"距我%@",jlstr];
+
+
+    
     _talkLab.text =[NSString stringWithFormat:@"%@",model.num];
     //类型是餐厅和购物的时候显示人均
     if ([model.type integerValue] ==1 ||[model.type integerValue] ==3 ) {

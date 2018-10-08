@@ -105,6 +105,7 @@
 		C977138E20E4BE35007AE5F0 /* SearchResultHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = C977138D20E4BE35007AE5F0 /* SearchResultHeader.m */; };
 		C977139120E4BFF0007AE5F0 /* SearchResultSectionZeroCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C977139020E4BFF0007AE5F0 /* SearchResultSectionZeroCell.m */; };
 		C977139420E4C1B1007AE5F0 /* SearchResultSectionOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C977139320E4C1B1007AE5F0 /* SearchResultSectionOneCell.m */; };
+		C9EE30EE216B02110012BF43 /* SearchHistoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EE30ED216B02110012BF43 /* SearchHistoryView.m */; };
 		F4FF636EA87F22A1DB12DE83 /* libPods-GoogleMapProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF73FC6E901B989D43D34C9 /* libPods-GoogleMapProject.a */; };
 /* End PBXBuildFile section */
 
@@ -305,6 +306,8 @@
 		C977139020E4BFF0007AE5F0 /* SearchResultSectionZeroCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultSectionZeroCell.m; sourceTree = "<group>"; };
 		C977139220E4C1B1007AE5F0 /* SearchResultSectionOneCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultSectionOneCell.h; sourceTree = "<group>"; };
 		C977139320E4C1B1007AE5F0 /* SearchResultSectionOneCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultSectionOneCell.m; sourceTree = "<group>"; };
+		C9EE30EC216B02110012BF43 /* SearchHistoryView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchHistoryView.h; sourceTree = "<group>"; };
+		C9EE30ED216B02110012BF43 /* SearchHistoryView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchHistoryView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -489,6 +492,8 @@
 				2682073A20F3A5F100DE7FE0 /* SearchResultFooter.m */,
 				268B226A2106132200F6A24D /* SearchNoResultHeader.h */,
 				268B226B2106132200F6A24D /* SearchNoResultHeader.m */,
+				C9EE30EC216B02110012BF43 /* SearchHistoryView.h */,
+				C9EE30ED216B02110012BF43 /* SearchHistoryView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -785,6 +790,7 @@
 				267BBF4C20D93D4D0005AE5A /* PubulicObj.m in Sources */,
 				C977137C20E358AD007AE5F0 /* CustomAccount.m in Sources */,
 				264DEF8620FA43E900A0238F /* CustomNetAlertView.m in Sources */,
+				C9EE30EE216B02110012BF43 /* SearchHistoryView.m in Sources */,
 				C977132820E214F7007AE5F0 /* ShopInfoTableViewCell.m in Sources */,
 				260C46CF20CD5841008952B4 /* BottomView.m in Sources */,
 				267BBF6320DA9FC20005AE5A /* HomePageSecitonThreeCell.m in Sources */,

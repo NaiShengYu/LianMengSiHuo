@@ -8,7 +8,7 @@
 
 #import "HomePageViewController.h"
 #import "ShopInfoViewController.h"
-
+#import "HomePageMapViewController.h"
 #import "HomePageNavView.h"
 #import "HomePageSectionZeroCell.h"
 #import "HomePageSectionZeroTypeTowCell.h"
@@ -330,14 +330,22 @@
 //通知获取当前位置
 - (void)getCityName{
     [self makeData];
-    
 }
 
 - (void)changeLocation{
-    [CustomAccount sharedCustomAccount].cityName = [CustomAccount sharedCustomAccount].currentCityName;
-    [CustomAccount sharedCustomAccount].cityEnName = @"";
-    [CustomAccount sharedCustomAccount].cityLocation = [CustomAccount sharedCustomAccount].curCoordinate2D;
-    [CustomAccount sharedCustomAccount].isSearch = NO;
-    [self makeData];
+    
+    HomePageMapViewController *vc =[[HomePageMapViewController alloc]init];
+    [UIView transitionWithView:[[UIApplication sharedApplication].delegate window] duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
+        [self.navigationController pushViewController:vc animated:NO];
+    } completion:^(BOOL finished) {
+        
+    }];
+
+    
+//    [CustomAccount sharedCustomAccount].cityName = [CustomAccount sharedCustomAccount].currentCityName;
+//    [CustomAccount sharedCustomAccount].cityEnName = @"";
+//    [CustomAccount sharedCustomAccount].cityLocation = [CustomAccount sharedCustomAccount].curCoordinate2D;
+//    [CustomAccount sharedCustomAccount].isSearch = NO;
+//    [self makeData];
 }
 @end
