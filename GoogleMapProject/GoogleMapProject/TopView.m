@@ -8,8 +8,8 @@
 
 #import "TopView.h"
 #import "SearchKeyViewController.h"
-#import "ViewController.h"
-
+//#import "ViewController.h"
+#import "HomePageMapViewController.h"
 #import "HomePageListViewController.h"
 
 @interface TopView ()<UITextFieldDelegate>
@@ -101,7 +101,8 @@
 
 - (void)goMap{
     if ([self.vc isKindOfClass:[HomePageListViewController class]]) {
-        ViewController *vc =[[ViewController alloc]init];
+        HomePageMapViewController *vc =[[HomePageMapViewController alloc]init];
+        vc.VCType = 0;
         [UIView transitionWithView:[[UIApplication sharedApplication].delegate window] duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
             [self.vc.navigationController pushViewController:vc animated:NO];
         } completion:^(BOOL finished) {

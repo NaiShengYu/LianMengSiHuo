@@ -10,8 +10,6 @@
 #import "ShopInfoViewController.h"
 #import "TopView.h"
 #import "CollectionShopUneditCell.h"
-#import "ViewController.h"
-
 #import "FilterView.h"
 
 #import "FilterItem.h"

@@ -335,6 +335,7 @@
 - (void)changeLocation{
     
     HomePageMapViewController *vc =[[HomePageMapViewController alloc]init];
+    vc.VCType = 1;
     [UIView transitionWithView:[[UIApplication sharedApplication].delegate window] duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
         [self.navigationController pushViewController:vc animated:NO];
     } completion:^(BOOL finished) {

@@ -140,10 +140,9 @@
         item77.isSelect =NO;
         item77.Id = @"20";
         [headerModel1.itemsArray addObject:item77];
-
+        
         _filterArray =[[NSMutableArray alloc]initWithObjects:headerModel, headerModel1,nil];
         _filterV.dataArray =_filterArray;
-        
         
     }
     return _filterV;
@@ -159,20 +158,22 @@
     self.dataArray = [[NSMutableArray alloc]init];
     GMSCameraPosition *position = [GMSCameraPosition cameraWithLatitude:-33.86 longitude:151.20 zoom:13];
     _mapV =[GMSMapView mapWithFrame:self.view.bounds camera:position];
-//    _mapV.myLocationEnabled = YES;
+    //    _mapV.myLocationEnabled = YES;
     _mapV.delegate =self;
     _mapV.settings.compassButton = YES;//显示指南针
     
     _mapV.contentScaleFactor = 100;
-        [self.view addSubview:_mapV];
-    self.bottomV=[[BottomView alloc]initWithFrame:CGRectMake(10, screenHeight -153-TabbarHeight, screenWigth-20, 153)];
+    [self.view addSubview:_mapV];
+    
+    CGFloat Y = self.VCType==1?TabbarHeight:0;
+    self.bottomV=[[BottomView alloc]initWithFrame:CGRectMake(10, screenHeight -153-Y, screenWigth-20, 153)];
     self.bottomV.vc =self;
     
- 
+    
     //    UIWebView *web =[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.width)];
     //    [web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.xkddyz.com/admin/index.php"]]];
     //    [self.view addSubview:web];
-
+    
     UIView *bacv =[[UIView alloc]initWithFrame:CGRectMake(self.view.bounds.size.width-70, MaxY+60, 60, 120)];
     bacv.backgroundColor =[UIColor clearColor];
     [self.view addSubview:bacv];
@@ -202,49 +203,52 @@
     [self.view addSubview:topV];
     topV.vc =self;
     [topV.backBut addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    topV.chooseBut.hidden = YES;
     [topV.chooseBut addTarget:self action:@selector(chooseBut:) forControlEvents:UIControlEventTouchUpInside];
     
-//    if ([CustomAccount sharedCustomAccount].curCoordinate2D.latitude==0 && [CustomAccount sharedCustomAccount].curCoordinate2D.longitude==0) {
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLocation) name:@"getCityName" object:nil];
-//    }else{
-        [self currentLocation];
-//    }
+    //    if ([CustomAccount sharedCustomAccount].curCoordinate2D.latitude==0 && [CustomAccount sharedCustomAccount].curCoordinate2D.longitude==0) {
+    //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLocation) name:@"getCityName" object:nil];
+    //    }else{
+    [self currentLocation];
+    //    }
     
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-        self.navigationController.navigationBar.hidden =YES;
+    self.navigationController.navigationBar.hidden =YES;
     
-    }
-    
+}
+
 - (void)getLocation{
-        [self currentLocation];
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"getCityName" object:nil];
-    }
-    
+    [self currentLocation];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"getCityName" object:nil];
+}
+
 - (void)currentCenter{
-  
-        if (position2D.latitude !=0 && position2D.longitude !=0) {
-            GMSCameraPosition *position1 = [GMSCameraPosition cameraWithTarget:position2D zoom:13];
-            [self.mapV animateToCameraPosition:position1];
-            _marker.position =position2D;
-            BIGposition2D = position2D;
-        }
+    
+    if (position2D.latitude !=0 && position2D.longitude !=0) {
+        GMSCameraPosition *position1 = [GMSCameraPosition cameraWithTarget:position2D zoom:13];
+        [self.mapV animateToCameraPosition:position1];
+        _marker.position =position2D;
+        BIGposition2D = position2D;
+    }
 }
 
 
 - (void)currentLocation{
-
-        // 通过location  或得到当前位置的经纬度
-        CLLocationCoordinate2D curCoordinate2D = [CustomAccount sharedCustomAccount].cityLocation;
-        GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:curCoordinate2D.latitude longitude:curCoordinate2D.longitude zoom:13];
-        position2D = [CustomAccount sharedCustomAccount].curCoordinate2D;//可以吧这个存起来
-        BIGposition2D = curCoordinate2D;//可以吧这个存起来
+    
+    // 通过location  或得到当前位置的经纬度
+    CLLocationCoordinate2D curCoordinate2D = [CustomAccount sharedCustomAccount].cityLocation;
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:curCoordinate2D.latitude longitude:curCoordinate2D.longitude zoom:13];
+    position2D = [CustomAccount sharedCustomAccount].curCoordinate2D;//可以吧这个存起来
+    BIGposition2D = curCoordinate2D;//可以吧这个存起来
+    if (self.VCType ==1) {
         [self creatBottomView];
-        [self makeDataWithSaoMiao:NO];
-        [self getCollection];
-
-        self.mapV.camera = camera;//这句话很重要很重要，将我们获取到的经纬度转成影像并赋值给地图的camera属性
+    }
+    [self makeDataWithSaoMiao:NO];
+    [self getCollection];
+    
+    self.mapV.camera = camera;//这句话很重要很重要，将我们获取到的经纬度转成影像并赋值给地图的camera属性
     
     _marker =[[GMSMarker alloc]init];
     _marker.position =CLLocationCoordinate2DMake(BIGposition2D.latitude, BIGposition2D.longitude);
@@ -258,7 +262,7 @@
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     self.navigationController.navigationBar.hidden =NO;
-
+    
     
 }
 - (void)creatBottomView{
@@ -269,22 +273,17 @@
     [self.view addSubview:_functionBar];
     [CustomAccount sharedCustomAccount].className =@"list_map_scenic";
     [CustomAccount sharedCustomAccount].classtype =@"2";
-
+    
     _functionBar.selectBlock = ^(NSInteger index) {
         [blockSelf makeDataWithSaoMiao:NO];
         [blockSelf getCollection];
     };
 }
 
-
-
-
 - (void)mapView:(GMSMapView *)mapView didEndDraggingMarker:(GMSMarker *)marker{
-    
     NSLog(@"%f",marker.position.latitude);
     BIGposition2D.latitude =marker.position.latitude;
     BIGposition2D.longitude =marker.position.longitude;
-    
 }
 
 #pragma mark --检索周围店铺
@@ -301,35 +300,35 @@
     _marker.icon =[UIImage imageNamed:@"25"];
     _marker.draggable =YES;
     _marker.map = self.mapV;
-//    GMSCameraPosition *position1 = [GMSCameraPosition cameraWithLatitude:BIGposition2D.latitude longitude:BIGposition2D.longitude zoom:14];
-//    [_mapV animateToCameraPosition:position1];
+    //    GMSCameraPosition *position1 = [GMSCameraPosition cameraWithLatitude:BIGposition2D.latitude longitude:BIGposition2D.longitude zoom:14];
+    //    [_mapV animateToCameraPosition:position1];
     
     for (int i =0 ; i <self.dataArray.count; i ++) {
-//         if(i >19)return;
+        //         if(i >19)return;
         MapBottomModel *model = self.dataArray[i];
         CustomMarker *marker =[[CustomMarker alloc]init];
         marker.bottomModel = model;
-       
         
-//        double c = arc4random()%2;
-//        double d = pow(-1, c);
-//        CGFloat a = d *(arc4random() % 999)/100000.0;
-//        CGFloat b = d * (arc4random() % 999)/100000.0;
-//
-//        marker.position =CLLocationCoordinate2DMake(BIGposition2D.latitude +a, BIGposition2D.longitude+b);
+        
+        //        double c = arc4random()%2;
+        //        double d = pow(-1, c);
+        //        CGFloat a = d *(arc4random() % 999)/100000.0;
+        //        CGFloat b = d * (arc4random() % 999)/100000.0;
+        //
+        //        marker.position =CLLocationCoordinate2DMake(BIGposition2D.latitude +a, BIGposition2D.longitude+b);
         
         double lat = [model.lat doubleValue];
         double lng = [model.lng doubleValue];
         
         marker.position =CLLocationCoordinate2DMake(lat,lng);
         
-    
+        
         
         DLog(@"i===%d___ lat===%f----lng===%f",i,lat,lng)
         ;
         marker.title =[NSString stringWithFormat:@"第%d个",i+1];
         //        marker.icon = [UIImage imageNamed:@"25"];\
-
+        
         UILabel *view =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
         view.backgroundColor =[UIColor colorWithRed:156/255.0 green:37/255.0 blue:29/255.0 alpha:1];
         view.layer.cornerRadius =12.5;
@@ -374,7 +373,7 @@
     _marker.position =coordinate;
     BIGposition2D =coordinate;
     [self viewDismiss];
-
+    
 }
 
 - (void)goInfo{
@@ -396,22 +395,25 @@
     if (but.selected ==YES) {
         [UIView animateWithDuration:0.4 animations:^{
             blockSelf.filterV.frame =CGRectMake(0, MaxY, screenWigth, screenHeight-MaxY);
-            blockSelf.bottomV.frame =CGRectMake(10, screenHeight +10, screenWigth-20, 153);
-            blockSelf.functionBar.frame =CGRectMake(10, screenHeight +10+153, screenWigth-20, 153);
+            if (self.VCType ==1) {
+                blockSelf.bottomV.frame =CGRectMake(10, screenHeight +10, screenWigth-20, 153);
+                blockSelf.functionBar.frame =CGRectMake(10, screenHeight +10+153, screenWigth-20, 153);
+            }
+            
         }];
         but.backgroundColor = zhuse;
         but.layer.borderColor = [UIColor whiteColor].CGColor;
         but.layer.borderWidth =1;
-        
         
     }else{
         but.layer.borderWidth =0;
         but.backgroundColor =RGBA(133, 31, 24, 1);
         [UIView animateWithDuration:0.4 animations:^{
             self.filterV.frame =CGRectMake(0, 0, screenWigth, 0);
-            blockSelf.bottomV.frame =CGRectMake(10, screenHeight -153-TabbarHeight, screenWigth-20, 153);
-            blockSelf.functionBar.frame =CGRectMake(10, screenHeight-TabbarHeight , screenWigth-20, 153);
-
+            if (self.VCType ==1) {
+                blockSelf.bottomV.frame =CGRectMake(10, screenHeight -153-TabbarHeight, screenWigth-20, 153);
+                blockSelf.functionBar.frame =CGRectMake(10, screenHeight-TabbarHeight , screenWigth-20, 153);
+            }
         }];
     }
     
@@ -423,52 +425,72 @@
 }
 
 
-- (void)makeDataWithSaoMiao:(BOOL)isSiaoMiao{
+- (void)makeDataWithSaoMiao:(BOOL)isSaoMiao{
     WS(blockSelf);
-    [self.filterArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        FilterHeaderModel *headerModel =obj;
-        [headerModel.itemsArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            FilterItem *item = obj;
-            if (item.isSelect ==YES) {
-                if ([headerModel.title isEqualToString:@"评分"]) {
-                    blockSelf.star =item.Id;
-                }
-                if ([headerModel.title isEqualToString:@"距离"]) {
-                    blockSelf.raidus =item.Id;
-                }
-                if ([headerModel.title isEqualToString:@"菜系"]) {
-                    if (blockSelf.list_condition.length ==0) {
-                        blockSelf.list_condition = [NSString stringWithFormat:@"%@",item.Id];
-                    }else{
-                        blockSelf.list_condition = [NSString stringWithFormat:@"%@,%@",blockSelf.list_condition,item.Id];
-                    }
-                }
-                
-            }
-        }];
-    }];
+    
     
     NSString *url = [NSString stringWithFormat:@"%@app_list.php",BaseURL];
     DLog(@"url==%@",url);
     NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
     CustomAccount *acc = [CustomAccount sharedCustomAccount];
-    [param setObject:@"list_show" forKey:@"app"];
-    [param setObject:acc.classtype forKey:@"type"];
-    [param setObject:[NSString stringWithFormat:@"%f",BIGposition2D.longitude] forKey:@"lng"];
-    [param setObject:[NSString stringWithFormat:@"%f",BIGposition2D.latitude] forKey:@"lat"];
     
-    //    [param setObject:@"2.3411111" forKey:@"lng"];
-    //    [param setObject:@"48.8600" forKey:@"lat"];
-    
-    //距离
-    [param setObject:self.raidus forKey:@"raidus"];
-    //分类
-    [param setObject:self.list_condition forKey:@"list_condition"];
-    //评分
-    [param setObject:self.star forKey:@"star"];
-    
-    //请求起始个数
+    if(isSaoMiao ==NO){
+        [self.filterArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            FilterHeaderModel *headerModel =obj;
+            [headerModel.itemsArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                FilterItem *item = obj;
+                if (item.isSelect ==YES) {
+                    if ([headerModel.title isEqualToString:@"评分"]) {
+                        blockSelf.star =item.Id;
+                    }
+                    if ([headerModel.title isEqualToString:@"距离"]) {
+                        blockSelf.raidus =item.Id;
+                    }
+                    if ([headerModel.title isEqualToString:@"菜系"]) {
+                        if (blockSelf.list_condition.length ==0) {
+                            blockSelf.list_condition = [NSString stringWithFormat:@"%@",item.Id];
+                        }else{
+                            blockSelf.list_condition = [NSString stringWithFormat:@"%@,%@",blockSelf.list_condition,item.Id];
+                        }
+                    }
+                    
+                }
+            }];
+        }];
+        
+        [param setObject:@"list_show" forKey:@"app"];
+        [param setObject:acc.classtype forKey:@"type"];
+        [param setObject:[NSString stringWithFormat:@"%f",BIGposition2D.longitude] forKey:@"lng"];
+        [param setObject:[NSString stringWithFormat:@"%f",BIGposition2D.latitude] forKey:@"lat"];
+        
+        //    [param setObject:@"2.3411111" forKey:@"lng"];
+        //    [param setObject:@"48.8600" forKey:@"lat"];
+        
+        //距离
+        [param setObject:self.raidus forKey:@"raidus"];
+        //分类
+        [param setObject:self.list_condition forKey:@"list_condition"];
+        //评分
+        [param setObject:self.star forKey:@"star"];
+        
+        //请求起始个数
         [param setObject:@"0" forKey:@"pageno"];
+        
+    }else{
+        DLog(@"lat==%f--lng==%f",_mapV.camera.target.latitude,_mapV.camera.target.longitude);
+        CLLocationCoordinate2D leftTop = [_mapV.projection coordinateForPoint:CGPointMake(0, 0)];
+        CLLocationCoordinate2D rightBottom = [_mapV.projection coordinateForPoint:CGPointMake(screenWigth, screenHeight)];
+        [param setObject:[NSString stringWithFormat:@"%f",leftTop.longitude] forKey:@"zs_lng"];
+        [param setObject:[NSString stringWithFormat:@"%f",leftTop.latitude] forKey:@"zs_lat"];
+        [param setObject:[NSString stringWithFormat:@"%f",rightBottom.longitude] forKey:@"yx_lng"];
+        [param setObject:[NSString stringWithFormat:@"%f",rightBottom.latitude] forKey:@"yx_lat"];
+        [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.longitude] forKey:@"user_lng"];
+        [param setObject:[NSString stringWithFormat:@"%f",acc.curCoordinate2D.latitude] forKey:@"user_lat"];
+        [param setObject:@"show_list_4" forKey:@"app"];
+        [param setObject:acc.classtype forKey:@"type"];
+        
+    }
+    
     [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
         if ([responseObject[@"code"] integerValue] ==1) {
             [blockSelf.dataArray removeAllObjects];
@@ -482,8 +504,10 @@
             [blockSelf.view addSubview:blockSelf.bottomV];
             if (blockSelf.dataArray.count >0) {
                 blockSelf.bottomV.model = blockSelf.dataArray[0];
+                if (isSaoMiao ==NO) {
                     [blockSelf.mapV animateToLocation:self->BIGposition2D];
-              
+                }
+                
                 blockSelf.bottomV.hidden = NO;
             }else{
                 blockSelf.bottomV.hidden =YES;
@@ -557,7 +581,5 @@
     } isShowHUD:NO];
     
 }
-
-
 
 @end

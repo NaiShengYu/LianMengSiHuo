@@ -10,7 +10,6 @@
 		260C46CF20CD5841008952B4 /* BottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 260C46CE20CD5841008952B4 /* BottomView.m */; };
 		260C46D220CD6736008952B4 /* TopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 260C46D120CD6736008952B4 /* TopView.m */; };
 		26196CB820C55C6E0097D72D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 26196CB720C55C6E0097D72D /* AppDelegate.m */; };
-		26196CBB20C55C6E0097D72D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26196CBA20C55C6E0097D72D /* ViewController.m */; };
 		26196CBE20C55C6E0097D72D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26196CBC20C55C6E0097D72D /* Main.storyboard */; };
 		26196CC120C55C6E0097D72D /* GoogleMapProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 26196CBF20C55C6E0097D72D /* GoogleMapProject.xcdatamodeld */; };
 		26196CC320C55C6F0097D72D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26196CC220C55C6F0097D72D /* Assets.xcassets */; };
@@ -68,6 +67,7 @@
 		C938504E20ECB44A007AF5A7 /* CustomBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = C938504D20ECB44A007AF5A7 /* CustomBrowser.m */; };
 		C938505120EDA741007AF5A7 /* AFNetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C938505020EDA741007AF5A7 /* AFNetRequest.m */; };
 		C938505420EDE24C007AF5A7 /* CollectionShopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C938505320EDE24B007AF5A7 /* CollectionShopModel.m */; };
+		C9400519216F1B7400B50EFE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9400517216F1B7400B50EFE /* ViewController.m */; };
 		C97712E120DB4F2D007AE5F0 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712E020DB4F2D007AE5F0 /* CommentViewController.m */; };
 		C97712E720DB5046007AE5F0 /* BindingPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712E620DB5046007AE5F0 /* BindingPhoneViewController.m */; };
 		C97712EA20DB5062007AE5F0 /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97712E920DB5062007AE5F0 /* AboutUsViewController.m */; };
@@ -118,8 +118,6 @@
 		26196CB320C55C6E0097D72D /* GoogleMapProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoogleMapProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26196CB620C55C6E0097D72D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		26196CB720C55C6E0097D72D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		26196CB920C55C6E0097D72D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		26196CBA20C55C6E0097D72D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		26196CBD20C55C6E0097D72D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		26196CC020C55C6E0097D72D /* GoogleMapProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GoogleMapProject.xcdatamodel; sourceTree = "<group>"; };
 		26196CC220C55C6F0097D72D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -232,6 +230,8 @@
 		C938505020EDA741007AF5A7 /* AFNetRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetRequest.m; sourceTree = "<group>"; };
 		C938505220EDE24B007AF5A7 /* CollectionShopModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionShopModel.h; sourceTree = "<group>"; };
 		C938505320EDE24B007AF5A7 /* CollectionShopModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionShopModel.m; sourceTree = "<group>"; };
+		C9400517216F1B7400B50EFE /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		C9400518216F1B7400B50EFE /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		C97712DF20DB4F2D007AE5F0 /* CommentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
 		C97712E020DB4F2D007AE5F0 /* CommentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
 		C97712E520DB5046007AE5F0 /* BindingPhoneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BindingPhoneViewController.h; sourceTree = "<group>"; };
@@ -355,8 +355,8 @@
 				C938504D20ECB44A007AF5A7 /* CustomBrowser.m */,
 				C977138020E475ED007AE5F0 /* FirstViewController.h */,
 				C977138120E475ED007AE5F0 /* FirstViewController.m */,
-				26196CB920C55C6E0097D72D /* ViewController.h */,
-				26196CBA20C55C6E0097D72D /* ViewController.m */,
+				C9400518216F1B7400B50EFE /* ViewController.h */,
+				C9400517216F1B7400B50EFE /* ViewController.m */,
 				26904EB320E78A2200084B5F /* HomePageMapViewController.h */,
 				26904EB420E78A2200084B5F /* HomePageMapViewController.m */,
 				26904EB620E78CD000084B5F /* YNSFunctionBar.h */,
@@ -760,7 +760,6 @@
 				267BBF4F20D941D20005AE5A /* FogotSecondViewController.m in Sources */,
 				26904EB820E78CD000084B5F /* YNSFunctionBar.m in Sources */,
 				267BBF5420DA7D4F0005AE5A /* ThirdPartyLandedView.m in Sources */,
-				26196CBB20C55C6E0097D72D /* ViewController.m in Sources */,
 				267BBF7820DBDFA50005AE5A /* NavHeader.m in Sources */,
 				26196CC920C55C6F0097D72D /* main.m in Sources */,
 				2636ACA220F635BE00FBDDC5 /* HomePageSectionZeroTypeTowCell.m in Sources */,
@@ -817,6 +816,7 @@
 				26A608C620E1251300B677FF /* ChangePasswordViewController.m in Sources */,
 				2636ACA820F78C7700FBDDC5 /* ShopInfoModel.m in Sources */,
 				C977139420E4C1B1007AE5F0 /* SearchResultSectionOneCell.m in Sources */,
+				C9400519216F1B7400B50EFE /* ViewController.m in Sources */,
 				265F8D1420EBA9FF00620F3E /* KNLocationConverter.m in Sources */,
 				C977131920E1EF42007AE5F0 /* FilterItem.m in Sources */,
 				268B226C2106132200F6A24D /* SearchNoResultHeader.m in Sources */,

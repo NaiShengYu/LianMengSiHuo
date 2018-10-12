@@ -233,6 +233,7 @@
 
 - (void)goMap{
     HomePageMapViewController *vc =[[HomePageMapViewController alloc]init];
+    vc.VCType = 1;
     [UIView transitionWithView:[[UIApplication sharedApplication].delegate window] duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
         [self.VC.navigationController pushViewController:vc animated:NO];
         

@@ -265,7 +265,7 @@
     [self makeDataWithSaoMiao:YES];
 }
 
-- (void)saoMiaoJieGuo{
+- (void)saoMiaoJieGuoWithbool:(BOOL)isSaomiao{
     
     [self.mapV clear];
     _marker =[[GMSMarker alloc]init];
@@ -369,7 +369,6 @@
         but.layer.borderColor = [UIColor whiteColor].CGColor;
         but.layer.borderWidth =1;
         
-        
     }else{
         but.layer.borderWidth =0;
         but.backgroundColor =RGBA(133, 31, 24, 1);
@@ -441,7 +440,7 @@
                     [blockSelf.dataArray addObject:model];
                 }
             }
-            
+        
             [blockSelf.view addSubview:blockSelf.bottomV];
             if (blockSelf.dataArray.count >0) {
                 blockSelf.bottomV.model = blockSelf.dataArray[0];
@@ -453,7 +452,7 @@
                 [PubulicObj ShowSVWhitMessage];
                 [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"未在周围查到相关信息"];
             }
-            [blockSelf saoMiaoJieGuo];
+            [blockSelf saoMiaoJieGuoWithbool:isSiaoMiao];
 
         }else{
             [PubulicObj ShowSVWhitMessage];

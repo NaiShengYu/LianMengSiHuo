@@ -126,7 +126,6 @@
     self.filterV.selectChangeBLock = ^(FilterItem *selectItem) {
         blockSelf.LastItem = selectItem;
         [blockSelf makeDataIsRefresh:YES];
-
     };
     
     NavHeader *header =[[NavHeader alloc]initWithFrame:CGRectMake(0, 0, screenWigth, MaxY)];

@@ -33,6 +33,6 @@
 
 - (void)setIndex:(NSInteger *)index{
     _index = index;
-    self.numLab.text =[NSString stringWithFormat:@"%lu/%lu",(unsigned long)index+1,(unsigned long)self.imgs.count];    
+    self.numLab.text =[NSString stringWithFormat:@"%lu/%lu",(unsigned long)index+1,(unsigned long)self.imgs.count];
 }
 @end

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface HomePageMapViewController : UIViewController
+@property (nonatomic,assign)NSInteger VCType;//0从列表页进入，1从首页进入
 
 @end

@@ -262,7 +262,7 @@
     NSMutableArray *mutArray = [[NSMutableArray alloc]initWithArray:arr];
     static BOOL aaaaa = NO;
     [mutArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj == historyKey) {
+        if ([obj isEqualToString:historyKey]) {
             aaaaa = YES;
         }
     }];

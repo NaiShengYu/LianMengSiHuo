@@ -44,10 +44,7 @@
             [but addTarget:self action:@selector(butChange:) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:but];
         }
-        
-        
-        
-        
+   
     }
     return self;
     

@@ -253,7 +253,6 @@
 - (void)keyBoardDidShow{
     DLog(@"键盘出现了");
     [SVProgressHUD setOffsetFromCenter:UIOffsetMake(0,100)];
-
 }
 //- (void)keyBoardHiden{
 //    
@@ -265,7 +264,7 @@
 - (void)keyBoardHiden{
     DLog(@"键盘消失了");
 
-    [SVProgressHUD setOffsetFromCenter:UIOffsetMake(0,0)];
+//    [SVProgressHUD setOffsetFromCenter:UIOffsetMake(0,0)];
 
 }
 
