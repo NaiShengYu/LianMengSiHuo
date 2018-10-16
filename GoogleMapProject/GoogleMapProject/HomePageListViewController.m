@@ -14,7 +14,7 @@
 
 #import "FilterItem.h"
 #import "FilterHeaderModel.h"
-#import "HomePageListModel.h"
+#import "MapBottomModel.h"
 @interface HomePageListViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *myTable;
 @property (nonatomic,strong)UIButton *deleteBut;
@@ -215,7 +215,7 @@
    
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    HomePageListModel *model = self.dataArray[indexPath.row];
+    MapBottomModel *model = self.dataArray[indexPath.row];
     ShopInfoViewController *vc = [[ShopInfoViewController alloc]init];
     vc.Id = model.Id;
     [self.navigationController pushViewController:vc animated:YES];
@@ -323,7 +323,7 @@
                 NSDictionary *dataDic = responseObject[@"data"][0];
                 NSArray *arr = dataDic[@"list_show"];
                 [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    HomePageListModel *model = [[HomePageListModel alloc]initWithDic:obj];
+                    MapBottomModel *model = [[MapBottomModel alloc]initWithDic:obj];
                     [blockSelf.dataArray addObject:model];
                 }];
                 if (blockSelf.dataArray.count >=[dataDic[@"list_num"] integerValue]) {

@@ -16,7 +16,6 @@
 		26196CC620C55C6F0097D72D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26196CC420C55C6F0097D72D /* LaunchScreen.storyboard */; };
 		26196CC920C55C6F0097D72D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 26196CC820C55C6F0097D72D /* main.m */; };
 		2636ACA220F635BE00FBDDC5 /* HomePageSectionZeroTypeTowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2636ACA120F635BE00FBDDC5 /* HomePageSectionZeroTypeTowCell.m */; };
-		2636ACA520F77C6F00FBDDC5 /* HomePageListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2636ACA420F77C6F00FBDDC5 /* HomePageListModel.m */; };
 		2636ACA820F78C7700FBDDC5 /* ShopInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2636ACA720F78C7700FBDDC5 /* ShopInfoModel.m */; };
 		2636ACAB20F79C1A00FBDDC5 /* ShopInfoCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2636ACAA20F79C1A00FBDDC5 /* ShopInfoCommentModel.m */; };
 		264DEF8620FA43E900A0238F /* CustomNetAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 264DEF8520FA43E900A0238F /* CustomNetAlertView.m */; };
@@ -58,7 +57,6 @@
 		26904EB520E78A2200084B5F /* HomePageMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26904EB420E78A2200084B5F /* HomePageMapViewController.m */; };
 		26904EB820E78CD000084B5F /* YNSFunctionBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 26904EB720E78CD000084B5F /* YNSFunctionBar.m */; };
 		26A608C620E1251300B677FF /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A608C520E1251300B677FF /* ChangePasswordViewController.m */; };
-		C908C6E120F3443E0090E2B1 /* MapBottomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C908C6E020F3443E0090E2B1 /* MapBottomModel.m */; };
 		C908C6E420F355B20090E2B1 /* CustomMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = C908C6E320F355B20090E2B1 /* CustomMarker.m */; };
 		C908C6E720F483280090E2B1 /* SearchResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C908C6E620F483280090E2B1 /* SearchResultModel.m */; };
 		C938504720EC9F85007AF5A7 /* YFScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = C938504320EC9F85007AF5A7 /* YFScrollView.m */; };
@@ -105,6 +103,7 @@
 		C977138E20E4BE35007AE5F0 /* SearchResultHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = C977138D20E4BE35007AE5F0 /* SearchResultHeader.m */; };
 		C977139120E4BFF0007AE5F0 /* SearchResultSectionZeroCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C977139020E4BFF0007AE5F0 /* SearchResultSectionZeroCell.m */; };
 		C977139420E4C1B1007AE5F0 /* SearchResultSectionOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C977139320E4C1B1007AE5F0 /* SearchResultSectionOneCell.m */; };
+		C97917D62174335500EF7915 /* MapBottomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C97917D52174335500EF7915 /* MapBottomModel.m */; };
 		C9EE30EE216B02110012BF43 /* SearchHistoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EE30ED216B02110012BF43 /* SearchHistoryView.m */; };
 		F4FF636EA87F22A1DB12DE83 /* libPods-GoogleMapProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF73FC6E901B989D43D34C9 /* libPods-GoogleMapProject.a */; };
 /* End PBXBuildFile section */
@@ -126,8 +125,6 @@
 		26196CC820C55C6F0097D72D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2636ACA020F635BE00FBDDC5 /* HomePageSectionZeroTypeTowCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageSectionZeroTypeTowCell.h; sourceTree = "<group>"; };
 		2636ACA120F635BE00FBDDC5 /* HomePageSectionZeroTypeTowCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageSectionZeroTypeTowCell.m; sourceTree = "<group>"; };
-		2636ACA320F77C6F00FBDDC5 /* HomePageListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageListModel.h; sourceTree = "<group>"; };
-		2636ACA420F77C6F00FBDDC5 /* HomePageListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageListModel.m; sourceTree = "<group>"; };
 		2636ACA620F78C7700FBDDC5 /* ShopInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopInfoModel.h; sourceTree = "<group>"; };
 		2636ACA720F78C7700FBDDC5 /* ShopInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopInfoModel.m; sourceTree = "<group>"; };
 		2636ACA920F79C1A00FBDDC5 /* ShopInfoCommentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopInfoCommentModel.h; sourceTree = "<group>"; };
@@ -212,8 +209,6 @@
 		2BF73FC6E901B989D43D34C9 /* libPods-GoogleMapProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GoogleMapProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		764BAFDF28E3445530AD6A69 /* Pods-GoogleMapProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleMapProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GoogleMapProject/Pods-GoogleMapProject.debug.xcconfig"; sourceTree = "<group>"; };
 		962BF1968C3B249CC9293335 /* Pods-GoogleMapProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleMapProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoogleMapProject/Pods-GoogleMapProject.release.xcconfig"; sourceTree = "<group>"; };
-		C908C6DF20F3443E0090E2B1 /* MapBottomModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapBottomModel.h; sourceTree = "<group>"; };
-		C908C6E020F3443E0090E2B1 /* MapBottomModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapBottomModel.m; sourceTree = "<group>"; };
 		C908C6E220F355B20090E2B1 /* CustomMarker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomMarker.h; sourceTree = "<group>"; };
 		C908C6E320F355B20090E2B1 /* CustomMarker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomMarker.m; sourceTree = "<group>"; };
 		C908C6E520F483280090E2B1 /* SearchResultModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultModel.h; sourceTree = "<group>"; };
@@ -306,6 +301,8 @@
 		C977139020E4BFF0007AE5F0 /* SearchResultSectionZeroCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultSectionZeroCell.m; sourceTree = "<group>"; };
 		C977139220E4C1B1007AE5F0 /* SearchResultSectionOneCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultSectionOneCell.h; sourceTree = "<group>"; };
 		C977139320E4C1B1007AE5F0 /* SearchResultSectionOneCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultSectionOneCell.m; sourceTree = "<group>"; };
+		C97917D42174335400EF7915 /* MapBottomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapBottomModel.h; sourceTree = "<group>"; };
+		C97917D52174335500EF7915 /* MapBottomModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapBottomModel.m; sourceTree = "<group>"; };
 		C9EE30EC216B02110012BF43 /* SearchHistoryView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchHistoryView.h; sourceTree = "<group>"; };
 		C9EE30ED216B02110012BF43 /* SearchHistoryView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchHistoryView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -581,10 +578,8 @@
 				2682073420F2613A00DE7FE0 /* HomePageSectionOneModel.m */,
 				2682073620F261EA00DE7FE0 /* HomePageSectionTowModel.h */,
 				2682073720F261EA00DE7FE0 /* HomePageSectionTowModel.m */,
-				2636ACA320F77C6F00FBDDC5 /* HomePageListModel.h */,
-				2636ACA420F77C6F00FBDDC5 /* HomePageListModel.m */,
-				C908C6DF20F3443E0090E2B1 /* MapBottomModel.h */,
-				C908C6E020F3443E0090E2B1 /* MapBottomModel.m */,
+				C97917D42174335400EF7915 /* MapBottomModel.h */,
+				C97917D52174335500EF7915 /* MapBottomModel.m */,
 				C908C6E220F355B20090E2B1 /* CustomMarker.h */,
 				C908C6E320F355B20090E2B1 /* CustomMarker.m */,
 				C908C6E520F483280090E2B1 /* SearchResultModel.h */,
@@ -748,6 +743,7 @@
 				260C46D220CD6736008952B4 /* TopView.m in Sources */,
 				2636ACAB20F79C1A00FBDDC5 /* ShopInfoCommentModel.m in Sources */,
 				C977130020E09F73007AE5F0 /* PersonImageCell.m in Sources */,
+				C97917D62174335500EF7915 /* MapBottomModel.m in Sources */,
 				C977138B20E4B854007AE5F0 /* SearchResultViewController.m in Sources */,
 				C977132520E212FB007AE5F0 /* ShopInfoViewController.m in Sources */,
 				265F8D1720EBC29600620F3E /* SearchKeyViewController.m in Sources */,
@@ -768,7 +764,6 @@
 				267BBF5720DA840A0005AE5A /* HomePageViewController.m in Sources */,
 				268B22692106083300F6A24D /* SearchNoResultViewController.m in Sources */,
 				C97712EA20DB5062007AE5F0 /* AboutUsViewController.m in Sources */,
-				C908C6E120F3443E0090E2B1 /* MapBottomModel.m in Sources */,
 				C977130620E0DF69007AE5F0 /* ChangePersonNameViewController.m in Sources */,
 				C977132E20E23249007AE5F0 /* ShopInfoCommentTableViewCell.m in Sources */,
 				C97712FD20E09B4A007AE5F0 /* PersonDataController.m in Sources */,
@@ -804,7 +799,6 @@
 				2682073520F2613A00DE7FE0 /* HomePageSectionOneModel.m in Sources */,
 				C977131220E1DFD9007AE5F0 /* FilterHeader.m in Sources */,
 				C938505120EDA741007AF5A7 /* AFNetRequest.m in Sources */,
-				2636ACA520F77C6F00FBDDC5 /* HomePageListModel.m in Sources */,
 				267BBF4620D92B330005AE5A /* RegistViewController.m in Sources */,
 				C977137F20E37913007AE5F0 /* FiterOtherCell.m in Sources */,
 				265F8D1A20EBC8BA00620F3E /* SearchKeyNavVar.m in Sources */,

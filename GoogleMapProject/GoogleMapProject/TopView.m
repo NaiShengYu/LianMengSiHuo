@@ -109,6 +109,7 @@
         }];
     }else{
         HomePageListViewController *vc =[[HomePageListViewController alloc]init];
+        vc.dataArray = self.dataArray;
         [UIView transitionWithView:[[UIApplication sharedApplication].delegate window] duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
             [self.vc.navigationController pushViewController:vc animated:NO];
         } completion:^(BOOL finished) {

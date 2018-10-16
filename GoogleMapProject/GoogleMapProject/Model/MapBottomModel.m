@@ -13,6 +13,7 @@
     self = [super init];
     if (self) {
         _Id = dic[@"Id"];
+        _No = dic[@"No"];
         _number = dic[@"number"];
         _type = dic[@"type"];
         _img = dic[@"img"];

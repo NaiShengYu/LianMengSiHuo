@@ -246,15 +246,17 @@
     _titleLab.text =[NSString stringWithFormat:@"%@",model.name];
     
     CGFloat jl = [model.distance floatValue];
-    NSString *jlstr = @"";
-    if (jl <10) {
-        jlstr = [NSString stringWithFormat:@"%.fm",jl*1000];
-        
-    }else{
-        jlstr = [NSString stringWithFormat:@"%.fkm",jl];
+    if (jl >0) {
+        NSString *jlstr = @"";
+        if (jl <10) {
+            jlstr = [NSString stringWithFormat:@"%.fm",jl*1000];
+            
+        }else{
+            jlstr = [NSString stringWithFormat:@"%.fkm",jl];
+        }
+        _juliLab.text =[CustomAccount sharedCustomAccount].isSearch == YES ?[NSString stringWithFormat:@"距市中心%@",jlstr]:[NSString stringWithFormat:@"距我%@",jlstr];
     }
-    _juliLab.text =[CustomAccount sharedCustomAccount].isSearch == YES ?[NSString stringWithFormat:@"距市中心%@",jlstr]:[NSString stringWithFormat:@"距我%@",jlstr];
-
+  
     //类型是餐厅和购物的时候显示人均
     if ([model.type integerValue] ==1 ) {
         _topickNumLab.text =[NSString stringWithFormat:@"%@  %@",model.red,model.num];

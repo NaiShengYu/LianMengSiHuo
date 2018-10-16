@@ -267,10 +267,10 @@
                     }else{
                         acc.cityLocation = acc.curCoordinate2D;
                     }
-                    
+
                     acc.cityName =dataDic[@"city_cn"];
                     acc.cityEnName = dataDic[@"city_en"];
-                                    
+
                 }
             } @catch (NSException *exception) {
             } @finally {
@@ -283,7 +283,7 @@
               } @catch (NSException *exception) {
             } @finally {
             }
-            
+
             @try {
                 for (NSDictionary *cityDic in dataDic[@"around_city"]) {
                     HomePageSectionTowModel *model = [[HomePageSectionTowModel alloc]initWithDic:cityDic];
@@ -292,11 +292,9 @@
             } @catch (NSException *exception) {
             } @finally {
             }
-           
-            [blockSelf.collectionV removeFromSuperview];
-            blockSelf.collectionV =nil;
-            [blockSelf.view addSubview:blockSelf.collectionV];
-          
+                [blockSelf.collectionV removeFromSuperview];
+                blockSelf.collectionV =nil;
+                [blockSelf.view addSubview:blockSelf.collectionV];
         }else{
             [blockSelf.collectionV.mj_header endRefreshing];
             [PubulicObj ShowSVWhitMessage];
@@ -321,9 +319,7 @@
         || acc.cityEnName == acc.currentCityName) {
         acc.isSearch =NO;
     }
-    
-    
-    
+
     [self makeData];
 }
 
@@ -333,6 +329,9 @@
 }
 
 - (void)changeLocation{
+    //如果没有定位点击无效
+    if ([CustomAccount sharedCustomAccount].cityLocation.latitude ==0 && [CustomAccount sharedCustomAccount].cityLocation.latitude ==0)
+        return;
     
     HomePageMapViewController *vc =[[HomePageMapViewController alloc]init];
     vc.VCType = 1;

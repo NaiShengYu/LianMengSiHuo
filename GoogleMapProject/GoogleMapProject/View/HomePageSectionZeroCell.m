@@ -9,7 +9,7 @@
 #import "HomePageSectionZeroCell.h"
 #import "HomePageListViewController.h"
 #import "HomePageMapViewController.h"
-#import "HomePageListModel.h"
+#import "MapBottomModel.h"
 #import "CustomNoFoodAlert.h"
 @interface HomePageSectionZeroCell()<UITableViewDelegate,UITableViewDataSource>
 
@@ -24,10 +24,9 @@
         WS(blockSelf);
         _titlesArray =[[NSMutableArray alloc]initWithObjects:@"景点 Attractions",@"餐厅 Restaurant",@"购物 Shopping",@"酒店 Hotel", nil];
         _imgArray =[[NSMutableArray alloc]initWithObjects:@"首页_03",@"首页_06",@"首页_09",@"首页_13", nil];
-
         _mapV =[[GMSMapView alloc]initWithFrame:frame];
         [self.contentView addSubview:_mapV];
-        
+
         UIView *backView =[UIView new];
         [self.contentView addSubview:backView];
         [backView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -169,7 +168,7 @@
                 NSDictionary *dataDic = responseObject[@"data"][0];
                 NSArray *arr = dataDic[@"list_show"];
                 [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    HomePageListModel *model = [[HomePageListModel alloc]initWithDic:obj];
+                    MapBottomModel *model = [[MapBottomModel alloc]initWithDic:obj];
                     [dataArray addObject:model];
                 }];
                 if (dataArray.count >0) {
@@ -270,5 +269,10 @@
     GMSCameraPosition *position1 = [GMSCameraPosition cameraWithTarget:[CustomAccount sharedCustomAccount].cityLocation zoom:14];
     [self.mapV animateToCameraPosition:position1];
     
+}
+
+- (void)dealloc{
+    [_mapV removeFromSuperview];
+    _mapV =nil;
 }
 @end

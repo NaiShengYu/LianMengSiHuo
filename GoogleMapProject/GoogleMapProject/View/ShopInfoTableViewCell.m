@@ -7,6 +7,7 @@
 //
 
 #import "ShopInfoTableViewCell.h"
+#import "HomePageMapViewController.h"
 //#import "YFScrollView.h"
 #import <MWPhotoBrowser.h>
 #import <MapKit/MapKit.h>
@@ -199,12 +200,13 @@
             make.left.right.offset =0;
             make.height.offset =80;
         }];
-//        UIView *mapBackV =[UIView new];
-//        [_mapV addSubview:mapBackV];
-//        [mapBackV mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.edges.insets =UIEdgeInsetsMake(10, 20, 10, 20);
-//        }];
-//        mapBackV.backgroundColor =RGBA(250, 250, 250, 0.4);
+        UIButton *mapBackV =[UIButton new];
+        [_mapV addSubview:mapBackV];
+        [mapBackV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.insets =UIEdgeInsetsMake(10, 20, 10, 20);
+        }];
+        mapBackV.backgroundColor =RGBA(250, 250, 250, 0.4);
+        [mapBackV addTarget:self action:@selector(goMapVC) forControlEvents:UIControlEventTouchUpInside];
 //
         UIImageView *img =[UIImageView new];
         [self.contentView addSubview:img];
@@ -456,7 +458,20 @@
         }]];
         [_VC presentViewController:alertV animated:YES completion:nil];
 
+}
+
+- (void)goMapVC{
     
+    HomePageMapViewController *vc =[[HomePageMapViewController alloc]init];
+    vc.VCType = 2;
+    vc.shopLocation = CLLocationCoordinate2DMake([_model.details_lat doubleValue], [_model.details_lng doubleValue]);
+    vc.shopId = _model.Id;
+    [UIView transitionWithView:[[UIApplication sharedApplication].delegate window] duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
+        [self.VC.navigationController pushViewController:vc animated:NO];
+    } completion:^(BOOL finished) {
+    }];
     
 }
+
+
 @end

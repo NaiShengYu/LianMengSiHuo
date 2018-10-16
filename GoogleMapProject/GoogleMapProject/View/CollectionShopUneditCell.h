@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CollectionShopModel.h"
 
-#import "HomePageListModel.h"
+#import "MapBottomModel.h"
 @interface CollectionShopUneditCell : UITableViewCell
 
 
@@ -28,6 +28,6 @@
 
 @property (nonatomic,strong)CollectionShopModel *collecitonModel;
 
-@property (nonatomic,strong)HomePageListModel *homePageModel;
+@property (nonatomic,strong)MapBottomModel *homePageModel;
 
 @end

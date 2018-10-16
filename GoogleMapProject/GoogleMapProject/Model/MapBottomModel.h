@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface MapBottomModel : NSObject
+
 @property (nonatomic,copy)NSString *number;
+@property (nonatomic,copy)NSString *No;
 @property (nonatomic,copy)NSString *Id;
 @property (nonatomic,copy)NSString *type;
 @property (nonatomic,copy)NSString *img;

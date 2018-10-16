@@ -220,7 +220,7 @@
     
 }
 
-- (void)setHomePageModel:(HomePageListModel *)homePageModel{
+- (void)setHomePageModel:(MapBottomModel *)homePageModel{
     _homePageModel = homePageModel;
     
     [_imageV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",allImageURL,homePageModel.img]]];

@@ -20,4 +20,7 @@
 
 @property (nonatomic,weak)UIViewController *vc;
 
+@property (nonatomic,strong)NSMutableArray *dataArray;
+
+
 @end
