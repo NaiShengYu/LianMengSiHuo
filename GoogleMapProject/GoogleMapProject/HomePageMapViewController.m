@@ -18,7 +18,7 @@
 #import "CustomMarker.h"
 @interface HomePageMapViewController ()<GMSMapViewDelegate>
 {
-    GMSMarker *_marker;
+//    GMSMarker *_marker;
     CLLocationCoordinate2D position2D;
     CLLocationCoordinate2D BIGposition2D;
 }
@@ -230,7 +230,6 @@
     if (position2D.latitude !=0 && position2D.longitude !=0) {
         GMSCameraPosition *position1 = [GMSCameraPosition cameraWithTarget:position2D zoom:13];
         [self.mapV animateToCameraPosition:position1];
-        _marker.position =position2D;
         BIGposition2D = position2D;
     }
 }
@@ -251,11 +250,11 @@
     
     self.mapV.camera = camera;//这句话很重要很重要，将我们获取到的经纬度转成影像并赋值给地图的camera属性
     
-    _marker =[[GMSMarker alloc]init];
-    _marker.position =CLLocationCoordinate2DMake(BIGposition2D.latitude, BIGposition2D.longitude);
-    _marker.icon =[UIImage imageNamed:@"25"];
-    _marker.draggable =YES;
-    _marker.map = self.mapV;
+//    _marker =[[GMSMarker alloc]init];
+//    _marker.position =CLLocationCoordinate2DMake(BIGposition2D.latitude, BIGposition2D.longitude);
+//    _marker.icon =[UIImage imageNamed:@"25"];
+//    _marker.draggable =YES;
+//    _marker.map = self.mapV;
     GMSCameraPosition *position1 = [GMSCameraPosition cameraWithLatitude:BIGposition2D.latitude longitude:BIGposition2D.longitude zoom:13];
     [_mapV animateToCameraPosition:position1];
 }
@@ -296,11 +295,11 @@
 - (void)saoMiaoJieGuo{
     
     [self.mapV clear];
-    _marker =[[GMSMarker alloc]init];
-    _marker.position =CLLocationCoordinate2DMake(BIGposition2D.latitude, BIGposition2D.longitude);
-    _marker.icon =[UIImage imageNamed:@"25"];
-    _marker.draggable =YES;
-    _marker.map = self.mapV;
+//    _marker =[[GMSMarker alloc]init];
+//    _marker.position =CLLocationCoordinate2DMake(BIGposition2D.latitude, BIGposition2D.longitude);
+//    _marker.icon =[UIImage imageNamed:@"25"];
+//    _marker.draggable =YES;
+//    _marker.map = self.mapV;
     //    GMSCameraPosition *position1 = [GMSCameraPosition cameraWithLatitude:BIGposition2D.latitude longitude:BIGposition2D.longitude zoom:14];
     //    [_mapV animateToCameraPosition:position1];
     
@@ -348,10 +347,7 @@
 
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker{
     
-    if (marker ==_marker) {
-        
-        return YES;
-    }
+
     WS(blockSelf)
     CustomMarker *maker1 =(CustomMarker *)marker;
     self.bottomV.coor = marker.position;
@@ -371,7 +367,6 @@
         return;
     }
     [mapView animateToLocation:coordinate];
-    _marker.position =coordinate;
     BIGposition2D =coordinate;
     [self viewDismiss];
     

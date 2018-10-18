@@ -263,6 +263,7 @@
 
 - (void)makeDataIsRefresh:(BOOL) isRefresh{
     WS(blockSelf);
+    blockSelf.list_condition = @"";
     [self.filterArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         FilterHeaderModel *headerModel =obj;
             [headerModel.itemsArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
