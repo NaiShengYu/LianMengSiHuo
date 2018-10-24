@@ -103,6 +103,7 @@
     if ([self.vc isKindOfClass:[HomePageListViewController class]]) {
         HomePageMapViewController *vc =[[HomePageMapViewController alloc]init];
         vc.VCType = 0;
+        vc.dataArray = self.dataArray;
         [UIView transitionWithView:[[UIApplication sharedApplication].delegate window] duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
             [self.vc.navigationController pushViewController:vc animated:NO];
         } completion:^(BOOL finished) {

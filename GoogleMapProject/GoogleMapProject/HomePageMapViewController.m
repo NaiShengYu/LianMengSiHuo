@@ -32,7 +32,6 @@
 
 @property (nonatomic,strong)FilterView *filterV;
 
-@property (nonatomic,strong)NSMutableArray *dataArray;
 
 @property (nonatomic,strong)YNSFunctionBar * functionBar;
 
@@ -157,7 +156,6 @@
     self.raidus = @"";
     self.list_condition = @"";
     
-    self.dataArray = [[NSMutableArray alloc]init];
     GMSCameraPosition *position = [GMSCameraPosition cameraWithLatitude:-33.86 longitude:151.20 zoom:13];
     _mapV =[GMSMapView mapWithFrame:self.view.bounds camera:position];
     //    _mapV.myLocationEnabled = YES;
@@ -237,6 +235,9 @@
 
 - (void)currentLocation{
     
+    
+    
+    
     // 通过location  或得到当前位置的经纬度
     CLLocationCoordinate2D curCoordinate2D = [CustomAccount sharedCustomAccount].cityLocation;
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:curCoordinate2D.latitude longitude:curCoordinate2D.longitude zoom:13];
@@ -245,7 +246,15 @@
     if (self.VCType ==1) {
         [self creatBottomView];
     }
-    [self makeDataWithSaoMiao:NO];
+    if (self.dataArray ==nil) {
+        self.dataArray =[[NSMutableArray alloc]init];
+        [self makeDataWithSaoMiao:NO];
+    }else{
+        self.bottomV.model = self.dataArray[0];
+        [self saoMiaoJieGuo];
+        [self.view addSubview:self.bottomV];
+        self.topV.dataArray = self.dataArray;
+    }
     [self getCollection];
     
     self.mapV.camera = camera;//这句话很重要很重要，将我们获取到的经纬度转成影像并赋值给地图的camera属性
@@ -527,8 +536,7 @@
                 [PubulicObj ShowSVWhitMessage];
                 [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"未在周围查到相关信息"];
             }
-            if(blockSelf.VCType ==2)
-                blockSelf.topV.dataArray = blockSelf.dataArray;
+            blockSelf.topV.dataArray = blockSelf.dataArray;
             [blockSelf saoMiaoJieGuo];
         }else{
             [PubulicObj ShowSVWhitMessage];

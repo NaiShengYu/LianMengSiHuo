@@ -30,6 +30,8 @@
 //评分
 @property (nonatomic,copy)NSString *star;
 
+@property (nonatomic,strong)TopView *navBarView;
+
 
 @end
 
@@ -174,9 +176,11 @@
     [topV.backBut addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [topV.chooseBut addTarget:self action:@selector(chooseBut:) forControlEvents:UIControlEventTouchUpInside];
     topV.vc =self;
+    _navBarView = topV;
+    _navBarView.dataArray = self.dataArray;
     [self.view addSubview:topV];
+
     [self getCollection];
-    
     if (self.dataArray ==nil) {
         self.dataArray =[[NSMutableArray alloc]init];
         [self makeDataIsRefresh:YES];
@@ -334,7 +338,8 @@
                 }
                 [blockSelf.myTable.mj_header endRefreshing];
                 [blockSelf.myTable reloadData];
-                
+                blockSelf.navBarView.dataArray = blockSelf.dataArray;
+
             } @catch (NSException *exception) {
                 
             } @finally {
@@ -389,7 +394,6 @@
                 }];
                 [blockSelf.filterArray addObject:headerModel2];
                 blockSelf.filterV.dataArray = blockSelf.filterArray;
-                
             } @catch (NSException *exception) {
             } @finally {
             }

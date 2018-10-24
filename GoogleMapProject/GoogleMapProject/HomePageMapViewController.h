@@ -14,4 +14,7 @@
 @property (nonatomic,assign)CLLocationCoordinate2D shopLocation;
 
 @property (nonatomic,copy) NSString *shopId;
+
+@property (nonatomic,strong)NSMutableArray *dataArray;
+
 @end
