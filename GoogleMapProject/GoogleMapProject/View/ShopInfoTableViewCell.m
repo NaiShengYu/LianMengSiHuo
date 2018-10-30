@@ -359,7 +359,7 @@
     _titleLab.text =[NSString stringWithFormat:@"%@",model.name];
     CGFloat jl = [model.distance floatValue];
     NSString *jlstr = @"";
-    if (jl <10) {
+    if (jl <1) {
         jlstr = [NSString stringWithFormat:@"%.fm",jl*1000];
         
     }else{
