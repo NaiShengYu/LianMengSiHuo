@@ -17,6 +17,7 @@
 @property (nonatomic,copy)NSString *num;
 @property (nonatomic,copy)NSString *red;
 @property (nonatomic,copy)NSString *distance;
+@property (nonatomic,copy)NSString *city_distance;
 - (instancetype)initWithDic:(NSDictionary *)dic;
 
 @end

@@ -21,6 +21,7 @@
         _distance = dic[@"distance"];
         _red = dic[@"red"];
         _num= dic[@"num"];
+        _city_distance = dic[@"city_distance"];
     }
     
     return self;

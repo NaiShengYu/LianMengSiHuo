@@ -149,11 +149,12 @@
 
 - (void)setModel:(HomePageSectionOneModel *)model{
     
+    
     _model = model;
     
     [_headerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",allImageURL,model.img]]];
 
-    CGFloat jl = [model.distance floatValue];
+    CGFloat jl =[CustomAccount sharedCustomAccount].isSearch == YES ?[model.city_distance floatValue]:[model.distance floatValue];
     NSString *jlstr = @"";
     if (jl <1) {
         jlstr = [NSString stringWithFormat:@"%.fm",jl*1000];
