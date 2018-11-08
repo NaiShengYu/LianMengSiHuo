@@ -39,7 +39,9 @@
                 if (animation) {
                     [SVProgressHUD dismiss];
                 }
+                NSLog(@"error==%@",error);
                 if (error) {
+                    
                     failure (error);
                 }
             }];

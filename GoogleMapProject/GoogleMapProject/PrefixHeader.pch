@@ -75,8 +75,8 @@
 
 #define TabbarHeight [[UITabBarController alloc]init].tabBar.frame.size.height
 
-#define BaseURL @"http://lm.hlymsp.com/"
-#define allImageURL @"http://www.lianorg.com/"
+#define BaseURL @"http://lm.jianxinnet.com/"
+#define allImageURL @"http://lm.jianxinnet.com/"
 
 
 //用户id

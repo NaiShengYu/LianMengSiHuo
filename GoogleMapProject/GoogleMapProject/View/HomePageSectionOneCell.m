@@ -148,9 +148,9 @@
 }
 
 - (void)setModel:(HomePageSectionOneModel *)model{
-    
-    
     _model = model;
+
+    NSLog(@"imgURL==%@",[NSString stringWithFormat:@"%@%@",allImageURL,model.img]);
     
     [_headerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",allImageURL,model.img]]];
 
