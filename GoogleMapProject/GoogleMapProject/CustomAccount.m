@@ -16,7 +16,11 @@
     static dispatch_once_t tar;
     dispatch_once(&tar, ^{
         sharedCustomAccountInstance = [[CustomAccount alloc]init];
+        sharedCustomAccountInstance.cityName = @"";
+        sharedCustomAccountInstance.cityEnName = @"";
+        sharedCustomAccountInstance.currentCityName = @"";
     });
+    
     return sharedCustomAccountInstance;    
 }
 @end

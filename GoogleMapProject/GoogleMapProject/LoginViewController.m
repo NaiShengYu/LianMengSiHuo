@@ -226,8 +226,9 @@
     [containerView addSubview:weiXin];
     [weiXin mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(lab.mas_bottom).offset =30;
-        make.left.offset =30;
-        
+//        make.left.offset =30;
+        make.right.equalTo(containerView.mas_centerX).offset = -30;
+
         make.width.offset =60;
         make.height.offset =60;
     }];
@@ -240,7 +241,8 @@
     [containerView addSubview:QQ];
     [QQ mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(lab.mas_bottom).offset =30;
-        make.left.equalTo(weiXin.mas_right).offset =30;
+//        make.left.equalTo(weiXin.mas_right).offset =30;
+        make.left.equalTo(containerView.mas_centerX).offset = 30;
         make.width.offset =60;
         make.height.offset =60;
     }];
@@ -249,20 +251,20 @@
     [QQ addTarget:self action:@selector(QQLogin) forControlEvents:UIControlEventTouchUpInside];
     
    
-    _moreBut =[UIButton new];
-    [containerView addSubview:_moreBut];
-    [_moreBut mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(lab.mas_bottom).offset =30;
-        make.left.equalTo(QQ.mas_right).offset =30;
-        make.right.offset =-20;
-        make.height.offset =60;
-    }];
-    [_moreBut setTitle:@"更多登陆方式>>" forState:UIControlStateNormal];
-    _moreBut.titleLabel.font =FontSize(15);
-    [_moreBut addTarget:self action:@selector(thirdLanded:) forControlEvents:UIControlEventTouchUpInside];
-
+//    _moreBut =[UIButton new];
+//    [containerView addSubview:_moreBut];
+//    [_moreBut mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(lab.mas_bottom).offset =30;
+//        make.left.equalTo(QQ.mas_right).offset =30;
+//        make.right.offset =-20;
+//        make.height.offset =60;
+//    }];
+//    [_moreBut setTitle:@"更多登陆方式>>" forState:UIControlStateNormal];
+//    _moreBut.titleLabel.font =FontSize(15);
+//    [_moreBut addTarget:self action:@selector(thirdLanded:) forControlEvents:UIControlEventTouchUpInside];
+//
     [containerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(blockSelf.moreBut.mas_bottom).offset(20);// 这里放最后一个view的底部
+        make.bottom.equalTo(QQ.mas_bottom).offset(20);// 这里放最后一个view的底部
     }];
     
 }
@@ -388,7 +390,16 @@
 #pragma mark -- 微信登录
 - (void)weiXinLogin{
     
-    //例如QQ的登录
+    
+    if (![[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"Whatapp://"]]) {
+        [PubulicObj ShowSVWhitMessage];
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"您没有安装微信客户端"];
+        return;
+    }
+    
+    
+    
+    //例如微信的登录
     [ShareSDK getUserInfo:SSDKPlatformTypeWechat
            onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error)
      {
@@ -447,16 +458,22 @@
          else
          {
              NSLog(@"%@",error);
+             [PubulicObj ShowSVWhitMessage];
+             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"登录失败"];
+         
          }
          
      }];
-    
-    
 }
 
 #pragma mark --QQ登录
 - (void)QQLogin{
     
+    if (![[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"mqqapi://"]]) {
+        [PubulicObj ShowSVWhitMessage];
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"您没有安装QQ客户端"];
+        return;
+    }
     
     //例如QQ的登录
     [ShareSDK getUserInfo:SSDKPlatformTypeQQ
@@ -520,6 +537,8 @@
          else
          {
              NSLog(@"%@",error);
+             [PubulicObj ShowSVWhitMessage];
+             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"登录失败"];
          }
          
      }];

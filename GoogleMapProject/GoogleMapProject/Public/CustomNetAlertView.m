@@ -10,7 +10,6 @@
 
 @implementation CustomNetAlertView
 
-
 - (instancetype)initWithFrame:(CGRect)frame{
     
     self = [super initWithFrame:frame];
@@ -91,24 +90,25 @@
 
 
 - (void)updata{
-    if ([_setBut.titleLabel.text isEqualToString:@"设置网络"]){
-    NSString * urlString = @"App-Prefs:root=WIFI";
-    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:urlString]]) {
-        
-        if ([[UIDevice currentDevice].systemVersion doubleValue] >= 10.0) {
-            
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString] options:@{} completionHandler:nil];
-            
-        } else {
-            
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
-            
-        }
-        
-    }
-    }else{
+//    if ([_setBut.titleLabel.text isEqualToString:@"设置网络"]){
+    
+//    NSString * urlString = @"App-Prefs:root=WIFI";
+//    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:urlString]]) {
+//
+//        if ([[UIDevice currentDevice].systemVersion doubleValue] >= 10.0) {
+//
+//            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString] options:@{} completionHandler:nil];
+//
+//        } else {
+//
+//            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+//
+//        }
+//    }
+//    }else{
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-    }
+//    }
+    
 }
 
 - (void)cancel{
