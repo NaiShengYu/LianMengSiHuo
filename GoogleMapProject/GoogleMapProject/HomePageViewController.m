@@ -331,9 +331,12 @@
 
 - (void)changeLocation{
     //如果没有定位点击无效
-    if ([CustomAccount sharedCustomAccount].cityLocation.latitude ==0 && [CustomAccount sharedCustomAccount].cityLocation.latitude ==0)
+    CustomAccount * acc = [CustomAccount sharedCustomAccount];
+    if (acc.cityLocation.latitude ==0 && acc.cityLocation.latitude ==0)
         return;
-    
+    if (acc.isSearch ==NO) {
+        acc.cityLocation = acc.curCoordinate2D;
+    }
     HomePageMapViewController *vc =[[HomePageMapViewController alloc]init];
     vc.VCType = 1;
     [UIView transitionWithView:[[UIApplication sharedApplication].delegate window] duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{

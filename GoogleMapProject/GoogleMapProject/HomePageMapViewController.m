@@ -234,10 +234,7 @@
 
 
 - (void)currentLocation{
-    
-    
-    
-    
+
     // 通过location  或得到当前位置的经纬度
     CLLocationCoordinate2D curCoordinate2D = [CustomAccount sharedCustomAccount].cityLocation;
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:curCoordinate2D.latitude longitude:curCoordinate2D.longitude zoom:13];

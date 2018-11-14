@@ -193,12 +193,27 @@
     [rgistBut setTitle:@"注册 Register" forState:UIControlStateNormal];
     [rgistBut addTarget:self action:@selector(registBut) forControlEvents:UIControlEventTouchUpInside];
 
+    
+    UIButton *agreementBut =[UIButton new];
+    [containerView addSubview:agreementBut];
+    [agreementBut mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(fogotBut.mas_bottom).offset = 10;
+        make.centerX.offset = 0;
+    }];
+    [agreementBut setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    agreementBut.titleLabel.font =FontSize(12);
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithString:@"登录代表你已同意 连盟旅游用户协议"];
+    [attr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(9, attr.length-8)];
+        [agreementBut setAttributedTitle:attr forState:UIControlStateNormal];
+    [agreementBut addTarget:self action:@selector(agreementButClick) forControlEvents:UIControlEventTouchUpInside];
+    
     UILabel *lab =[UILabel new];
     [containerView addSubview:lab];
     [lab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.offset =0;
         make.top.equalTo(fogotBut.mas_bottom).offset =60;
     }];
+    
     lab.text =@"第三方登陆 Or Log In With";
     lab.textColor =[UIColor whiteColor];
     
@@ -222,26 +237,11 @@
     }];
     rightView.backgroundColor =[UIColor whiteColor];
     
-    UIButton *weiXin =[UIButton new];
-    [containerView addSubview:weiXin];
-    [weiXin mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(lab.mas_bottom).offset =30;
-//        make.left.offset =30;
-        make.right.equalTo(containerView.mas_centerX).offset = -30;
-
-        make.width.offset =60;
-        make.height.offset =60;
-    }];
-    [weiXin setImage:[UIImage imageNamed:@"登录_42"] forState:UIControlStateNormal];
-    weiXin.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    [weiXin addTarget:self action:@selector(weiXinLogin) forControlEvents:UIControlEventTouchUpInside];
-
-    
     UIButton *QQ =[UIButton new];
     [containerView addSubview:QQ];
     [QQ mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(lab.mas_bottom).offset =30;
-//        make.left.equalTo(weiXin.mas_right).offset =30;
+        //        make.left.equalTo(weiXin.mas_right).offset =30;
         make.left.equalTo(containerView.mas_centerX).offset = 30;
         make.width.offset =60;
         make.height.offset =60;
@@ -250,7 +250,34 @@
     [QQ setImage:[UIImage imageNamed:@"登录_39"] forState:UIControlStateNormal];
     [QQ addTarget:self action:@selector(QQLogin) forControlEvents:UIControlEventTouchUpInside];
     
-   
+    
+    
+    if ([WXApi isWXAppInstalled]) {
+        UIButton *weiXin =[UIButton new];
+        [containerView addSubview:weiXin];
+        [weiXin mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(lab.mas_bottom).offset =30;
+            //        make.left.offset =30;
+            make.right.equalTo(containerView.mas_centerX).offset = -30;
+            
+            make.width.offset =60;
+            make.height.offset =60;
+        }];
+        [weiXin setImage:[UIImage imageNamed:@"登录_42"] forState:UIControlStateNormal];
+        weiXin.imageView.contentMode = UIViewContentModeScaleAspectFill;
+        [weiXin addTarget:self action:@selector(weiXinLogin) forControlEvents:UIControlEventTouchUpInside];
+    }else{
+        [QQ mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(lab.mas_bottom).offset =30;
+            //        make.left.equalTo(weiXin.mas_right).offset =30;
+            make.centerX.equalTo(containerView.mas_centerX).offset = 0;
+            make.width.offset =60;
+            make.height.offset =60;
+        }];
+    }
+
+    
+  
 //    _moreBut =[UIButton new];
 //    [containerView addSubview:_moreBut];
 //    [_moreBut mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -266,6 +293,12 @@
     [containerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(QQ.mas_bottom).offset(20);// 这里放最后一个view的底部
     }];
+    
+}
+-(void)agreementButClick{
+    
+    
+    
     
 }
 
@@ -468,12 +501,6 @@
 
 #pragma mark --QQ登录
 - (void)QQLogin{
-    
-    if (![[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"mqqapi://"]]) {
-        [PubulicObj ShowSVWhitMessage];
-        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"您没有安装QQ客户端"];
-        return;
-    }
     
     //例如QQ的登录
     [ShareSDK getUserInfo:SSDKPlatformTypeQQ
