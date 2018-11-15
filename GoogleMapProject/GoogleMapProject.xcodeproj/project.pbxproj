@@ -59,6 +59,8 @@
 		26A608C620E1251300B677FF /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A608C520E1251300B677FF /* ChangePasswordViewController.m */; };
 		C908C6E420F355B20090E2B1 /* CustomMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = C908C6E320F355B20090E2B1 /* CustomMarker.m */; };
 		C908C6E720F483280090E2B1 /* SearchResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C908C6E620F483280090E2B1 /* SearchResultModel.m */; };
+		C930CFB1219C020B00E1F973 /* UserAgrrementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C930CFB0219C020B00E1F973 /* UserAgrrementViewController.m */; };
+		C930CFB5219C07A400E1F973 /* userAgreement.docx in Resources */ = {isa = PBXBuildFile; fileRef = C930CFB4219C07A400E1F973 /* userAgreement.docx */; };
 		C938504720EC9F85007AF5A7 /* YFScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = C938504320EC9F85007AF5A7 /* YFScrollView.m */; };
 		C938504820EC9F85007AF5A7 /* YFScaleScrollViewView.m in Sources */ = {isa = PBXBuildFile; fileRef = C938504620EC9F85007AF5A7 /* YFScaleScrollViewView.m */; };
 		C938504B20ECAD10007AF5A7 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C938504A20ECAD10007AF5A7 /* TestViewController.m */; };
@@ -213,6 +215,9 @@
 		C908C6E320F355B20090E2B1 /* CustomMarker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomMarker.m; sourceTree = "<group>"; };
 		C908C6E520F483280090E2B1 /* SearchResultModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultModel.h; sourceTree = "<group>"; };
 		C908C6E620F483280090E2B1 /* SearchResultModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultModel.m; sourceTree = "<group>"; };
+		C930CFAF219C020B00E1F973 /* UserAgrrementViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserAgrrementViewController.h; sourceTree = "<group>"; };
+		C930CFB0219C020B00E1F973 /* UserAgrrementViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserAgrrementViewController.m; sourceTree = "<group>"; };
+		C930CFB4219C07A400E1F973 /* userAgreement.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = userAgreement.docx; sourceTree = "<group>"; };
 		C938504320EC9F85007AF5A7 /* YFScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YFScrollView.m; sourceTree = "<group>"; };
 		C938504420EC9F85007AF5A7 /* YFScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YFScrollView.h; sourceTree = "<group>"; };
 		C938504520EC9F85007AF5A7 /* YFScaleScrollViewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YFScaleScrollViewView.h; sourceTree = "<group>"; };
@@ -365,6 +370,7 @@
 				C977137A20E358AD007AE5F0 /* CustomAccount.h */,
 				C977137B20E358AD007AE5F0 /* CustomAccount.m */,
 				2670EF8120FB7B7200A54DAD /* loading.gif */,
+				C930CFB4219C07A400E1F973 /* userAgreement.docx */,
 				26196CBC20C55C6E0097D72D /* Main.storyboard */,
 				26196CC220C55C6F0097D72D /* Assets.xcassets */,
 				267BBF4A20D93D4D0005AE5A /* PubulicObj.h */,
@@ -380,6 +386,8 @@
 				260C46CC20CD5715008952B4 /* PrefixHeader.pch */,
 				267BBF4120D913760005AE5A /* LoginViewController.h */,
 				267BBF4220D913760005AE5A /* LoginViewController.m */,
+				C930CFAF219C020B00E1F973 /* UserAgrrementViewController.h */,
+				C930CFB0219C020B00E1F973 /* UserAgrrementViewController.m */,
 				267BBF4420D92B330005AE5A /* RegistViewController.h */,
 				267BBF4520D92B330005AE5A /* RegistViewController.m */,
 				265F8D1B20EE5C9B00620F3E /* RegistSecondViewController.h */,
@@ -662,6 +670,7 @@
 			files = (
 				26196CC620C55C6F0097D72D /* LaunchScreen.storyboard in Resources */,
 				2670EF8220FB7B7300A54DAD /* loading.gif in Resources */,
+				C930CFB5219C07A400E1F973 /* userAgreement.docx in Resources */,
 				26196CC320C55C6F0097D72D /* Assets.xcassets in Resources */,
 				26196CBE20C55C6E0097D72D /* Main.storyboard in Resources */,
 			);
@@ -765,6 +774,7 @@
 				268B22692106083300F6A24D /* SearchNoResultViewController.m in Sources */,
 				C97712EA20DB5062007AE5F0 /* AboutUsViewController.m in Sources */,
 				C977130620E0DF69007AE5F0 /* ChangePersonNameViewController.m in Sources */,
+				C930CFB1219C020B00E1F973 /* UserAgrrementViewController.m in Sources */,
 				C977132E20E23249007AE5F0 /* ShopInfoCommentTableViewCell.m in Sources */,
 				C97712FD20E09B4A007AE5F0 /* PersonDataController.m in Sources */,
 				C977133A20E32217007AE5F0 /* ShopCommentViewController.m in Sources */,

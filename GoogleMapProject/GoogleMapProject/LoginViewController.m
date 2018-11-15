@@ -12,6 +12,7 @@
 #import "ThirdPartyLandedView.h"
 #import "HomePageViewController.h"
 #import "RegistSecondViewController.h"
+#import "UserAgrrementViewController.h"
 @interface LoginViewController ()
 @property (nonatomic,strong)ThirdPartyLandedView *thirdLandedView;
 @property (nonatomic,strong)UIButton *thirdLandedBackBut;
@@ -203,7 +204,7 @@
     [agreementBut setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     agreementBut.titleLabel.font =FontSize(12);
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithString:@"登录代表你已同意 连盟旅游用户协议"];
-    [attr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(9, attr.length-8)];
+    [attr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(9, attr.length-9)];
         [agreementBut setAttributedTitle:attr forState:UIControlStateNormal];
     [agreementBut addTarget:self action:@selector(agreementButClick) forControlEvents:UIControlEventTouchUpInside];
     
@@ -297,8 +298,8 @@
 }
 -(void)agreementButClick{
     
-    
-    
+    UserAgrrementViewController *agrrementVC = [[UserAgrrementViewController alloc]init];
+    [self.navigationController pushViewController:agrrementVC animated:YES];
     
 }
 
@@ -422,16 +423,7 @@
 
 #pragma mark -- 微信登录
 - (void)weiXinLogin{
-    
-    
-    if (![[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"Whatapp://"]]) {
-        [PubulicObj ShowSVWhitMessage];
-        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"您没有安装微信客户端"];
-        return;
-    }
-    
-    
-    
+
     //例如微信的登录
     [ShareSDK getUserInfo:SSDKPlatformTypeWechat
            onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error)
