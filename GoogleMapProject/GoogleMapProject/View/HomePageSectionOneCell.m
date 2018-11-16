@@ -154,6 +154,7 @@
     
     [_headerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",allImageURL,model.img]]];
 
+    
     CGFloat jl =[CustomAccount sharedCustomAccount].isSearch == YES ?[model.city_distance floatValue]:[model.distance floatValue];
     NSString *jlstr = @"";
     if (jl <1) {

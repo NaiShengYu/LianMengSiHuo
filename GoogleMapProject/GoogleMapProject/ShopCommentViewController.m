@@ -200,15 +200,14 @@
                 NSData *resData = [[NSData alloc] initWithData:[str dataUsingEncoding:NSUTF8StringEncoding]];
                 //系统自带JSON解析
                 NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:resData options:NSJSONReadingAllowFragments error:nil];
+                [PubulicObj ShowSVWhitMessage];
+                [SVProgressHUD showErrorWithStatus:resultDic[@"message"]];
+                
                 if ([resultDic[@"code"]integerValue] ==1) {
-                    [PubulicObj ShowSVWhitMessage];
-                    [SVProgressHUD showErrorWithStatus:@"评论成功"];
                     [blockSelf.navigationController popViewControllerAnimated:YES];
                     [[NSNotificationCenter defaultCenter]postNotificationName:@"addCommentSuccess" object:nil];
-                }else{
-                    [PubulicObj ShowSVWhitMessage];
-                    [SVProgressHUD showErrorWithStatus:resultDic[@"message"]];
                 }
+                
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 DLog(@"error==%@",error);
                 [SVProgressHUD dismiss];

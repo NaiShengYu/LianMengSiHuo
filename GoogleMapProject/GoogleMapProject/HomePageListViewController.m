@@ -214,7 +214,7 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
         CollectionShopUneditCell *cell =[tableView dequeueReusableCellWithIdentifier:@"CollectionShopUneditCell" forIndexPath:indexPath];
-    cell.homePageModel = self.dataArray[indexPath.row];
+        cell.homePageModel = self.dataArray[indexPath.row];
         return cell;
    
 }

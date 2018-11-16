@@ -18,7 +18,7 @@
 #import "CustomMarker.h"
 @interface HomePageMapViewController ()<GMSMapViewDelegate>
 {
-//    GMSMarker *_marker;
+    //    GMSMarker *_marker;
     CLLocationCoordinate2D position2D;
     CLLocationCoordinate2D BIGposition2D;
 }
@@ -169,11 +169,6 @@
     self.bottomV=[[BottomView alloc]initWithFrame:CGRectMake(10, screenHeight -153-Y, screenWigth-20, 153)];
     self.bottomV.vc =self;
     
-    
-    //    UIWebView *web =[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.width)];
-    //    [web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.xkddyz.com/admin/index.php"]]];
-    //    [self.view addSubview:web];
-    
     UIView *bacv =[[UIView alloc]initWithFrame:CGRectMake(self.view.bounds.size.width-70, MaxY+60, 60, 120)];
     bacv.backgroundColor =[UIColor clearColor];
     [self.view addSubview:bacv];
@@ -202,7 +197,7 @@
     TopView*topV=[[TopView alloc]initWithFrame:CGRectMake(0, 0,screenWigth , MaxY)];
     [self.view addSubview:topV];
     topV.vc =self;
-    [topV.backBut addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];    
+    [topV.backBut addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [topV.chooseBut addTarget:self action:@selector(chooseBut:) forControlEvents:UIControlEventTouchUpInside];
     _topV = topV;
     //    if ([CustomAccount sharedCustomAccount].curCoordinate2D.latitude==0 && [CustomAccount sharedCustomAccount].curCoordinate2D.longitude==0) {
@@ -234,7 +229,7 @@
 
 
 - (void)currentLocation{
-
+    
     // 通过location  或得到当前位置的经纬度
     CLLocationCoordinate2D curCoordinate2D = [CustomAccount sharedCustomAccount].cityLocation;
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:curCoordinate2D.latitude longitude:curCoordinate2D.longitude zoom:13];
@@ -245,7 +240,7 @@
     }
     if (self.dataArray ==nil) {
         self.dataArray =[[NSMutableArray alloc]init];
-        [self makeDataWithSaoMiao:NO];
+        //        [self makeDataWithSaoMiao:NO];
     }else{
         self.bottomV.model = self.dataArray[0];
         [self saoMiaoJieGuo];
@@ -256,11 +251,11 @@
     
     self.mapV.camera = camera;//这句话很重要很重要，将我们获取到的经纬度转成影像并赋值给地图的camera属性
     
-//    _marker =[[GMSMarker alloc]init];
-//    _marker.position =CLLocationCoordinate2DMake(BIGposition2D.latitude, BIGposition2D.longitude);
-//    _marker.icon =[UIImage imageNamed:@"25"];
-//    _marker.draggable =YES;
-//    _marker.map = self.mapV;
+    //    _marker =[[GMSMarker alloc]init];
+    //    _marker.position =CLLocationCoordinate2DMake(BIGposition2D.latitude, BIGposition2D.longitude);
+    //    _marker.icon =[UIImage imageNamed:@"25"];
+    //    _marker.draggable =YES;
+    //    _marker.map = self.mapV;
     GMSCameraPosition *position1 = [GMSCameraPosition cameraWithLatitude:BIGposition2D.latitude longitude:BIGposition2D.longitude zoom:13];
     [_mapV animateToCameraPosition:position1];
 }
@@ -301,11 +296,11 @@
 - (void)saoMiaoJieGuo{
     
     [self.mapV clear];
-//    _marker =[[GMSMarker alloc]init];
-//    _marker.position =CLLocationCoordinate2DMake(BIGposition2D.latitude, BIGposition2D.longitude);
-//    _marker.icon =[UIImage imageNamed:@"25"];
-//    _marker.draggable =YES;
-//    _marker.map = self.mapV;
+    //    _marker =[[GMSMarker alloc]init];
+    //    _marker.position =CLLocationCoordinate2DMake(BIGposition2D.latitude, BIGposition2D.longitude);
+    //    _marker.icon =[UIImage imageNamed:@"25"];
+    //    _marker.draggable =YES;
+    //    _marker.map = self.mapV;
     //    GMSCameraPosition *position1 = [GMSCameraPosition cameraWithLatitude:BIGposition2D.latitude longitude:BIGposition2D.longitude zoom:14];
     //    [_mapV animateToCameraPosition:position1];
     
@@ -353,7 +348,7 @@
 
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker{
     
-
+    
     WS(blockSelf)
     CustomMarker *maker1 =(CustomMarker *)marker;
     self.bottomV.coor = marker.position;
@@ -555,15 +550,14 @@
     [param setObject:@"list_condition" forKey:@"app"];
     [param setObject:acc.city_id forKey:@"city_id"];
     [param setObject:acc.classtype forKey:@"type"];
-    
     WS(blockSelf);
     [AFNetRequest HttpPostCallBack:url Parameters:param success:^(id responseObject) {
         if ([responseObject[@"code"] integerValue] ==1) {
-            @try {
+            
+            if (blockSelf.filterArray.count >=3) {
                 [blockSelf.filterArray removeObjectAtIndex:2];
-            } @catch (NSException *exception) {
-            } @finally {
             }
+            
             @try {
                 FilterHeaderModel *headerModel2 = [[FilterHeaderModel alloc]init];
                 headerModel2.isSelect = NO;
@@ -591,7 +585,6 @@
             }
         }else{
             [PubulicObj ShowSVWhitMessage];
-            
             [SVProgressHUD showImage:[UIImage imageNamed:@""] status:responseObject[@"message"]];
         }
     } failure:^(NSError *error) {
@@ -599,6 +592,14 @@
         
         [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"网络错误"];
     } isShowHUD:NO];
+    
+}
+
+- (void)dealloc{
+    
+    self.mapV.delegate = nil;
+    [self.mapV removeFromSuperview];
+    self.mapV = nil;
     
 }
 
