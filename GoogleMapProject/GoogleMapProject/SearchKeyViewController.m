@@ -56,7 +56,6 @@
     self.myTable.tableFooterView = self.historyView;
     @try {
         self.myTable.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        
     } @catch (NSException *exception) {
         
     } @finally {
@@ -65,6 +64,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
     self.navigationController.navigationBar.hidden =YES;
 }
 
@@ -76,8 +76,8 @@
     SearchKeyNavVar *navView = [[SearchKeyNavVar alloc]initWithFrame:CGRectMake(0, 0, screenWigth, MaxY)];
     navView.vc =self;
     navView.searchBar.delegate =self;
-    [navView.backBut addTarget:self action:@selector(showLeftVC) forControlEvents:UIControlEventTouchUpInside];
     [navView.searchBar becomeFirstResponder];
+    [navView.backBut addTarget:self action:@selector(showLeftVC) forControlEvents:UIControlEventTouchUpInside];
     [navView.searchBar addTarget:self action:@selector(textChange:) forControlEvents:UIControlEventEditingChanged];
     [navView.rightBut setTitle:@"取消" forState:UIControlStateNormal];
     [navView.rightBut setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
@@ -417,4 +417,13 @@
 //    [self.drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:^(BOOL finished) {
 //    }];
 }
+
+
+- (void)dealloc{
+    
+    NSLog(@"消失了");
+    
+}
+
+
 @end

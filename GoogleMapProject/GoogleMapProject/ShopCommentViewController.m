@@ -115,7 +115,7 @@
     cell.cancelImgsBlock =^(NSInteger a){
         [blockSelf.imagesArray removeObjectAtIndex:a];
         [blockSelf.assetsArray removeObjectAtIndex:a];
-        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [blockSelf.myTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     };
     
     return cell;
