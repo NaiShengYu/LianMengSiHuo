@@ -46,6 +46,7 @@
             } make.width.equalTo(blockSelf.imageV.mas_height).multipliedBy(1.65);
         }];
         _imageV.userInteractionEnabled =YES;
+        
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]init];
         [tap addTarget:self action:@selector(BrowsePicture)];
         [_imageV addGestureRecognizer:tap];
@@ -269,7 +270,7 @@
             make.top.equalTo(heline.mas_bottom).offset =0;
         }];
         _backBut.backgroundColor =[UIColor whiteColor];
-        
+        [_backBut addTarget:self action:@selector(callPhone) forControlEvents:UIControlEventTouchUpInside];
         UIImageView *img11 =[UIImageView new];
         [_backBut addSubview:img11];
         [img11 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -470,6 +471,24 @@
         [self.VC.navigationController pushViewController:vc animated:NO];
     } completion:^(BOOL finished) {
     }];
+    
+}
+
+- (void)callPhone{
+    
+    @try {
+        NSString *telNum = [self.model.tel stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",telNum];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+    
+    } @catch (NSException *exception) {
+        [SVProgressHUD showErrorWithStatus:@"号码有误"];
+    } @finally {
+
+    }
+    
+    
+    
     
 }
 
