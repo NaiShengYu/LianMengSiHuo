@@ -163,7 +163,7 @@
     self.star =@"";
     self.raidus = @"";
     self.list_condition = @"";
- 
+
     self.view.backgroundColor =[UIColor whiteColor];
     [self.view addSubview:self.myTable];
     [self.view addSubview:self.filterV];
@@ -215,8 +215,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
         CollectionShopUneditCell *cell =[tableView dequeueReusableCellWithIdentifier:@"CollectionShopUneditCell" forIndexPath:indexPath];
         cell.homePageModel = self.dataArray[indexPath.row];
+    if (cell.homePageModel.No !=nil && cell.homePageModel.No.length >0) {
+        cell.numLab.text =[NSString stringWithFormat:@"Top\n%@",cell.homePageModel.No];
+    }else{
+        cell.numLab.text =[NSString stringWithFormat:@"Top\n%d",indexPath.row+1];
+    }
         return cell;
-   
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     MapBottomModel *model = self.dataArray[indexPath.row];

@@ -170,7 +170,11 @@
     _talkLab.text =[NSString stringWithFormat:@"%@",model.num];
     //类型是餐厅和购物的时候显示人均
     if ([model.type integerValue] ==1 ||[model.type integerValue] ==3 ) {
-        _redLab.text =[NSString stringWithFormat:@"%@",model.red];
+        
+        if ([model.red isKindOfClass:[NSNull class]] || [model.red isEqual:[NSNull null]] || model.red == nil) {
+            model.red = @"";
+        }
+            _redLab.text =[NSString stringWithFormat:@"%@",model.red];
     }else {
         _redLab.text =@"";
     }

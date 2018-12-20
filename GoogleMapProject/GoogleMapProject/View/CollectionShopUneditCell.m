@@ -225,7 +225,6 @@
     
     [_imageV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",allImageURL,homePageModel.img]]];
     _titleLab.text =[NSString stringWithFormat:@"%@",homePageModel.name];
-    _numLab.text =[NSString stringWithFormat:@"Top\n%@",homePageModel.No];
     CGFloat jl = [homePageModel.distance floatValue];
     NSString *jlstr = @"";
     if (jl <1) {

@@ -421,6 +421,7 @@
 
 - (void)dealloc{
     
+    [self.searchKeyNavVar.searchBar removeFromSuperview];
     NSLog(@"消失了");
     
 }

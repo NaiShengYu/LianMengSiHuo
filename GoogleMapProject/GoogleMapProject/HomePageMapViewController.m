@@ -240,7 +240,7 @@
     }
     if (self.dataArray ==nil) {
         self.dataArray =[[NSMutableArray alloc]init];
-        //        [self makeDataWithSaoMiao:NO];
+        [self makeDataWithSaoMiao:NO];
     }else{
         self.bottomV.model = self.dataArray[0];
         [self saoMiaoJieGuo];

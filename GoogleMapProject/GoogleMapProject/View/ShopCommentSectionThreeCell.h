@@ -13,6 +13,7 @@
 @property (nonatomic,strong)UIButton *addBut;
 @property (nonatomic,strong)NSMutableArray *dataArray;
 @property (nonatomic,strong)NSMutableArray *imgUrlArray;
+
 @property (nonatomic,weak)UIViewController *controller;
 
 @property (nonatomic,strong)NSURL *videoURL;
