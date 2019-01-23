@@ -177,13 +177,14 @@
         return;
     }
     if (![[PubulicObj valiMobile:_phoneTF.text] isEqualToString:@"是"]) {
-        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"请正确手机号"];
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"请输入正确手机号"];
         return;
     }
     if (_codeTF.text.length ==0 ||_codeTF.text ==nil) {
         [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"请输入验证码"];
         return;
     }
+
     if (![_codeTF.text isEqualToString:self.code]) {
         [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"验证码不正确"];
         return;

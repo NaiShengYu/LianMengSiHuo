@@ -299,6 +299,10 @@
             return;
         }
     }
+    if (_codeTF.text.length ==0 ||_codeTF.text ==nil) {
+        [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"请输入验证码"];
+        return;
+    }
     if (![self.code isEqualToString:_codeTF.text]) {
          [SVProgressHUD showImage:[UIImage imageNamed:@""] status:@"验证码不正确"];
         return;

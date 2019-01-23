@@ -96,7 +96,7 @@
 
         cell.textLabel.textColor = [UIColor grayColor];
         cell.textLabel.font =FontSize(16);
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
         
         [paragraphStyle setLineSpacing:6];

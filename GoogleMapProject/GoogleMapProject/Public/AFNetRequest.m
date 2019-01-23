@@ -15,6 +15,7 @@
         [PubulicObj ShowSVWithoutImage];
         [SVProgressHUD showInfoWithStatus:@""];
     }
+    
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             manager.requestSerializer = [AFHTTPRequestSerializer serializer];
             manager.responseSerializer = [AFHTTPResponseSerializer serializer];

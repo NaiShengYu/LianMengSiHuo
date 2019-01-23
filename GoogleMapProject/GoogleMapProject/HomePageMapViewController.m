@@ -238,7 +238,7 @@
     if (self.VCType ==1) {
         [self creatBottomView];
     }
-    if (self.dataArray ==nil) {
+    if (self.dataArray ==nil || self.dataArray.count ==0) {
         self.dataArray =[[NSMutableArray alloc]init];
         [self makeDataWithSaoMiao:NO];
     }else{
